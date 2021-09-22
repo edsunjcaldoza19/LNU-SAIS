@@ -46,9 +46,6 @@
                                             <th>Department</th>
                                             <th>Entry</th>
                                             <th>Documents Status</th>
-                                            <th>Exam Status</th>
-                                            <th>Interview Status</th>
-                                            <th>Examination Status</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -59,9 +56,7 @@
                                             <th>Department</th>
                                             <th>Entry</th>
                                             <th>Documents Status</th>
-                                            <th>Exam Status</th>
-                                            <th>Interview Status</th>
-                                            <th>Examination Status</th>
+
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -104,60 +99,6 @@
                                                     echo $fetch['dept_acronym'];
                                             ?></td>
                                             <td><?php echo $fetch['entry']; ?></td>
-                                            <td><?php
-                                                if ($fetch['application_status'] == "approved") {
-                                                    ?>
-                                                    <span class="label bg-green"><?php echo $fetch['application_status'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['application_status'] == "pending"){
-                                                ?>
-                                                <span class="label bg-teal"><?php echo $fetch['application_status'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['application_status'] == "rejected"){
-                                                ?>
-                                                <span class="label bg-red"><?php echo $fetch['application_status'];?></span>
-                                                <?php
-                                            }
-                                            ?>
-                                            </td>
-                                            <td><?php
-                                                if ($fetch['exam_remarks'] == "approved") {
-                                                    ?>
-                                                    <span class="label bg-green"><?php echo $fetch['exam_remarks'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['exam_remarks'] == "pending"){
-                                                ?>
-                                                <span class="label bg-teal"><?php echo $fetch['exam_remarks'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['exam_remarks'] == "rejected"){
-                                                ?>
-                                                <span class="label bg-red"><?php echo $fetch['exam_remarks'];?></span>
-                                                <?php
-                                            }
-                                            ?>
-                                            </td>
-                                            <td><?php
-                                                if ($fetch['interview_status'] == "approved") {
-                                                    ?>
-                                                    <span class="label bg-green"><?php echo $fetch['interview_status'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['interview_status'] == "pending"){
-                                                ?>
-                                                <span class="label bg-teal"><?php echo $fetch['interview_status'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['interview_status'] == "rejected"){
-                                                ?>
-                                                <span class="label bg-red"><?php echo $fetch['interview_status'];?></span>
-                                                <?php
-                                            }
-                                            ?>
-                                            </td>
                                             <td><?php
                                                 if ($fetch['admission_status'] == "approved") {
                                                     ?>

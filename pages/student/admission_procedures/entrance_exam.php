@@ -1,8 +1,9 @@
 <?php
 
 	date_default_timezone_set('Asia/Taipei');
-	$today = date("m/d/y");
-	$time = date("g:i");
+	$today = new DateTime();
+	$display = "block";
+	$display = "block";
 	$email = '';
 	require '../../backend/auth/check_token.php';
 
@@ -16,6 +17,31 @@
 			$form1_status = $fetch['form1_progress'];
 			$form2_status = $fetch['form2_progress'];
 			$exam_status = $fetch['examination_progress'];
+
+			$sql1 = $conn->prepare("SELECT * from `tbl_exam`");
+			$sql1->execute();
+
+			if($fetch1 = $sql1->fetch()){
+
+				$exam_start = new DateTime($fetch1['exam_start_date']);
+				$exam_end = new DateTime($fetch1['exam_end_date']);
+				$exam_stat = $fetch1['exam_status'];
+
+				if($today >= $exam_start && $today < $exam_end){
+
+					$exam_stat = "Activated";
+
+				}else if($today >= $exam_end){
+
+					$exam_stat = "Expired";
+
+				}else{
+
+					$exam_stat = "Deactivated";
+
+				}
+
+			}
 
 		}
 
@@ -43,30 +69,6 @@
 			</script>
 
 			';
-
-		}
-
-		$sql1 = $conn->prepare("SELECT * from `tbl_exam`");
-		$sql1->execute();
-
-		if($fetch1 = $sql1->fetch()){
-
-			$exam_start = $fetch1['exam_start_date'];
-			$exam_start_time = $fetch1['exam_start_time'];
-			$exam_end = $fetch1['exam_end_date'];
-			$exam_end_time = $fetch1['exam_end_time'];
-			$exam_stat = $fetch1['exam_status'];
-
-			if($exam_start == $today && $exam_start_time == $time){
-
-				$exam_stat = "Activated";
-
-			}
-			else if($exam_end == $today && $exam_end_time == $time){
-
-				$exam_stat = "Deactivated";
-
-			}
 
 		}
 
@@ -199,26 +201,43 @@
 							<a class="student-account-details-item" href="javascript.void(0)" data-toggle="modal" data-target="#logoutModal">Logout</a>
 						</div>
 					</div>
-					<p><?php echo $exam_stat ?></p>
-					<div class="exam-placeholder" id="not-available-placeholder" style="display: block">
+					<div class="exam-placeholder" id="not-available-placeholder" <?php if($exam_stat == "Deactivated" || $exam_stat == "Expired")
+					{echo 'style="display:block"';} else if($exam_stat == "Activated"){echo 'style="display:none"';}?>>
 						<div class="row">
 							<div class="col-md-5" align="center">
 								<img src="../../assets/images/exam_placeholder_not_available.png" class="exam-placeholder-image">
 							</div>
 							<div class="col-md-7" style="padding: 0px 40px 0px 40px;">
 								<p class="exam-placeholder-header">
-									The entrance examination module is not yet activated.
+									<?php
+										if($exam_stat == "Deactivated"){
+											echo 'The entrance examination module is not yet activated';
+										}else if($exam_stat == "Expired"){
+											echo 'The entrance examination is already finished!';
+										}
+									?>
 								</p>
-								<p class="exam-placeholder-subheader">
-									Please come back on:
-								</p>
-								<p class="exam-placeholder-schedule">
-									January 1, 2021 | 9:00 A.M
-								</p>
+								<div <?php if($exam_stat == "Deactivated"){echo 'style="display:block"';}
+								else if($exam_stat == "Expired"){echo 'style="display:none"';} ?>>
+									<p class="exam-placeholder-subheader">
+										Please come back on:
+									</p>
+									<p class="exam-placeholder-schedule">
+										<?php echo $exam_start->format("F j, Y")?> |
+										<?php echo $exam_start->format("g:i A") ?>
+									</p>
+								</div>
+								<div <?php if($exam_stat == "Expired"){echo 'style="display:block"';}
+								else if($exam_stat == "Deactivated"){echo 'style="display:none"';} ?>>
+									<p class="exam-placeholder-schedule">
+										Please contact the Admissions Office for assistance.
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="exam-placeholder" id="available-placeholder" style="display: none;">
+					<div class="exam-placeholder" id="available-placeholder" <?php if($exam_stat == "Deactivated" || $exam_stat == "Expired")
+					{echo 'style="display:none"';} else if($exam_stat == "Activated"){echo 'style="display:block"';}?>>
 						<div class="row">
 							<div class="col-md-5" align="center">
 								<img src="../../assets/images/exam_placeholder_available.png" class="exam-placeholder-image">
