@@ -187,8 +187,11 @@
             </div>
         </div>
     </section>
-
-    <?php include 'includes/scripts.php';?>
+    <!-- Logout Modal -->
+    <?php
+        include 'includes/logout_modal.php';
+        include 'includes/scripts.php';
+    ?>
 </body>
 
 </html>

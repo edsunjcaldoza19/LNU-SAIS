@@ -68,7 +68,7 @@
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id LEFT JOIN tbl_department ON tbl_department.id=tbl_applicant.dept_id LEFT JOIN tbl_exam_result ON tbl_exam_result.exam_applicant_id=tbl_applicant.applicant_account_id LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id=tbl_applicant.applicant_account_id WHERE application_status='approved'");
                                             $sql->execute();
-                                            
+
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
@@ -91,7 +91,7 @@
                                                     echo $fetch['dept_acronym'];
                                             ?></td>
                                             <td><?php echo $fetch['entry']; ?></td>
-                                            <td><?php 
+                                            <td><?php
                                                 if ($fetch['application_status'] == "approved") {
                                                     ?>
                                                     <span class="label bg-green"><?php echo $fetch['application_status'];?></span>
@@ -109,7 +109,7 @@
                                             }
                                             ?>
                                             </td>
-                                            <td><?php 
+                                            <td><?php
                                                 if ($fetch['exam_remarks'] == "approved") {
                                                     ?>
                                                     <span class="label bg-green"><?php echo $fetch['exam_remarks'];?></span>
@@ -125,9 +125,9 @@
                                                 <span class="label bg-red"><?php echo $fetch['exam_remarks'];?></span>
                                                 <?php
                                             }
-                                            ?>       
+                                            ?>
                                             </td>
-                                            <td><?php 
+                                            <td><?php
                                                 if ($fetch['interview_status'] == "approved") {
                                                     ?>
                                                     <span class="label bg-green"><?php echo $fetch['interview_status'];?></span>
@@ -143,9 +143,9 @@
                                                 <span class="label bg-red"><?php echo $fetch['interview_status'];?></span>
                                                 <?php
                                             }
-                                            ?>       
+                                            ?>
                                             </td>
-                                            <td><?php 
+                                            <td><?php
                                                 if ($fetch['admission_status'] == "approved") {
                                                     ?>
                                                     <span class="label bg-green"><?php echo $fetch['admission_status'];?></span>
@@ -161,7 +161,7 @@
                                                 <span class="label bg-red"><?php echo $fetch['admission_status'];?></span>
                                                 <?php
                                             }
-                                            ?>       
+                                            ?>
                                             </td>
                                             <?php
                                             }
@@ -210,7 +210,7 @@
                                         require 'be/database/db_pdo.php';
                                         $sql = $conn->prepare("SELECT * FROM `tbl_department`");
                                         $sql->execute();
-                                                        
+
                                         while($fetch = $sql->fetch()){
                                     ?>
                                     <option name="deptId" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['dept_name'] ?></option>
@@ -221,7 +221,7 @@
                             </div>
                             </div>
 
-                           
+
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
@@ -233,7 +233,10 @@
             </div>
         </div>
     </section>
-    <?php include 'includes/scripts.php';?>
+    <?php
+        include 'includes/logout_modal.php';
+        include 'includes/scripts.php';
+    ?>
 </body>
 
 </html>

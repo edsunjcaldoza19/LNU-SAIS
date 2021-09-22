@@ -7,10 +7,31 @@
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
-                <li class="<?= ($activePage == 'home') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'home') ? 'active': ''; ?>">
                         <a href="home.php">
                             <i class="material-icons">home</i>
                             <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                    <li class="<?= ($activePage == 'procedure') ? 'active': ''; ?>">
+                        <a href="procedure.php">
+                            <i class="material-icons">assignment_turned_in</i>
+                            <span>Procedures</span>
+                        </a>
+                    </li>
+                    <li>
+                    <li class="<?= ($activePage == 'requirements') ? 'active': ''; ?>">
+                        <a href="requirements.php">
+                            <i class="material-icons">assignment</i>
+                            <span>Requirements</span>
+                        </a>
+                    </li>
+                    <li>
+                    <li class="<?= ($activePage == 'schedule') ? 'active': ''; ?>">
+                        <a href="schedule.php">
+                            <i class="material-icons">date_range</i>
+                            <span>Schedules</span>
                         </a>
                     </li>
                     <li class="header">MANAGE STUDENT APPLICATIONS</li>
@@ -33,7 +54,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>"><?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -50,7 +71,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>"><?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -67,7 +88,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>"><?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
