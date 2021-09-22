@@ -1,0 +1,172 @@
+<head>
+
+    <link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
+
+    <script src="../../assets/libs/jquery/jquery.min.js"></script>
+    <script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/libs/sweetalert/sweetalert2.all.min.js"></script>
+
+</head>
+
+<?php
+
+require '../config/db_pdo.php';
+
+session_start();
+
+if(isset($_POST['btnLogin'])){
+
+	try{
+
+		/* Checks user credentials in the database  */
+
+		$email = $_POST['tbEmail'];
+		$password = $_POST['tbPassword'];
+		$validCredentials = '';
+		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` where `email`='$email'");
+		$sql->execute();
+		if($fetch = $sql->fetch()){
+
+			if(password_verify($password, $fetch['password'])){
+
+				$user = $fetch;
+				$validCredentials = true;
+
+			}else{
+
+				$validCredentials = false;
+
+			}
+
+		}
+
+		if($validCredentials){
+
+			/* Generate JWT Token */
+
+			require_once('jwt.php');
+
+			$serverKey = '5f2b5cdbe5194f10b3241568fe4e2b23';
+
+            $nbf = new DateTimeImmutable();
+            $exp = $nbf->modify('+6 minutes')->getTimestamp();
+
+			$payloadArray = array();
+    		$payloadArray['email'] = $email;
+    		if (isset($nbf)) {$payloadArray['nbf'] = $nbf->getTimestamp();}
+    		if (isset($exp)) {$payloadArray['exp'] = $exp;}
+
+    		$token = JWT::encode($payloadArray, $serverKey); 
+
+			if($user['login_status'] == "Logged-out"){
+
+				// Check if account is already verified //
+
+				if($fetch['verified'] == 1){
+
+					/* Set Session Information */
+
+					$_SESSION['token'] = $token;
+
+					/* Update User Token */
+
+    				$data = [
+
+    					'token' => $token,
+    					'login_status' => "Logged-in",
+    					'id' => $user['id']
+
+    				];
+
+					$sql = "UPDATE tbl_applicant_account SET session_token=:token, login_status=:login_status WHERE id=:id";
+					$conn->prepare($sql)->execute($data);
+
+					echo '
+						<script>
+							window.location.replace("../../student/admission_procedures/start.php");
+						</script>
+					';
+			
+
+				}else{
+
+					notVerified();
+
+				}
+
+
+			}else{
+
+				loggedIn();
+
+			}
+
+
+		}else{
+
+			invalidCredentials();
+		}
+
+	}catch(exception $e){
+		echo 'Error: '.$e->getErrorMessage();
+
+	}
+
+}
+
+function invalidCredentials(){
+
+	echo '
+        <script>
+
+            $(document).ready(function(){
+
+                Swal.fire({
+
+                    icon: "error",
+                    title: "Invalid username or password",
+                    showConfirmButton: false,
+                    timer: 2000
+
+                }).then(function(){
+
+                    window.location.replace("../../accounts/student/login.php");
+
+                });
+
+            });
+
+        </script>
+
+    ';
+
+}
+
+function loggedIn(){
+
+	echo '
+      	<script>
+
+         	alert("[WARNING]: Your account is already logged-in from other device");
+         	window.location.replace("../../accounts/student/login.php");
+
+      	</script>
+
+   	';
+
+}
+
+function notVerified(){
+
+	echo '
+        <script>
+
+            alert("[UNVERIFIED ACCOUNT]: Please check your email to verify and try again");
+            window.location.replace("../../accounts/student/login.php");
+
+        </script>
+
+    ';
+
+}
