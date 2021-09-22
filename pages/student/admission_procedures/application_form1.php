@@ -173,6 +173,23 @@
 							<div class="col-md-8">
 								<div class="row">
 									<div class="col-md-6">
+									<p class="student-page-label">School Year *</p>
+										<div class="form-group form-float">
+					                        <select class="form-control show-tick" name="cbAcademicYear" id="cbAcademicYear" required>
+                                        		<option value="" disabled selected>Select School Year</option>
+												<?php
+													require '../../backend/config/db_pdo.php';
+													$sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+													$sql->execute();
+													while($fetch = $sql->fetch()){
+												?>
+                                        		<option value="<?php echo $fetch['id']; ?>"><?php echo $fetch['ay_year'];?></option>
+												<?php
+													}
+												?>
+                                    		</select>
+
+		                    			</div>
 										<p class="student-page-label">Entry Status *</p>
 										<div class="form-group form-float">
 					                        <select class="form-control show-tick" name="cbEntryStatus" id="cbEntryStatus" required>

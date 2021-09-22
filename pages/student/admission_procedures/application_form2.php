@@ -350,7 +350,7 @@
 		                    		<p class="student-page-label">Please upload a scanned copy of your Grade 12 Report Card/TOR (for transferees)</p>
 		                    		<p style="font-size: 12px"><i>Note: See to it that your name is visible in the photo/s of the report card or TOR.</i></p>
 									<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        		<input class="student-page-upload" name="images[]" type="file" multiple required>
+		                        		<input class="student-page-upload" name="cardImages[]" type="file" multiple required>
 		                    		</div>
 		                    	</div>
 
@@ -458,7 +458,7 @@
 		                    		<p class="student-page-label">If necessary, please attach medical certificate and/or psycho-educational
 		                    		assessment report</p>
 									<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        		<input class="student-page-upload" name="medical[]" type="file" multiple>
+		                        		<input class="student-page-upload" name="medicalImages[]" type="file" multiple>
 		                    		</div>
 		                    	</div>
 		                    	<br>

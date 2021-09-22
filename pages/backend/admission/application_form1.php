@@ -9,11 +9,16 @@ if(isset($_POST['btnNext'])){
 
         /* Add a new Applicant to the database [Application Form 1] */
         //pathinfo
-        $target="../../assets/applicant-image/".basename($_FILES['image']['name']);
-        $image=$_FILES['image']['name'];
+		$image=$_FILES['image']['name'];
+		$extension = pathinfo($image, PATHINFO_EXTENSION);
+		$random=rand(0,100000);
+		$rename = 'IMG_APPLICANT'.date('Ymd').$random;
+		$newname = $rename.'.'.$extension;
+		$target="../../../images/applicant-img/applicant-profile/".$newname;
 
         $applicant_account_id = $_POST['id'];
 
+        $academic_year = $_POST['cbAcademicYear'];
         $entry = $_POST['cbEntryStatus'];
         $semester = $_POST['cbSemester'];
         $dept_id = $_POST['cbCollege'];
@@ -56,7 +61,7 @@ if(isset($_POST['btnNext'])){
         $guardian_employer = $_POST['tbGuardianEmployer'];
 
 
-        $query="INSERT INTO `tbl_applicant`(`applicant_picture`, `entry`, `semester`,
+        $query="INSERT INTO `tbl_applicant`(`school_year_id`, `applicant_picture`, `entry`, `semester`,
         `program_first_choice`, `program_second_choice`, `dept_id`, `course_id`, `last_name`,
         `middle_name`, `first_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`,
         `weight`, `civil_status`, `place_birth`, `citizenship`, `address`,
@@ -66,7 +71,7 @@ if(isset($_POST['btnNext'])){
         `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`,
         `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`,
         `applicant_account_id`, `application_status`, `admission_status`)
-            VALUES ('$image', '$entry', '$semester', '$first_choice', '$second_choice',
+            VALUES ('$academic_year', '$newname', '$entry', '$semester', '$first_choice', '$second_choice',
             '$dept_id', '$first_choice', '$last_name', '$middle_name', '$first_name',
             '$birthday', '$age', '$gender', '$height_feet', '$height_inch', '$weight',
             '$civil_status', '$place_birth', '$citizenship', '$address', '$mailing_address',
@@ -87,7 +92,7 @@ if(isset($_POST['btnNext'])){
 
         //Move to path
         if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
-          $msg="Image uploaded successfully";
+            $msg="Image uploaded successfully";
         }
 
         if($query_run && $query_run2 && $query_run3){

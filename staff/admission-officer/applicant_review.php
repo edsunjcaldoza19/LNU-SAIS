@@ -1,6 +1,10 @@
 <?php
     include 'includes/session.php';
     include 'includes/header.php';
+    ?>
+    <!-- Light Gallery Plugin Css -->
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+    <?php
     include 'includes/topbar.php';
 ?>
     <section>
@@ -28,6 +32,7 @@
 
                 while($fetch = $sql->fetch()){
                     while($fetch2 = $sql2->fetch()){
+                        $applicant_account_id = $fetch['applicant_account_id'];
 
          ?>
         <div class="container-fluid">
@@ -44,6 +49,7 @@
                                     <li role="presentation"><a href="#parent" aria-controls="settings" role="tab" data-toggle="tab">Parent Information</a></li>
                                     <li role="presentation"><a href="#education" aria-controls="settings" role="tab" data-toggle="tab">Educational Background</a></li>
                                      <li role="presentation"><a href="#references" aria-controls="settings" role="tab" data-toggle="tab">References And Other Info</a></li>
+                                     <li role="presentation"><a href="#documents" aria-controls="settings" role="tab" data-toggle="tab">Documents</a></li>
                                 </ul>
 
 
@@ -54,6 +60,7 @@
                                     	include 'applicant-tabs/tab-parent.php';
                                     	include 'applicant-tabs/tab-education.php';
                                     	include 'applicant-tabs/tab-references.php';
+                                        include 'applicant-tabs/tab-document.php';
                                     ?>
                                 </div>
 
@@ -77,5 +84,8 @@
         include 'includes/scripts.php';
     ?>
 </body>
+<script src="../../js/pages/medias/image-gallery.js"></script>
+<!-- Light Gallery Plugin Js -->
+<script src="../../plugins/light-gallery/js/lightgallery-all.js"></script>
 
 </html>

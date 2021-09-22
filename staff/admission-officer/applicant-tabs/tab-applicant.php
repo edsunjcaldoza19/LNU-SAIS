@@ -3,7 +3,7 @@
                         <div class="profile-header">&nbsp;</div>
                         <div class="profile-body">
                             <?php
-                                $image = (!empty($fetch['applicant_picture'])) ? '../../pages/assets/applicant-image/'.$fetch['applicant_picture'] : '../../images/user-lg.jpg';
+                                $image = (!empty($fetch['applicant_picture'])) ? '../../images/applicant-img/applicant-profile/'.$fetch['applicant_picture'] : '../../images/user-lg.jpg';
                             ?>
                             <div class="image-area">
                                 <?php echo "<img src='".$image."'  width='180px' height='180'";?>
