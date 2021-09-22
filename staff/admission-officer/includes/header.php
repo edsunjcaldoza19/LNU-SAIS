@@ -8,8 +8,6 @@
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
     <!-- Google Fonts -->
-
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <!-- Bootstrap Core Css -->
     <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -19,6 +17,8 @@
     <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
     <!-- Waves -->
     <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+    <!-- Wait Me Css -->
+    <link href="../../plugins/waitme/waitMe.css" rel="stylesheet" />
     <!-- Custom Css -->
     <link href="../../css/style.css" rel="stylesheet">
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->

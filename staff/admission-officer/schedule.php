@@ -1,9 +1,45 @@
 <?php include 'includes/session.php'; ?>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Basic Form Elements | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-<?php
-    include 'includes/header.php';
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="../../plugins/waitme/waitMe.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+</head>
+
+    <?php
     include 'includes/topbar.php';
 ?>
     <section>
@@ -16,12 +52,15 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php include 'includes/breadcrumbs_applicant.php';?>
+                        <h3>
+                            SCHEDULES
+                        </h3>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                REQUIREMENTS
-                            </h2>
+                        <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addModal">
+                                    <i class="material-icons">add</i>
+                                <span>ADD SCHEDULE</span>
+                            </button>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -36,51 +75,40 @@
                             </ul>
                         </div>
                         <div class="body">
+
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Department</th>
-                                            <th>Entry</th>
+                                            <th style="width: 20%;">Requirement No.</th>
+                                            <th>Description</th>
+                                            <th style="width: 10%;">Update</th>
+                                            <th style="width: 10%;">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
-                                            LEFT JOIN tbl_department ON tbl_department.id=tbl_unit.unit_dept_id");
+                                            $sql = $conn->prepare("SELECT * FROM `tbl_schedules`");
                                             $sql->execute();
 
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td>
-                                                <?php
-                                                    echo $fetch['last_name'];
-                                                    echo ', ';
-                                                    echo $fetch['middle_name'];
-                                                    echo ' ';
-                                                    echo $fetch['first_name'];
-                                                ?></td>
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
-                                            <td><?php
-                                                    echo $fetch['dept_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['dept_acronym'];
-                                            ?></td>
-                                            <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['schedule_date']; ?></td>
+                                            <td><?php echo $fetch['schedule_desc']; ?></td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-teal btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
+                                            </td>
                                             <?php
+                                            include 'be/schedule/deleteModal.php';
+                                            include 'be/schedule/updateModal.php';
                                             }
-                                        ?>
+                                            ?>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -90,66 +118,40 @@
                 </div>
             </div>
             <!-- #END# Exportable Table -->
-             <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action = "../../be/course/add.php" method="POST" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Course Information</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="name" placeholder="Course Name" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="acronym" placeholder="Acronym" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                <select class="form-control" style="margin-top: 10px;" name="deptId" id="deptId">
-                                    <option selected="true" disabled="true">Department</option>
-                                    <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_department`");
-                                        $sql->execute();
-
-                                        while($fetch = $sql->fetch()){
-                                    ?>
-                                    <option name="deptId" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['dept_name'] ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
+             <?php include 'be/schedule/addModal.php'; ?>
         </div>
     </section>
     <?php include 'includes/logout_modal.php';?>
-    <?php include 'includes/scripts.php';?>
 </body>
+ <!-- Jquery Core Js -->
+ <script src="../../plugins/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core Js -->
+<script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+<!-- Select Plugin Js -->
+<script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+<!-- Slimscroll Plugin Js -->
+<script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+<!-- Waves Effect Plugin Js -->
+<script src="../../plugins/node-waves/waves.js"></script>
+
+<!-- Autosize Plugin Js -->
+<script src="../../plugins/autosize/autosize.js"></script>
+
+<!-- Moment Plugin Js -->
+<script src="../../plugins/momentjs/moment.js"></script>
+
+<!-- Bootstrap Material Datetime Picker Plugin Js -->
+<script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+<!-- Custom Js -->
+<script src="../../js/admin.js"></script>
+<script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+<!-- Demo Js -->
+<script src="../../js/demo.js"></script>
 
 </html>

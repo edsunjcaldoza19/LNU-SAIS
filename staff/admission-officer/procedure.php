@@ -17,9 +17,9 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                    <h3>
-                        PROCEDURES
-                    </h3>
+                        <h3>
+                            PROCEDURES
+                        </h3>
                     </div>
                     <div class="card">
                         <div class="header">
@@ -69,6 +69,8 @@
                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
                                             <?php
+                                            include 'be/procedure/deleteModal.php';
+                                            include 'be/procedure/updateModal.php';
                                             }
                                         ?>
                                         </tr>
@@ -80,62 +82,7 @@
                 </div>
             </div>
             <!-- #END# Exportable Table -->
-             <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action = "../../be/course/add.php" method="POST" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Course Information</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="name" placeholder="Course Name" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="acronym" placeholder="Acronym" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                <select class="form-control" style="margin-top: 10px;" name="deptId" id="deptId">
-                                    <option selected="true" disabled="true">Department</option>
-                                    <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_department`");
-                                        $sql->execute();
-
-                                        while($fetch = $sql->fetch()){
-                                    ?>
-                                    <option name="deptId" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['dept_name'] ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
+            <?php include 'be/procedure/addModal.php' ?>
         </div>
     </section>
     <?php include 'includes/logout_modal.php';?>

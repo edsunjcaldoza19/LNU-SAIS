@@ -16,12 +16,17 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php include 'includes/breadcrumbs_applicant.php';?>
+                <div class="block-header">
+                        <h3>
+                            REQUIREMENTS
+                        </h3>
+                    </div>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                REQUIREMENTS
-                            </h2>
+                            <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addModal">
+                                    <i class="material-icons">add</i>
+                                <span>ADD REQUIREMENTS</span>
+                            </button>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -40,47 +45,35 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Department</th>
-                                            <th>Entry</th>
+                                            <th style="width: 20%;">Requirement No.</th>
+                                            <th>Description</th>
+                                            <th style="width: 10%;">Update</th>
+                                            <th style="width: 10%;">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
-                                            LEFT JOIN tbl_department ON tbl_department.id=tbl_unit.unit_dept_id");
+                                            $sql = $conn->prepare("SELECT * FROM tbl_requirements");
                                             $sql->execute();
 
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td>
-                                                <?php
-                                                    echo $fetch['last_name'];
-                                                    echo ', ';
-                                                    echo $fetch['middle_name'];
-                                                    echo ' ';
-                                                    echo $fetch['first_name'];
-                                                ?></td>
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
-                                            <td><?php
-                                                    echo $fetch['dept_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['dept_acronym'];
-                                            ?></td>
-                                            <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['requirements_num']; ?></td>
+                                            <td><?php echo $fetch['requirements_desc']; ?></td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-teal btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
+                                            </td>
                                             <?php
+                                            include 'be/requirement/deleteModal.php';
+                                            include 'be/requirement/updateModal.php';
                                             }
-                                        ?>
+                                            ?>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -90,62 +83,7 @@
                 </div>
             </div>
             <!-- #END# Exportable Table -->
-             <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action = "../../be/course/add.php" method="POST" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Course Information</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="name" placeholder="Course Name" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="acronym" placeholder="Acronym" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                <select class="form-control" style="margin-top: 10px;" name="deptId" id="deptId">
-                                    <option selected="true" disabled="true">Department</option>
-                                    <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_department`");
-                                        $sql->execute();
-
-                                        while($fetch = $sql->fetch()){
-                                    ?>
-                                    <option name="deptId" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['dept_name'] ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
+            <?php include 'be/requirement/addModal.php' ?>
         </div>
     </section>
     <?php include 'includes/logout_modal.php';?>
