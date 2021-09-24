@@ -1,4 +1,4 @@
 <?php
 ob_start();
-header("location:login.php");
+header("location:home.php");
 ob_flush();

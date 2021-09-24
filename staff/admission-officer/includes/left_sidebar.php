@@ -3,7 +3,6 @@
            <?php
                 include 'includes/user.php';
            ?>
-
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
@@ -96,6 +95,12 @@
                                 </ul>
                             </li>
                         </ul>
+                    </li>
+                    <li class="<?= ($activePage == 'qualified') ? 'active': ''; ?>">
+                        <a href="qualified.php">
+                            <i class="material-icons">check_circle</i>
+                            <span>Qualified for Admission</span>
+                        </a>
                     </li>
                     <li class="header">OTHER OPTIONS</li>
                      <li>

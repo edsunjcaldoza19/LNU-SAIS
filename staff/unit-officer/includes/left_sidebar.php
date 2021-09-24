@@ -3,29 +3,93 @@
            <?php
                 include 'includes/user.php';
            ?>
-
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
+                    <li class="<?= ($activePage == 'home') ? 'active': ''; ?>">
+                        <a href="home.php">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                    <li class="<?= ($activePage == 'account_add') ? 'active': ''; ?>">
+                        <a href="account_add.php">
+                            <i class="material-icons">person_add</i>
+                            <span>Add Interviewer Account</span>
+                        </a>
+                    </li>
+                    <li>
+                    <li class="<?= ($activePage == 'account_interviewer') ? 'active': ''; ?>">
+                        <a href="account_interviewer.php">
+                            <i class="material-icons">person</i>
+                            <span>Interviewer Accounts</span>
+                        </a>
+                    </li>
+                    <li>
                     <li class="header">MANAGE STUDENT APPLICATIONS</li>
-                    <li class="<?= ($activePage == 'interview_pending' || $activePage == 'interview_pass' || $activePage == 'interview_fail' || $activePage =='applicant_review') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
                             <span>Applicants</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'interview_pending') ? 'active': ''; ?>">
-                                <a href="interview_pending.php">Pending Applications</a>
+                            <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
+                                <a href="applicant.php">Applicants Masterlist</a>
                             </li>
-                            <li class="<?= ($activePage == 'interview_pass') ? 'active': ''; ?>">
-                                <a href="interview_pass.php">Approved Applications</a>
+                            <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="<?= ($activePage == 'interview_fail') ? 'active': ''; ?>">
-                                <a href="interview_fail.php">Rejected Applications</a>
+                            <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Approved Applications</a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="<?= ($activePage == 'applicant_rejected') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Rejected Applications</a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
-                    
                     <li class="header">OTHER OPTIONS</li>
                      <li>
                         <a href="settings.php">

@@ -91,6 +91,7 @@
 						$_SESSION['staff_id'] = $fetch['id'];
 						$_SESSION['staff_name'] = $fetch['staff_username'];
 						$_SESSION['staff_email'] = $fetch['staff_email'];
+						$_SESSION['staff_profile_img'] = $fetch['staff_profile_img'];
 						echo '
 						<script>
 							$(document).ready(function(){
@@ -124,6 +125,7 @@
 						$_SESSION['staff_id'] = $fetch['id'];
 						$_SESSION['staff_name'] = $fetch['staff_username'];
 						$_SESSION['staff_email'] = $fetch['staff_email'];
+						$_SESSION['staff_profile_img'] = $fetch['staff_profile_img'];
 						echo '
 						<script>
 							$(document).ready(function(){
@@ -157,6 +159,8 @@
 						$_SESSION['staff_id'] = $fetch['id'];
 						$_SESSION['staff_name'] = $fetch['staff_username'];
 						$_SESSION['staff_email'] = $fetch['staff_email'];
+						$_SESSION['staff_profile_img'] = $fetch['staff_profile_img'];
+						$_SESSION['staff_unit'] = $fetch['staff_unit'];
 						echo '
 						<script>
 							$(document).ready(function(){
@@ -190,6 +194,7 @@
 						$_SESSION['staff_id'] = $fetch['id'];
 						$_SESSION['staff_name'] = $fetch['staff_username'];
 						$_SESSION['staff_email'] = $fetch['staff_email'];
+						$_SESSION['staff_profile_img'] = $fetch['staff_profile_img'];
 						echo '
 						<script>
 							$(document).ready(function(){
