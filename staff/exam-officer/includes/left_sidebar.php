@@ -49,7 +49,6 @@
                         </li>
                     </li>
                 </ul>
-                <?php include 'be/entrance_examination/addExaminationModal.php';?>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
@@ -67,3 +66,4 @@
         ?>
         </aside>
         <!-- #END# Left Sidebar -->
+        <?php include 'be/entrance_examination/addExaminationModal.php';?>

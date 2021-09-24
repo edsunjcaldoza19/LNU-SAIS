@@ -2,7 +2,7 @@
 <div class="modal fade" id="addExaminationModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action = "be/unit/add.php" method="POST" enctype="multipart/form-data">
+            <form action = "add.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Add Examination Module</h4>
                 </div>

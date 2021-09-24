@@ -1,6 +1,7 @@
 <!-- Logout Modal -->
                     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
+                          <form action="be/logout.php" method="POST">
                             <div class="modal-content">
                                 <div class="modal-header">
                                   <h5 class="modal-title logout-modal-title">Proceed with logout?</h5>
@@ -13,8 +14,9 @@
                                 </div>
                                 <div class="modal-footer">
                                   <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                  <a class="btn btn-primary" href="be/logout.php">Logout</a>
+                                  <button class="btn btn-primary" name="logout">Logout</button>
                                 </div>
                             </div>
+                          </form>
                         </div>
                     </div>
