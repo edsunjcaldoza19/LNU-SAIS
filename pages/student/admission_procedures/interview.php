@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	$email = '';
 	require '../../backend/auth/check_token.php';
@@ -7,6 +7,8 @@
 
 		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
 		$sql->execute();
+		$sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
+		$sql1->execute();
 
 		if($fetch = $sql->fetch()){
 
@@ -15,34 +17,74 @@
 			$exam_status = $fetch['examination_progress'];
 			$interview_status = $fetch['interview_progress'];
 
+			if($fetch1 = $sql1->fetch()){
+
+				$exam_enabled = $fetch1['enable_exam'];
+
+				if($exam_enabled == 1){
+
+					if($interview_status == 'Done'){
+
+						echo '
+
+						<script>
+
+							window.location.replace("done.php");
+
+						</script>
+
+						';
+
+					}else if($exam_status == 'Not Started'){
+
+						echo '
+
+						<script>
+
+							alert("[MESSAGE]: Finish the previous step first!");
+							window.location.replace("entrance_exam.php");
+
+						</script>
+
+						';
+
+					}
+
+				}else if($exam_enabled == 0){
+
+					if($interview_status == 'Done'){
+
+						echo '
+
+						<script>
+
+							window.location.replace("done.php");
+
+						</script>
+
+						';
+
+					}else if($form2_status == 'Not Started'){
+
+						echo '
+
+						<script>
+
+							alert("[MESSAGE]: Finish the previous step first!");
+							window.location.replace("application_form2.php");
+
+						</script>
+
+						';
+
+					}
+
+				}
+
+			}
+
 		}
 
-		if($interview_status == 'Done'){
-
-			echo '
-
-			<script>
-
-				window.location.replace("done.php");
-
-			</script>
-
-			';
-
-		}else if ($exam_status == 'Not Started'){
-
-			echo '
-
-			<script>
-
-				alert("[MESSAGE]: Finish the previous step first!");
-				window.location.replace("entrance_exam.php");
-
-			</script>
-
-			';
-
-		}
 
 	}
 
@@ -110,11 +152,11 @@
 							<div class="collapse show" id="collapse-progress">
 								<div class="sidebar-item">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Application Form (1/2)
-								</div>	
+								</div>
 								<div class="sidebar-item">
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Application Form (2/2)
-								</div>	
+								</div>
 								<div class="sidebar-item">
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Entrance Examination
@@ -145,11 +187,11 @@
 							<div class="collapse show" id="collapse-progress-hidden">
 								<div class="sidebar-item">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Application Form (1/2)
-								</div>	
+								</div>
 								<div class="sidebar-item">
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Application Form (2/2)
-								</div>	
+								</div>
 								<div class="sidebar-item">
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Entrance Examination
@@ -295,7 +337,7 @@
     	});
 
 		$('#sidebar-toggle').click(function () {
-        	
+
 			toggleClicks++;
 
 			if(toggleClicks %2 == 0){

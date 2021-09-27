@@ -47,7 +47,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_pending.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -64,7 +64,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -81,7 +81,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_rejected.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>

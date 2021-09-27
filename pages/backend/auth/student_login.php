@@ -57,7 +57,7 @@ if(isset($_POST['btnLogin'])){
     		if (isset($nbf)) {$payloadArray['nbf'] = $nbf->getTimestamp();}
     		if (isset($exp)) {$payloadArray['exp'] = $exp;}
 
-    		$token = JWT::encode($payloadArray, $serverKey); 
+    		$token = JWT::encode($payloadArray, $serverKey);
 
 			if($user['login_status'] == "Logged-out"){
 
@@ -87,7 +87,7 @@ if(isset($_POST['btnLogin'])){
 							window.location.replace("../../student/admission_procedures/start.php");
 						</script>
 					';
-			
+
 
 				}else{
 
@@ -109,7 +109,7 @@ if(isset($_POST['btnLogin'])){
 		}
 
 	}catch(exception $e){
-		echo 'Error: '.$e->getErrorMessage();
+		echo 'Error: '.$e->getMessage();
 
 	}
 

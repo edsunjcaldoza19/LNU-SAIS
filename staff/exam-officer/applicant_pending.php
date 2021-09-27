@@ -9,7 +9,6 @@
     <section>
         <?php
             include 'includes/left_sidebar.php';
-            include 'includes/right_sidebar.php';
         ?>
     </section>
     <section class="content">
@@ -20,7 +19,14 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                APPLICANTS
+                                <?php
+                                $sy_id = $_GET['sy_id'];
+                                require 'be/database/db_pdo.php';
+                                $sqlAY = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `id` = $sy_id");
+                                $sqlAY->execute();
+                                $fetchAY = $sqlAY->fetch();
+                                ?>
+                                APPLICANTS FOR A.Y. <?php echo $fetchAY['ay_year']; ?>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -35,31 +41,38 @@
                                 </li>
                             </ul>
                         </div>
+
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
+                                            <th>Add Score</th>
                                             <th>Name</th>
                                             <th>Course</th>
                                             <th>Entry Type</th>
                                             <th>Documents Status</th>
+                                            <th>Exam Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <!-- populate table with db data -->
                                         <?php
-                                            $sy_id = $_GET['sy_id'];
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            WHERE `form_status`='Rejected' AND `school_year_id` = $sy_id");
+                                            WHERE `form_status`='Approved' AND `exam_status`='Pending' AND `school_year_id` = $sy_id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
+                                            <td>
+                                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
+                                                    <i class="material-icons">add</i>
+                                                    <span>Add Score</span>
+                                            </button>
+                                            </td>
                                             <td>
                                                 <?php
                                                     echo $fetch['last_name'];
@@ -92,7 +105,26 @@
                                             }
                                             ?>
                                             </td>
+                                            <td><?php
+                                                if ($fetch['exam_status'] == "Approved") {
+                                                    ?>
+                                                    <span class="label bg-green"><?php echo $fetch['exam_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['exam_status'] == "Pending"){
+                                                ?>
+                                                <span class="label bg-teal"><?php echo $fetch['exam_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['exam_status'] == "Rejected"){
+                                                ?>
+                                                <span class="label bg-red"><?php echo $fetch['exam_status'];?></span>
+                                                <?php
+                                            }
+                                            ?>
+                                            </td>
                                             <?php
+                                            include 'be/applicant_exam/updateScoreModal.php';
                                             }
                                         ?>
                                         </tr>
@@ -162,6 +194,7 @@
             </div>
         </div>
     </section>
+    <!-- Logout Modal -->
     <?php
         include 'includes/logout_modal.php';
         include 'includes/scripts.php';

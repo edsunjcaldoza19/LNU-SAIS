@@ -17,48 +17,32 @@
     		$application['middle_name'] = '--';
     		$application['last_name'] = '--';
     		$application['entry'] = 'N/A';
-    		$application['application_status'] = 'Pending';
+    		$application['form_status'] = 'Pending';
+    		$application['fs_timestamp'] = 'N/A';
+			$application['exam_status'] = 'Pending';
+    		$application['es_timestamp'] = 'N/A';
+			$application['interview_status'] = 'Pending';
+    		$application['is_timestamp'] = 'N/A';
+			$application['admission_status'] = 'Pending';
     		$application['as_timestamp'] = 'N/A';
 
     	}
 
-    	if($application['application_status'] == 'Pending'){
+    	if($application['form_status'] == 'Pending'){
 
     		$application['as_timestamp'] = 'N/A';
 
     	}
 
-	}catch(exception $e){
-		echo 'Error: '.$e->getMessage();
-	}
+		if($application['exam_status'] == 'Pending'){
 
-	try{
-
-		$sql = $conn->prepare("SELECT * FROM tbl_exam_result WHERE `exam_applicant_id` = '$id'");
-    	$sql->execute();
-    	$exam = $sql->fetch();
-
-    	if($exam == ''){
-
-    		$exam['exam_remarks'] = 'Pending';
-    		$exam['er_timestamp'] = 'N/A';
+    		$application['es_timestamp'] = 'N/A';
 
     	}
 
-	}catch(exception $e){
-		echo 'Error: '.$e->getMessage();
-	}
+		if($application['interview_status'] == 'Pending'){
 
-	try{
-
-		$sql = $conn->prepare("SELECT * FROM tbl_interview WHERE `interview_applicant_id` = '$id'");
-    	$sql->execute();
-    	$interview = $sql->fetch();
-
-    	if($interview == ''){
-
-    		$interview['interview_status'] = 'Pending';
-    		$interview['i_timestamp'] = 'N/A';
+    		$application['is_timestamp'] = 'N/A';
 
     	}
 
@@ -238,15 +222,15 @@
 									</p>
 									<p class="default-interface-text">
 										<?php
-											if($application['application_status'] == 'Approved'){
+											if($application['form_status'] == 'Approved'){
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
-											}else if($application['application_status'] == 'Pending'){
+											}else if($application['form_status'] == 'Pending'){
 												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
 											}else{
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
 											}
 										?>
-										<?php echo $application['application_status'] ?> (<?php echo $application['as_timestamp'] ?>)
+										<?php echo $application['form_status'] ?> (<?php echo $application['fs_timestamp'] ?>)
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<p class="default-interface-subheader">
@@ -254,15 +238,15 @@
 									</p>
 									<p class="default-interface-text">
 										<?php
-											if($exam['exam_remarks'] == 'Passed'){
+											if($application['exam_status'] == 'Approved'){
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
-											}else if($exam['exam_remarks'] == 'Pending'){
+											}else if($application['exam_status'] == 'Pending'){
 												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
 											}else{
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
 											}
 										?>
-										<?php echo $exam['exam_remarks'] ?> (<?php echo $exam['er_timestamp'] ?>)
+										<?php echo $application['exam_status'] ?> (<?php echo $application['es_timestamp'] ?>)
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<p class="default-interface-subheader">
@@ -270,15 +254,15 @@
 									</p>
 									<p class="default-interface-text">
 										<?php
-											if($interview['interview_status'] == 'Passed'){
+											if($application['interview_status'] == 'Approved'){
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
-											}else if($interview['interview_status'] == 'Pending'){
+											}else if($application['interview_status'] == 'Pending'){
 												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
 											}else{
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
 											}
 										?>
-										<?php echo $interview['interview_status'] ?> (<?php echo $interview['i_timestamp'] ?>)
+										<?php echo $application['interview_status'] ?> (<?php echo $application['is_timestamp'] ?>)
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<p class="default-interface-subheader">
@@ -286,15 +270,15 @@
 									</p>
 									<p class="default-interface-text">
 										<?php
-											if($fetch['admission_status'] == 'Approved'){
+											if($application['admission_status'] == 'Approved'){
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
-											}else if($fetch['admission_status'] == 'Pending'){
+											}else if($application['admission_status'] == 'Pending'){
 												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
 											}else{
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
 											}
 										?>
-										<?php echo $fetch['admission_status'] ?> (<?php echo $fetch['as_timestamp'] ?>)
+										<?php echo $application['admission_status'] ?> (<?php echo $application['as_timestamp'] ?>)
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 								</div>

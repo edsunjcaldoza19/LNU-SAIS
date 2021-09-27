@@ -5,5 +5,6 @@
     if(!ISSET($_SESSION['staff_id'])){
 		header('location:../login/index.php');
 	}
+  $interviewerProgramID = $_SESSION['staff_program'];
 
 ?>

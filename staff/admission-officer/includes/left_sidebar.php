@@ -53,7 +53,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_pending.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -70,7 +70,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -87,13 +87,34 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_pending.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_rejected.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
                                     </li>
                                 </ul>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="<?= ($activePage == 'applicant_monitoring') ? 'active': ''; ?>">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">supervisor_account</i>
+                            <span>Applicant Monitoring</span>
+                        </a>
+                         <ul class="ml-menu">
+                            <li>
+                            <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_monitoring.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                            </li>
+
                         </ul>
                     </li>
                     <li class="<?= ($activePage == 'qualified') ? 'active': ''; ?>">

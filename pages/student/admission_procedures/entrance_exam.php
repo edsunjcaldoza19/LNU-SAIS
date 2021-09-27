@@ -18,26 +18,53 @@
 			$form2_status = $fetch['form2_progress'];
 			$exam_status = $fetch['examination_progress'];
 
-			$sql1 = $conn->prepare("SELECT * from `tbl_exam`");
+			$sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
 			$sql1->execute();
+			$sql2 = $conn->prepare("SELECT * from `tbl_exam`");
+			$sql2->execute();
 
 			if($fetch1 = $sql1->fetch()){
 
-				$exam_start = new DateTime($fetch1['exam_start_date']);
-				$exam_end = new DateTime($fetch1['exam_end_date']);
-				$exam_stat = $fetch1['exam_status'];
+				$exam_enabled = $fetch1['enable_exam'];
 
-				if($today >= $exam_start && $today < $exam_end){
+				if($fetch2 = $sql2->fetch()){
 
-					$exam_stat = "Activated";
+					if($exam_enabled == 1){
 
-				}else if($today >= $exam_end){
+						$exam_start = new DateTime($fetch2['exam_start_date']);
+						$exam_end = new DateTime($fetch2['exam_end_date']);
+						$exam_stat = $fetch2['exam_status'];
 
-					$exam_stat = "Expired";
+						if($today >= $exam_start && $today < $exam_end){
+
+							$exam_stat = "Activated";
+							$time_limit = $fetch2['exam_time_limit'];
+
+						}else if($today >= $exam_end){
+
+							$exam_stat = "Expired";
+
+						}else{
+
+							$exam_stat = "Deactivated";
+
+						}
+
+					}else{
+
+						echo '
+
+							<script>
+								window.location.replace("interview.php");
+							</script>
+
+						';
+
+					}
 
 				}else{
 
-					$exam_stat = "Deactivated";
+					$exam_stat = "Not Set";
 
 				}
 
@@ -50,9 +77,7 @@
 			echo '
 
 			<script>
-
 				window.location.replace("interview.php");
-
 			</script>
 
 			';
@@ -62,10 +87,8 @@
 			echo '
 
 			<script>
-
 				alert("[MESSAGE]: Finish the previous step first!");
 				window.location.replace("application_form2.php");
-
 			</script>
 
 			';
@@ -214,11 +237,13 @@
 											echo 'The entrance examination module is not yet activated';
 										}else if($exam_stat == "Expired"){
 											echo 'The entrance examination is already finished!';
+										}else if($exam_stat == "Not Set"){
+											echo 'The entrance examination is not yet configured';
 										}
 									?>
 								</p>
 								<div <?php if($exam_stat == "Deactivated"){echo 'style="display:block"';}
-								else if($exam_stat == "Expired"){echo 'style="display:none"';} ?>>
+								else if($exam_stat == "Expired" || $exam_stat == "Not Set"){echo 'style="display:none"';} ?>>
 									<p class="exam-placeholder-subheader">
 										Please come back on:
 									</p>
@@ -227,7 +252,7 @@
 										<?php echo $exam_start->format("g:i A") ?>
 									</p>
 								</div>
-								<div <?php if($exam_stat == "Expired"){echo 'style="display:block"';}
+								<div <?php if($exam_stat == "Expired" || $exam_stat == "Not Set"){echo 'style="display:block"';}
 								else if($exam_stat == "Deactivated"){echo 'style="display:none"';} ?>>
 									<p class="exam-placeholder-schedule">
 										Please contact the Admissions Office for assistance.
@@ -249,7 +274,7 @@
 								<p class="exam-placeholder-subheader">
 									Before you begin, please take note of the following:
 								</p>
-								<li class="exam-placeholder-text">A time limit of 60 minutes is given for the whole coverage of the exam.</li>
+								<li class="exam-placeholder-text">A time limit of <?php echo $time_limit ?> minutes is given for the whole coverage of the exam.</li>
 								<li class="exam-placeholder-text">Please read and answer each questions carefully.</li>
 								<li class="exam-placeholder-text">Cheating is strictly prohibited.</li>
 								<div class="page-start-button-container" style="margin-top: 30px;">

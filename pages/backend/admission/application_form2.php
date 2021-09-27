@@ -94,9 +94,6 @@
         ## Personal Statement
         $statement = $_POST['tbStatement'];
 
-        $application_status = 'pending';
-        $application_timestamp = 'N/A';
-
         $timestamp = date("F j, Y, h:i:s a");
 
         $sql = "UPDATE `tbl_applicant` SET `kinder_name`='$kinderSchoolName',
@@ -117,8 +114,7 @@
         `reference_contact2`='$referenceContact2',`previous_application`='$previousApplication',
         `previous_academic_year`='$previousApplicationYear',`hobbies`='$hobbies',
         `club_member`='$clubMember',`club_name`='$clubName',`disability`='$physicalCondition',
-        `disability_name`='$physicalConditionSpecify',`personal_statement`='$statement',
-        `application_status` = '$application_status', `as_timestamp` = '$application_timestamp'
+        `disability_name`='$physicalConditionSpecify',`personal_statement`='$statement'
         WHERE `applicant_account_id` = '$applicant_account_id'";
         $conn->exec($sql);
 

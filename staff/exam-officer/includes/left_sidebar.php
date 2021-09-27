@@ -12,35 +12,82 @@
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class="header">MANAGE ENTRANCE EXAMINATION</li>
-                    <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment</i>
-                            <span>Entrance Examination</span>
+                            <i class="material-icons">supervisor_account</i>
+                            <span>Applicants</span>
                         </a>
                          <ul class="ml-menu">
-                            <li>
-                                <a href="#" data-toggle="modal" data-target="#addExaminationModal">Add Examination Module</a>
+                            <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
+                                <a href="applicant.php">Applicants Masterlist</a>
+                            </li>
+                            <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_pending.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
-                                <a href="applicant_approved.php">Manage Examination Modules</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Approved Applications</a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="<?= ($activePage == 'applicant_rejected') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Rejected Applications</a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <?php
+                                        require 'be/database/db_pdo.php';
+                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                        $sql->execute();
+                                        while($fetch = $sql->fetch()){
+                                        ?>
+                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <?php
+                                            }
+                                        ?>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                        <li class="<?= ($activePage == 'exam_results') ? 'active': ''; ?>">
+                    </li>
+                    <li class="<?= ($activePage == 'exam_manage') ? 'active': ''; ?>">
+                                <a href="exam_manage.php">
+                                <i class="material-icons">assignment</i>
+                                <span>Examination Module</span>
+                                </a>
+                            </li>
+                    <li class="<?= ($activePage == 'exam_results') ? 'active': ''; ?>">
                             <a href="exam_results.php">
                                 <i class="material-icons">list</i>
                                 <span>Examination Results</span>
                             </a>
                         </li>
-                    </li>
                     <li class="header">OTHER OPTIONS</li>
                      <li>
-                        <li class="<?= ($activePage == 'exam_settings') ? 'active': ''; ?>">
-                            <a href="exam_settings.php">
-                                <i class="material-icons">settings</i>
-                                <span>Examination Settings</span>
-                            </a>
-                        </li>
                         <li class="<?= ($activePage == 'account_settings') ? 'active': ''; ?>">
                             <a href="account_settings.php">
                                 <i class="material-icons">person</i>

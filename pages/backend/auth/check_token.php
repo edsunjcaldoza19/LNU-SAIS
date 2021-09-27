@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /* Redirects to login page if user already logged-out */
 
@@ -26,7 +26,7 @@ if(isset($_SESSION['token'])){
 	}
 
 }else{
-   
+
    loggedOut();
 
 }

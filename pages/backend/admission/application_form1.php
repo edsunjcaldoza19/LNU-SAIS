@@ -21,7 +21,6 @@ if(isset($_POST['btnNext'])){
         $academic_year = $_POST['cbAcademicYear'];
         $entry = $_POST['cbEntryStatus'];
         $semester = $_POST['cbSemester'];
-        $dept_id = $_POST['cbCollege'];
         $first_choice = $_POST['cbFirstChoice'];
         $second_choice = $_POST['cbSecondChoice'];
 
@@ -59,10 +58,12 @@ if(isset($_POST['btnNext'])){
         $guardian_email = $_POST['tbGuardianEmail'];
         $guardian_occupation = $_POST['tbGuardianOccupation'];
         $guardian_employer = $_POST['tbGuardianEmployer'];
+        $status = "Pending";
+        $timestamp = "N/A";
 
 
         $query="INSERT INTO `tbl_applicant`(`school_year_id`, `applicant_picture`, `entry`, `semester`,
-        `program_first_choice`, `program_second_choice`, `dept_id`, `course_id`, `last_name`,
+        `program_first_choice`, `program_second_choice`, `course_id`, `last_name`,
         `middle_name`, `first_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`,
         `weight`, `civil_status`, `place_birth`, `citizenship`, `address`,
         `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`,
@@ -70,9 +71,10 @@ if(isset($_POST['btnNext'])){
         `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`,
         `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`,
         `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`,
-        `applicant_account_id`, `application_status`, `admission_status`)
+        `applicant_account_id`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`,
+        `interview_status`, `is_timestamp`, `admission_status`, `as_timestamp`)
             VALUES ('$academic_year', '$newname', '$entry', '$semester', '$first_choice', '$second_choice',
-            '$dept_id', '$first_choice', '$last_name', '$middle_name', '$first_name',
+            '$first_choice', '$last_name', '$middle_name', '$first_name',
             '$birthday', '$age', '$gender', '$height_feet', '$height_inch', '$weight',
             '$civil_status', '$place_birth', '$citizenship', '$address', '$mailing_address',
             '$religion', '$mobile_number', '$father_name', '$father_citizenship',
@@ -80,11 +82,13 @@ if(isset($_POST['btnNext'])){
             '$mother_name', '$mother_citizenship', '$mother_contact', '$mother_email',
             '$mother_occupation', '$mother_employer', '$guardian_name', '$guardian_citizenship',
             '$guardian_contact', '$guardian_email', '$guardian_occupation', '$guardian_employer',
-            '$applicant_account_id', 'pending', 'pending')";
-            $query2="INSERT INTO `tbl_interview` (`interview_applicant_id`, `interview_status`)
-            VALUES ('$applicant_account_id', 'pending')";
-            $query3="INSERT INTO `tbl_exam_result` (`exam_applicant_id`, `exam_remarks`)
-            VALUES ('$applicant_account_id', 'pending')";
+            '$applicant_account_id', '$status', '$timestamp', '$status', '$timestamp',
+            '$status', '$timestamp', '$status', '$timestamp')";
+
+            $query2="INSERT INTO `tbl_interview` (`interview_applicant_id`)
+            VALUES ('$applicant_account_id')";
+            $query3="INSERT INTO `tbl_exam_result` (`exam_applicant_id`)
+            VALUES ('$applicant_account_id')";
 
         $query_run = mysqli_query($connection, $query);
         $query_run2 = mysqli_query($connection, $query2);

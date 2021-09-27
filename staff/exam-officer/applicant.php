@@ -9,7 +9,6 @@
     <section>
         <?php
             include 'includes/left_sidebar.php';
-            include 'includes/right_sidebar.php';
         ?>
     </section>
     <section class="content">

@@ -1,28 +1,26 @@
-<?php
-    include 'includes/session.php';
-    include 'includes/header.php';
-    ?>
-    <?php
-    include 'includes/topbar.php';
-    include 'includes/left_sidebar.php';
-?>
+<?php include 'includes/session.php'; ?>
+<!DOCTYPE html>
+<html>
 
+<?php
+    include 'includes/header.php';
+    include 'includes/topbar.php';
+?>
+    <section>
+        <?php
+            include 'includes/left_sidebar.php';
+        ?>
+    </section>
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h1>INTERVIEWER</h1>
+            <h1>APPLICANT EXAM RESULT</h1>
             </div>
-            <!-- Basic Examples -->
-            <div class="row clearfix">
+            <div class="row clearfix jsdemo-notification-button">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h3>
-                                INTERVIEWER ACCOUNTS
-                            </h3>
-                            <p>This shows the verified interviewer accounts.
-                                Interviewers are the one who will rate the interview performance
-                                of the applicants.
+                            <h3>APPLICANT SCORE</h3>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -37,52 +35,38 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <div class="table-responsive">
+                            <div class="table">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Username</th>
                                             <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Email</th>
-                                            <th>Assigned Program</th>
-                                            <th>Delete</th>
+                                            <th>Acronym</th>
+                                            <th style="width: 5%;">Update</th>
+                                            <th style="width: 5%;">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
-                                            $staff_unit = $_SESSION['staff_unit'];
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_account_staff.id FROM `tbl_account_staff`
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_account_staff.staff_program
-                                            LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
-                                            WHERE `staff_role` = '4'");
+                                            $sql = $conn->prepare("SELECT * FROM `tbl_department`");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td><?php echo $fetch['staff_username']?></td>
-                                            <td><?php
-                                                echo $fetch['staff_first_name'];
-                                                echo $fetch['staff_middle_name'];
-                                                echo " ";
-                                                echo $fetch['staff_last_name'];?>
+                                            <td><?php echo $fetch['dept_name']?></td>
+                                            <td><?php echo $fetch['dept_acronym']?></td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-teal btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
                                             </td>
-                                            <td><?php echo $fetch['staff_address']; ?></td>
-                                            <td><?php echo $fetch['staff_email']; ?></td>
-                                            <td><?php echo $fetch['course_name']; ?></td>
-                                            <td style="text-align: center; width: 5%; vertical-align: middle;">
-                                                <a class="btn bg-teal btn-circle waves-effect waves-circle waves-float" href="account_update.php?id=<?php echo $fetch['id']; ?>"><i class="material-icons">edit</i></a>
-                                            </td>
-                                            <td style="text-align: center; width: 5%; vertical-align: middle;">
+                                            <td style="text-align: center;">
                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
-                                        </tr>
-                                        <?php
-                                            include 'be/account_staff/deleteModal.php';
-                                            }
 
+                                        </tr>
+
+                                        <?php
+                                            }
                                         ?>
                                     </tbody>
                                 </table>
@@ -98,4 +82,32 @@
         include 'includes/scripts.php';
     ?>
 </body>
+
+
+<!-- Autosize Plugin Js -->
+<script src="../../plugins/autosize/autosize.js"></script>
+
+<!-- Moment Plugin Js -->
+<script src="../../plugins/momentjs/moment.js"></script>
+
+<!-- Bootstrap Material Datetime Picker Plugin Js -->
+<script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#exam_start_sched').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD HH:mm'
+        });
+        $('#exam_end_sched').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD HH:mm'
+        });
+
+        $.material.init();
+    });
+</script>
+
+<!-- Custom Js -->
+<script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+
 </html>

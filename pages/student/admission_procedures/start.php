@@ -347,6 +347,19 @@
   		}
 
 
+		//$(window).unload(function() {
+		//	$.ajax({
+		//		url:"../../backend/auth/student_logout.php",
+		//		type:"POST",
+		//		async:false, // so browser waits till xhr completed
+		//		success:function() {
+		//			alert("bye!");
+		//		}
+//
+//			});
+//
+//		});
+
 	</script>
 
 </body>

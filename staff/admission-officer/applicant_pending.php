@@ -43,39 +43,26 @@
                                             <th>Review</th>
                                             <th>Name</th>
                                             <th>Course</th>
-                                            <th>Department</th>
-                                            <th>Entry</th>
+                                            <th>Entry Type</th>
                                             <th>Documents Status</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Review</th>
-                                            <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Department</th>
-                                            <th>Entry</th>
-                                            <th>Documents Status</th>
-
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
 
                                         <!-- populate table with db data -->
                                         <?php
-                                        $sy_id = $_GET['id'];
+                                            $sy_id = $_GET['sy_id'];
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
+                                            LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
-                                            LEFT JOIN tbl_department ON tbl_department.id=tbl_unit.unit_dept_id
-                                            WHERE application_status='pending' AND `school_year_id`=$sy_id ");
+                                            WHERE `form_status`='Pending' AND `school_year_id` = $sy_id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
                                             <td>
-                                                <a href="applicant_review.php?id=<?php echo $fetch['id']; ?>" type="button" class="btn btn-primary waves-effect">
+                                                <a href="applicant_review.php?id=<?php echo $fetch['id'];?>&sy_id=<?php echo $sy_id; ?>" type="button" class="btn btn-primary waves-effect">
                                                     <i class="material-icons">launch</i>
                                                     <span>REVIEW</span>
                                                 </a>
@@ -93,26 +80,21 @@
                                                     echo ' - ';
                                                     echo $fetch['course_acronym'];
                                             ?></td>
-                                            <td><?php
-                                                    echo $fetch['dept_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['dept_acronym'];
-                                            ?></td>
                                             <td><?php echo $fetch['entry']; ?></td>
                                             <td><?php
-                                                if ($fetch['admission_status'] == "approved") {
+                                                if ($fetch['form_status'] == "Approved") {
                                                     ?>
-                                                    <span class="label bg-green"><?php echo $fetch['admission_status'];?></span>
+                                                    <span class="label bg-green"><?php echo $fetch['form_status'];?></span>
                                                 <?php
                                             }
-                                            elseif ($fetch['admission_status'] == "pending"){
+                                            elseif ($fetch['form_status'] == "Pending"){
                                                 ?>
-                                                <span class="label bg-teal"><?php echo $fetch['admission_status'];?></span>
+                                                <span class="label bg-teal"><?php echo $fetch['form_status'];?></span>
                                                 <?php
                                             }
-                                            elseif ($fetch['admission_status'] == "rejected"){
+                                            elseif ($fetch['form_status'] == "Rejected"){
                                                 ?>
-                                                <span class="label bg-red"><?php echo $fetch['admission_status'];?></span>
+                                                <span class="label bg-red"><?php echo $fetch['form_status'];?></span>
                                                 <?php
                                             }
                                             ?>

@@ -19,8 +19,14 @@
                     <?php include 'includes/breadcrumbs_applicant.php';?>
                     <div class="card">
                         <div class="header">
+                            <?php $sy_id = $_GET['id'];
+                                require 'be/database/db_pdo.php';
+                                $sqlAY = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `id` = $sy_id");
+                                $sqlAY->execute();
+                                $fetchAY = $sqlAY->fetch();
+                            ?>
                             <h2>
-                                APPLICANTS
+                                APPLICANT MONITORING FOR A.Y. <?php echo $fetchAY['ay_year']; ?>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -42,20 +48,22 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Course</th>
-                                            <th>Entry Type</th>
+                                            <th>Entry</th>
                                             <th>Documents Status</th>
+                                            <th>Exam Status</th>
+                                            <th>Interview Status</th>
+                                            <th>Admission Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <!-- populate table with db data -->
                                         <?php
-                                            $sy_id = $_GET['sy_id'];
+                                            $sy_id = $_GET['id'];
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            WHERE `form_status`='Rejected' AND `school_year_id` = $sy_id");
+                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id WHERE `school_year_id` = '$sy_id'");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
@@ -92,6 +100,60 @@
                                             }
                                             ?>
                                             </td>
+                                            <td><?php
+                                                if ($fetch['exam_status'] == "Approved") {
+                                                    ?>
+                                                    <span class="label bg-green"><?php echo $fetch['exam_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['exam_status'] == "Pending"){
+                                                ?>
+                                                <span class="label bg-teal"><?php echo $fetch['exam_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['exam_status'] == "Rejected"){
+                                                ?>
+                                                <span class="label bg-red"><?php echo $fetch['exam_status'];?></span>
+                                                <?php
+                                            }
+                                            ?>
+                                            </td>
+                                            <td><?php
+                                                if ($fetch['interview_status'] == "Approved") {
+                                                    ?>
+                                                    <span class="label bg-green"><?php echo $fetch['interview_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['interview_status'] == "Pending"){
+                                                ?>
+                                                <span class="label bg-teal"><?php echo $fetch['interview_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['interview_status'] == "Rejected"){
+                                                ?>
+                                                <span class="label bg-red"><?php echo $fetch['interview_status'];?></span>
+                                                <?php
+                                            }
+                                            ?>
+                                            </td>
+                                            <td><?php
+                                                if ($fetch['admission_status'] == "Approved") {
+                                                    ?>
+                                                    <span class="label bg-green"><?php echo $fetch['admission_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['admission_status'] == "Pending"){
+                                                ?>
+                                                <span class="label bg-teal"><?php echo $fetch['admission_status'];?></span>
+                                                <?php
+                                            }
+                                            elseif ($fetch['admission_status'] == "Rejected"){
+                                                ?>
+                                                <span class="label bg-red"><?php echo $fetch['admission_status'];?></span>
+                                                <?php
+                                            }
+                                            ?>
+                                            </td>
                                             <?php
                                             }
                                         ?>
@@ -107,7 +169,7 @@
              <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form action = "../../be/course/add.php" method="POST" enctype="multipart/form-data">
+                        <form action = "be/course/add.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-header">
                             <h4 class="modal-title" id="defaultModalLabel">Add Course Information</h4>
                         </div>

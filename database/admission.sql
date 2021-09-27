@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2021 at 02:48 AM
+-- Generation Time: Sep 27, 2021 at 05:47 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -30,18 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `tbl_academic_year` (
   `id` int(11) NOT NULL,
   `ay_year` varchar(50) NOT NULL,
-  `ay_start` varchar(100) NOT NULL,
-  `ay_end` varchar(100) NOT NULL
+  `enable_exam` int(5) NOT NULL,
+  `ay_status` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_academic_year`
 --
 
-INSERT INTO `tbl_academic_year` (`id`, `ay_year`, `ay_start`, `ay_end`) VALUES
-(1, '2019-2020', 'Wednesday 01 September 2021', 'Thursday 01 September 2022'),
-(3, '2020-2021', 'Thursday 09 September 2021', 'Friday 16 September 2022'),
-(7, '2021 - 2022', '', '');
+INSERT INTO `tbl_academic_year` (`id`, `ay_year`, `enable_exam`, `ay_status`) VALUES
+(1, '2019-2020', 0, 0),
+(3, '2020-2021', 0, 0),
+(7, '2021 - 2022', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -70,11 +70,15 @@ CREATE TABLE `tbl_account_staff` (
 --
 
 INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_address`, `staff_email`, `staff_profile_img`, `staff_role`, `staff_unit`, `staff_program`) VALUES
-(8, 'interviewer', 'interviewer', 'Mrs.', 'Edsun Sun', 'Juntila', 'Caldoza', 'Brgy. Hiagsam\r\nJaro, Leyte', 'edsunjcaldoza@gmail.com', 'IMG_STAFF202109189122.jpg', 3, 6, 0),
+(8, 'unit', 'unit', 'Mrs.', 'Edsun Sun', 'Juntila', 'Caldoza', 'Brgy. Hiagsam\r\nJaro, Leyte', 'edsunjcaldoza@gmail.com', 'IMG_STAFF202109189122.jpg', 3, 2, 0),
 (10, 'admissionoffice2', 'admission', 'Mr.', 'Edsun', 'Juntila', 'Caldoza', 'Brgy. Hiagsam\r\nJaro, Leyte', 'edsunjcaldoza@gmail.com', 'IMG_STAFF2021091828734.jpg', 1, 2, 0),
 (22, 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd@gmail.com', 'IMG_STAFF2021091841084.png', 1, 2, 0),
 (23, 'dsa', 'dsa', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd@gmail.com', 'IMG_STAFF2021091831306.jpg', 2, 2, 0),
-(26, 'YdjUQDygng', 'asdasd', 'OQsWdePgYT', 'LWk0c5jm6T', 'Ca7QGAShln', 'p89ixsXCno', 'asdasd', 'wa7bi@af3i.com', 'IMG_STAFF2021091826570.png', 1, 2, 0);
+(26, 'YdjUQDygng', 'asdasd', 'OQsWdePgYT', 'LWk0c5jm6T', 'Ca7QGAShln', 'p89ixsXCno', 'asdasd', 'wa7bi@af3i.com', 'IMG_STAFF2021091826570.png', 1, 2, 0),
+(28, 'interviewer', 'asd', 'bo49vuLcMQ', 'D98ANpmoU3', 'uBJtte7ENp', 'nEczelyoIj', 'Interviewer Address', 'uyoww@a8k2.com', 'IMG_STAFF2021092367150.jpg', 4, 18, 18),
+(29, 'interviewer2', 'asd', 'FJKQjKWmaE', 'doe1ITgZUp', 'qQCiYtJ4Ib', 'WvBprh0JpM', 'asd', 'bslt3@1pq5.com', 'IMG_STAFF2021092385715.jpg', 4, 0, 18),
+(30, 'unit2', 'unit2', 'cokpB3w2Oa', 'ZgYez5IesN', 'WG8DoX8vGv', 'VJy0ySSa7n', 'asdwasd', 'pupmz@ljd8.com', 'IMG_STAFF2021092487878.jpg', 3, 7, 0),
+(32, 'bsit', 'bsit', 'jDloMvNZeI', 'ReGL6C6MoI', 'sYjlFEsZq6', 'LdnY2kAl0w', 'Velit amet commodo eu et sit ea nostrud do. Cupidatat culpa sint id magna minim ut velit cillum nulla ullamco consequat irure duis duis. Nulla ipsum laborum qui et elit labore ex et anim nulla. Magna ', 'imjo7@8aec.com', 'IMG_STAFF2021092613684.jpg', 4, 0, 18);
 
 -- --------------------------------------------------------
 
@@ -190,19 +194,16 @@ CREATE TABLE `tbl_applicant` (
   `disability_name` varchar(100) NOT NULL,
   `medical_certificate_image` varchar(100) NOT NULL,
   `personal_statement` varchar(1000) NOT NULL,
-  `application_status` varchar(10) NOT NULL,
-  `as_timestamp` varchar(50) NOT NULL,
+  `form_status` varchar(50) NOT NULL,
+  `fs_timestamp` varchar(50) NOT NULL,
+  `exam_status` varchar(50) NOT NULL,
+  `es_timestamp` varchar(50) NOT NULL,
+  `interview_status` varchar(50) NOT NULL,
+  `is_timestamp` varchar(50) NOT NULL,
   `admission_status` varchar(50) NOT NULL,
+  `as_timestamp` varchar(50) NOT NULL,
   `application_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_applicant`
---
-
-INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `course_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `report_card`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `medical_certificate_image`, `personal_statement`, `application_status`, `as_timestamp`, `admission_status`, `application_date`) VALUES
-(22, 13, 'c34505eb63edc65300a690f1ad903799.jpg', 1, 'Freshmen', 'First Semester', '7', '14', 0, 7, 'sZW26SGRx2', 'gnbQj09huN', 'zES9Mghh7K', '2021-09-16', 946985, 'Male', 5, 6, 0, 'Single', 'e3Nwps4yTq', 'BTmhvmU81s', 'is4mdoGPpl', 'aS0twOmH3x', 'fSbUSYuiqA', 'W8RH9MoI2f', 'AXMzVv7m9f', 'Mfr9NfdO49', 'sq4XwB3zKq', 'IVrTVLsd0R', '59Ur6qFZyT', 'JzBftlzAfD', 'ewT9qJnY8o', 'AxSj1CV38b', 'SWJu4MaBMO', '8Oprk09aeK', 'aa6FLD5626', 'OyHxyKaRBh', 'oaAg2q0lzJ', 'iuZt6oHDkI', 'qTaBQhrrv8', 'oYpxmTET2L', 'f7WJnHOnlo', 'Ja0BbpGZf3', 'Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', 'Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', 'Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', 'Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', 'Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', 'Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', '', 'Sims Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'Sims Clay', '951 Dooley Street, Lumberton, Federated States Of Micronesia, 3176', 'I am a beautiful title for Sims Clay', 'No', 'I am a beautiful title for Sims Clay', 'I am a beautiful title for Sims Clay', 'No', 'Sims Clay', 'No', 'I am a beautiful title for Sims Clay', '', 'Sint do irure ex aliqua. Id do aliquip laborum minim amet tempor. Mollit non sunt magna duis fugiat dolore reprehenderit qui consequat dolore eiusmod in pariatur enim. Ullamco dolor non adipisicing nulla sint anim fugiat magna. Aliquip do ullamco cupidatat est consequat in do qui id qui nisi eiusmod. Esse magna voluptate labore eiusmod do eiusmod culpa deserunt nisi irure irure tempor deserunt. Aute quis dolor ullamco minim veniam.\r\nAute nostrud voluptate anim nostrud excepteur esse. Pariatur ipsum do occaecat anim ea qui sit. Id proident incididunt adipisicing duis laborum pariatur pariatur commodo ea. Ipsum esse aute irure nisi pariatur. Exercitation fugiat reprehenderit voluptate consectetur aliqua est ad voluptate mollit excepteur exercitation id.\r\n', 'pending', 'N/A', 'pending', '2021-09-16 01:41:52'),
-(23, 14, 'IMG_20210918_144905.jpg', 1, 'Freshmen', 'First Semester', '15', '18', 0, 15, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 5, 6, 120, 'Single', 'Pasig City', 'Filipino', 'Brgy. Uyawan, Carigara, Leyte', 'N/A', 'Roman Catholic', '09501532031', 'Rodolfo T. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'Flor V. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A ', '', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'No', 'N/A', 'N/A', 'No', 'N/A', 'No', '', '', 'Blah blah blah blah ', 'pending', 'N/A', 'pending', '2021-09-21 15:04:56');
 
 -- --------------------------------------------------------
 
@@ -225,8 +226,6 @@ CREATE TABLE `tbl_applicant_account` (
   `ep_timestamp` varchar(50) NOT NULL,
   `interview_progress` varchar(20) NOT NULL,
   `ip_timestamp` varchar(50) NOT NULL,
-  `admission_status` varchar(20) NOT NULL,
-  `as_timestamp` varchar(50) NOT NULL,
   `student_number` varchar(15) NOT NULL,
   `login_status` varchar(10) NOT NULL,
   `session_token` varchar(200) NOT NULL
@@ -236,9 +235,34 @@ CREATE TABLE `tbl_applicant_account` (
 -- Dumping data for table `tbl_applicant_account`
 --
 
-INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `admission_status`, `as_timestamp`, `student_number`, `login_status`, `session_token`) VALUES
-(13, 'edsunjcaldoza@gmail.com', '$2y$10$ir396pbkRvQurbp7yyIBtejYoaJSybkwh6PiykHygn.ukgQOHiSte', 'e0c9c47effe5024d0a81f0c5cb2c8023', 1, 'What time of the day were you born?', '5:00', 'Done', 'Done', 'September 16, 2021, 09:42:46 am', 'Not Started', 'September 15, 2021, 10:27:10 p', 'Not Started', 'N/A', 'Pending', 'N/A', 'N/A', 'Logged-in', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVkc3VuamNhbGRvemFAZ21haWwuY29tIiwibmJmIjoxNjMyMjMzMTc0LCJleHAiOjE2MzIyMzM1MzR9.o5R4Wmt7t0BziEjqHeG1FuJJUYKjGSh11W0hSUsI1Ak'),
-(14, 'ricocombinido9@gmail.com', '$2y$10$ZnbsjketrFjrIyHo9hMRPON3D326W0X1ldtfmoW8MTz10WiZ1lwtC', '9deb6d23f417dcf07c0b0f7c543cd791', 1, 'How old is your oldest sibling?', '35', 'Done', 'Done', 'September 21, 2021, 11:07:48 pm', 'Not Started', 'N/A', 'Not Started', 'N/A', 'pending', 'N/A', 'N/A', 'Logged-in', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpY29jb21iaW5pZG85QGdtYWlsLmNvbSIsIm5iZiI6MTYzMjI0Mjg1MiwiZXhwIjoxNjMyMjQzMjEyfQ.dNPVQuTsbDsj7RTEMEzfgByCzrdjaPyO2bEUSYz7Mts');
+INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`, `session_token`) VALUES
+(13, 'edsunjcaldoza@gmail.com', '$2y$10$LUfaHIDwtya3AF/bC.bqGuOAdnJDQR3skcOiAIr2fAFEkNRP95Qpe', 'e0c9c47effe5024d0a81f0c5cb2c8023', 1, 'What time of the day were you born?', '5:00', 'Not Started', 'Not Started', 'September 27, 2021, 11:10:10 am', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 'Logged-out', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVkc3VuamNhbGRvemFAZ21haWwuY29tIiwibmJmIjoxNjMyNzExOTEzLCJleHAiOjE2MzI3MTIyNzN9.agu5MqrrFdJ4qm72_VgsVR4vxYjTIZz7kIblWCbew1U'),
+(14, 'ricocombinido9@gmail.com', '$2y$10$ZnbsjketrFjrIyHo9hMRPON3D326W0X1ldtfmoW8MTz10WiZ1lwtC', '9deb6d23f417dcf07c0b0f7c543cd791', 1, 'How old is your oldest sibling?', '35', 'Done', 'Done', 'September 26, 2021, 09:39:00 pm', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 'Logged-out', ''),
+(15, '1800638@lnu.edu.ph', '$2y$10$88XsLbr4ssmmHATOtYiu9u5BnX6FRgWg0kCspMh9isnZ4MmkB93IO', '837e85fc764cfeb047c3fac8bf53ab37', 0, 'How old is your oldest sibling?', '34', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 'Logged-out', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_applicant_card`
+--
+
+CREATE TABLE `tbl_applicant_card` (
+  `id` int(11) NOT NULL,
+  `card_applicant_id` int(11) NOT NULL,
+  `card_image` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_applicant_medical`
+--
+
+CREATE TABLE `tbl_applicant_medical` (
+  `id` int(11) NOT NULL,
+  `medical_applicant_id` int(11) NOT NULL,
+  `medical_image` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -300,10 +324,8 @@ CREATE TABLE `tbl_exam` (
   `exam_quest_limit` int(11) NOT NULL,
   `exam_description` varchar(1000) NOT NULL,
   `exam_created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `exam_start_date` varchar(20) NOT NULL,
-  `exam_start_time` varchar(20) NOT NULL,
-  `exam_end_date` varchar(20) NOT NULL,
-  `exam_end_time` varchar(20) NOT NULL,
+  `exam_start_date` varchar(30) NOT NULL,
+  `exam_end_date` varchar(30) NOT NULL,
   `exam_status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -311,8 +333,8 @@ CREATE TABLE `tbl_exam` (
 -- Dumping data for table `tbl_exam`
 --
 
-INSERT INTO `tbl_exam` (`id`, `exam_title`, `exam_time_limit`, `exam_quest_limit`, `exam_description`, `exam_created`, `exam_start_date`, `exam_start_time`, `exam_end_date`, `exam_end_time`, `exam_status`) VALUES
-(1, 'Entrance Exam', '60', 2, 'Sample Description', '2021-06-13 10:56:09', '9/22/2021', '12:56', '09/22/2021', '9:00', 'Deactivated');
+INSERT INTO `tbl_exam` (`id`, `exam_title`, `exam_time_limit`, `exam_quest_limit`, `exam_description`, `exam_created`, `exam_start_date`, `exam_end_date`, `exam_status`) VALUES
+(9, 'OLSAT Entrance Examination', '50', 100, 'This is the standard examination for LNU Admissions.', '2021-09-24 13:31:22', '2021-09-24 00:00', '2021-09-30 00:29', 'Deactivated');
 
 -- --------------------------------------------------------
 
@@ -352,20 +374,8 @@ CREATE TABLE `tbl_exam_questions` (
 CREATE TABLE `tbl_exam_result` (
   `id` int(11) NOT NULL,
   `exam_applicant_id` int(11) NOT NULL,
-  `exam_score` int(11) NOT NULL,
-  `exam_remarks` varchar(20) NOT NULL,
-  `er_timestamp` varchar(30) NOT NULL
+  `exam_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_exam_result`
---
-
-INSERT INTO `tbl_exam_result` (`id`, `exam_applicant_id`, `exam_score`, `exam_remarks`, `er_timestamp`) VALUES
-(18, 13, 0, 'Passed', 'September 15, 2021, 10:27:10 p'),
-(19, 13, 0, 'Done', ''),
-(20, 13, 0, 'pending', ''),
-(21, 14, 0, 'pending', '');
 
 -- --------------------------------------------------------
 
@@ -424,21 +434,8 @@ CREATE TABLE `tbl_interview` (
   `interview_applicant_id` int(11) NOT NULL,
   `interview_date` varchar(20) NOT NULL,
   `interview_time` varchar(20) NOT NULL,
-  `interview_link` varchar(50) NOT NULL,
-  `interview_rating` varchar(20) NOT NULL,
-  `interview_status` varchar(20) NOT NULL,
-  `i_timestamp` varchar(20) NOT NULL
+  `interview_rating` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_interview`
---
-
-INSERT INTO `tbl_interview` (`id`, `interview_applicant_id`, `interview_date`, `interview_time`, `interview_link`, `interview_rating`, `interview_status`, `i_timestamp`) VALUES
-(24, 13, '01-01-01', '12:00 AM', 'asdasdas', 'Good', 'Done', '01-01-01'),
-(25, 13, '', '', '', '', 'pending', ''),
-(26, 13, '', '', '', '', 'pending', ''),
-(27, 14, '', '', '', '', 'pending', '');
 
 -- --------------------------------------------------------
 
@@ -457,10 +454,8 @@ CREATE TABLE `tbl_procedures` (
 --
 
 INSERT INTO `tbl_procedures` (`id`, `procedure_step_num`, `procedure_desc`) VALUES
-(1, 1, 'The first step...'),
-(2, 2, 'The second step...'),
-(3, 3, 'The third step...'),
-(4, 4, 'The fourth step...');
+(1, 1, 'The first step'),
+(2, 2, 'The Second Step');
 
 -- --------------------------------------------------------
 
@@ -479,9 +474,9 @@ CREATE TABLE `tbl_requirements` (
 --
 
 INSERT INTO `tbl_requirements` (`id`, `requirements_num`, `requirements_desc`) VALUES
-(1, 1, 'Duly Accomplished Online Admission Form'),
+(1, 1, 'Duly Accomplished Online Admission Form Sample Update'),
 (2, 2, 'A scanned copy OR a photograph of Grade 12 card showing the grades on all subjects during the first semester, LRN and Strand, or Official Transcript of Records from the school last attended for transferees.'),
-(3, 3, 'A recent (within 6 months) decent SOLO FULL-BODY photo of the applicant with a plain background.');
+(5, 0, 'Sample Schedule');
 
 -- --------------------------------------------------------
 
@@ -500,7 +495,7 @@ CREATE TABLE `tbl_schedules` (
 --
 
 INSERT INTO `tbl_schedules` (`id`, `schedule_date`, `schedule_desc`) VALUES
-(1, 'Monday, July 1, 2021', 'Opening of the admission period'),
+(1, 'Wednesday 01 September 2021', 'Opening of the admission period Sample Update'),
 (2, 'Monday, July 29, 2021', 'Closing of the admission period.');
 
 -- --------------------------------------------------------
@@ -559,6 +554,18 @@ ALTER TABLE `tbl_applicant`
 -- Indexes for table `tbl_applicant_account`
 --
 ALTER TABLE `tbl_applicant_account`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_applicant_card`
+--
+ALTER TABLE `tbl_applicant_card`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_applicant_medical`
+--
+ALTER TABLE `tbl_applicant_medical`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -653,7 +660,7 @@ ALTER TABLE `tbl_academic_year`
 -- AUTO_INCREMENT for table `tbl_account_staff`
 --
 ALTER TABLE `tbl_account_staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -665,12 +672,24 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_account`
 --
 ALTER TABLE `tbl_applicant_account`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tbl_applicant_card`
+--
+ALTER TABLE `tbl_applicant_card`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tbl_applicant_medical`
+--
+ALTER TABLE `tbl_applicant_medical`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
@@ -689,7 +708,7 @@ ALTER TABLE `tbl_department`
 -- AUTO_INCREMENT for table `tbl_exam`
 --
 ALTER TABLE `tbl_exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_exam_admin`
@@ -707,7 +726,7 @@ ALTER TABLE `tbl_exam_questions`
 -- AUTO_INCREMENT for table `tbl_exam_result`
 --
 ALTER TABLE `tbl_exam_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_faqs`
@@ -719,31 +738,31 @@ ALTER TABLE `tbl_faqs`
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_interview`
 --
 ALTER TABLE `tbl_interview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_procedures`
 --
 ALTER TABLE `tbl_procedures`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_requirements`
 --
 ALTER TABLE `tbl_requirements`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedules`
 --
 ALTER TABLE `tbl_schedules`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_unit`

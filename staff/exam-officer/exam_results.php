@@ -7,7 +7,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h3>EXAMINATION SETTINGS</h3>
+                <h3>EXAMINATION RESULTS</h3>
             </div>
 
         </div>

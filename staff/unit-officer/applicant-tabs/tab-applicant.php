@@ -21,10 +21,6 @@
                             </div>
 
                         </div>
-                         <div class="body">
-                                <button type="submit" data-toggle="modal" data-target="#approve<?php echo $fetch['id']?>" class="btn btn-block btn-lg btn-success waves-effect"><i class="material-icons">check</i>APPROVE</button>
-                                <button type="submit" data-toggle="modal" data-target="#reject<?php echo $fetch['id']?>"class="btn btn-block btn-lg bg-red waves-effect"><i class="material-icons">close</i>REJECT</button>
-                                </div>
                     </div>
 
                     <div class="card card-about-me">

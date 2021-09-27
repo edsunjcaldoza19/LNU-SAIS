@@ -28,7 +28,7 @@ $success = $conn->prepare($sql)->execute($data);
 
 /* Unsets session */
 
-if ($success){
+if($success){
 
 	unset($_SESSION['token']);
 	header("location:../../accounts/student/login.php");
