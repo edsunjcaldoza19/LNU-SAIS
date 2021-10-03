@@ -2,8 +2,6 @@
 
 	date_default_timezone_set('Asia/Taipei');
 	$today = new DateTime();
-	$display = "block";
-	$display = "block";
 	$email = '';
 	require '../../backend/auth/check_token.php';
 
@@ -433,6 +431,26 @@
                 URL.revokeObjectURL(output.src)
             }
         }
+
+        //auto logout on idle script//
+
+		var maxIdle = 25; //log the user out after 25 minutes of inactivity
+		var idleTime = 0;
+
+		var idleInterval = setInterval("incrementTimer()", 60000);
+		$("body").mousemove(function(event){
+			idleTime = 0;
+		})
+
+		//increment idle time every minute
+
+		function incrementTimer(){
+			idleTime = idleTime + 1;
+			if(idleTime > maxIdle){
+				alert("[WARNING]: You've been logged-out due to inactivity. Please login again");
+				window.location = "../../backend/auth/student_logout.php" ;
+			}
+		}
 
 
 	</script>

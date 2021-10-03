@@ -157,9 +157,10 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item">
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
-									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Entrance Examination
+									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
 								</div>
 								<div class="sidebar-item active">
 									<hr class="default-divider ml-auto" style="margin: 10px;">
@@ -192,9 +193,10 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item">
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
-									<i class="fas fa-check-circle sidebar-progress-icon done"></i> Entrance Examination
+									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
 								</div>
 								<div class="sidebar-item active">
 									<hr class="default-divider ml-auto" style="margin: 10px;">
@@ -380,6 +382,26 @@
                 URL.revokeObjectURL(output.src)
             }
         }
+
+        //auto logout on idle script//
+
+		var maxIdle = 25; //log the user out after 25 minutes of inactivity
+		var idleTime = 0;
+
+		var idleInterval = setInterval("incrementTimer()", 60000);
+		$("body").mousemove(function(event){
+			idleTime = 0;
+		})
+
+		//increment idle time every minute
+
+		function incrementTimer(){
+			idleTime = idleTime + 1;
+			if(idleTime > maxIdle){
+				alert("[WARNING]: You've been logged-out due to inactivity. Please login again");
+				window.location = "../../backend/auth/student_logout.php" ;
+			}
+		}
 
 
 	</script>

@@ -8,6 +8,11 @@
 		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
 		$sql->execute();
 
+		//checks if examination module is activated//
+		$sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
+		$sql1->execute();
+		$fetch1 = $sql1->fetch();
+
 		if($fetch = $sql->fetch()){
 
 			$interview_status = $fetch['interview_progress'];
@@ -18,11 +23,9 @@
 
 			echo '
 
-			<script>
-
-				window.location.replace("done.php");
-
-			</script>
+				<script>
+					window.location.replace("done.php");
+				</script>
 
 			';
 
@@ -98,7 +101,8 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item">
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
 								</div>
@@ -133,7 +137,8 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item">
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
 								</div>
@@ -346,19 +351,25 @@
 
   		}
 
+		//auto logout on idle script//
 
-		//$(window).unload(function() {
-		//	$.ajax({
-		//		url:"../../backend/auth/student_logout.php",
-		//		type:"POST",
-		//		async:false, // so browser waits till xhr completed
-		//		success:function() {
-		//			alert("bye!");
-		//		}
-//
-//			});
-//
-//		});
+		var maxIdle = 25; //log the user out after 25 minutes of inactivity
+		var idleTime = 0;
+
+		var idleInterval = setInterval("incrementTimer()", 60000);
+		$("body").mousemove(function(event){
+			idleTime = 0;
+		})
+
+		//increment idle time every minute
+
+		function incrementTimer(){
+			idleTime = idleTime + 1;
+			if(idleTime > maxIdle){
+				alert("[WARNING]: You've been logged-out due to inactivity. Please login again");
+				window.location = "../../backend/auth/student_logout.php" ;
+			}
+		}
 
 	</script>
 

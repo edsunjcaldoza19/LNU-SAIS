@@ -13,6 +13,7 @@
 
 require '../config/db_pdo.php';
 
+session_set_cookie_params(0);
 session_start();
 
 if(isset($_POST['btnLogin'])){
@@ -50,7 +51,7 @@ if(isset($_POST['btnLogin'])){
 			$serverKey = '5f2b5cdbe5194f10b3241568fe4e2b23';
 
             $nbf = new DateTimeImmutable();
-            $exp = $nbf->modify('+6 minutes')->getTimestamp();
+            $exp = $nbf->modify('+5 minutes')->getTimestamp();
 
 			$payloadArray = array();
     		$payloadArray['email'] = $email;

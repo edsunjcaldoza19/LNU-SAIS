@@ -1,7 +1,7 @@
 <?php
 
 /* Redirects to login page if user already logged-out */
-
+session_set_cookie_params(0);
 session_start();
 
 require '../../backend/config/db_pdo.php';
@@ -27,7 +27,8 @@ if(isset($_SESSION['token'])){
 
 }else{
 
-   loggedOut();
+
+	loggedOut();
 
 }
 

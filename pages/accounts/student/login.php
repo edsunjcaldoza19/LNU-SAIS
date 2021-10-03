@@ -98,7 +98,7 @@
 							<button class="default-button disabled-button" id="btnLogin" name="btnLogin" type="submit" disabled>Login</button>
 							<a class="default-button alt-button" href="registration.php">Register Account</a>
 							<hr class="default-divider ml-auto">
-							<i class="fa fa-question-circle" style="color: #007bff"></i>  <a class="default-form-link-text" href="password_recovery.php">Forgot Password?</a>
+							<i class="fa fa-question-circle" style="color: #4285F4; font-size: 15px;"></i> <a class="default-form-link-text" href="password_recovery.php">Forgot Password?</a>
 						</div>
 					</form>
 				</div>
