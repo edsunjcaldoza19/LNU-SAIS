@@ -1,14 +1,12 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Admin | Student Admission and Information System</title>
+    <title>LNU SAIS | Administrator </title>
     <!-- Favicon-->
     <link rel="icon" href="../../lnu.ico" type="image/x-icon">
     <!-- Google Fonts -->
-
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <!-- Bootstrap Core Css -->
@@ -23,5 +21,8 @@
     <link href="../../css/style.css" rel="stylesheet">
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="../../css/themes/theme-red.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../plugins/font-awesome/css/all.css">
+
 
 </head>

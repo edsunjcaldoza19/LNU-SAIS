@@ -7,7 +7,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h3>ACCOUNT SETTINGS</h3>
+                <p class="block-header-text">ACCOUNT SETTINGS</p>
             </div>
 
         </div>

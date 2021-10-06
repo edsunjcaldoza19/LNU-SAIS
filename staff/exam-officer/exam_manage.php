@@ -9,7 +9,6 @@
     <section>
         <?php
             include 'includes/left_sidebar.php';
-            include 'includes/right_sidebar.php';
         ?>
     </section>
     <section class="content">
@@ -17,15 +16,17 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <h1>EXAM MODULE</h1>
-                            <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addExaminationModal">
-                                    <i class="material-icons">add</i>
-                                <span>ADD EXAM</span>
+                        <p class="block-header-text">MANAGE EXAMINATION MODULES</p>
+                            <button type="button" class="btn bg-green waves-effect" href="#" data-toggle="modal" data-target="#addExaminationModal">
+                                <i class="material-icons">add</i>
+                                <span style="font-family: 'Segoe UI', sans-serif; font-weight: 600;">ADD EXAM</span>
                             </button>
                     </div>
                     <div class="card">
                         <div class="header">
-
+                            <h2>
+                                Examination Modules
+                            </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

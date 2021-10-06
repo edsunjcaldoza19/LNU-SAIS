@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Admission Officer | Student Admission and Information System</title>
+    <title>LNU SAIS | Admission Officer</title>
     <!-- Favicon-->
     <link rel="icon" href="../../lnu.ico" type="image/x-icon">
     <!-- Google Fonts -->

@@ -40,16 +40,6 @@
                 <a href="javascript:void(0);" class="bars"></a>
                 <img src="../../images/navbar-logo.png" width="180" height="auto">
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Call Search -->
-                    <li><a href="javascript:void(0);" class="js-search" data-close="true">Admission Officer</a></li>
-                    <!-- #END# Call Search -->
-                    <!-- Notifications -->
-                    <!-- #END# Notifications -->
-                    <!-- Tasks -->
-                </ul>
-            </div>
         </div>
     </nav>
     <!-- #Top Bar -->

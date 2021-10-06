@@ -14,6 +14,8 @@
 
             $username = $_POST['username'];
             $password = $_POST['password'];
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            
             $title = $_POST['title'];
             $firstName = $_POST['firstName'];
             $middleName = $_POST['middleName'];
@@ -26,9 +28,9 @@
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO `tbl_account_staff`(`staff_username`, `staff_password`,
             `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_address`,
-            `staff_email`, `staff_role`, `staff_unit`, `staff_profile_img`)
+            `staff_email`, `staff_role`, `staff_unit`, `staff_profile_img`, `login_status`)
             VALUES ('$username','$password','$title','$firstName','$middleName',
-            '$lastName','$address','$email', '$role', '$unitID', '$newname')";
+            '$lastName','$address','$email', '$role', '$unitID', '$newname', '0')";
 			$conn->exec($sql);
 			//Move to path
 			if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){

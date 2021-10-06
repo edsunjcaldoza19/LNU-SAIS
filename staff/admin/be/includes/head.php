@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../../../../plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/libs/font-awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="../../../../css/style.css">
 
     <script src="../../../../plugins/jquery/jquery.min.js"></script>

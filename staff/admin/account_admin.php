@@ -23,63 +23,22 @@
                     <div class="card profile-card">
                         <div class="profile-header">&nbsp;</div>
                         <div class="profile-body">
+                            <?php
+                                require 'be/database/db_pdo.php';
+                                $admin_id = $_SESSION['admin_id'];
+                                $sql = $conn->prepare("SELECT * FROM `tbl_admin` WHERE `id` = $admin_id");
+                                $sql->execute();
+                                $fetch = $sql->fetch();
+                                $image = (!empty($fetch['image'])) ? '../../images/staff-img/'.$fetch['staff_profile_img'] : '../../images/staff-img/default.png';
+                            ?>
                             <div class="image-area">
-                                <img src="../../images/user-account.png" width="128px" alt="AdminBSB - Profile Image" />
+                                <img src="<?php echo $image ?>" width="128px" height="128px" alt="AdminBSB - Profile Image" />
                             </div>
                             <div class="content-area">
                                 <h3><?php echo $fetch['name'];?></h3>
-                                <p>LNU STUDENT ADMISSION AND INFORMATION SYSTEM</p>
+                                <p>LNU SAIS V.1.0.0</p>
                                 <p>Administrator</p>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-about-me">
-                        <div class="header">
-                            <h2>ABOUT ME</h2>
-                        </div>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">library_books</i>
-                                        Education
-                                    </div>
-                                    <div class="content">
-                                        B.S. in Computer Science from the University of Tennessee at Knoxville
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">location_on</i>
-                                        Location
-                                    </div>
-                                    <div class="content">
-                                        Malibu, California
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">edit</i>
-                                        Skills
-                                    </div>
-                                    <div class="content">
-                                        <span class="label bg-red">UI Design</span>
-                                        <span class="label bg-teal">JavaScript</span>
-                                        <span class="label bg-blue">PHP</span>
-                                        <span class="label bg-amber">Node.js</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title">
-                                        <i class="material-icons">notes</i>
-                                        Description
-                                    </div>
-                                    <div class="content">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -124,13 +83,14 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <input type="checkbox" id="terms_condition_check" class="chk-col-red filled-in" required="true" />
-                                                    <label for="terms_condition_check">I agree to the <a href="#">terms and conditions</a></label>
+                                                    <input type="checkbox" id="terms_condition_check" class="chk-col-green filled-in" required="true" />
+                                                    <label for="terms_condition_check">I hereby confirm updating my account information.</a></label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-danger">SUBMIT</button>
+                                                     <i class="material-icons">check</i>
+                                                    <button type="submit" name="submit" class="btn bg-green waves-effect">SUBMIT</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -139,35 +99,45 @@
                                     <!--- ## START CHANGE PASSWORD --->
                                     <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
                                         <form action="be/account_admin/update-password.php" method="post" class="form-horizontal">
+                                            <div class="alert alert-danger" id="alertMessage" name="alertMessage" style="padding: 10px; display: none;">
+                                                <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">The old password is incorrect!</p>
+                                            </div>
                                             <div class="form-group">
                                                 <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
                                                 <div class="col-sm-9">
-                                                    <input type="hidden" name="id" value="<?php echo $_SESSION['id']?>">
+                                                    <input type="hidden" name="adminId" id="id" value="<?php echo $id?>">
                                                     <div class="form-line">
                                                         <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Old Password" required>
+                                                        <span toggle="#oldPassword" class="fa fa-eye form-toggle-password"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
+                                                <label for="NewPassword" class="col-sm-3 control-label" id="newPasswordLabel">New Password</label>
                                                 <div class="col-sm-9">
-                                                    <div class="form-line">
-                                                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required>
+                                                    <div class="form-line" id="newPasswordLine">
+                                                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required disabled>
+                                                        <span toggle="#newPassword" class="fa fa-eye form-toggle-password"></span>
                                                     </div>
+                                                    <p class="form-error" id="passwordError1"><i class="fa fa-exclamation-circle"></i> What's your password?</p>
+                                                    <p class="form-error" id="passwordError2"><i class="fa fa-exclamation-circle"></i> Minimum password length is 8</p>
+                                                    <p class="form-error" id="passwordError3"><i class="fa fa-exclamation-circle"></i> Maximum password length is 16</p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="newPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
+                                                <label for="newPasswordConfirm" class="col-sm-3 control-label" id="newPasswordConfirmLabel">New Password (Confirm)</label>
                                                 <div class="col-sm-9">
-                                                    <div class="form-line">
-                                                        <input type="password" class="form-control" id="newPasswordConfirm" name="newPasswordConfirm" placeholder="New Password (Confirm)" required>
+                                                    <div class="form-line" id="newPasswordConfirmLine" >
+                                                        <input type="password" class="form-control" id="newPasswordConfirm" name="newPasswordConfirm" placeholder="New Password (Confirm)" required disabled>
+                                                        <span toggle="#newPasswordConfirm" class="fa fa-eye form-toggle-password"></span>
                                                     </div>
+                                                    <p class="form-error" id="confirmPasswordError"><i class="fa fa-exclamation-circle"></i> Passwords does not match</p>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
-                                                <div class="col-sm-offset-3 col-sm-9">
-                                                    <button type="submit" name="submit" class="btn btn-danger">SUBMIT</button>
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                     <i class="material-icons">check</i>
+                                                    <button type="submit" name="submit" id="submitPass" class="btn bg-green waves-effect" disabled>SUBMIT</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -208,8 +178,128 @@
     <!-- Custom Js -->
     <script src="../../js/admin.js"></script>
     <script src="../../js/pages/tables/jquery-datatable.js"></script>
-    <script src="../../js/pages/forms/basic-form-elements.js"></script>
     <!-- Demo Js -->
     <script src="../../js/demo.js"></script>
+
+    <!-- Validation scripts -->
+
+    <script>
+
+        document.getElementById("oldPassword").addEventListener("keyup", checkOldPassword);
+        document.getElementById("newPassword").addEventListener("keyup", validateNewPasswordField);
+        document.getElementById("newPasswordConfirm").addEventListener("keyup", validateConfirmPasswordField);
+
+        function checkOldPassword(){
+
+            var id = $('#id').val();
+            var pass = $('#oldPassword').val();
+
+            $.post("be/verify_password.php", { "id": id, "pass": pass }, function(response){
+
+                if(response == 0){
+
+                    $('#alertMessage').css('display', 'block');
+                    $('#newPassword').prop('disabled', true);
+                    $('#newPasswordConfirm').prop('disabled', true);
+
+                }else{
+
+                    $('#alertMessage').css('display', 'none');
+                    $('#newPassword').prop('disabled', false);
+                    $('#newPasswordConfirm').prop('disabled', false);
+
+                }
+
+            });
+
+        }
+
+        function validateNewPasswordField(){
+
+            var newPass = $('#newPassword').val();
+
+            if(newPass == ''){
+
+                $('#newPasswordLine').css('border-bottom', '2px solid #ff6961');
+                $('#newPasswordLabel').css('color', '#ff6961');
+                $('#passwordError1').css('display', 'block');
+                
+            }else{
+
+                $('#newPasswordLine').css('border-bottom', '1px solid #1f91f3');
+                $('#newPasswordLabel').css('color', '#555');
+                $('#passwordError1').css('display', 'none');
+
+                if(newPass.length < 8){
+
+                    $('#newPasswordLine').css('border-bottom', '2px solid #ff6961');
+                    $('#newPasswordLabel').css('color', '#ff6961');
+                    $('#passwordError2').css('display', 'block');
+
+                }else{
+
+                    $('#newPasswordLine').css('border-bottom', '1px solid #1f91f3');
+                    $('#newPasswordLabel').css('color', '#55');
+                    $('#passwordError2').css('display', 'none');
+
+                    if(newPass.length > 16){
+
+                        $('#newPasswordLine').css('border-bottom', '2px solid #ff6961');
+                        $('#newPasswordLabel').css('color', '#ff6961');
+                        $('#passwordError3').css('display', 'block');
+
+                    }else{
+
+                        $('#newPasswordLine').css('border-bottom', '1px solid #1f91f3');
+                        $('#newPasswordLabel').css('color', '#555');
+                        $('#passwordError3').css('display', 'none');
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        function validateConfirmPasswordField(){
+
+            var pass = $('#newPassword').val();
+            var cpass = $('#newPasswordConfirm').val();
+
+            if(pass != cpass){
+
+                $('#newPasswordConfirmLine').css('border-bottom', '2px solid #ff6961');
+                $('#newPasswordConfirmLabel').css('color', '#ff6961');
+                $('#confirmPasswordError').css('display', 'block');
+                $('#submitPass').prop('disabled', true);
+                    
+            }else{
+
+                $('#newPasswordConfirmLine').css('border-bottom', '1px solid #1f91f3');
+                $('#newPasswordConfirmLabel').css('color', '#555');
+                $('#confirmPasswordError').css('display', 'none');
+                $('#submitPass').prop('disabled', false);
+
+            }
+
+        }
+
+        //toggles show/hide password
+
+        $('.form-toggle-password').click(function(){
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+
+            if(input.attr("type") == "password"){
+                input.attr("type", "text");
+            }else{
+                input.attr("type", "password");
+            }
+
+        })
+
+    </script>
 
 </html>

@@ -99,11 +99,11 @@
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <div class="copyright">
-                    &copy; 2021 <a href="javascript:void(0);">Online Admission System</a>.
-                </div>
                 <div class="version">
-                    <b>Version: </b> 1.0.0
+                    LNU SAIS| Version 1.0.0
+                </div>
+                <div class="copyright">
+                    &copy; 2021 <a href="javascript:void(0);">Leyte Normal University</a>
                 </div>
             </div>
             <!-- #Footer -->

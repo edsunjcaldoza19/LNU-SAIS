@@ -4,9 +4,10 @@
 	
 	if(ISSET($_POST['submit'])){
 		try{
-			$id = $_POST['id'];
+			$id = $_POST['adminId'];
 			$oldPassword = $_POST['oldPassword'];
 			$newPassword = $_POST['newPassword'];
+			$newPassword1 = password_hash($newPassword, PASSWORD_DEFAULT);
 			$newPasswordConfirm = $_POST['newPasswordConfirm'];
 
 			$sql = "SELECT * from `tbl_admin` where `id`='$id'";
@@ -14,9 +15,9 @@
 			$row = mysqli_fetch_array($query);
 			$count = mysqli_num_rows($query);
 
-			if ($oldPassword == $row['password'] and $newPassword == $newPasswordConfirm) {
+			if ($newPassword == $newPasswordConfirm) {
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$sql = "UPDATE `tbl_admin`SET `password` = '$newPassword' WHERE `id` = '$id'";
+				$sql = "UPDATE `tbl_admin` SET `password` = '$newPassword1' WHERE `id` = '$id'";
 				$conn->exec($sql);
 			}
 			else{

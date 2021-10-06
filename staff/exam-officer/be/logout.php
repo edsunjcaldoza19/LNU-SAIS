@@ -1,18 +1,47 @@
 <?php
 
-require 'database/db_mysqli.php';
+require 'database/db_pdo.php';
 
 session_start();
 
+$user = $_SESSION['staff_username'];
 
+$sql = $conn->prepare("SELECT * from `tbl_account_staff` where `staff_username`='$user'");
+$sql->execute();
 
-/* Unsets session from admin username */
+if($fetch = $sql->fetch()){
 
-unset($_SESSION['staff_id']);
-unset($_SESSION['staff_email']);
-unset($_SESSION['staff_password']);
-header("location:../../login");
+	$id = $fetch['id'];
 
-session_destroy();
+	$sql = "UPDATE `tbl_account_staff` SET `login_status` = '0', `session_token` = '' WHERE id = '$id'";
+	$success = $conn->prepare($sql)->execute();
+
+	/* Unsets session from admin username */
+
+	if($success){
+
+		unset($_SESSION['staff_id']);
+		unset($_SESSION['staff_email']);
+		unset($_SESSION['staff_password']);
+
+		session_destroy();
+
+		header("location:../../login/index.php");
+
+	}else{
+ 
+		echo '
+
+			<script>
+
+				alert("Something went wrong");
+
+			</script>
+
+		';
+
+	}
+
+}
 
 ?>

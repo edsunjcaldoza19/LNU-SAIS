@@ -68,8 +68,8 @@
                             </li>
                         </ul>
                     </li>
-                     <li class="<?= ($activePage == 'settings') ? 'active': ''; ?>">
-                        <a href="settings.php">
+                     <li class="<?= ($activePage == 'account_admin') ? 'active': ''; ?>">
+                        <a href="account_admin.php">
                             <i class="material-icons">settings</i>
                             <span>Settings</span>
                         </a>
@@ -80,22 +80,16 @@
                             <span>Feedbacks</span>
                         </a>
                     </li>
-                    <li class="<?= ($activePage == 'changelog') ? 'active': ''; ?>">
-                        <a href="changelog.php">
-                            <i class="material-icons">update</i>
-                            <span>Changelogs</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
-                <div class="copyright">
-                    &copy; 2021 <a href="javascript:void(0);">Online Admission System</a>.
-                </div>
                 <div class="version">
-                    <b>Version: </b> 1.0.0
+                    LNU SAIS | Version 1.0.0
+                </div>
+                <div class="copyright">
+                    &copy; 2021 <a href="javascript:void(0);">Leyte Normal University</a>
                 </div>
             </div>
             <!-- #Footer -->
