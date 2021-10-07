@@ -19,6 +19,13 @@ if($fetch = $sql->fetch()){
 
 	if($success){
 
+		unset($_SESSION['staff_id']);
+		unset($_SESSION['staff_email']);
+		unset($_SESSION['staff_username']);
+		unset($_SESSION['staff_name']);
+		unset($_SESSION['staff_profile_img']);
+		unset($_SESSION['token']);
+
 		session_destroy();
 		header("location:../../login/index.php");
 

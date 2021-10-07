@@ -1,10 +1,7 @@
 <?php
-    session_start();
-    $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
-    if(!ISSET($_SESSION['staff_id'])){
-		header('location:../login/index.php');
-	}
-  $interviewerProgramID = $_SESSION['staff_program'];
+	include '../login/be/check_token.php';
+    $activePage = basename($_SERVER['PHP_SELF'], ".php");
+  	$interviewerProgramID = $_SESSION['staff_program'];
 
 ?>

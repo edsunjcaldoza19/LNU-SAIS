@@ -1,45 +1,50 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="../../../plugins/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/style.css">
-
-    <script src="../../../plugins/jquery/jquery.min.js"></script>
-    <script src="../../../plugins/sweetalert2/sweetalert2.all.min.js"></script>
-</head>
 <?php
 
-require 'database/db_mysqli.php';
+require 'database/db_pdo.php';
 
-	echo '
-		<script>
+session_start();ma
 
-			$(document).ready(function(){
+$user = $_SESSION['staff_username'];
 
-				Swal.fire({
-					icon: "success",
-					title: "Logged Out",
-                    text: "LNU - Student Admission and Information System",
-                    timer: 2000
+$sql = $conn->prepare("SELECT * from `tbl_account_staff` where `staff_username`='$user'");
+$sql->execute();
 
-				}).then(function(){
-					window.location.replace("../../login");
+if($fetch = $sql->fetch()){
 
-				});
+	$id = $fetch['id'];
 
-			});
+	$sql = "UPDATE `tbl_account_staff` SET `login_status` = '0', `session_token` = '' WHERE id = '$id'";
+	$success = $conn->prepare($sql)->execute();
 
-		</script>
-	';
+	/* Unsets session from admin username */
 
-session_start();
-/* Unsets session from admin username */
+	if($success){
 
-unset($_SESSION['staff_id']);
-unset($_SESSION['staff_email']);
-unset($_SESSION['staff_password']);
+		unset($_SESSION['staff_id']);
+		unset($_SESSION['staff_email']);
+		unset($_SESSION['staff_username']);
+		unset($_SESSION['staff_name']);
+		unset($_SESSION['staff_profile_img']);
+		unset($_SESSION['token']);
 
-session_destroy();
+		session_destroy();
 
+		header("location:../../login/index.php");
 
+	}else{
+ 
+		echo '
 
+			<script>
+
+				alert("Something went wrong");
+
+			</script>
+
+		';
+
+	}
+
+}
 
 ?>

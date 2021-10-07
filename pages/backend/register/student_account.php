@@ -72,7 +72,7 @@ if(isset($_POST['btnRegister'])){
 
         $mail->isHTML(true);
         $mail->From = "lnu.admissionsoffice@lnu.edu.ph";
-        $mail->FromName = "<no-reply@lnu.admissionsoffice@lnu.edu.ph>";
+        $mail->FromName = "<no-reply-lnu.admissionsoffice@lnu.edu.ph>";
         $mail->addAddress($email);
         $mail->addEmbeddedImage('../../assets/images/logo.png', 'lnu_logo');
         $mail->Body = "
@@ -94,7 +94,7 @@ if(isset($_POST['btnRegister'])){
                     <p style='text-align: justify;'>Sincerely,</p>
                     <p style='text-align: justify; font-weight: 600;'>Admissions Office | Leyte Normal University</p>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
-                        <a href='http://localhost/sais/backend/register/verify.php?verification_key=$vkey'>Verify Account Here</a>
+                        <a href='http://localhost/lnu-sais/pages/backend/register/verify.php?verification_key=$vkey'>Verify Account Here</a>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
                     <p style='text-align: center;'><i>Note: Unverified accounts will not be allowed to log-in to the system</i></p>
                     <p style='font-size: 12px; text-align: center'><i>(This is a system generated email. Do not reply.)</i></p>
