@@ -14,6 +14,7 @@
 require '../config/db_mysqli.php';
 require '../../assets/libs/PHPMailer/src/PHPMailer.php';
 require '../../assets/libs/PHPMailer/src/SMTP.php'; 
+require '../../assets/libs/PHPMailer/src/Exception.php'; 
 
 if(isset($_POST['btnRegister'])){
 
