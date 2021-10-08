@@ -76,9 +76,6 @@
 							<p class="login-form-header-text">Applicant Login</p>
 							<p class="login-form-header-subtext">Please login using a valid account</p>
 						</div>
-						<div class="alert alert-danger" style="padding: 10px; display: none;">
-							<i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">Invalid email and password.</p>
-						</div>
 						<div class="login-form-body">
 		                    <div class="form-group form-float">
 		                       	<div class="form-line">

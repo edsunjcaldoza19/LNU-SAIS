@@ -1,100 +1,118 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<?php
 
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    include 'includes/header.php';
+    include 'includes/scripts.php';
 
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+?>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Login Page Contents -->
 
-    <!-- Style -->
-    <link rel="stylesheet" href="css/style.css">
+<body>
 
-    <title>Login | LNU - Student Admission and Information System</title>
-  </head>
-  <body>
+    <!-- Navbar -->
 
-
-
-  <div class="content">
-    <div class="container">
-      <div class="card">
-        <div class="row">
-          <div class="col-md-6 order-md-2 contents">
-            <img src="images/undraw_file_sync_ot38.svg" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-md-6 contents">
-            <div class="row justify-content-center">
-              <div class="col-md-12">
-                <div class="mb-4">
-                <h3>Sign In to <strong>LNU - SAIS</strong></h3>
-                <p class="mb-4">Please use a verified account in order to sign in to the
-                  Student Admission and Information System.</p>
-              </div>
-              <form action="be/login.php" method="post" enctype="multipart/form-data">
-                <div class="form-group first">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" name="username" id="username">
-
-                </div>
-                <div class="form-group last mb-4">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" id="password">
-                </div>
-                <small for="role">Login As</small>
-                <div class="form-group last mb-4">
-                  <select class="form-control" name="role" id="role">
-                    <option value="0">Admin - MIS</option>
-                    <option value="1">Admission</option>
-                    <option value="2">Examination Officer</option>
-                    <option value="3">Unit Head</option>
-                    <option value="4">Interviewer</option>
-                  </select>
-                </div>
-                <div class="d-flex mb-5 align-items-center">
-                  <label class="control control--checkbox mb-0"><span class="caption">Remember Me</span>
-                    <input type="checkbox" checked="checked" name="remember"/>
-                    <div class="control__indicator"></div>
-                  </label>
-                  <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
-                </div>
-
-                <button type="submit" name="login" class="btn text-white btn-block btn-primary">Log In</button>
-
-                <span class="d-block text-left my-4 text-muted"> Here are the account types</span>
-
-                <div class="social-login">
-                  <a href="#" class="facebook">
-
-                  </a>
-                  <a href="#" class="twitter">
-
-                  </a>
-                  <a href="#" class="google">
-
-                  </a>
-                </div>
-              </form>
-              </div>
-            </div>
-
-          </div>
-
+    <nav class="navbar navbar-expand-sm student-navbar-main">
+        <div class="student-navbar-logo-container">
+            <img src="../../pages/assets/images/student_navbar_logo_container.png" class="logo-container">
+            <a class="navbar-brand" href="../../index.php">
+                <img src="../../pages/assets/images/navbar_logo_main.png" class="logo">
+            </a>
         </div>
-      </div>
+    </nav>
+
+    <!-- Login Form Contents -->
+
+    <div class="container-fluid login">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 login">
+                <div class="login-form-container">
+                    <form method="POST" action="be/login.php">
+                        <div class="login-form-header">
+                            <p class="login-form-header-text">Staff Login</p>
+                            <p class="login-form-header-subtext">Please login using a valid staff account.</p>
+                        </div>
+                        <div class="login-form-body">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" name="username" id="username" class="form-control" autocomplete="off" required/>
+                                    <label class="form-label">Username</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="password" name="password" id="password" class="form-control" autocomplete="off" required/>
+                                    <label class="form-label">Password</label>
+                                    <span toggle="#password" class="fa fa-eye form-toggle-password"></span>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <p class="login-form-header-subtext" style="margin-bottom: 5px;">Login as:</p>
+                                    <select class="form-control" name="role" id="role" required>
+                                        <option value="0">System Administrator - MIS</option>
+                                        <option value="1">Admissions Office</option>
+                                        <option value="2">Examination Officer</option>
+                                        <option value="3">Unit Head</option>
+                                        <option value="4">Interviewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login-form-buttons" align="center">
+                            <button class="default-button disabled-button" id="login" name="login" type="submit" disabled>Login</button>
+                            <hr class="default-divider ml-auto">
+                            <p style="text-align: center; font-size: 12px; letter-spacing: 3px; color: #8B8B8B;">LNU SAIS V.1.0.0</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
     </div>
-  </div>
 
+    <script>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+        document.getElementById("password").addEventListener("keyup", validateFields);
+
+        function validateFields(){
+
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+            if(username.length > 1 && password.length > 1){
+
+                $('#login').addClass("primary-button");
+                $('#login').removeClass("disabled-button");
+                $('#login').attr("disabled", false);
+
+            }else{
+
+                $('#login').addClass("disabled-button");
+                $('#login').removeClass("primary-button");
+                $('#login').attr("disabled", true);
+
+            }
+
+        }
+
+        //toggles show/hide password
+
+        $('.form-toggle-password').click(function(){
+
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var input = $($(this).attr("toggle"));
+
+            if(input.attr("type") == "password"){
+                input.attr("type", "text");
+            }else{
+                input.attr("type", "password");
+            }
+
+        })
+
+    </script>
+
+</body>
+
 </html>
