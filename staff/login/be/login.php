@@ -58,7 +58,9 @@
 
 		    		$token = JWT::encode($payloadArray, $serverKey);
 
-					if($user['login_status'] == "0"){
+					if($user['verified'] == '1'){
+
+						if($user['login_status'] == "0"){
 
 							/* Set Session Information */
 
@@ -91,9 +93,15 @@
 								</script>
 							';
 
+						}else{
+
+							loggedIn();	
+
+						}
+
 					}else{
 
-						loggedIn();
+						notVerified();
 
 					}
 
@@ -497,6 +505,34 @@
 
                     icon: "error",
                     title: "Invalid username or password",
+                    showConfirmButton: false,
+                    timer: 2000
+
+                }).then(function(){
+
+                    window.location.replace("../index.php");
+
+                });
+
+            });
+
+        </script>
+
+    ';
+
+	}
+
+	function notVerified(){
+
+	echo '
+        <script>
+
+            $(document).ready(function(){
+
+                Swal.fire({
+
+                    icon: "error",
+                    title: "Your account is not yet activated!",
                     showConfirmButton: false,
                     timer: 2000
 

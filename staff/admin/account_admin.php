@@ -43,12 +43,13 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-9">
-                    <div class="card">
+                    <div class="card" style="height: 376px; overflow-y: auto;">
                         <div class="body">
                             <div>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
                                     <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
+                                    <li role="presentation"><a href="#add_administrator_settings" aria-controls="settings" role="tab" data-toggle="tab">Add Administrator Account</a></li>
                                 </ul>
 
                                 <div class="tab-content">
@@ -143,6 +144,56 @@
                                         </form>
                                     </div>
                                     <!-- ## END CHANGE PASSWORD -->
+                                    <!--- ## START ADD ADMIN --->
+                                    <div role="tabpanel" class="tab-pane fade in" id="add_administrator_settings">
+                                        <form action="be/account_admin/add-administrator.php" method="post" class="form-horizontal">
+                                            <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
+                                                <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
+                                            </div>
+                                            <div class="alert alert-danger" id="alertEmail" name="alertEmail" style="padding: 10px; display: none;">
+                                                <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar email already exists!</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newUsername" class="col-sm-3 control-label"> Username</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="newUsername" name="newUsername" placeholder="Enter Username" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newEmail" class="col-sm-3 control-label">Email</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-line">
+                                                        <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="Enter Email" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                     <i class="material-icons">check</i>
+                                                    <button type="submit" name="addAccount" id="addAccount" class="btn bg-green waves-effect">ADD ACCOUNT</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- ## END ADD ADMIN -->
                                 </div>
                             </div>
                         </div>
@@ -188,6 +239,9 @@
         document.getElementById("oldPassword").addEventListener("keyup", checkOldPassword);
         document.getElementById("newPassword").addEventListener("keyup", validateNewPasswordField);
         document.getElementById("newPasswordConfirm").addEventListener("keyup", validateConfirmPasswordField);
+
+        document.getElementById("newUsername").addEventListener("keyup", checkUsername);
+        document.getElementById("newEmail").addEventListener("keyup", checkEmail);
 
         function checkOldPassword(){
 
@@ -282,6 +336,52 @@
                 $('#submitPass').prop('disabled', false);
 
             }
+
+        }
+
+        //Validate add administrator account
+
+        function checkUsername(){
+
+            var username = $('#newUsername').val();
+
+            $.post("be/account_admin/check_admin_account.php", { "username": username }, function(response){
+
+                if(response == 1){
+
+                    $('#alertUsername').css('display', 'block');
+                    $('#addAccount').attr("disabled", true);
+
+                }else{
+
+                    $('#alertUsername').css('display', 'none');
+                    $('#addAccount').attr("disabled", false);
+
+                }
+
+            });
+
+        }
+
+        function checkEmail(){
+
+            var email = $('#newEmail').val();
+
+            $.post("be/account_admin/check_admin_account.php", { "email": email }, function(response){
+
+                if(response == 1){
+
+                    $('#alertEmail').css('display', 'block');
+                    $('#addAccount').attr("disabled", true);
+
+                }else{
+
+                    $('#alertEmail').css('display', 'none');
+                    $('#addAccount').attr("disabled", false);
+
+                }
+
+            });
 
         }
 
