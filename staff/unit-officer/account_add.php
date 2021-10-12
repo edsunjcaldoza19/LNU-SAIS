@@ -18,7 +18,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h3>ACCOUNT DETAILS</h3>
+                            <p style="font-size: 24px; font-weight: 600;">ACCOUNT DETAILS</p>
                             <p>Please fill in the required fields to create an account. </p>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -35,54 +35,53 @@
                         </div>
                         <div class="body">
                             <form action="be/account_staff/add.php" method="POST" enctype="multipart/form-data">
-                                <h3>Account Information</h3>
+                                <p style="font-size: 20px;">Account Information</p>
                                 <div class="form-group">
                                     <small>Provide username and password for your account information. This will be used to login to the system.</small>
                                 </div>
                                 <fieldset>
+                                    <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
+                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
+                                    </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="username" required>
+                                            <input type="text" class="form-control" name="username" id="username" required>
                                             <label class="form-label">Username*</label>
                                         </div>
                                     </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="password" class="form-control" name="password" id="password" required>
-                                            <label class="form-label">Password*</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="password" class="form-control" name="confirm" required>
-                                            <label class="form-label">Confirm Password*</label>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
-                                    <p id="unitLabel">Program</p>
-                                    <select name="courseID" class="form-control">
-                                        <?php
-                                            require 'be/database/db_pdo.php';
-                                            $program_id = $_SESSION['staff_unit'];
-                                            $sqlCourse = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $program_id");
-                                            $sqlCourse->execute();
-                                            while($fetchCourse = $sqlCourse->fetch()){
-                                        ?>
-                                            <option name="courseID" value="<?php echo $fetchCourse['id']?>">
-                                            <?php echo $fetchCourse['course_name'] ?></option>
-                                        <?php
-                                            }
-                                    ?>
-                                    </select>
+                                        <div class="form-line">
+                                            <p id="unitLabel">Program*</p>
+                                                <select name="courseID" class="form-control" required>
+                                                    <?php
+                                                        require 'be/database/db_pdo.php';
+                                                        $program_id = $_SESSION['staff_unit'];
+                                                        $sqlCourse = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $program_id");
+                                                        $sqlCourse->execute();
+                                                        while($fetchCourse = $sqlCourse->fetch()){
+                                                    ?>
+                                                        <option name="courseID" value="<?php echo $fetchCourse['id']?>">
+                                                        <?php echo $fetchCourse['course_name'] ?></option>
+                                                    <?php
+                                                        }
+                                                ?>
+                                                </select>
+                                        </div>  
                                     </div>
                                 </fieldset>
-                                <h3>Profile Information</h3>
+                                <p style="font-size: 20px;">Personal Information</p>
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="title" class="form-control" required>
-                                            <label class="form-label">Title*</label>
-                                        </div>
+                                            <p id="unitLabel">Honorific</p>
+                                            <select name="title" class="form-control">
+                                                <option value="Mr.">Mr.</option>
+                                                <option value="Mr.">Mrs.</option>
+                                                <option value="Prof.">Prof.</option>
+                                                <option value="Dr.">Dr.</option>
+                                                <option value="Engr.">Engr.</option>
+                                            </select>
+                                        </div>  
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -92,8 +91,8 @@
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="middleName" class="form-control" required>
-                                            <label class="form-label">Middle Name*</label>
+                                            <input type="text" name="middleName" class="form-control">
+                                            <label class="form-label">Middle Name</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
@@ -102,16 +101,19 @@
                                             <label class="form-label">Last Name*</label>
                                         </div>
                                     </div>
+                                    <div class="alert alert-danger" id="alertEmail" name="alertEmail" style="padding: 10px; display: none;">
+                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
+                                    </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="email" name="email" class="form-control" required>
-                                            <label class="form-label">Email*</label>
+                                            <input type="email" name="email" id="email" class="form-control" required>
+                                            <label class="form-label">Email Address*</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <textarea name="address" cols="30" rows="3" class="form-control no-resize" required></textarea>
-                                            <label class="form-label">Address*</label>
+                                            <input type="text" name="contact" cols="30" rows="3" class="form-control" required></input>
+                                            <label class="form-label">Contact Number*</label>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -174,6 +176,55 @@
             output.onload = function(){
                 URL.revokeObjectURL(output.src)
             }
+        }
+
+        //Validate add administrator account
+
+        document.getElementById("username").addEventListener("keyup", checkUsername);
+        document.getElementById("email").addEventListener("keyup", checkEmail);
+
+        function checkUsername(){
+
+            var username = $('#username').val();
+
+            $.post("be/account_staff/check_staff_account.php", { "username": username }, function(response){
+
+                if(response == 1){
+
+                    $('#alertUsername').css('display', 'block');
+                    $('#submit').attr("disabled", true);
+
+                }else{
+
+                    $('#alertUsername').css('display', 'none');
+                    $('#submit').attr("disabled", false);
+
+                }
+
+            });
+
+        }
+
+        function checkEmail(){
+
+            var email = $('#email').val();
+
+            $.post("be/account_staff/check_staff_account.php", { "email": email }, function(response){
+
+                if(response == 1){
+
+                    $('#alertEmail').css('display', 'block');
+                    $('#submit').attr("disabled", true);
+
+                }else{
+
+                    $('#alertEmail').css('display', 'none');
+                    $('#submit').attr("disabled", false);
+
+                }
+
+            });
+
         }
     </script>
 </body>

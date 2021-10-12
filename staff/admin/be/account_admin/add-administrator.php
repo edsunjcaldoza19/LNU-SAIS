@@ -88,7 +88,7 @@ if(isset($_POST['addAccount'])){
                     <p>Please use the following default user credentials upon activation:</p>
                     <p style='margin-bottom: 5px;'><b>Username: $username</b></p>
                     <p><b>Password: $lastName</b></p>
-                    <p style='text-align: justify;'>To activate your administrator account, please click your link provided below</p>
+                    <p style='text-align: justify;'>To activate your administrator account, please click the link provided below</p>
                     <p style='text-align: justify;'>Sincerely,</p>
                     <p style='text-align: justify; font-weight: 600;'>Admissions Office | Leyte Normal University</p>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>

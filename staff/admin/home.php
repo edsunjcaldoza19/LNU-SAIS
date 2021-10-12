@@ -102,7 +102,7 @@
                                                             <tr>
                                                                 <th>Username</th>
                                                                 <th>Name</th>
-                                                                <th>Address</th>
+                                                                <th>Contact Number</th>
                                                                 <th>Email</th>
                                                             </tr>
                                                         </thead>
@@ -124,7 +124,7 @@
                                                                     echo " ";
                                                                     echo $fetch['staff_last_name'];?>
                                                                 </td>
-                                                                <td><?php echo $fetch['staff_address']; ?></td>
+                                                                <td><?php echo $fetch['staff_contact']; ?></td>
                                                                 <td><?php echo $fetch['staff_email']; ?></td>
 
                                                             </tr>

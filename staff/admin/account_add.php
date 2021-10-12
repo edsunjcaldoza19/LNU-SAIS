@@ -18,7 +18,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h3>ACCOUNT DETAILS</h3>
+                            <p style="font-size: 24px; font-weight: 600;">ACCOUNT DETAILS</p>
                             <p>Please fill in the required fields to create an account. </p>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -35,62 +35,63 @@
                         </div>
                         <div class="body">
                             <form action="be/account_staff/add.php" method="POST" enctype="multipart/form-data">
-                                <h3>Account Information</h3>
+                                <p style="font-size: 20px;">Account Information</p>
                                 <div class="form-group">
                                     <small>Provide username and password for your account information. This will be used to login to the system.</small>
                                 </div>
                                 <fieldset>
+                                    <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
+                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
+                                    </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="username" required>
+                                            <input type="text" class="form-control" name="username" id="username" required>
                                             <label class="form-label">Username*</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="password" class="form-control" name="password" id="password" required>
-                                            <label class="form-label">Password*</label>
-                                        </div>
+                                            <p>Role*</p>
+                                            <select id="role" name="role" class="form-control show-tick" required>
+                                                <option disabled>Select Role</option>
+                                                <option value="1">Admission Officer</option>
+                                                <option value="2">Exam Officer</option>
+                                                <option value="3">Unit Head</option>
+                                            </select>
+                                        </div> 
                                     </div>
-                                    <div class="form-group form-float">
+                                    <div class="form-group form-float" id="unit">
                                         <div class="form-line">
-                                            <input type="password" class="form-control" name="confirm" required>
-                                            <label class="form-label">Confirm Password*</label>
+                                            <p>Program*</p>
+                                                <select name="unitID" class="form-control" required>
+                                                    <?php
+                                                        require 'be/database/db_pdo.php';
+                                                        $sqlCourse = $conn->prepare("SELECT * FROM `tbl_unit`");
+                                                        $sqlCourse->execute();
+                                                        while($fetchCourse = $sqlCourse->fetch()){
+                                                    ?>
+                                                        <option name="unitID" value="<?php echo $fetchCourse['id']?>">
+                                                        <?php echo $fetchCourse['unit_name'] ?></option>
+                                                    <?php
+                                                        }
+                                                ?>
+                                                </select>
                                         </div>
-                                    </div>
-                                    <div class="form-group" id="">
-                                    <p>Role</p>
-                                        <select id="role" name="role" class="form-control show-tick">
-                                            <option disabled>Select Role</option>
-                                            <option value="1">Admission Officer</option>
-                                            <option value="2">Exam Officer</option>
-                                            <option value="3">Unit Head</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group" id="unitID">
-                                    <p id="unitLabel">Program</p>
-                                    <select name="unitID" class="form-control">
-                                        <?php
-                                            require 'be/database/db_pdo.php';
-                                            $sqlCourse = $conn->prepare("SELECT * FROM `tbl_unit`");
-                                            $sqlCourse->execute();
-                                            while($fetchCourse = $sqlCourse->fetch()){
-                                        ?>
-                                            <option name="unitID" value="<?php echo $fetchCourse['id']?>">
-                                            <?php echo $fetchCourse['unit_name'] ?></option>
-                                        <?php
-                                            }
-                                    ?>
-                                    </select>
                                     </div>
                                 </fieldset>
-                                <h3>Profile Information</h3>
+                                <p style="font-size: 20px;">Personal Information</p>
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="title" class="form-control" required>
-                                            <label class="form-label">Title*</label>
-                                        </div>
+                                            <p>Honorific</p>
+                                            <select name="title" class="form-control">
+                                                <option value="Mr.">Mr.</option>
+                                                <option value="Mr.">Mrs.</option>
+                                                <option value="Prof.">Prof.</option>
+                                                <option value="Dr.">Dr.</option>
+                                                <option value="Engr.">Engr.</option>
+                                            </select>
+                                        </div>  
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -100,8 +101,8 @@
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="middleName" class="form-control" required>
-                                            <label class="form-label">Middle Name*</label>
+                                            <input type="text" name="middleName" class="form-control">
+                                            <label class="form-label">Middle Name</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
@@ -110,16 +111,19 @@
                                             <label class="form-label">Last Name*</label>
                                         </div>
                                     </div>
+                                    <div class="alert alert-danger" id="alertEmail" name="alertEmail" style="padding: 10px; display: none;">
+                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar email already exists!</p>
+                                    </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="email" name="email" class="form-control" required>
+                                            <input type="email" name="email" id="email" class="form-control" required>
                                             <label class="form-label">Email*</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <textarea name="address" cols="30" rows="3" class="form-control no-resize" required></textarea>
-                                            <label class="form-label">Address*</label>
+                                            <input name="contact" cols="30" rows="3" class="form-control no-resize" required></input>
+                                            <label class="form-label">Contact Number*</label>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -147,7 +151,7 @@
                                     <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
                                 </fieldset>
                                 <div class="form-group">
-                                    <button type="submit" class="btn bg-green btn-lg" name="submit">Submit</button>
+                                    <button type="submit" class="btn bg-green btn-lg" name="submit" id="submit">Submit</button>
                                     <a href="account_admission_officer.php" class="btn bg-blue btn-lg">Cancel</a>
                                 </div>
                             </form>
@@ -187,20 +191,16 @@
     <!-- Demo Js -->
     <script src="../../js/demo.js"></script>
      <script>
-            document.getElementById("unitID").hidden=true;
-            document.getElementById("unitLabel").hidden=true;
+            document.getElementById("unit").hidden=true;
             document.getElementById("role").onchange=function(){
                 if(this.options[this.selectedIndex].value==1){
-                    document.getElementById("unitID").hidden=true;
-                    document.getElementById("unitLabel").hidden=true;
+                    document.getElementById("unit").hidden=true;
                 }
                 else if(this.options[this.selectedIndex].value==2){
-                    document.getElementById("unitID").hidden=true;
-                    document.getElementById("unitLabel").hidden=true;
+                    document.getElementById("unit").hidden=true;
                 }
                 else if(this.options[this.selectedIndex].value==3){
-                    document.getElementById("unitID").hidden=false;
-                    document.getElementById("unitLabel").hidden=false;
+                    document.getElementById("unit").hidden=false;
                 }
             }
         var previewImage = function(event){
@@ -209,6 +209,55 @@
             output.onload = function(){
                 URL.revokeObjectURL(output.src)
             }
+        }
+
+        //Validate add administrator account
+
+        document.getElementById("username").addEventListener("keyup", checkUsername);
+        document.getElementById("email").addEventListener("keyup", checkEmail);
+
+        function checkUsername(){
+
+            var username = $('#username').val();
+
+            $.post("be/account_staff/check_staff_account.php", { "username": username }, function(response){
+
+                if(response == 1){
+
+                    $('#alertUsername').css('display', 'block');
+                    $('#submit').attr("disabled", true);
+
+                }else{
+
+                    $('#alertUsername').css('display', 'none');
+                    $('#submit').attr("disabled", false);
+
+                }
+
+            });
+
+        }
+
+        function checkEmail(){
+
+            var email = $('#email').val();
+
+            $.post("be/account_staff/check_staff_account.php", { "email": email }, function(response){
+
+                if(response == 1){
+
+                    $('#alertEmail').css('display', 'block');
+                    $('#submit').attr("disabled", true);
+
+                }else{
+
+                    $('#alertEmail').css('display', 'none');
+                    $('#submit').attr("disabled", false);
+
+                }
+
+            });
+
         }
     </script>
 </body>

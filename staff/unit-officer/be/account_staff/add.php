@@ -1,7 +1,18 @@
+<head>
+
+    <link rel="stylesheet" type="text/css" href="../../../../pages/assets/libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../pages/assets/css/style.css">
+
+    <script src="../../../../pages/assets/libs/jquery/jquery.min.js"></script>
+    <script src="../../../../pages/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../../pages/assets/libs/sweetalert/sweetalert2.all.min.js"></script>
+
+</head>
+
 <?php
 
-    include '../includes/head.php';
     require '../database/db_pdo.php';
+
 	if(ISSET($_POST['submit'])){
 		try{
 			//pathinfo
@@ -13,22 +24,26 @@
 			$target="../../../../images/staff-img/".$newname;
 
             $username = $_POST['username'];
-            $password = $_POST['password'];
             $title = $_POST['title'];
             $firstName = $_POST['firstName'];
             $middleName = $_POST['middleName'];
             $lastName = $_POST['lastName'];
             $email = $_POST['email'];
-            $address = $_POST['address'];
+            $contact = $_POST['contact'];
 			$role = 4;
 			$courseID = $_POST['courseID'];
 
+			$password = $username;
+			$password = password_hash($password, PASSWORD_DEFAULT);
+
+			$loginStatus = 0;
+
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO `tbl_account_staff`(`staff_username`, `staff_password`,
-            `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_address`,
-            `staff_email`, `staff_role`, `staff_program`, `staff_profile_img`)
+            `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_contact`,
+            `staff_email`, `staff_role`, `staff_program`, `login_status`, `staff_profile_img`)
             VALUES ('$username','$password','$title','$firstName','$middleName',
-            '$lastName','$address','$email', '$role', '$courseID', '$newname')";
+            '$lastName','$contact','$email', '$role', '$courseID', '$loginStatus', '$newname')";
 			$conn->exec($sql);
 			//Move to path
 			if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){

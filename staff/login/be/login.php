@@ -448,6 +448,7 @@
 							$_SESSION['staff_email'] = $user['staff_email'];
 							$_SESSION['staff_profile_img'] = $user['staff_profile_img'];
 							$_SESSION['staff_unit'] = $user['staff_unit'];
+							$_SESSION['staff_program'] = $user['staff_program'];
 							$_SESSION['token'] = $token;
 
 							$id = $user['id'];

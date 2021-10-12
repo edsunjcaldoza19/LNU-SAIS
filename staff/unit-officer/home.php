@@ -102,7 +102,7 @@
                                                             <tr>
                                                                 <th>Username</th>
                                                                 <th>Name</th>
-                                                                <th>Address</th>
+                                                                <th>Contact Number</th>
                                                                 <th>Email</th>
                                                             </tr>
                                                         </thead>
@@ -110,7 +110,7 @@
                                                             <!-- populate table with db data -->
                                                             <?php
                                                                 require 'be/database/db_pdo.php';
-                                                                $sql = $conn->prepare("SELECT * FROM `tbl_account_staff` WHERE `staff_role` = '1'");
+                                                                $sql = $conn->prepare("SELECT * FROM `tbl_account_staff` WHERE `staff_role` = '3'");
                                                                 $sql->execute();
 
                                                                 while($fetch = $sql->fetch()){
@@ -124,7 +124,7 @@
                                                                     echo " ";
                                                                     echo $fetch['staff_last_name'];?>
                                                                 </td>
-                                                                <td><?php echo $fetch['staff_address']; ?></td>
+                                                                <td><?php echo $fetch['staff_contact']; ?></td>
                                                                 <td><?php echo $fetch['staff_email']; ?></td>
 
                                                             </tr>

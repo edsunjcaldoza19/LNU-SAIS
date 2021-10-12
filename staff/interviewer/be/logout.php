@@ -2,7 +2,7 @@
 
 require 'database/db_pdo.php';
 
-session_start();ma
+session_start();
 
 $user = $_SESSION['staff_username'];
 
