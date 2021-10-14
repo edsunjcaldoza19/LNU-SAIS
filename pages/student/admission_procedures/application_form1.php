@@ -39,7 +39,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admission Procedure - Form 1 </title>
+	<title>LNU SAIS | Application Form 1</title>
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,6 +84,8 @@
 							<img src="../../assets/images/sidebar-logo.png" class="sidebar-logo">
 						</div>
 						<div class="sidebar-navigation">
+							<p class="sidebar-header" style="margin-bottom: 3px;">SCHOOL YEAR</p>
+								<p class="sidebar-link"><?php echo $fetch1['ay_year']?></p>
 							<p class="sidebar-header">NAVIGATE</p>
 							<div class="sidebar-item">
 								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="../help/my_status.php" class="sidebar-link">My Status</a>
@@ -120,6 +122,8 @@
 				<aside id="sidebar-hidden" class="sidebar-hidden">
 					<div class="student-sidebar-container-hidden">
 						<div class="sidebar-navigation">
+							<p class="sidebar-header" style="margin-bottom: 3px;">SCHOOL YEAR</p>
+								<p class="sidebar-link"><?php echo $fetch1['ay_year']?></p>
 							<p class="sidebar-header">NAVIGATE</p>
 							<div class="sidebar-item">
 								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="../help/my_status.php" class="sidebar-link">My Status</a>
@@ -180,7 +184,7 @@
 							<div class="col-md-8">
 								<div class="row">
 									<div class="col-md-6">
-									<p class="student-page-label">School Year *</p>
+										<!-- <p class="student-page-label">School Year *</p>
 										<div class="form-group form-float">
 					                        <select class="form-control show-tick" name="cbAcademicYear" id="cbAcademicYear" required>
                                         		<option value="" disabled selected>Select School Year</option>
@@ -195,17 +199,7 @@
 													}
 												?>
                                     		</select>
-
-		                    			</div>
-										<p class="student-page-label">Entry Status *</p>
-										<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="cbEntryStatus" id="cbEntryStatus" required>
-                                        		<option value="" disabled selected>Select Entry Status</option>
-                                        		<option value="Freshmen">Freshmen</option>
-                                        		<option value="Transferee">Transferee</option>
-                                        		<option value="Re-admission">Re-admission</option>
-                                    		</select>
-		                    			</div>
+		                    			</div> -->
 		                    			<p class="student-page-label">Semester *</p>
 										<div class="form-group form-float">
 					                        <select class="form-control show-tick" name="cbSemester" id="cbSemester" required>
@@ -215,8 +209,6 @@
                                         		<option value="Summer">Summer</option>
                                     		</select>
 		                    			</div>
-									</div>
-									<div class="col-md-6">
 		                    			<p class="student-page-label">Program Preference (First Choice) *</p>
 										<div class="form-group form-float">
 					                        <select class="form-control show-tick" style="margin-top: 10px;" name="cbFirstChoice" id="cbFirstChoice">
@@ -234,6 +226,8 @@
 		                                    ?>
 		                                </select>
 		                    			</div>
+									</div>
+									<div class="col-md-6">
 		                    			<p class="student-page-label">Program Preference (Second Choice) *</p>
 										<div class="form-group form-float">
 					                       <select class="form-control show-tick" style="margin-top: 10px;" name="cbSecondChoice" id="cbSecondChoice">
@@ -261,52 +255,6 @@
 						<p style="font-size: 12px;"><i>Note: Put NONE or N/A if not applicable.</i></p>
 						<div class="row">
 							<div class="col-md-6">
-								<p class="student-page-label">Name of Applicant as Stated in Birth Certificate</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbFamilyName" id="tbFamilyName" class="form-control" required/>
-		                            	<label class="form-label">Family Name *</label>
-		                       		</div>
-		                    	</div>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbFirstName" id="tbFirstName" class="form-control" required/>
-		                            	<label class="form-label">First Name *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbMiddleName" id="tbMiddleName" class="form-control"/>
-		                            	<label class="form-label">Middle Name </label>
-		                       		</div>
-		                    	</div>
-		                    	<p class="student-page-label">Date of Birth</p>
-		                    	<div class="form-group">
-                                    <div class="form-line">
-                                        <input type="date" name="dpBirthday" id="dpBirthday" class="form-control" required/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                	<div class="col-md-6">
-                                		<p class="student-page-label">Age</p>
-                                		<div class="form-group form-float">
-                                    		<div class="form-line">
-                                        		<input type="number" name="tbAge" id="tbAge" class="form-control" required/>
-                                        		<label class="form-label">Enter Age</label>
-                                    		</div>
-                                		</div>
-                                	</div>
-                                	<div class="col-md-6">
-                                		<p class="student-page-label">Gender</p>
-                                		<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="cbGender" id="cbGender" required>
-                                        		<option value="" disabled selected>Select Gender</option>
-                                        		<option value="Male">Male</option>
-                                        		<option value="Female">Female</option>
-                                    		</select>
-		                    			</div>
-                                	</div>
-                                </div>
                                 <p class="student-page-label">Height</p>
                                 <div class="row">
                                 	<div class="col-md-6">
@@ -404,9 +352,7 @@
                                         <label class="form-label">Enter Mobile Number</label>
                                     </div>
                                 </div>
-							</div>
-							<div class="col-md-6">
-								<p class="student-page-label">Father's Information</p>
+                                <p class="student-page-label">Father's Information</p>
 		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
                                     <div class="form-line">
                                         <input type="text" name="tbFatherName" id="tbFatherName" class="form-control" required/>
@@ -443,6 +389,8 @@
                                         <label class="form-label">Employer's Address</label>
                                     </div>
                                 </div>
+							</div>
+							<div class="col-md-6">
                                 <p class="student-page-label">Mother's Information</p>
 		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
                                     <div class="form-line">

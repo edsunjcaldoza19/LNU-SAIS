@@ -26,6 +26,25 @@
 			$application['admission_status'] = 'Pending';
     		$application['as_timestamp'] = 'N/A';
 
+    	}else{
+
+    		if($application['form_status'] == ''){
+    			$application['form_status'] = 'Pending';
+    			$application['fs_timestamp'] = 'N/A';
+    		}
+    		if($application['exam_status'] == ''){
+    			$application['exam_status'] = 'Pending';
+    			$application['es_timestamp'] = 'N/A';
+    		}
+    		if($application['interview_status'] == ''){
+    			$application['interview_status'] = 'Pending';
+    			$application['is_timestamp'] = 'N/A';
+    		}
+    		if($application['admission_status'] == ''){
+    			$application['admission_status'] = 'Pending';
+    			$application['as_timestamp'] = 'N/A';
+    		}
+
     	}
 
     	if($application['form_status'] == 'Pending'){
@@ -184,8 +203,6 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 
 
-									<!--
-
 									<p class="default-interface-subheader">
 										Entrance Examination
 									</p>
@@ -213,8 +230,7 @@
 										?>
 										<?php echo $fetch['interview_progress'] ?> (<?php echo $fetch['ip_timestamp'] ?>)
 									</p>
-									-->
-
+						
 
 									<!-- Admission Status -->
 
@@ -355,9 +371,6 @@
 		$(function(){
 			$('#status-labels').slimScroll({
 				height: '350px'
-			});
-			$('#student-page-default').slimScroll({
-				height: '550px'
 			});
 		});
 

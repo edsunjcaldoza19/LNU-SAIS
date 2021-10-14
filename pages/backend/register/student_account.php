@@ -12,6 +12,7 @@
 <?php
 
 require '../config/db_mysqli.php';
+require '../config/db_pdo.php';
 require '../../assets/libs/PHPMailer/src/PHPMailer.php';
 require '../../assets/libs/PHPMailer/src/SMTP.php'; 
 require '../../assets/libs/PHPMailer/src/Exception.php'; 
@@ -20,6 +21,13 @@ if(isset($_POST['btnRegister'])){
 
     //Get form Data
 
+    $last_name = $_POST['tbFamilyName'];
+    $first_name = $_POST['tbFirstName'];
+    $middle_name = $_POST['tbMiddleName'];
+    $birthday = $_POST['dpBirthday'];
+    $age = $_POST['tbAge'];
+    $gender = $_POST['cbGender'];
+    $entry = $_POST['cbEntryStatus'];
     $email = $_POST['tbEmail'];
     $password = $_POST['tbPassword'];
     $securityQuestion = $_POST['cbQuestion'];
@@ -36,7 +44,7 @@ if(isset($_POST['btnRegister'])){
     $studentNumber = "N/A";
     $loginStatus = "Logged-out";
 
-    //Sanitize form data
+    //Sanitize account credentials data
 
     $email = $connection->real_escape_string($email);
     $password = $connection->real_escape_string($password);
@@ -50,9 +58,21 @@ if(isset($_POST['btnRegister'])){
     $verified = 0;
 
     $query="INSERT INTO tbl_applicant_account(`email`, `password`, `verification_key`, `verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`) VALUES('$email', '$password', '$vkey', '$verified', '$securityQuestion', '$securityAnswer', '$form1', '$form2', '$form_timestamp', '$exam', '$exam_timestamp', '$interview', '$interview_timestamp', '$studentNumber', '$loginStatus')";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($connection, $query); 
 
-    if($query_run){
+    //Insert applicant_account_id to tbl_applicant
+
+    $sql = $conn->prepare("SELECT * FROM `tbl_applicant_account` ORDER BY `id` DESC LIMIT 1");
+    $sql->execute();
+    $fetch = $sql->fetch();
+                                            
+    $applicant_account_id = $fetch['id'];
+    
+    $query2="INSERT INTO tbl_applicant(`applicant_account_id`, `entry`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`)
+    VALUES ('$applicant_account_id', '$entry', '$first_name', '$middle_name', '$last_name', '$birthday', '$age', '$gender')";
+    $query2_run = mysqli_query($connection, $query2);
+
+    if($query_run && $query2_run){
         sleep(1);
 
         //Initialize PHPMailer
@@ -65,17 +85,61 @@ if(isset($_POST['btnRegister'])){
         $mail->Port = "587";
         $mail->Username = "1800638@lnu.edu.ph";
         $mail->Password = "09041999";
-        $mail->Subject = "Verify Your Email";
         $mail->setFrom("lnu.admissionsoffice@lnu.edu.ph");
 
         //Initialize email body
 
         $mail->isHTML(true);
         $mail->From = "lnu.admissionsoffice@lnu.edu.ph";
-        $mail->FromName = "<no-reply-lnu.admissionsoffice@lnu.edu.ph>";
+        $mail->FromName = "<no-reply@lnu-sais>";
         $mail->addAddress($email);
         $mail->addEmbeddedImage('../../assets/images/logo.png', 'lnu_logo');
-        $mail->Body = "
+        
+        if($entry == 'Re-admission'){
+
+            //Mail body for returnee applicants
+
+            $mail->Subject = "Account Registration for Re-admission Students";
+            $mail->Body = "
+
+            <div class='email-body' style=' height: auto; width: auto; background-color: #F2F2F2;'>
+                <div class='email-logo-container' align='center' style='height: auto; width: auto; padding: 15px;
+                background-color: #FFFFFF;'>
+                    <img src='cid:lnu_logo' class='email-header-logo' alt='lnu-logo' style='height: auto;
+                    width: 250px;'>
+                </div>
+                <div class='row' style='margin: 0px;'>
+                    <div class='col-md-3'></div>
+                    <div class='col-md-6 email-content' style='height: auto; width: auto; margin-top: 10px; padding: 20px;
+                    background-color: #FFFFFF; box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.05);'>
+                    <p class='letter-header' style='font-size: 30px; font-weight: 300; color: #A2A2A2;'>Account Registration</p>
+                    <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
+                    <p style='font-weight: 600;'>Hi! $email Your account registration is currently under verification</p>
+                    <p style='text-align: justify;'>The admissions office will verify and confirm your existing records 
+                    in the university first before confirming your account registration. Please wait for further updates
+                    through this email address.
+                    </p>
+                    <p style='text-align: justify;'>Sincerely,</p>
+                    <p style='text-align: justify; font-weight: 600;'>Admissions Office | Leyte Normal University</p>
+                    <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
+                    <p style='font-size: 12px; text-align: center'><i>(This is a system generated email. Do not reply.)</i></p>
+                    <p class='letter-footer' style='font-size: 10px; letter-spacing: 3px; color: #A2A2A2; text-align: center;'>
+                        POWERED BY LNU SAIS V1.0.0
+                    </p>
+                    </div>   
+                    <div class='col-md-3'></div> 
+                </div>       
+            </div>
+
+            ";
+
+
+        }else{
+
+            //Mail body for non-returnee applicants
+
+            $mail->Subject = "Verify Your Email";
+            $mail->Body = "
 
             <div class='email-body' style=' height: auto; width: auto; background-color: #F2F2F2;'>
                 <div class='email-logo-container' align='center' style='height: auto; width: auto; padding: 15px;
@@ -106,7 +170,9 @@ if(isset($_POST['btnRegister'])){
                 </div>       
             </div>
 
-        ";
+            ";
+
+        }
 
         if($mail->Send()){
             echo '

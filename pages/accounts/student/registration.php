@@ -57,25 +57,80 @@
 					<form method="POST" action="../../backend/register/student_account.php">
 						<div class="login-form-header">
 							<p class="login-form-header-text">Register Account</p>
-							<p class="login-form-header-subtext">Please use a valid and active e-mail address.</p>
 						</div>
-						<div class="alert alert-danger" id="alertMessage" name="alertMessage" style="padding: 10px; display: none;">
-							<i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar email already exists.</p>
-						</div>
+						<hr class="default-divider ml-auto" style="margin: 10px;">
 						<div class="login-form-body">
-		                    <div class="row">
-		                    	<div class="col-md-12">
-		                    		<div class="form-group form-float">
-		                       			<div class="form-line" id="emailLine">
-		                        		    <input type="email" name="tbEmail" id="tbEmail" class="form-control" autocomplete="off" required/>
-		                        		    <label class="form-label" id="emailLabel">Email Address *</label>
-		                        		</div>
-		                        		<p class="form-error" id="emailError"><i class="fa fa-exclamation-circle"></i> What's your email?</p>
-		                   		 	</div>
-		                    	</div>
-		                    </div>
-		                    <div class="row">
-		                    	<div class="col-md-6">
+							<div id="accountInfo" style="height: auto; padding: 2px;">
+								<p style="font-size: 18px; margin-bottom: 0px;">Account Details</p>
+								<p class="login-form-header-subtext" style="margin-bottom: 15px;">Please enter your basic account details.</p>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbFirstName" id="tbFirstName" class="form-control" required/>
+				                            	<label class="form-label">First Name *</label>
+				                       		</div>
+			                    		</div>
+			                    		<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbMiddleName" id="tbMiddleName" class="form-control"/>
+				                            	<label class="form-label">Middle Name </label>
+				                       		</div>
+			                    		</div>
+			                    		<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbFamilyName" id="tbFamilyName" class="form-control" required/>
+				                            	<label class="form-label">Last Name *</label>
+				                       		</div>
+		                    			</div>
+		                    			<div class="form-group form-float">
+	                                    	<div class="form-line">
+	                                        	<input type="number" name="tbAge" id="tbAge" class="form-control" required/>
+	                                        	<label class="form-label">Enter Age *</label>
+	                                    	</div>
+	                                	</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group form-float">
+                                    		<div class="form-line">
+                                       			<input type="date" name="dpBirthday" id="dpBirthday" class="form-control" required/>
+                                    		</div>
+                               	 		</div>
+	                                	<div class="form-group form-float">
+					                        <select class="form-control show-tick" name="cbGender" id="cbGender" required>
+                                        		<option value="" disabled selected>Select Gender *</option>
+                                        		<option value="Male">Male</option>
+                                        		<option value="Female">Female</option>
+                                    		</select>
+		                    			</div>
+		                    			<div class="form-group form-float">
+					                        <select class="form-control show-tick" name="cbEntryStatus" id="cbEntryStatus" required>
+                                        		<option value="" disabled selected>Select Entry Status *</option>
+                                        		<option value="Freshmen">Freshmen</option>
+                                        		<option value="Transferee">Transferee</option>
+                                        		<option value="Re-admission">Re-admission</option>
+                                    		</select>
+		                    			</div>
+									</div>
+								</div>
+								<p style="font-size: 18px; margin-bottom: 0px;">Account Credentials</p>
+								<p class="login-form-header-subtext" style="margin-bottom: 15px;">You'll use these details to login.</p>
+								<div class="row">
+									<div class="col-md-12">		
+				                    	<div class="alert alert-danger" id="alertMessage" name="alertMessage" style="padding: 10px; display: none;">
+											<i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar email already exists.</p>
+										</div>
+										<div class="form-group form-float">
+			                       			<div class="form-line" id="emailLine">
+			                        		    <input type="email" name="tbEmail" id="tbEmail" class="form-control" autocomplete="off" required/>
+			                        		    <label class="form-label" id="emailLabel">Email Address *</label>
+			                        		</div>
+			                        		<p class="form-error" id="emailError"><i class="fa fa-exclamation-circle"></i> What's your email?</p>
+		                   		 		</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
 		                    		<div class="form-group form-float">
 		                        		<div class="form-line" id="passwordLine">
 		                            		<input type="password" name="tbPassword" id="tbPassword" class="form-control" required/>
@@ -97,54 +152,51 @@
 		                       			<p class="form-error" id="confirmPasswordError"><i class="fa fa-exclamation-circle"></i> Passwords does not match</p>
 		                    		</div>
 		                    	</div>
+								</div>
 		                    </div>
-		                    <div class="row">
-		                    	<div class="col-md-12">
-		                    		<div class="login-form-header">
-										<p class="login-form-header-text">Password Recovery</p>
+		                    <div id="passwordRecovery" style="display: none;">
+			                   	<div class="row" style="margin-bottom: 20px; margin-top: 10px;" style="display: none;">
+			                    	<div class="col-md-12">
+			                    		<p style="font-size: 18px; margin-bottom: 0px;">Password Recovery</p>
 										<p class="login-form-header-subtext" style="text-align: justify;">Please pick and answer one of the security questions below to recover your account incase you forgot your password.</p>
-									</div>
-		                    	</div>
-		                    </div>
-		                   	<div class="row" style="margin-bottom: 20px;">
-		                    	<div class="col-md-12">
-		                    		<div class="form-line">
-		                    			<select class="form-control show-tick" name="cbQuestion" id="cbQuestion" style="max-width: 100%;" required>
-                                        	<option value="" disabled selected>-- Pick a security question --</option>
-                                        	<option value="What was the house number and street name you lived in as a child?">When was your parents married?</option>
-                                        	<option value="What is your grandmother's (on your mother side) maiden name?">What is your grandmother's (on your mother side) 
-                                        	maiden name?</option>
-                                        	<option value="What time of the day were you born?">What time of the day were you born?</option>
-                                        	<option value="What was your childhood nickname?">What was your childhood nickname?</option>
-                                        	<option value="What was the last name of your third grade teacher?">What was the last name of your third grade teacher?</option>
-                                        	<option value="What was the favorite place you visited as a child?">What was the favorite place you visited as a child?</option>
-                                        	<option value="How old is your oldest sibling?">How old is your oldest sibling?</option>
-                                    	</select>
-		                    		</div>
-		                    	</div>
-		                    </div>
-		                    <div class="row">
-		                    	<div class="col-md-6">
-		                    		<div class="form-group form-float">
-		                        		<div class="form-line" id="answerLine">
-		                            		<input type="password" name="tbAnswer" id="tbAnswer" class="form-control" required/>
-		                            		<label class="form-label" id="answerLabel">Answer *</label>
-		                            		<span toggle="#tbAnswer" class="fa fa-eye form-toggle-password"></span>
-		                       			</div>
-		                       			<p class="form-error" id="answerError"><i class="fa fa-exclamation-circle"></i> What is your answer?</p>
-		                    		</div>
-		                    	</div>
-		                    	<div class="col-md-6">
-		                    		<div class="form-group form-float">
-		                        		<div class="form-line" id="confirmAnswerLine">
-		                            		<input type="password" name="tbConfirmAnswer" id="tbConfirmAnswer" class="form-control" required/>
-		                            		<label class="form-label" id="confirmAnswerLine">Confirm Answer *</label>
-		                            		<span toggle="#tbConfirmAnswer" class="fa fa-eye form-toggle-password"></span>
-		                       			</div>
-		                       			<p class="form-error" id="confirmAnswerError"><i class="fa fa-exclamation-circle"></i> Your answers does not match</p>
-		                    		</div>
-		                    	</div>
-		                    </div>
+			                    		<div class="form-line">
+			                    			<select class="form-control show-tick" name="cbQuestion" id="cbQuestion" style="max-width: 100%;" required>
+	                                        	<option value="" disabled selected>-- Pick a security question --</option>
+	                                        	<option value="What was the house number and street name you lived in as a child?">When was your parents married?</option>
+	                                        	<option value="What is your grandmother's (on your mother side) maiden name?">What is your grandmother's (on your mother side) 
+	                                        	maiden name?</option>
+	                                        	<option value="What time of the day were you born?">What time of the day were you born?</option>
+	                                        	<option value="What was your childhood nickname?">What was your childhood nickname?</option>
+	                                        	<option value="What was the last name of your third grade teacher?">What was the last name of your third grade teacher?</option>
+	                                        	<option value="What was the favorite place you visited as a child?">What was the favorite place you visited as a child?</option>
+	                                        	<option value="How old is your oldest sibling?">How old is your oldest sibling?</option>
+	                                    	</select>
+			                    		</div>
+			                    	</div>
+			                    </div>
+			                    <div class="row">
+			                    	<div class="col-md-6">
+			                    		<div class="form-group form-float">
+			                        		<div class="form-line" id="answerLine">
+			                            		<input type="password" name="tbAnswer" id="tbAnswer" class="form-control" required/>
+			                            		<label class="form-label" id="answerLabel">Answer *</label>
+			                            		<span toggle="#tbAnswer" class="fa fa-eye form-toggle-password"></span>
+			                       			</div>
+			                       			<p class="form-error" id="answerError"><i class="fa fa-exclamation-circle"></i> What is your answer?</p>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col-md-6">
+			                    		<div class="form-group form-float">
+			                        		<div class="form-line" id="confirmAnswerLine">
+			                            		<input type="password" name="tbConfirmAnswer" id="tbConfirmAnswer" class="form-control" required/>
+			                            		<label class="form-label" id="confirmAnswerLine">Confirm Answer *</label>
+			                            		<span toggle="#tbConfirmAnswer" class="fa fa-eye form-toggle-password"></span>
+			                       			</div>
+			                       			<p class="form-error" id="confirmAnswerError"><i class="fa fa-exclamation-circle"></i> Your answers does not match</p>
+			                    		</div>
+			                    	</div>
+			                    </div>
+		                	</div>
 						</div>
 						<div class="login-form-buttons" align="center">
 							<button class="default-button primary-button" type="submit" name="btnRegister" id="btnRegister">Register Account</button>
@@ -305,12 +357,14 @@
 				$('#confirmPasswordLine').css('border-bottom', '2px solid #ff6961');
 				$('#confirmPasswordLabel').css('color', '#ff6961');
 				$('#confirmPasswordError').css('display', 'block');
+				$('#passwordRecovery').css('display', 'none');
 				
 			}else{
 
 				$('#confirmPasswordLine').css('border-bottom', '1px solid #1f91f3');
 				$('#confirmPasswordLabel').css('color', '#aaa');
 				$('#confirmPasswordError').css('display', 'none');
+				$('#passwordRecovery').css('display', 'block');
 
 			}
 
@@ -346,6 +400,7 @@
 				$('#confirmAnswerLine').css('border-bottom', '2px solid #ff6961');
 				$('#confirmAnswerLabel').css('color', '#ff6961');
 				$('#confirmAnswerError').css('display', 'block');
+			
 				
 			}else{
 
@@ -397,7 +452,6 @@
 			}
 
 		})
-
 
 	</script>
 

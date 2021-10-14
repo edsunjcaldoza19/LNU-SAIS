@@ -2,7 +2,7 @@
 
 	$email = '';
 	require '../../backend/auth/check_token.php';
-
+ 
 	if(isset($_SESSION['token'])){
 
 		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
@@ -39,7 +39,7 @@
 <html>
 <head>
 
-	<title>LNU SAIS | Student - Home</title>
+	<title>LNU SAIS | Admission Procedure</title>
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,6 +82,8 @@
 							<img src="../../assets/images/sidebar-logo.png" class="sidebar-logo">
 						</div>
 						<div class="sidebar-navigation">
+							<p class="sidebar-header" style="margin-bottom: 3px;">SCHOOL YEAR</p>
+								<p class="sidebar-link"><?php echo $fetch1['ay_year']?></p>
 							<p class="sidebar-header">NAVIGATE</p>
 							<div class="sidebar-item">
 								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="../help/my_status.php" class="sidebar-link">My Status</a>
@@ -118,6 +120,8 @@
 				<aside id="sidebar-hidden" class="sidebar-hidden">
 					<div class="student-sidebar-container-hidden">
 						<div class="sidebar-navigation">
+							<p class="sidebar-header" style="margin-bottom: 3px;">SCHOOL YEAR</p>
+								<p class="sidebar-link"><?php echo $fetch1['ay_year']?></p>
 							<p class="sidebar-header">NAVIGATE</p>
 							<div class="sidebar-item">
 								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="../help/my_status.php" class="sidebar-link">My Status</a>
@@ -154,7 +158,7 @@
 			<div class="col-md-10">
 				<div class="student-page-container">
 					<div class="student-account-container">
-						<p id="datetime" class="default-datetime">0:00</p>
+						<p id="datetime" class="default-datetime">0:00 </p>
 						<div class="student-account-details">
 							<p class="student-account-details-item"><b>Hi, <?php echo $email ?></b></p>
 							<a class="student-account-details-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>

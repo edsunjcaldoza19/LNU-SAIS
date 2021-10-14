@@ -54,7 +54,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admission Procedure - Form 2</title>
+	<title>LNU SAIS | Application Form 2</title>
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,6 +99,8 @@
 							<img src="../../assets/images/sidebar-logo.png" class="sidebar-logo">
 						</div>
 						<div class="sidebar-navigation">
+							<p class="sidebar-header" style="margin-bottom: 3px;">SCHOOL YEAR</p>
+								<p class="sidebar-link"><?php echo $fetch1['ay_year']?></p>
 							<p class="sidebar-header">NAVIGATE</p>
 							<div class="sidebar-item">
 								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="../help/my_status.php" class="sidebar-link">My Status</a>
@@ -135,6 +137,8 @@
 				<aside id="sidebar-hidden" class="sidebar-hidden">
 					<div class="student-sidebar-container-hidden">
 						<div class="sidebar-navigation">
+							<p class="sidebar-header" style="margin-bottom: 3px;">SCHOOL YEAR</p>
+								<p class="sidebar-link"><?php echo $fetch1['ay_year']?></p>
 							<p class="sidebar-header">NAVIGATE</p>
 							<div class="sidebar-item">
 								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="../help/my_status.php" class="sidebar-link">My Status</a>
