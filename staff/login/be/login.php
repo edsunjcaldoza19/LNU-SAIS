@@ -60,7 +60,7 @@
 
 					if($user['verified'] == '1'){
 
-						if($user['login_status'] == "0"){
+						if($user['login_status'] == 0){
 
 							/* Set Session Information */
 
@@ -95,7 +95,7 @@
 
 						}else{
 
-							loggedIn();	
+							loggedIn();
 
 						}
 
@@ -156,7 +156,7 @@
 
 		    		$token = JWT::encode($payloadArray, $serverKey);
 
-					if($user['login_status'] == "0"){
+					if($user['login_status'] == 0){
 
 							$fullname = $user['staff_first_name'].' '.$user['staff_middle_name'].' '.$user['staff_last_name'];
 
@@ -249,7 +249,7 @@
 
 		    		$token = JWT::encode($payloadArray, $serverKey);
 
-					if($user['login_status'] == "0"){
+					if($user['login_status'] == 0){
 
 							$fullname = $user['staff_first_name'].' '.$user['staff_middle_name'].' '.$user['staff_last_name'];
 
@@ -342,7 +342,7 @@
 
 		    		$token = JWT::encode($payloadArray, $serverKey);
 
-					if($user['login_status'] == "0"){
+					if($user['login_status'] == 0){
 
 							$fullname = $user['staff_first_name'].' '.$user['staff_middle_name'].' '.$user['staff_last_name'];
 
@@ -436,7 +436,7 @@
 
 		    		$token = JWT::encode($payloadArray, $serverKey);
 
-					if($user['login_status'] == "0"){
+					if($user['login_status'] == 0){
 
 							$fullname = $user['staff_first_name'].' '.$user['staff_middle_name'].' '.$user['staff_last_name'];
 
@@ -564,5 +564,5 @@
 	   	';
 
 	}
-		
+
 ?>

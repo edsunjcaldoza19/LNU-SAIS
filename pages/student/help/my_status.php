@@ -182,11 +182,15 @@
 										<?php echo $fetch['form2_progress'] ?> (<?php echo $fetch['fp_timestamp'] ?>)
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
+
+
+									<!--
+
 									<p class="default-interface-subheader">
 										Entrance Examination
 									</p>
 									<p class="default-interface-text">
-										<?php
+									<?php
 											if($fetch['examination_progress'] == 'Not Started'){
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
 											}else{
@@ -209,6 +213,8 @@
 										?>
 										<?php echo $fetch['interview_progress'] ?> (<?php echo $fetch['ip_timestamp'] ?>)
 									</p>
+									-->
+
 
 									<!-- Admission Status -->
 

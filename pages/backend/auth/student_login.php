@@ -60,7 +60,7 @@ if(isset($_POST['btnLogin'])){
 
     		$token = JWT::encode($payloadArray, $serverKey);
 
-			if($user['login_status'] == "Logged-out"){
+			if($user['login_status'] == 0){
 
 				// Check if account is already verified //
 
