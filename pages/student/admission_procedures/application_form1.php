@@ -5,7 +5,9 @@
 
 	if(isset($_SESSION['token'])){
 
-		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
+		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM `tbl_applicant_account`
+		LEFT JOIN tbl_applicant ON tbl_applicant.applicant_account_id = tbl_applicant_account.id
+		WHERE `session_token` = '$token'");
 		$sql->execute();
 
 		//checks if examination module is activated//
@@ -16,6 +18,7 @@
 		if($fetch = $sql->fetch()){
 
 			$form1_status = $fetch['form1_progress'];
+			$id = $fetch['applicant_account_id'];
 
 		}
 
@@ -47,7 +50,6 @@
 		<!-- Imports third-party CSS libraries -->
 
 		<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap-select/dist/css/bootstrap-select.css">
     	<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
 		<link rel="stylesheet" type="text/css" href="../../assets/libs/font-awesome/css/all.css">
 
@@ -184,66 +186,56 @@
 							<div class="col-md-8">
 								<div class="row">
 									<div class="col-md-6">
-										<!-- <p class="student-page-label">School Year *</p>
-										<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="cbAcademicYear" id="cbAcademicYear" required>
-                                        		<option value="" disabled selected>Select School Year</option>
-												<?php
-													require '../../backend/config/db_pdo.php';
-													$sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
-													$sql->execute();
-													while($fetch = $sql->fetch()){
-												?>
-                                        		<option value="<?php echo $fetch['id']; ?>"><?php echo $fetch['ay_year'];?></option>
-												<?php
-													}
-												?>
-                                    		</select>
-		                    			</div> -->
+										<input type="hidden" name="applicantId" id="applicantId" value="<?php echo $id?>">
+										<input type="hidden" name="academicYear" id="academicYear" value="<?php echo $fetch1['id'] ?>">
 		                    			<p class="student-page-label">Semester *</p>
 										<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="cbSemester" id="cbSemester" required>
-                                        		<option value="" disabled selected>Select Semester</option>
-                                        		<option value="First Semester">First Semester</option>
-                                        		<option value="Second Semester">Second Semester</option>
-                                        		<option value="Summer">Summer</option>
-                                    		</select>
+											<div class="form-line">
+						                        <select class="form-control" name="cbSemester" id="cbSemester" required>
+	                                        		<option value="" disabled selected>Select Semester</option>
+	                                        		<option value="First Semester">First Semester</option>
+	                                        		<option value="Second Semester">Second Semester</option>
+	                                        		<option value="Summer">Summer</option>
+	                                    		</select>	
+                                    		</div>
 		                    			</div>
 		                    			<p class="student-page-label">Program Preference (First Choice) *</p>
 										<div class="form-group form-float">
-					                        <select class="form-control show-tick" style="margin-top: 10px;" name="cbFirstChoice" id="cbFirstChoice">
-		                                    <option selected="true" disabled="true">First Choice</option>
-		                                    <?php
+					                        <div class="form-line">
+					                        	<select class="form-control" style="margin-top: 10px;" name="cbFirstChoice" id="cbFirstChoice">
+					                        		<option value="" selected disabled>Select First Choice</option>
+					                                <?php
+					                                	$sql = $conn->prepare("SELECT * FROM `tbl_course`");
+					                                    $sql->execute();
 
-		                                        $sql = $conn->prepare("SELECT * FROM `tbl_course`");
-		                                        $sql->execute();
-
-		                                        while($fetch = $sql->fetch()){
-		                                    ?>
-		                                    <option name="cbFirstChoice" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['course_name'] ?></option>
-		                                    <?php
-		                                        }
-		                                    ?>
-		                                </select>
+					                                    while($fetch = $sql->fetch()){
+					                                ?>
+				                                    <option name="cbFirstChoice" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['course_name'] ?></option>
+					                                <?php
+					                                    }
+					                                ?>
+		                                		</select>
+					                        </div>
 		                    			</div>
 									</div>
 									<div class="col-md-6">
 		                    			<p class="student-page-label">Program Preference (Second Choice) *</p>
 										<div class="form-group form-float">
-					                       <select class="form-control show-tick" style="margin-top: 10px;" name="cbSecondChoice" id="cbSecondChoice">
-		                                    <option selected="true" disabled="true">Second Choice</option>
-		                                    <?php
+					                       <div class="form-line">
+					                        	<select class="form-control" style="margin-top: 10px;" name="cbSecondChoice" id="cbSecondChoice">
+					                        	   	<option value="" selected disabled>Select Second Choice</option>
+					                                <?php
+					                                	$sql = $conn->prepare("SELECT * FROM `tbl_course`");
+					                                    $sql->execute();
 
-		                                        $sql = $conn->prepare("SELECT * FROM `tbl_course`");
-		                                        $sql->execute();
-
-		                                        while($fetch = $sql->fetch()){
-		                                    ?>
-		                                    <option name="cbSecondChoice" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['course_name'] ?></option>
-		                                    <?php
-		                                        }
-		                                    ?>
-		                                </select>
+					                                    while($fetch = $sql->fetch()){
+					                                ?>
+				                                    <option name="cbSecondChoice" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['course_name'] ?></option>
+					                                <?php
+					                                    }
+					                                ?>
+		                                		</select>
+					                        </div>
 		                    			</div>
 									</div>
 								</div>
@@ -259,32 +251,36 @@
                                 <div class="row">
                                 	<div class="col-md-6">
                                 		<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="heightFeet" id="heightFeet" required>
-                                        		<option value="" disabled selected>Height in Feet *</option>
-                                        		<option value="3">3</option>
-                                        		<option value="4">4</option>
-                                        		<option value="5">5</option>
-                                        		<option value="6">6</option>
-                                    		</select>
+                                			<div class="form-line">
+						                        <select class="form-control show-tick" name="heightFeet" id="heightFeet" required>
+	                                        		<option value="" disabled selected>Height in Feet *</option>
+	                                        		<option value="3">3</option>
+	                                        		<option value="4">4</option>
+	                                        		<option value="5">5</option>
+	                                        		<option value="6">6</option>
+	                                    		</select>
+                                    		</div>
 		                    			</div>
                                 	</div>
                                 	<div class="col-md-6">
                                 		<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="heightInch" id="heightInch" required>
-                                        		<option value="" disabled selected>Height in Inches *</option>
-                                        		<option value="0">0</option>
-                                        		<option value="1">1</option>
-                                        		<option value="2">2</option>
-                                        		<option value="3">3</option>
-                                        		<option value="4">4</option>
-                                        		<option value="5">5</option>
-                                        		<option value="6">6</option>
-                                        		<option value="7">7</option>
-                                        		<option value="8">8</option>
-                                        		<option value="9">9</option>
-                                        		<option value="10">10</option>
-                                        		<option value="11">11</option>
-                                    		</select>
+                                			<div class="form-line">
+						                        <select class="form-control show-tick" name="heightInch" id="heightInch" required>
+	                                        		<option value="" disabled selected>Height in Inches *</option>
+	                                        		<option value="0">0</option>
+	                                        		<option value="1">1</option>
+	                                        		<option value="2">2</option>
+	                                        		<option value="3">3</option>
+	                                        		<option value="4">4</option>
+	                                        		<option value="5">5</option>
+	                                        		<option value="6">6</option>
+	                                        		<option value="7">7</option>
+	                                        		<option value="8">8</option>
+	                                        		<option value="9">9</option>
+	                                        		<option value="10">10</option>
+	                                        		<option value="11">11</option>
+	                                    		</select>
+                                    		</div>
 		                    			</div>
                                 	</div>
                                 </div>
@@ -300,13 +296,15 @@
                                 	<div class="col-md-6">
                                 		<p class="student-page-label">Civil Status *</p>
 		                    			<div class="form-group form-float">
-					                        <select class="form-control show-tick" name="cbCivilStatus" id="cbCivilStatus" required>
-                                        		<option value="" disabled selected>Select Civil Status</option>
-                                        		<option value="Single">Single</option>
-                                        		<option value="Married">Married</option>
-                                        		<option value="Separated">Separated</option>
-                                        		<option value="Widowed">Widowed</option>
-                                    		</select>
+		                    				<div class="form-line">
+						                        <select class="form-control" name="cbCivilStatus" id="cbCivilStatus" required>
+	                                        		<option value="" disabled selected>Select Civil Status</option>
+	                                        		<option value="Single">Single</option>
+	                                        		<option value="Married">Married</option>
+	                                        		<option value="Separated">Separated</option>
+	                                        		<option value="Widowed">Widowed</option>
+	                                    		</select>
+                                    		</div>
 		                    			</div>
                                 	</div>
                                 </div>
@@ -526,7 +524,6 @@
 
 	<script src="../../assets/libs/jquery/jquery.min.js"></script>
 	<script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../assets/libs/bootstrap-select/dist/js/bootstrap-select.js"></script>
 	<script src="../../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="../../assets/libs/node-waves/waves.js"></script>
@@ -587,6 +584,15 @@
                 URL.revokeObjectURL(output.src)
             }
         }
+
+        //remove option if selected on first select dropdown
+
+        $("select").change(function(e){
+        	$("select option").removeAttr('disabled');
+        	$("select").each(function(i,s){
+        		$("select").not(s).find('option[value="'+$(s).val()+'"]').attr('disabled', 'disabled');
+        	});
+        }); 
 
         //auto logout on idle script//
 

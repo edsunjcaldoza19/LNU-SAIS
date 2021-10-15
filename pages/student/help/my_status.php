@@ -192,13 +192,18 @@
 									</p>
 									<p class="default-interface-text">
 										<?php
-											if($fetch['form2_progress'] == 'Not Started'){
+											if($fetch['form1_progress'] == 'Not Started' && $fetch['form2_progress'] == 'Not Started'){
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
+												echo ''.$fetch['form2_progress']. ' ('.$fetch['fp_timestamp'].')';
+											}else if($fetch['form1_progress'] == 'Done' && $fetch['form2_progress'] == 'Not Started'){
+												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+												echo 'Started '.' ('.$fetch['fp_timestamp'].')';;
 											}else{
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+												echo ''.$fetch['form2_progress']. ' ('.$fetch['fp_timestamp'].')';
 											}
 										?>
-										<?php echo $fetch['form2_progress'] ?> (<?php echo $fetch['fp_timestamp'] ?>)
+										
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 

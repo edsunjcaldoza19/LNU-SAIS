@@ -176,7 +176,7 @@
 
                 }).then(function(){
 
-                     window.location.replace("../../student/admission_procedures/application_form1.php");
+                     window.location.replace("../../student/admission_procedures/application_form2.php");
 
                 });
 

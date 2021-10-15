@@ -16,20 +16,12 @@ if(isset($_POST['btnNext'])){
 		$newname = $rename.'.'.$extension;
 		$target="../../../images/applicant-img/applicant-profile/".$newname;
 
-        $applicant_account_id = $_POST['id'];
+        $applicant_account_id = $_POST['applicantId'];
 
-        $academic_year = $_POST['cbAcademicYear'];
-        //$entry = $_POST['cbEntryStatus'];
+        $academic_year = $_POST['academicYear'];
         $semester = $_POST['cbSemester'];
         $first_choice = $_POST['cbFirstChoice'];
         $second_choice = $_POST['cbSecondChoice'];
-
-        //$last_name = $_POST['tbFamilyName'];
-        //$first_name = $_POST['tbFirstName'];
-        //$middle_name = $_POST['tbMiddleName'];
-        //$birthday = $_POST['dpBirthday'];
-        //$age = $_POST['tbAge'];
-        //$gender = $_POST['cbGender'];
         $height_feet = $_POST['heightFeet'];
         $height_inch = $_POST['heightInch'];
         $weight = $_POST['tbWeight'];
@@ -61,25 +53,24 @@ if(isset($_POST['btnNext'])){
         $status = "Pending";
         $timestamp = "N/A";
 
+        $query="UPDATE `tbl_applicant` SET `school_year_id`='$academic_year',`applicant_picture`='$newname', 
+        `semester`='$semester',`program_first_choice`='$first_choice',`program_second_choice`='$second_choice', 
+        `course_id`='$first_choice',`height_feet`='$height_feet',`height_inches`='$height_inch',`weight`='$weight', 
+        `civil_status`='$civil_status',`place_birth`='$place_birth',`citizenship`='$citizenship',`address`='$address', 
+        `mailing_address`='$mailing_address',`religion`='$religion',`mobile_number`='$mobile_number',`father_name`='$father_name', 
+        `father_citizenship`='$father_citizenship',`father_contact`='$father_contact',`father_email`='$father_email', 
+        `father_occupation`='$father_occupation',`father_employer_address`='$father_employer',`mother_name`='$mother_name',
+        `mother_citizenship`='$mother_citizenship',`mother_contact`='$mother_contact',`mother_email`='$mother_email',
+        `mother_occupation`='$mother_occupation',`mother_employer_address`='$mother_employer',`guardian_name`='$guardian_name',
+        `guardian_citizenship`='$guardian_citizenship',`guardian_contact`='$guardian_contact',`guardian_email`='$guardian_email',
+        `guardian_occupation`='$guardian_occupation',`guardian_employer_address`='$guardian_employer',`form_status`='$status', 
+        `fs_timestamp`='$timestamp',`exam_status`='$status',`es_timestamp`='$timestamp',`interview_status`='$status', 
+        `is_timestamp`='$timestamp',`admission_status`='$status',`as_timestamp`='$timestamp'
+        WHERE `applicant_account_id` = '$applicant_account_id'";
 
-        $query="UPDATE `tbl_applicant` SET `school_year_id`='$academic_year', `applicant_picture`='$newname',
-        `semester`='$semester', `program_first_choice`='$first_choice', `program_second_choice`='$second_choice', 
-        `course_id`='$first_choice', `height_feet`='$height_feet', `height_inches`='$height_inch',
-        `weight`='$weight', `civil_status`='$civil_status', `place_birth`='$place_birth', 
-        `citizenship`='$citizenship', `address`='$address', `mailing_address`='$mailing_address', 
-        `religion`='religion', `mobile_number`='$mobile_number', `father_name`='$father_name', 
-        `father_citizenship`='$father_citizenship', `father_contact`='$father_contact', `father_email`='$father_email', 
-        `father_occupation`='$father_occupation', `father_employer_address`='$father_employer',
-        `mother_name`='$mother_name', `mother_citizenship`='$mother_citizenship', `mother_contact`='$mother_contact', 
-        `mother_email`='$mother_email', `mother_occupation`='$mother_occupation', `mother_employer_address`='$mother_employer', 
-        `guardian_name`='$guardian_name', `guardian_citizenship`='$guardian_citizenship', `guardian_contact`='$guardian_contact', 
-        `guardian_email`='$guardian_email', `guardian_occupation`='$guardian_occupation', `guardian_employer_address`='$guardian_employer',
-        `form_status`='$status', `fs_timestamp`='$timestamp', `exam_status`='$status', `es_timestamp`='$timestamp', `interview_status`='$status', 
-        `is_timestamp`='$timestamp', `admission_status`='$status', `as_timestamp`='$timestamp' WHERE `applicant_account_id` = '$applicant_account_id'";
-
-        $query2="INSERT INTO `tbl_interview` (`interview_applicant_id`)
+        $query2="INSERT INTO `tbl_interview`(`interview_applicant_id`)
         VALUES ('$applicant_account_id')";
-        $query3="INSERT INTO `tbl_exam_result` (`exam_applicant_id`)
+        $query3="INSERT INTO `tbl_exam_result`(`exam_applicant_id`)
         VALUES ('$applicant_account_id')";
 
         $query_run = mysqli_query($connection, $query);
