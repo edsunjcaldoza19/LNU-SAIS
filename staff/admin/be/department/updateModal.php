@@ -4,24 +4,21 @@
                     <div class="modal-content">
                         <form action = "be/department/update.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Department Information</h4>
+                            <h4 class="modal-title" id="defaultModalLabel">Update College</h4>
+                            <hr class="default-divider ml-auto">
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="id" value="<?php echo $fetch['id']?>">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
+                            <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="name" value="<?php echo $fetch['dept_name']?>" placeholder="Department Name" required autofocus>
+                                    <input type="text" class="form-control" name="name" value="<?php echo $fetch['dept_name'] ?>"required autofocus>
+                                    <label class="form-label">College Name</label>
                                 </div>
                             </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
+                            <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="acronym" value="<?php echo $fetch['dept_acronym']?>" placeholder="Acronym" required autofocus>
+                                    <input type="text" class="form-control" name="acronym" value="<?php echo $fetch['dept_acronym'] ?>" required autofocus>
+                                    <label class="form-label">Acronym</label>
                                 </div>
                             </div>
                         </div>

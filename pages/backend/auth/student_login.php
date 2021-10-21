@@ -62,9 +62,11 @@ if(isset($_POST['btnLogin'])){
 
 			if($user['login_status'] == 0){
 
-				// Check if account is already verified //
+				if($user['readmission_verified'] == 1){
 
-				if($fetch['verified'] == 1){
+					// Check if account is already verified //
+
+					if($fetch['verified'] == 1){
 
 					/* Set Session Information */
 
@@ -90,9 +92,20 @@ if(isset($_POST['btnLogin'])){
 					';
 
 
-				}else{
+					}else{
 
-					notVerified();
+						notVerified();
+
+					}
+
+				}else if($user['readmission_verified'] == 2){
+
+					rejected();
+
+				}
+				else{
+
+					notReadmissionVerified();
 
 				}
 
@@ -171,3 +184,33 @@ function notVerified(){
     ';
 
 }
+
+function notReadmissionVerified(){
+
+	echo '
+        <script>
+
+            alert("[UNVERIFIED ACCOUNT]: Your account is still pending verification from the admissions office");
+            window.location.replace("../../accounts/student/login.php");
+
+        </script>
+
+    ';
+
+}
+
+function rejected(){
+
+	echo '
+        <script>
+
+            alert("[UNVERIFIED ACCOUNT]: Your account was not approved for registration. Please check your email");
+            window.location.replace("../../accounts/student/login.php");
+
+        </script>
+
+    ';
+
+}
+
+

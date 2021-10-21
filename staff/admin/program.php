@@ -11,30 +11,18 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-            <h1>PROGRAM</h1>
-                 <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addModal">
-                        <i class="material-icons">add</i>
-                    <span>ADD PROGRAM</span>
-                </button>
+                <p class="page-header">Configure Programs</p>
+                <p class="page-subheader">Set configurations for offered programs</p>
             </div>
             <div class="row clearfix jsdemo-notification-button">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h3>PROGRAM INFORMATION</h3>
-                            <p>This shows the unit information which includes the name and acronym. Deleting a specific unit might affect the whole system.</p>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Programs Offered</p>
+                            <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addModal">
+                                <i class="material-icons">add</i>
+                                <span>New Program Offering</span>
+                            </button>
                         </div>
                         <div class="body">
                             <div class="table">
@@ -42,11 +30,10 @@
                                     <thead>
                                         <tr>
                                             <th>Program Name</th>
-                                            <th>Program Abbreviation</th>
-                                            <th>Unit</th>
+                                            <th>Program Acronym</th>
+                                            <th>Academic Unit</th>
                                             <th>College</th>
-                                            <th>Update</th>
-                                            <th>Delete</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,17 +52,14 @@
                                             <td><?php echo $fetch['course_acronym']?></td>
                                             <td><?php echo $fetch['unit_name']?></td>
                                             <td><?php echo $fetch['dept_name']?></td>
-                                            <td style="text-align: center; width: 5%">
-                                                <button class="btn bg-teal btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
-                                            </td>
-                                            <td style="text-align: center; width: 5%">
-                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
+                                            <td style="text-align: center; width: 100px;">
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
+                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
                                         </tr>
                                         <?php
                                             include 'be/program/updateModal.php';
                                             include 'be/program/deleteModal.php';
-
                                             }
                                         ?>
                                     </tbody>

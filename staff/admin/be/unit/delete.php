@@ -1,7 +1,7 @@
 <?php
     include '../includes/head.php';
     require '../database/db_pdo.php';
-	if(isset($_POST['deleteUnit'])){
+	if(isset($_POST['delete'])){
 		try{
            /* DELETE course from Database */
            $id = $_POST['id'];
@@ -19,9 +19,9 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Unit Information Successfully Deleted",
+					title: "Academic Unit Successfully Deleted",
                     text: "LNU - Student Admission and Information System",
-					timer: 3000
+					timer: 2000
 				}).then(function(){
 					window.location.replace("../../unit.php");
 

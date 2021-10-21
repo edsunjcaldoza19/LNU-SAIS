@@ -24,10 +24,10 @@ include '../includes/head.php';
 					icon: "success",
 					title: "College Successfully Updated",
 					text: "LNU - Student Admission Information System",
-					timer: 3000
+					timer: 2000
 				}).then(function(){
 
-					window.location.replace("../../department.php");
+					window.location.replace("../../college.php");
 
 				});
 

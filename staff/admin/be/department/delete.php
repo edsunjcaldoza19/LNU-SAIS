@@ -2,7 +2,7 @@
 	include '../includes/head.php';
 	require '../database/db_pdo.php';
 
-	if(isset($_POST['deleteCollege'])){
+	if(isset($_POST['delete'])){
 		try{
 			$id = $_POST['id'];
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -20,10 +20,11 @@
 				Swal.fire({
 					icon: "success",
 					title: "College Successfully Deleted",
-					timer: 3000
+					text: "LNU - Student Admission Information System",
+					timer: 2000
 				}).then(function(){
 
-					window.location.replace("../../department.php");
+					window.location.replace("../../college.php");
 
 				});
 

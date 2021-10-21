@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2021 at 05:47 AM
+-- Generation Time: Oct 21, 2021 at 04:52 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -52,33 +52,31 @@ INSERT INTO `tbl_academic_year` (`id`, `ay_year`, `enable_exam`, `ay_status`) VA
 CREATE TABLE `tbl_account_staff` (
   `id` int(11) NOT NULL,
   `staff_username` varchar(100) NOT NULL,
-  `staff_password` varchar(100) NOT NULL,
+  `staff_password` varchar(250) NOT NULL,
   `staff_title` varchar(50) NOT NULL,
   `staff_first_name` varchar(50) NOT NULL,
   `staff_middle_name` varchar(50) NOT NULL,
   `staff_last_name` varchar(50) NOT NULL,
-  `staff_address` varchar(200) NOT NULL,
+  `staff_contact` varchar(11) NOT NULL,
   `staff_email` varchar(100) NOT NULL,
   `staff_profile_img` varchar(1000) NOT NULL,
   `staff_role` int(11) NOT NULL,
   `staff_unit` int(11) NOT NULL,
-  `staff_program` int(11) NOT NULL
+  `staff_program` int(11) NOT NULL,
+  `login_status` int(5) NOT NULL,
+  `session_token` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_account_staff`
 --
 
-INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_address`, `staff_email`, `staff_profile_img`, `staff_role`, `staff_unit`, `staff_program`) VALUES
-(8, 'unit', 'unit', 'Mrs.', 'Edsun Sun', 'Juntila', 'Caldoza', 'Brgy. Hiagsam\r\nJaro, Leyte', 'edsunjcaldoza@gmail.com', 'IMG_STAFF202109189122.jpg', 3, 2, 0),
-(10, 'admissionoffice2', 'admission', 'Mr.', 'Edsun', 'Juntila', 'Caldoza', 'Brgy. Hiagsam\r\nJaro, Leyte', 'edsunjcaldoza@gmail.com', 'IMG_STAFF2021091828734.jpg', 1, 2, 0),
-(22, 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd@gmail.com', 'IMG_STAFF2021091841084.png', 1, 2, 0),
-(23, 'dsa', 'dsa', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd@gmail.com', 'IMG_STAFF2021091831306.jpg', 2, 2, 0),
-(26, 'YdjUQDygng', 'asdasd', 'OQsWdePgYT', 'LWk0c5jm6T', 'Ca7QGAShln', 'p89ixsXCno', 'asdasd', 'wa7bi@af3i.com', 'IMG_STAFF2021091826570.png', 1, 2, 0),
-(28, 'interviewer', 'asd', 'bo49vuLcMQ', 'D98ANpmoU3', 'uBJtte7ENp', 'nEczelyoIj', 'Interviewer Address', 'uyoww@a8k2.com', 'IMG_STAFF2021092367150.jpg', 4, 18, 18),
-(29, 'interviewer2', 'asd', 'FJKQjKWmaE', 'doe1ITgZUp', 'qQCiYtJ4Ib', 'WvBprh0JpM', 'asd', 'bslt3@1pq5.com', 'IMG_STAFF2021092385715.jpg', 4, 0, 18),
-(30, 'unit2', 'unit2', 'cokpB3w2Oa', 'ZgYez5IesN', 'WG8DoX8vGv', 'VJy0ySSa7n', 'asdwasd', 'pupmz@ljd8.com', 'IMG_STAFF2021092487878.jpg', 3, 7, 0),
-(32, 'bsit', 'bsit', 'jDloMvNZeI', 'ReGL6C6MoI', 'sYjlFEsZq6', 'LdnY2kAl0w', 'Velit amet commodo eu et sit ea nostrud do. Cupidatat culpa sint id magna minim ut velit cillum nulla ullamco consequat irure duis duis. Nulla ipsum laborum qui et elit labore ex et anim nulla. Magna ', 'imjo7@8aec.com', 'IMG_STAFF2021092613684.jpg', 4, 0, 18);
+INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_contact`, `staff_email`, `staff_profile_img`, `staff_role`, `staff_unit`, `staff_program`, `login_status`, `session_token`) VALUES
+(1, 'admission', '$2y$10$KhQSjCIC08kyPFEZrEYiZuHDJtvu.QBNULbt/q/OCP2nBhcs6loJi', 'Admission Officer', 'Admission', 'Officer', 'Account', 'Tacloban Ci', 'admission@test.com', 'IMG_STAFF2021100617486.', 1, 2, 0, 0, ''),
+(2, 'exam', '$2y$10$Hc45PNxbxc477b9QnBlSIuR5VioZQCxPe54/QMflZbf21OwX9fmtC', 'Exam Officer', 'Exam', 'Officer', 'Account', 'Tacloban Ci', 'exam@test.com', 'IMG_STAFF2021100669062.', 2, 2, 0, 0, ''),
+(3, 'unithead', '$2y$10$4cYzzeAOz2.Ptq7IiMZYeO1UHbN.xbLKRNA6E7rqLNNZEQY/XHoGe', 'Unit Head', 'Unit', 'Head', 'Account', 'Tacloban Ci', 'unit@test.com', 'IMG_STAFF2021100645539.', 3, 2, 0, 0, ''),
+(6, 'interviewer', '$2y$10$.nkZTdQz7bGCakRRbtXvou54x2iy77hr3v7P/3pjrvp6SOdkxMug6', 'Mr.', 'Rico', '', 'Combinido', '09911234567', 'ricocombinido9@gmail.com', 'IMG_STAFF202110128957.', 4, 0, 18, 0, ''),
+(7, 'unithead2', '$2y$10$2g1jps6zCedSMo/kfBN07.wtpnqsfQLQU9AZJqc8jC5TxdIibZLKe', 'Mr.', 'Filipino', 'Test', 'Yunit', '09501234567', '1800638@lnu.edu.ph', 'IMG_STAFF2021101250229.', 3, 6, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -89,19 +87,23 @@ INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staf
 CREATE TABLE `tbl_admin` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(250) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `image` varchar(200) NOT NULL,
-  `login_status` int(11) NOT NULL
+  `verification_key` varchar(250) NOT NULL,
+  `verified` int(5) NOT NULL,
+  `login_status` int(5) NOT NULL,
+  `session_token` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_admin`
 --
 
-INSERT INTO `tbl_admin` (`id`, `username`, `password`, `name`, `email`, `image`, `login_status`) VALUES
-(1, 'admin', 'admin', 'Administrator', 'adminsample@example.com', '', 1);
+INSERT INTO `tbl_admin` (`id`, `username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `login_status`, `session_token`) VALUES
+(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFmZl91c2VybmFtZSI6ImFkbWluIiwibmJmIjoxNjM0ODA5MTU4LCJleHAiOjE2MzQ4MDk0NTh9.3zouTY9GCLzXS3-coVMB0nljyYR3_FEgnfRdat_LxwE'),
+(7, 'test', '$2y$10$7X1Q13xHdHu/dZsYJAWqAOdFfEPawJ26tHKpl4dcU3qdabjA4GORa', 'test admin', '1800638@lnu.edu.ph', '', '49a424fed6e61d5274c5bd48bd3c0cfb', 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -205,6 +207,15 @@ CREATE TABLE `tbl_applicant` (
   `application_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_applicant`
+--
+
+INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `course_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `report_card`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `medical_certificate_image`, `personal_statement`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`, `interview_status`, `is_timestamp`, `admission_status`, `as_timestamp`, `application_date`) VALUES
+(4, 4, '', 0, 'Freshmen', '', '', '', 0, 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 04:24:29'),
+(5, 5, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 05:13:52'),
+(6, 6, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico ', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 07:59:10');
+
 -- --------------------------------------------------------
 
 --
@@ -217,6 +228,7 @@ CREATE TABLE `tbl_applicant_account` (
   `password` varchar(100) NOT NULL,
   `verification_key` varchar(100) NOT NULL,
   `verified` int(5) NOT NULL,
+  `readmission_verified` int(5) NOT NULL,
   `security_question` varchar(50) NOT NULL,
   `security_answer` varchar(50) NOT NULL,
   `form1_progress` varchar(20) NOT NULL,
@@ -227,7 +239,7 @@ CREATE TABLE `tbl_applicant_account` (
   `interview_progress` varchar(20) NOT NULL,
   `ip_timestamp` varchar(50) NOT NULL,
   `student_number` varchar(15) NOT NULL,
-  `login_status` varchar(10) NOT NULL,
+  `login_status` int(5) NOT NULL,
   `session_token` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -235,10 +247,9 @@ CREATE TABLE `tbl_applicant_account` (
 -- Dumping data for table `tbl_applicant_account`
 --
 
-INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`, `session_token`) VALUES
-(13, 'edsunjcaldoza@gmail.com', '$2y$10$LUfaHIDwtya3AF/bC.bqGuOAdnJDQR3skcOiAIr2fAFEkNRP95Qpe', 'e0c9c47effe5024d0a81f0c5cb2c8023', 1, 'What time of the day were you born?', '5:00', 'Not Started', 'Not Started', 'September 27, 2021, 11:10:10 am', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 'Logged-out', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVkc3VuamNhbGRvemFAZ21haWwuY29tIiwibmJmIjoxNjMyNzExOTEzLCJleHAiOjE2MzI3MTIyNzN9.agu5MqrrFdJ4qm72_VgsVR4vxYjTIZz7kIblWCbew1U'),
-(14, 'ricocombinido9@gmail.com', '$2y$10$ZnbsjketrFjrIyHo9hMRPON3D326W0X1ldtfmoW8MTz10WiZ1lwtC', '9deb6d23f417dcf07c0b0f7c543cd791', 1, 'How old is your oldest sibling?', '35', 'Done', 'Done', 'September 26, 2021, 09:39:00 pm', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 'Logged-out', ''),
-(15, '1800638@lnu.edu.ph', '$2y$10$88XsLbr4ssmmHATOtYiu9u5BnX6FRgWg0kCspMh9isnZ4MmkB93IO', '837e85fc764cfeb047c3fac8bf53ab37', 0, 'How old is your oldest sibling?', '34', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 'Logged-out', '');
+INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `readmission_verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`, `session_token`) VALUES
+(4, 'ricocombinido9@gmail.com', '$2y$10$QVMLSoO1GCyueI.acVPrVO54Zci1zmWb4anaIMAU/Gbj0OTg6iMZO', 'ed76643da8e486c93466a0399b836347', 1, 1, 'What was the house number and street name you live', '1998', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 0, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpY29jb21iaW5pZG85QGdtYWlsLmNvbSIsIm5iZiI6MTYzNDgxNDAzMCwiZXhwIjoxNjM0ODE0MzMwfQ.tC063Dg_9Q1NZDcNf5Aw0uSBUQE9Hajmgsl1_u1vZhA'),
+(6, '1800638@lnu.edu.ph', '$2y$10$mFfrAD8Xq1UeZu45iUSvReGwdKkdYoO59UJ8aVHCiVzB845Fbnclu', '2c766b176989fca4a746297cbbc2b3c0', 0, 2, 'What was the house number and street name you live', '1998', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 0, '');
 
 -- --------------------------------------------------------
 
@@ -252,6 +263,15 @@ CREATE TABLE `tbl_applicant_card` (
   `card_image` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_applicant_card`
+--
+
+INSERT INTO `tbl_applicant_card` (`id`, `card_applicant_id`, `card_image`) VALUES
+(21, 46, 'IMG_CARD163428992740858_user.png'),
+(22, 46, 'IMG_CARD163428992749076_online-streaming.png'),
+(23, 46, 'IMG_CARD163428992885189_desk-clock.png');
+
 -- --------------------------------------------------------
 
 --
@@ -263,6 +283,13 @@ CREATE TABLE `tbl_applicant_medical` (
   `medical_applicant_id` int(11) NOT NULL,
   `medical_image` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_applicant_medical`
+--
+
+INSERT INTO `tbl_applicant_medical` (`id`, `medical_applicant_id`, `medical_image`) VALUES
+(15, 46, 'IMG_MED163428992874842_');
 
 -- --------------------------------------------------------
 
@@ -334,7 +361,7 @@ CREATE TABLE `tbl_exam` (
 --
 
 INSERT INTO `tbl_exam` (`id`, `exam_title`, `exam_time_limit`, `exam_quest_limit`, `exam_description`, `exam_created`, `exam_start_date`, `exam_end_date`, `exam_status`) VALUES
-(9, 'OLSAT Entrance Examination', '50', 100, 'This is the standard examination for LNU Admissions.', '2021-09-24 13:31:22', '2021-09-24 00:00', '2021-09-30 00:29', 'Deactivated');
+(9, 'OLSAT Entrance Examination', '50', 100, 'This is the standard examination for LNU Admissions.', '2021-09-24 13:31:22', '2021-10-24 00:00', '2021-10-30 00:29', 'Deactivated');
 
 -- --------------------------------------------------------
 
@@ -376,6 +403,18 @@ CREATE TABLE `tbl_exam_result` (
   `exam_applicant_id` int(11) NOT NULL,
   `exam_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_exam_result`
+--
+
+INSERT INTO `tbl_exam_result` (`id`, `exam_applicant_id`, `exam_score`) VALUES
+(35, 7, 0),
+(36, 7, 0),
+(37, 7, 0),
+(38, 7, 0),
+(39, 7, 0),
+(40, 46, 0);
 
 -- --------------------------------------------------------
 
@@ -436,6 +475,18 @@ CREATE TABLE `tbl_interview` (
   `interview_time` varchar(20) NOT NULL,
   `interview_rating` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_interview`
+--
+
+INSERT INTO `tbl_interview` (`id`, `interview_applicant_id`, `interview_date`, `interview_time`, `interview_rating`) VALUES
+(41, 7, '', '', ''),
+(42, 7, '', '', ''),
+(43, 7, '', '', ''),
+(44, 7, '', '', ''),
+(45, 7, '', '', ''),
+(46, 46, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -654,55 +705,55 @@ ALTER TABLE `tbl_unit`
 -- AUTO_INCREMENT for table `tbl_academic_year`
 --
 ALTER TABLE `tbl_academic_year`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_account_staff`
 --
 ALTER TABLE `tbl_account_staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_account`
 --
 ALTER TABLE `tbl_applicant_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_card`
 --
 ALTER TABLE `tbl_applicant_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_medical`
 --
 ALTER TABLE `tbl_applicant_medical`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_exam`
@@ -726,7 +777,7 @@ ALTER TABLE `tbl_exam_questions`
 -- AUTO_INCREMENT for table `tbl_exam_result`
 --
 ALTER TABLE `tbl_exam_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_faqs`
@@ -744,7 +795,7 @@ ALTER TABLE `tbl_feedback`
 -- AUTO_INCREMENT for table `tbl_interview`
 --
 ALTER TABLE `tbl_interview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `tbl_procedures`
@@ -768,7 +819,7 @@ ALTER TABLE `tbl_schedules`
 -- AUTO_INCREMENT for table `tbl_unit`
 --
 ALTER TABLE `tbl_unit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

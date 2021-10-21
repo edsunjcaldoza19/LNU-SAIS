@@ -21,7 +21,7 @@
 					icon: "success",
 					title: "Academic Year Successfully Deleted",
 					text: "LNU - Student Admission and Information System",
-					timer: 3000
+					timer: 2000
 				}).then(function(){
 
 					window.location.replace("../../academic_year.php");

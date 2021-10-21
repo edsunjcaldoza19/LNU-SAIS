@@ -22,10 +22,11 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Department Successfully Added",
-					timer: 3000
+					title: "College Successfully Added",
+					text: "LNU - Student Admission Information System",
+					timer: 2000
 				}).then(function(){
-					window.location.replace("../../department.php");
+					window.location.replace("../../college.php");
 
 				});
 

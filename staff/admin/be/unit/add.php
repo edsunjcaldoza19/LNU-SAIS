@@ -24,9 +24,9 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Unit Successfully Added",
+					title: "Academic Unit Successfully Added",
 					text: "LNU - Student Admission and Information System",
-					timer: 3000
+					timer: 2000
 				}).then(function(){
 
 					window.location.replace("../../unit.php");

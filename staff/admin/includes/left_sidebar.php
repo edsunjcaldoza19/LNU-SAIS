@@ -20,24 +20,25 @@
                             <span>Academic Year</span>
                         </a>
                     </li>
-                    <li class="<?= ($activePage == 'department') ? 'active': ''; ?>">
-                        <a href="department.php">
-                            <i class="material-icons">assignment</i>
+                    <li class="<?= ($activePage == 'college') ? 'active': ''; ?>">
+                        <a href="college.php">
+                            <i class="material-icons">view_agenda</i>
                             <span>College</span>
                         </a>
                     </li>
                     <li class="<?= ($activePage == 'unit') ? 'active': ''; ?>">
                         <a href="unit.php">
-                            <i class="material-icons">dns</i>
-                            <span>Unit Information</span>
+                            <i class="material-icons">view_headline</i>
+                            <span>Academic Unit</span>
                         </a>
                     </li>
                     <li class="<?= ($activePage == 'program') ? 'active': ''; ?>">
                         <a href="program.php">
-                            <i class="material-icons">layers</i>
-                            <span>Programs Offered</span>
+                            <i class="material-icons">view_module</i>
+                            <span>Programs</span>
                         </a>
                     </li>
+                    <li class="header">OTHER SETTINGS</li>
                     <li class="<?= ($activePage == 'account_add') ? 'active': ''; ?>">
                         <a href="account_add.php">
                             <i class="material-icons">person_add</i>

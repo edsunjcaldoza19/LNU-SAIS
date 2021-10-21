@@ -23,9 +23,9 @@ include '../includes/head.php';
 
 				Swal.fire({
 					icon: "success",
-					title: "Program Successfully Added",
+					title: "Program Offering Successfully Added",
 					text: "LNU - Student Admission Information System",
-					timer: 3000
+					timer: 2000
 				}).then(function(){
 
 					window.location.replace("../../program.php");

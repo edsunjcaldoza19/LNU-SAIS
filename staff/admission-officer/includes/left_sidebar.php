@@ -40,8 +40,8 @@
                             <span>Applicants</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
-                                <a href="applicant.php">Applicants Masterlist</a>
+                            <li class="<?= ($activePage == 'pending_accounts') ? 'active': ''; ?>">
+                                <a href="pending_accounts.php">Pending Applicant Accounts</a>
                             </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
                                 <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>

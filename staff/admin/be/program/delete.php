@@ -19,8 +19,9 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Program Successfully Deleted",
-					timer: 3000
+					title: "Program Offering Successfully Deleted",
+					text: "LNU - Student Admission and Information System",
+					timer: 2000
 				}).then(function(){
 
 					window.location.replace("../../program.php");

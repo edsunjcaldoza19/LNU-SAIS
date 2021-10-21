@@ -56,8 +56,14 @@ if(isset($_POST['btnRegister'])){
 
     $vkey = md5(time().$email);
     $verified = 0;
+    
+    if($entry == 'Re-admission'){
+        $readmissionVerified = 0;
+    }else{
+        $readmissionVerified = 1;
+    }
 
-    $query="INSERT INTO tbl_applicant_account(`email`, `password`, `verification_key`, `verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`) VALUES('$email', '$password', '$vkey', '$verified', '$securityQuestion', '$securityAnswer', '$form1', '$form2', '$form_timestamp', '$exam', '$exam_timestamp', '$interview', '$interview_timestamp', '$studentNumber', '$loginStatus')";
+    $query="INSERT INTO tbl_applicant_account(`email`, `password`, `verification_key`, `verified`, `readmission_verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`) VALUES('$email', '$password', '$vkey', '$verified', '$readmissionVerified', '$securityQuestion', '$securityAnswer', '$form1', '$form2', '$form_timestamp', '$exam', '$exam_timestamp', '$interview', '$interview_timestamp', '$studentNumber', '$loginStatus')";
     $query_run = mysqli_query($connection, $query); 
 
     //Insert applicant_account_id to tbl_applicant
@@ -114,7 +120,7 @@ if(isset($_POST['btnRegister'])){
                     background-color: #FFFFFF; box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.05);'>
                     <p class='letter-header' style='font-size: 30px; font-weight: 300; color: #A2A2A2;'>Account Registration</p>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
-                    <p style='font-weight: 600;'>Hi! $email Your account registration is currently under verification</p>
+                    <p style='font-weight: 600;'>Hi! $email, your account registration is currently under verification.</p>
                     <p style='text-align: justify;'>The admissions office will verify and confirm your existing records 
                     in the university first before confirming your account registration. Please wait for further updates
                     through this email address.
@@ -153,7 +159,7 @@ if(isset($_POST['btnRegister'])){
                     background-color: #FFFFFF; box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.05);'>
                     <p class='letter-header' style='font-size: 30px; font-weight: 300; color: #A2A2A2;'>Email Verification</p>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
-                    <p style='font-weight: 600;'>Hi! $email Your account registration is almost done.</p>
+                    <p style='font-weight: 600;'>Hi! $email, your account registration is almost done.</p>
                     <p style='text-align: justify;'>To proceed with the admission process, kindly verify your account using the link provided below</p>
                     <p style='text-align: justify;'>Sincerely,</p>
                     <p style='text-align: justify; font-weight: 600;'>Admissions Office | Leyte Normal University</p>

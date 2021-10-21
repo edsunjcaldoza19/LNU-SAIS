@@ -20,30 +20,17 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                APPLICANTS
+                                Pending Applicant Accounts
                             </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Department</th>
-                                            <th>Entry</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,34 +38,24 @@
                                         <?php
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
-                                            LEFT JOIN tbl_department ON tbl_department.id=tbl_unit.unit_dept_id");
+                                            LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id=tbl_applicant.applicant_account_id WHERE `entry` = 'Re-admission' AND `readmission_verified` = 0");
                                             $sql->execute();
-
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo $fetch['last_name'];
-                                                    echo ', ';
-                                                    echo $fetch['middle_name'];
-                                                    echo ' ';
-                                                    echo $fetch['first_name'];
-                                                ?></td>
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
-                                            <td><?php
-                                                    echo $fetch['dept_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['dept_acronym'];
-                                            ?></td>
-                                            <td><?php echo $fetch['entry']; ?></td>
-                                            <?php
+                                                    echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
+                                                ?>  
+                                            </td>
+                                            <td><?php echo $fetch['email']; ?></td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-green btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#approveModal<?php echo $fetch['id']?>" id="btnAccept"><i class="material-icons">check</i></button>
+                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#rejectModal<?php echo $fetch['id']?>" id="btnReject"><i class="material-icons">clear</i></button>
+                                            </td>
+                                        <?php
+                                            include 'be/pending_applicants/approveModal.php';
+                                            include 'be/pending_applicants/rejectModal.php';
                                             }
                                         ?>
                                         </tr>
