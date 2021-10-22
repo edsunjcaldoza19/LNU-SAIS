@@ -39,12 +39,17 @@ if(isset($_POST['addAccount'])){
 
     $password = password_hash($lastName, PASSWORD_DEFAULT);
 
+    //Set default avatar
+
+    $image = generateAvatar(strtoupper($firstName[0].''.$lastName[0]), strtolower($firstName.'_'.$lastName));
+
     //Generate verification key
 
     $vkey = md5(time().$email);
     $verified = 0;
 
-    $query="INSERT INTO tbl_admin(`username`, `password`, `name`, `email`, `verification_key`, `verified`, `login_status`) VALUES('$username', '$password', '$fullName', '$email', '$vkey', '$verified', '$loginStatus')";
+
+    $query="INSERT INTO tbl_admin(`username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `login_status`) VALUES('$username', '$password', '$fullName', '$email', '$image', '$vkey', '$verified', '$loginStatus')";
     $query_run = mysqli_query($connection, $query);
 
     if($query_run){
@@ -137,6 +142,30 @@ if(isset($_POST['addAccount'])){
     else{
         echo '<script> alert("Error adding account");</script>';
         echo mysqli_error($connection);
+    }
+
+    function generateAvatar($character, $name){
+
+        $rename = 'STAFF_PROFILE_'.$name;
+        $newname = $rename.'.png';
+        $path = "../../../../images/staff-img/".$newname;
+
+        $image = imagecreate(200, 200);
+        $red = rand(0, 255);
+        $green = rand(0, 255);
+        $blue = rand(0, 255);
+
+        imagecolorallocate($image, $red, $green, $blue);
+
+        $textcolor = imagecolorallocate($image, 255, 255, 255);
+
+        imagettftext($image, 80, 0, 35, 140, $textcolor, 'c:/windows/fonts/segoeui.ttf', $character);
+
+        imagepng($image, $path);
+        imagedestroy($image);
+
+        return $newname;
+
     }
 }
 

@@ -2,6 +2,7 @@
 
     include '../includes/head.php';
     require '../database/db_pdo.php';
+    error_reporting(0);
 	if(ISSET($_POST['update'])){
 		try{
             $id = $_POST['id'];
@@ -13,7 +14,7 @@
             $middleName = $_POST['middleName'];
             $lastName = $_POST['lastName'];
             $email = $_POST['email'];
-            $address = $_POST['address'];
+            $contact = $_POST['contact'];
 			$role = $_POST['role'];
 			$unitID = $_POST['unitID'];
 
@@ -21,14 +22,13 @@
 			$sql = "UPDATE `tbl_account_staff` SET `staff_username`='$username',
             `staff_password`='$password',`staff_role`='$role', `staff_title`='$title',`staff_first_name`='$firstName',
             `staff_middle_name`='$middleName',`staff_last_name`='$lastName',
-            `staff_address`='$address',`staff_email`='$email',`staff_role`='$role',`staff_unit`='$unitID' WHERE `id` = '$id'";
+            `staff_contact`='$contact',`staff_email`='$email',`staff_role`='$role',`staff_unit`='$unitID' WHERE `id` = '$id'";
 			$conn->exec($sql);
 
 			//pathinfo
 			$image=$_FILES['image']['name'];
 			$extension = pathinfo($image, PATHINFO_EXTENSION);
-			$random=rand(0,100000);
-			$rename = 'IMG_STAFF'.date('Ymd').$random;
+			$rename = 'STAFF_PROFILE_'.strtolower($firstName.'_'.$lastName);
 			$newname = $rename.'.'.$extension;
 			$target="../../../../images/staff-img/".$newname;
 			//old Image
@@ -63,12 +63,12 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Account Successfully Updated",
+					title: "Staff Account Successfully Updated",
                     text: "LNU - Student Admission and Information System",
-                    timer: 3000
+                    timer: 2000
 
 				}).then(function(){
-					window.location.replace("../../account_add.php");
+					window.location.replace("../../account_all.php");
 
 				});
 

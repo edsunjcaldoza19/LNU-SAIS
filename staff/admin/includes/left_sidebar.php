@@ -38,25 +38,25 @@
                             <span>Programs</span>
                         </a>
                     </li>
-                    <li class="header">OTHER SETTINGS</li>
+                    <li class="header">ACCOUNTS</li>
                     <li class="<?= ($activePage == 'account_add') ? 'active': ''; ?>">
                         <a href="account_add.php">
                             <i class="material-icons">person_add</i>
-                            <span>Add Account</span>
+                            <span>Add Staff Account</span>
                         </a>
                     </li>
-                    <li class="<?= ($activePage == 'account_admin' || $activePage == 'account_admission_officer' || $activePage == 'account_exam_officer'
+                    <li class="<?= ($activePage == 'account_admission_officer' || $activePage == 'account_exam_officer'
                     || $activePage == 'account_interviewer' || $activePage == 'account_unit_head' || $activePage == 'account_all') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
-                            <span>Accounts</span>
+                            <span>Manage Staff Accounts</span>
                         </a>
                         <ul class="ml-menu">
                         <li class="<?= ($activePage == 'account_all') ? 'active': ''; ?>">
-                                <a href="account_all.php">All Accounts</a>
+                                <a href="account_all.php">All Staff Accounts</a>
                             </li>
                             <li class="<?= ($activePage == 'account_admission_officer') ? 'active': ''; ?>">
-                                <a href="account_admission_officer.php">Admission Officer</a>
+                                <a href="account_admission_officer.php">Admission Officer Account</a>
                             </li>
                             <li class="<?= ($activePage == 'account_exam_officer') ? 'active': ''; ?>">
                                 <a href="account_exam_officer.php">Exam Officer Account</a>
@@ -72,13 +72,20 @@
                      <li class="<?= ($activePage == 'account_admin') ? 'active': ''; ?>">
                         <a href="account_admin.php">
                             <i class="material-icons">settings</i>
-                            <span>Settings</span>
+                            <span>Admin Account Settings</span>
                         </a>
                     </li>
+                    <li class="header">OTHER SETTINGS</li>
                     <li class="<?= ($activePage == 'feedback') ? 'active': ''; ?>">
                         <a href="feedback.php">
                             <i class="material-icons">feedback</i>
                             <span>Feedbacks</span>
+                        </a>
+                    </li>
+                    <li class="<?= ($activePage == 'backup') ? 'active': ''; ?>">
+                        <a href="feedback.php">
+                            <i class="material-icons">download</i>
+                            <span>Backup Database</span>
                         </a>
                     </li>
                 </ul>

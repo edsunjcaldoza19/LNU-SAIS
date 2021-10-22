@@ -12,7 +12,8 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h1>ADMISSION OFFICER</h1>
+                <p class="page-header">Manage Staff Accounts</p>
+                <p class="page-subheader">Manage and control all registered staff accounts</p>
             </div>
             <!-- Basic Examples -->
             <div class="row clearfix">

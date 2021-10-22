@@ -12,42 +12,27 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h1>UNIT HEAD</h1>
+                <p class="page-header">Manage Staff Accounts</p>
+                <p class="page-subheader">Manage and control all registered staff accounts</p>
             </div>
             <!-- Basic Examples -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h3>
-                                ALL ACCOUNTS
-                            </h3>
-                            <p>This shows the verified accounts.
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Staff Accounts Overview</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
+                                            <th>Profile Picture</th>
                                             <th>Username</th>
                                             <th>Name</th>
-                                            <th>Address</th>
+                                            <th>Contact Number</th>
                                             <th>Email</th>
-                                            <th>Image</th>
-                                            <th>Update</th>
-                                            <th>Delete</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,6 +45,11 @@
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
+                                            <?php
+                                                $image = (!empty($fetch['staff_profile_img'])) ? '../../images/staff-img/'.$fetch['staff_profile_img'] : '../../images/staff-img/default.png';
+                                            ?>
+                                            <td style="text-align: center;"><img src="<?php echo $image; ?>" class="staff-img" style="border-radius: 100%;"  alt="Card image cap" width="50px" height="50px">
+                                            </td>
                                             <td><?php echo $fetch['staff_username']?></td>
                                             <td><?php
                                                 echo $fetch['staff_first_name'];
@@ -68,16 +58,10 @@
                                                 echo " ";
                                                 echo $fetch['staff_last_name'];?>
                                             </td>
-                                            <td><?php echo $fetch['staff_address']; ?></td>
+                                            <td><?php echo $fetch['staff_contact']; ?></td>
                                             <td><?php echo $fetch['staff_email']; ?></td>
-                                            <?php
-                                                $image = (!empty($fetch['staff_profile_img'])) ? '../../images/staff-img/'.$fetch['staff_profile_img'] : '../../images/staff-img/default.png';
-                                            ?>
-                                            <td style="text-align: center;"><img src="<?php echo $image; ?>" class="staff-img" style="border-radius: 100%; border: 2px solid teal;"  alt="Card image cap" width="50px" height="50px"></td>
-                                            <td style="text-align: center; width: 5%; vertical-align: middle;">
-                                                <a class="btn bg-teal btn-circle waves-effect waves-circle waves-float" href="account_update.php?id=<?php echo $fetch['id']; ?>"><i class="material-icons">edit</i></a>
-                                            </td>
-                                            <td style="text-align: center; width: 5%; vertical-align: middle;">
+                                            <td style="text-align: center; width: 120px; vertical-align: middle;">
+                                                <a class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" href="account_update.php?id=<?php echo $fetch['id']; ?>"><i class="material-icons">edit</i></a>
                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
                                         </tr>

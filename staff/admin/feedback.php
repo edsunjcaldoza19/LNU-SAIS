@@ -1,71 +1,63 @@
 <?php
     include 'includes/session.php';
     include 'includes/header.php';
+    ?>
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+    <?php
     include 'includes/topbar.php';
     include 'includes/left_sidebar.php';
 ?>
-    <!-- ## BODY CONTENTS ## -->
+
     <section class="content">
         <div class="container-fluid">
+            <div class="block-header">
+                <p class="page-header">Manage System Feedbacks</p>
+                <p class="page-subheader">View and answer feedbacks from end-users</p>
+            </div>
             <div class="row clearfix">
-                <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                FEEDBACKS
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Feedbacks Inbox</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Applicant Name</th>
-                                            <th>Feedback</th>
-                                            <th>Delete</th>
+                                            <th>Sender Name</th>
+                                            <th>Category</th>
+                                            <th>Subject</th>
+                                            <th>Send Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                             <th>Applicant Name</th>
-                                            <th>Feedback</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_feedback.id FROM tbl_feedback LEFT JOIN tbl_applicant ON tbl_applicant.id=tbl_feedback.feedback_applicant_id");
+                                            $sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account 
+                                                LEFT JOIN tbl_feedback ON tbl_feedback.feedback_applicant_id = tbl_applicant_account.id 
+                                                LEFT JOIN tbl_applicant ON tbl_applicant.applicant_account_id = tbl_applicant_account.id 
+                                                WHERE `feedback_status` = 'Queued'");
                                             $sql->execute();
 
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td><?php echo $fetch['feedback_message']?></td>
-                                            <td><?php echo $fetch['last_name']?></td>
-                                            <td align="center">
-                                                <button class="btn btn-danger btn-sm card-dashboard-button" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete">DELETE</button>
+                                            <td><?php echo $fetch['first_name'].' '.$fetch['last_name']?></td>
+                                            <td><?php echo $fetch['feedback_category']?></td>
+                                            <td><?php echo $fetch['feedback_subject']; ?></td>
+                                            <td><?php echo $fetch['feedback_sent_timestamp']; ?></td>
+                                            <td style="text-align: center; width: 120px; vertical-align: middle;">
+                                                <a class="btn bg-light-green btn-circle waves-effect waves-circle waves-float" href="account_update.php?id=<?php echo $fetch['id']; ?>"><i class="material-icons">reply</i></a>
+                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
-
                                         </tr>
 
                                         <?php
-
-                                            include 'be/feedback/deleteModal.php';
+                                            include 'be/account_staff/deleteModal.php';
                                             }
                                         ?>
                                     </tbody>
@@ -75,8 +67,7 @@
                     </div>
                 </div>
             </div>
-
-            </div>
+            <!-- #END# Advanced Form Example With Validation -->
         </div>
     </section>
 
@@ -88,7 +79,6 @@
 <!-- ADDITIONAL JAVASCRIPT FOR THIS PAGE (ACADEMIC YEAR) -->
     <!-- Autosize Plugin Js -->
     <script src="../../plugins/autosize/autosize.js"></script>
-
     <!-- Jquery DataTable Plugin Js -->
     <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
@@ -99,11 +89,10 @@
     <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-
     <!-- Custom Js -->
     <script src="../../js/admin.js"></script>
     <script src="../../js/pages/tables/jquery-datatable.js"></script>
+    <script src="../../js/pages/forms/advanced-form-elements.js"></script>
     <!-- Demo Js -->
     <script src="../../js/demo.js"></script>
-
 </html>

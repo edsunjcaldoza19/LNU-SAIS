@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <!-- Bootstrap Core Css -->
-    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="../../plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <!-- Animation Css -->

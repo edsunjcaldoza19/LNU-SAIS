@@ -81,17 +81,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <hr class="default-divider ml-auto">
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <input type="checkbox" id="terms_condition_check" class="chk-col-green filled-in" required="true" />
-                                                    <label for="terms_condition_check">I hereby confirm updating my account information.</a></label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                     <i class="material-icons">check</i>
-                                                    <button type="submit" name="submit" class="btn bg-green waves-effect">SUBMIT</button>
+                                                    <button type="submit" name="submit" class="btn bg-green waves-effect">
+                                                        <i class="material-icons">save</i>
+                                                        <span>Save Changes</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -135,10 +131,13 @@
                                                     <p class="form-error" id="confirmPasswordError"><i class="fa fa-exclamation-circle"></i> Passwords does not match</p>
                                                 </div>
                                             </div>
+                                            <hr class="default-divider ml-auto">
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                     <i class="material-icons">check</i>
-                                                    <button type="submit" name="submit" id="submitPass" class="btn bg-green waves-effect" disabled>SUBMIT</button>
+                                                    <button type="submit" name="submit" id="submitPass" class="btn bg-green waves-effect" disabled>
+                                                        <i class="material-icons">save</i>
+                                                        <span>Save Changes</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -185,10 +184,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <hr class="default-divider ml-auto">
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                     <i class="material-icons">check</i>
-                                                    <button type="submit" name="addAccount" id="addAccount" class="btn bg-green waves-effect">ADD ACCOUNT</button>
+                                                    <button type="submit" name="addAccount" id="addAccount" class="btn bg-green waves-effect">
+                                                        <i class="material-icons">save</i>
+                                                        <span>Save Changes</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>

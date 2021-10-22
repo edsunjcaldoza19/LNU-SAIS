@@ -1,24 +1,24 @@
-<!-- --DELETE MODAL (ADMISSION OFFICER)-- -->
-                                        <div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form action = "be/account_staff/delete.php" method="POST">
-                                                    <div class="modal-header">
-                                                      <h5 class="modal-title logout-modal-title">Delete Guest</h5>
-                                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                      </button>
-                                                    </div>
-                                                    <div class="modal-body logout-modal-body">
-                                                        <p class="card-dashboard-header">Are you sure you want to remove this guest from the database?</p>
-                                                        <input type="hidden" name="id" id="id" value="<?php echo $fetch['id'] ?>">
-                                                        <input type="hidden" name="image" id="image" value="<?php echo $fetch['staff_profile_img'] ?>">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-danger" style="color: #FFFFFF" type="submit" name="delete" id="delete" onclick="showSuccess();">Confirm Delete</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action = "be/academic_year/delete.php" method="POST" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Remove Staff Account</h4>
+                    <hr class="default-divider ml-auto">
+                </div>
+                <div class="modal-body">
+                <input class="hidden" value="<?php echo $fetch['id'] ?>" name="id">
+                <p style="font-size: 15px;">Are you sure you want to remove this staff account?</p>
+                <input type="hidden" name="id" id="id" value="<?php echo $fetch['id'] ?>">
+                <input type="hidden" name="image" id="image" value="<?php echo $fetch['staff_profile_img'] ?>">
+                </div>
+                <div class="modal-footer">
+                    <hr class="default-divider ml-auto">
+                    <button type="submit" class="btn btn-link waves-effect" name="delete" id="delete">CONFIRM</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
