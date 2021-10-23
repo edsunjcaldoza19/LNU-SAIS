@@ -90,7 +90,7 @@
 							</div>
 							<hr class="default-divider ml-auto" style="margin: 10px;">
 							<div class="sidebar-item">
-								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="../help/send_feedback.php" class="sidebar-link">Send Feedback</a>
+								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="../help/send_inquiry.php" class="sidebar-link">Send Inquiry</a>
 							</div>
 						</div>
 						<div class="sidebar-progress" style="opacity: 0.5">
@@ -128,7 +128,7 @@
 							</div>
 							<hr class="default-divider ml-auto" style="margin: 10px;">
 							<div class="sidebar-item">
-								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="../help/send_feedback.php" class="sidebar-link">Send Feedback</a>
+								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="../help/send_inquiry.php" class="sidebar-link">Send Inquiry</a>
 							</div>
 						</div>
 						<div class="sidebar-progress" style="opacity: 0.5;">

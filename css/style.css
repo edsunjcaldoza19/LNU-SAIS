@@ -8317,5 +8317,36 @@ html.ie11 .bs-searchbox .form-control {
   border-radius: 5px;
 }
 
+.feedback-reply-details{
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  padding: 10px;
+  background-color: #F7F7F7;
+  color: #3B3B3B;
+  margin-top: 0px;
+  border-radius: 5px;
+}
+
+.feedback-reply-message{
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  padding: 5px;
+  margin-top: 0px;
+  border-radius: 5px;
+}
+
+.feedback-reply-textarea:focus, input:focus{
+  outline: transparent;
+}
+
+.feedback-reply-textarea{
+  width: 100% !important;
+  height: 100px;
+  border-color: transparent;
+  resize: none;
+}
+
 
 

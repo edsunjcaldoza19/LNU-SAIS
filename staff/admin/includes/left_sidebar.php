@@ -76,10 +76,10 @@
                         </a>
                     </li>
                     <li class="header">OTHER SETTINGS</li>
-                    <li class="<?= ($activePage == 'feedback') ? 'active': ''; ?>">
-                        <a href="feedback.php">
+                    <li class="<?= ($activePage == 'inquiry') ? 'active': ''; ?>">
+                        <a href="inquiry.php">
                             <i class="material-icons">feedback</i>
-                            <span>Feedbacks</span>
+                            <span>Inquiries</span>
                         </a>
                     </li>
                     <li class="<?= ($activePage == 'backup') ? 'active': ''; ?>">

@@ -572,6 +572,23 @@ img.placeholder-image{
 
 }
 
+.label-red{
+  width: 100px;
+  text-align: center;
+  padding: 5px;
+  background-color: #fdaaaa;
+  color: #aa4344;
+  border-radius: 5px;
+}
+
+.label-green{
+  width: 100px;
+  text-align: center;
+  padding: 5px;
+  background-color: #d2e7d6;
+  color: #2f4c39;
+  border-radius: 5px;
+}
 
 /* Login and Registration */
 

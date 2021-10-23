@@ -90,7 +90,7 @@ if(isset($_POST['btnRegister'])){
         $mail->SMTPSecure = "tls";
         $mail->Port = "587";
         $mail->Username = "1800638@lnu.edu.ph";
-        $mail->Password = "payjspnnmtcjvvkd";
+        $mail->Password = "cyrbulsouiebisei";
         $mail->setFrom("lnu.admissionsoffice@lnu.edu.ph");
 
         //Initialize email body

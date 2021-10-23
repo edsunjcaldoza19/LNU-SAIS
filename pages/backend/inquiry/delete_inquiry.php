@@ -18,7 +18,7 @@
 		if(ISSET($_GET['id'])){
 		
 			$id = $_GET['id'];
-			$sql = $conn->prepare("DELETE from `tbl_feedback` WHERE `id`='$id'");
+			$sql = $conn->prepare("DELETE from `tbl_inquiry` WHERE `id`='$id'");
 			$sql->execute();
 
 			success();
@@ -41,13 +41,13 @@
                 Swal.fire({
 
                     icon: "success",
-                    title: "Feedback deleted successfully!",
+                    title: "Inquiry ticket deleted successfully!",
                     showConfirmButton: false,
                     timer: 2000
 
                 }).then(function(){
 
-                    window.location.replace("../../student/help/send_feedback.php");
+                    window.location.replace("../../student/help/send_inquiry.php");
 
                 });
 
@@ -75,7 +75,7 @@
 
                 }).then(function(){
 
-                    window.location.replace("../../student/help/send_feedback.php");
+                    window.location.replace("../../student/help/send_inquiry.php");
 
                 });
 

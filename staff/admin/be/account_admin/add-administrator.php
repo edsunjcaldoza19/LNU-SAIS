@@ -64,7 +64,7 @@ if(isset($_POST['addAccount'])){
         $mail->SMTPSecure = "tls";
         $mail->Port = "587";
         $mail->Username = "1800638@lnu.edu.ph";
-        $mail->Password = "09041999";
+        $mail->Password = "cyrbulsouiebisei";
         $mail->Subject = "Activate LNU-SAIS Administrator Account";
         $mail->setFrom("lnu.admissionsoffice@lnu.edu.ph");
 

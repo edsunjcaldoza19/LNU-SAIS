@@ -7,7 +7,7 @@
 
 		$id = $fetch['id'];
 
-		$sql = $conn->prepare("SELECT * FROM tbl_feedback WHERE `feedback_applicant_id` = '$id'");
+		$sql = $conn->prepare("SELECT * FROM tbl_inquiry WHERE `inquiry_applicant_id` = '$id'");
     	$sql->execute();
 
 	}catch(exception $e){
@@ -76,7 +76,7 @@
 							</div>
 							<hr class="default-divider ml-auto" style="margin: 10px;">
 							<div class="sidebar-item">
-								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="javascript:void(0)" class="sidebar-link active">Send Feedback</a>
+								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="javascript:void(0)" class="sidebar-link active">Send Inquiry</a>
 							</div>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 							</div>
 							<hr class="default-divider ml-auto" style="margin: 10px;">
 							<div class="sidebar-item">
-								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="javascript:void(0)" class="sidebar-link active">Send Feedback</a>
+								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="javascript:void(0)" class="sidebar-link active">Send Inquiry</a>
 							</div>
 						</div>
 					</div>
@@ -112,20 +112,21 @@
 					</div>
 					<div class="student-page-default" id="student-page-default">
 						<p class="exam-placeholder-header" style="font-size: 30px; margin: 0px;">
-							Send Feedback
+							Send Inquiry
 						</p>
 						<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px; margin-bottom: 5px;">
-							Send feedbacks, issues encountered and other related concerns.
+							Send inquiries, issues encountered and other related concerns.
 						</p>
 						<hr class="default-divider ml-auto" style="margin: 10px;">
-						<button class="default-button feedback-button" data-toggle="modal" data-target="#addMessageModal">Send Feedback</button>
+						<button class="default-button feedback-button" data-toggle="modal" data-target="#addMessageModal">New Inquiry Ticket</button>
 						<hr class="default-divider ml-auto" style="margin: 10px;">
 						<div class="feedback-table-container" id="feedback-table-container" style="overflow-y: auto;">
 							<table class="table table-striped feedback-table" id="dataTable">
                                 <thead class="header">
                                     <tr>
-                                    	<th>Feedback Subject</th>
+                                    	<th>Inquiry Subject</th>
                                     	<th>Status</th>
+                                    	<th>Sent On</th>
                                     	<th>Action</th>
                                     </tr>
                                 </thead>
@@ -134,15 +135,24 @@
                                         while($feedback = $sql->fetch()){
                                 	?>
                                     <tr>
-                                    	<td><?php echo $feedback['feedback_subject']?></td>
-                                    	<td><?php echo $feedback['feedback_status']?></td>
+                                    	<td><?php echo $feedback['inquiry_subject']?></td>
+                                    	<td>
+                                    		<?php 
+                                                if($feedback['inquiry_status'] == "Queued"){
+                                                    echo '<p class="label-red">Queued</p>';
+                                                }else{
+                                                    echo '<p class="label-green">Settled</p>';
+                                                }
+                                            ?>
+                                    	</td>
+                                    	<td><?php echo $feedback['inquiry_sent_timestamp']?></td>
                                     	<td>
                                     		<a data-toggle="modal" data-target="#openMessageModal<?php echo $feedback['id']?>"><i class="fa fa-eye" style="color: #7AA0CB; margin: 2px;"></i></a>
 											<div class="modal fade" id="openMessageModal<?php echo $feedback['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										    	<div class="modal-dialog" role="document">
 										      		<div class="modal-content">
 										       			<div class="modal-header">
-										       			  <p class="modal-header-text">Feedback Viewer</p>
+										       			  <p class="modal-header-text">Inquiry Viewer</p>
 										       			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
 										       			    <span aria-hidden="true">×</span>
 										       			  </button>
@@ -150,18 +160,18 @@
 										       			<div class="modal-body" style="height: auto; overflow-x: auto">
 										       				<div class="message-container">
 										       					<p><b>Me:</b></p>
-										       					<p><?php echo $feedback['feedback_message']?></p>
+										       					<p><?php echo $feedback['inquiry_message']?></p>
 										       					<hr class="default-divider ml-auto" style="margin: 5px;">
-										       					<p style="font-weight: 600; font-size: 12px;">Sent on: <?php echo $feedback['feedback_sent_timestamp']?></p>
+										       					<p style="font-weight: 600; font-size: 12px;">Sent on: <?php echo $feedback['inquiry_sent_timestamp']?></p>
 										       				</div>
 										       				<div class="reply-container" style="padding: 10px; width: 100%;">
 										       					<?php
-										       						if($feedback['feedback_reply'] !== ''){
+										       						if($feedback['inquiry_reply'] !== ''){
 										       							echo '
 										       								<p><b>System Administrator:</b></p>
-										       								<p>' .$feedback["feedback_reply"].'</p>
+										       								<p>' .$feedback["inquiry_reply"].'</p>
 										       								<hr class="default-divider ml-auto" style="margin: 10px;">
-										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["feedback_reply_timestamp"].'</p>
+										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["inquiry_reply_timestamp"].'</p>
 										       							';
 
 										       						}else{
@@ -178,17 +188,17 @@
 										    	<div class="modal-dialog" role="document">
 										      		<div class="modal-content">
 										       			<div class="modal-header">
-										       			  <p class="modal-header-text">Delete Message?</p>
+										       			  <p class="modal-header-text">Delete Ticket?</p>
 										       			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
 										       			    <span aria-hidden="true">×</span>
 										       			  </button>
 										       			</div>
 										       			<div class="modal-body" style="height: auto; overflow-x: auto">
-										       				Are you sure you want to delete this message?
+										       				Are you sure you want to delete this ticket?
 										       				<input name="message_id" type="hidden" value="<?php echo $feedback['id']?>">
 										      			</div>
 										      			<div class="modal-footer" style="padding: 10px;">
-       			  											<a class="default-button" href="../../backend/feedback/delete_feedback.php?id=<?php echo $feedback['id']?>">Confirm</a>
+       			  											<a class="default-button" href="../../backend/inquiry/delete_inquiry.php?id=<?php echo $feedback['id']?>">Confirm</a>
        													</div>
 										    		</div>
 										  		</div>
@@ -214,40 +224,41 @@
     		<form method="POST" action="../../backend/feedback/add_feedback.php">
       		<div class="modal-content">
        			<div class="modal-header">
-       			  <p class="modal-header-text">Create New Feedback</p>
+       			  <p class="modal-header-text">Create New Inquiry Ticket</p>
        			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
        			    <span aria-hidden="true">×</span>
        			  </button>
        			</div>
-       			<div class="modal-body">
-       				<p class="student-page-label">Feedback Category *</p>
+       			<div class="modal-body" style="overflow-y: auto; height: auto;">
+       				<p class="student-page-label">Inquiry Category *</p>
 					<div class="form-group form-float">
 					    <select class="form-control show-tick" name="cbFeedbackCategory" id="cbFeedbackCategory" required>
                             <option value="" disabled selected>Choose Feedback Category</option>
-                            <option value="User Experience Feedback">User Experience Feedback</option>
-                            <option value="Issues Encountered">Issues Encountered</option>
-                            <option value="Others">Others (specify on the subject line)</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Follow-up">Follow-up*</option>
+                            <option value="Others">Others (specify your concern on the subjec line)</option>
                         </select>
+                        <p id="followUpNote" style="margin-top: 10px; font-size: 12px; display: none;"><i>*Note: For follow-up tickets, kindly type "RE: (your original ticket subject)" as your feedback subject.</i></p>
 		            </div>
                     <div class="form-group form-float">
-                    	<p class="student-page-label">Feedback Subject *</p>
+                    	<p class="student-page-label">Inquiry Subject *</p>
                         <div class="form-line" style="margin-bottom: 20px;">
                           	<input type="text" name="tbFeedbackSubject" id="tbFeedbackSubject" class="form-control" required/>
                           	<label class="form-label">e.g. I discovered a bug on the system</label>
                         </div>
                     </div>
-                    <div class="form-group form-float">
-                    	<p class="student-page-label">Feedback Message *</p>
+                    <div class="form-group form-float" id="inquiryTextarea">
+                    	<p class="student-page-label">Inquiry *</p>
                         <div class="form-line">
 			               	<div class="form-line">
-                           	    <textarea rows="7" name="tbFeedbackMessage" id="tbFeedbackMessage" class="form-control no-resize" placeholder="Type your answer..." required></textarea>
+                           	    <textarea rows="7" name="tbFeedbackMessage" id="tbFeedbackMessage" class="form-control no-resize" placeholder="Describe your issue here..." required></textarea>
                            	</div>
 			            </div>
                     </div>
                     <input id="senderID" name="senderID" value="<?php echo $fetch['id'] ?>" type="hidden" style="margin: 0px;">
       			</div>
       			<div class="modal-footer" style="padding: 10px;">
-       			  <button class="default-button" type="submit" name="btnSend" style="padding: 5px 10px 5px 10px; position: relative;">Send Feedback</button>
+       			  <button class="default-button" type="submit" name="btnSend" style="padding: 5px 10px 5px 10px; position: relative;">Send Inquiry Ticket</button>
        			</div>
     		</div>
     		</form>
@@ -358,6 +369,18 @@
                 URL.revokeObjectURL(output.src)
             }
         }
+
+        $("#cbFeedbackCategory").change(function(){
+            if($(this).val() == "Others"){
+                $("#followUpNote").hide();
+            }
+            else if($(this).val() == "General Inquiry"){
+                $("#followUpNote").hide();
+            }
+            else if($(this).val() == "Follow-up"){
+                $("#followUpNote").show();
+            }
+        });
 
 
 	</script>

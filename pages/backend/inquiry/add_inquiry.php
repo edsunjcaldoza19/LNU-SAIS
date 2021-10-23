@@ -30,7 +30,7 @@
             $subject = $connection->real_escape_string($subject);
             $message = $connection->real_escape_string($message);
 
-			$query="INSERT INTO tbl_feedback(`feedback_applicant_id`, `feedback_category`, `feedback_subject`, `feedback_message`, `feedback_sent_timestamp`, `feedback_status`) VALUES('$id', '$category', '$subject', '$message', '$timestamp', '$status')";
+			$query="INSERT INTO tbl_inquiry(`inquiry_applicant_id`, `inquiry_category`, `inquiry_subject`, `inquiry_message`, `inquiry_sent_timestamp`, `inquiry_status`) VALUES('$id', '$category', '$subject', '$message', '$timestamp', '$status')";
             $query_run = mysqli_query($connection, $query);
 
 			success();
