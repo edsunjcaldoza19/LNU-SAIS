@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2021 at 04:52 PM
+-- Generation Time: Oct 23, 2021 at 05:20 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -72,11 +72,9 @@ CREATE TABLE `tbl_account_staff` (
 --
 
 INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_contact`, `staff_email`, `staff_profile_img`, `staff_role`, `staff_unit`, `staff_program`, `login_status`, `session_token`) VALUES
-(1, 'admission', '$2y$10$KhQSjCIC08kyPFEZrEYiZuHDJtvu.QBNULbt/q/OCP2nBhcs6loJi', 'Admission Officer', 'Admission', 'Officer', 'Account', 'Tacloban Ci', 'admission@test.com', 'IMG_STAFF2021100617486.', 1, 2, 0, 0, ''),
-(2, 'exam', '$2y$10$Hc45PNxbxc477b9QnBlSIuR5VioZQCxPe54/QMflZbf21OwX9fmtC', 'Exam Officer', 'Exam', 'Officer', 'Account', 'Tacloban Ci', 'exam@test.com', 'IMG_STAFF2021100669062.', 2, 2, 0, 0, ''),
-(3, 'unithead', '$2y$10$4cYzzeAOz2.Ptq7IiMZYeO1UHbN.xbLKRNA6E7rqLNNZEQY/XHoGe', 'Unit Head', 'Unit', 'Head', 'Account', 'Tacloban Ci', 'unit@test.com', 'IMG_STAFF2021100645539.', 3, 2, 0, 0, ''),
-(6, 'interviewer', '$2y$10$.nkZTdQz7bGCakRRbtXvou54x2iy77hr3v7P/3pjrvp6SOdkxMug6', 'Mr.', 'Rico', '', 'Combinido', '09911234567', 'ricocombinido9@gmail.com', 'IMG_STAFF202110128957.', 4, 0, 18, 0, ''),
-(7, 'unithead2', '$2y$10$2g1jps6zCedSMo/kfBN07.wtpnqsfQLQU9AZJqc8jC5TxdIibZLKe', 'Mr.', 'Filipino', 'Test', 'Yunit', '09501234567', '1800638@lnu.edu.ph', 'IMG_STAFF2021101250229.', 3, 6, 0, 0, '');
+(1, 'admission', '$2y$10$iMtf9kyfcHaXxcJ8R5JV4OeqtfZp5aoqnbgrO70mdxfHy7nnr9VjO', 'Mr.', 'Admission', '', 'Office', '09123456789', 'testadmission@test.com', 'STAFF_PROFILE_admission_office.png', 1, 0, 0, 0, ''),
+(2, 'exam', '$2y$10$vMjQD.WExiXW2.yoOYDcl.DN9YTels9jAbHmH3f7NYo9JjQQmIjzO', 'Mr.', 'Exam', '', 'Officer', '09123456789', 'testexam@test.com', 'STAFF_PROFILE_exam_officer.png', 2, 0, 0, 0, ''),
+(3, 'unithead', '', 'Prof.', 'Unit', '', 'Head', '09123456789', 'testunithead@test.com', 'STAFF_PROFILE_unit_head.jpg', 3, 2, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -102,7 +100,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`id`, `username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `login_status`, `session_token`) VALUES
-(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFmZl91c2VybmFtZSI6ImFkbWluIiwibmJmIjoxNjM0ODA5MTU4LCJleHAiOjE2MzQ4MDk0NTh9.3zouTY9GCLzXS3-coVMB0nljyYR3_FEgnfRdat_LxwE'),
+(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 0, ''),
 (7, 'test', '$2y$10$7X1Q13xHdHu/dZsYJAWqAOdFfEPawJ26tHKpl4dcU3qdabjA4GORa', 'test admin', '1800638@lnu.edu.ph', '', '49a424fed6e61d5274c5bd48bd3c0cfb', 1, 0, '');
 
 -- --------------------------------------------------------
@@ -214,7 +212,9 @@ CREATE TABLE `tbl_applicant` (
 INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `course_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `report_card`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `medical_certificate_image`, `personal_statement`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`, `interview_status`, `is_timestamp`, `admission_status`, `as_timestamp`, `application_date`) VALUES
 (4, 4, '', 0, 'Freshmen', '', '', '', 0, 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 04:24:29'),
 (5, 5, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 05:13:52'),
-(6, 6, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico ', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 07:59:10');
+(6, 6, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico ', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-21 07:59:10'),
+(7, 7, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico', '', 'Combinido', '2021-10-28', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-23 15:00:31'),
+(8, 8, '', 0, 'Re-admission', '', '', '', 0, 0, 'Rico', '', 'Combinido', '2021-10-18', 22, 'Male', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2021-10-23 15:10:37');
 
 -- --------------------------------------------------------
 
@@ -248,8 +248,8 @@ CREATE TABLE `tbl_applicant_account` (
 --
 
 INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `readmission_verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `student_number`, `login_status`, `session_token`) VALUES
-(4, 'ricocombinido9@gmail.com', '$2y$10$QVMLSoO1GCyueI.acVPrVO54Zci1zmWb4anaIMAU/Gbj0OTg6iMZO', 'ed76643da8e486c93466a0399b836347', 1, 1, 'What was the house number and street name you live', '1998', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 0, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpY29jb21iaW5pZG85QGdtYWlsLmNvbSIsIm5iZiI6MTYzNDgxNDAzMCwiZXhwIjoxNjM0ODE0MzMwfQ.tC063Dg_9Q1NZDcNf5Aw0uSBUQE9Hajmgsl1_u1vZhA'),
-(6, '1800638@lnu.edu.ph', '$2y$10$mFfrAD8Xq1UeZu45iUSvReGwdKkdYoO59UJ8aVHCiVzB845Fbnclu', '2c766b176989fca4a746297cbbc2b3c0', 0, 2, 'What was the house number and street name you live', '1998', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 0, '');
+(4, 'ricocombinido9@gmail.com', '$2y$10$QVMLSoO1GCyueI.acVPrVO54Zci1zmWb4anaIMAU/Gbj0OTg6iMZO', 'ed76643da8e486c93466a0399b836347', 1, 1, 'What was the house number and street name you live', '1998', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 0, ''),
+(8, '1800638@lnu.edu.ph', '$2y$10$lw55ckNeBrMWLvJyIuycaeV8j9LGwTWJuPDkb6xqT.uJs9mphYjHW', '8716a30c2c10cb0589c1503d2b365e80', 0, 0, 'How old is your oldest sibling?', '21', 'Not Started', 'Not Started', 'N/A', 'Not Started', 'N/A', 'Not Started', 'N/A', 'N/A', 0, '');
 
 -- --------------------------------------------------------
 
@@ -439,28 +439,28 @@ INSERT INTO `tbl_faqs` (`id`, `question`, `answer`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_feedback`
+-- Table structure for table `tbl_inquiry`
 --
 
-CREATE TABLE `tbl_feedback` (
+CREATE TABLE `tbl_inquiry` (
   `id` int(11) NOT NULL,
-  `feedback_applicant_id` int(11) NOT NULL,
-  `feedback_category` varchar(30) NOT NULL,
-  `feedback_subject` varchar(30) NOT NULL,
-  `feedback_message` longtext NOT NULL,
-  `feedback_sent_timestamp` varchar(30) NOT NULL,
-  `feedback_reply` longtext NOT NULL,
-  `feedback_reply_timestamp` varchar(30) NOT NULL,
-  `feedback_status` varchar(30) NOT NULL
+  `inquiry_applicant_id` int(11) NOT NULL,
+  `inquiry_category` varchar(30) NOT NULL,
+  `inquiry_subject` varchar(30) NOT NULL,
+  `inquiry_message` longtext NOT NULL,
+  `inquiry_sent_timestamp` varchar(30) NOT NULL,
+  `inquiry_reply` longtext NOT NULL,
+  `inquiry_reply_timestamp` varchar(30) NOT NULL,
+  `inquiry_status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_feedback`
+-- Dumping data for table `tbl_inquiry`
 --
 
-INSERT INTO `tbl_feedback` (`id`, `feedback_applicant_id`, `feedback_category`, `feedback_subject`, `feedback_message`, `feedback_sent_timestamp`, `feedback_reply`, `feedback_reply_timestamp`, `feedback_status`) VALUES
+INSERT INTO `tbl_inquiry` (`id`, `inquiry_applicant_id`, `inquiry_category`, `inquiry_subject`, `inquiry_message`, `inquiry_sent_timestamp`, `inquiry_reply`, `inquiry_reply_timestamp`, `inquiry_status`) VALUES
 (1, 7, '', '', '', '', '', '', ''),
-(3, 2, 'Issues Encountered', 'This is a test feedback.', 'This is a test feedback message.', 'June 30, 2021, 5:15 am', '', '', 'Queued');
+(3, 4, 'General Inquiry', 'This is a test feedback.', 'This is a test feedback message. This is a test feedback message. This is a test feedback message. This is a test feedback message. This is a test feedback message. This is a test. This is a test feedback message. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.  This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ', 'June 30, 2021, 5:15 am', 'This is settled.', 'October 23, 2021, 10:37 pm', 'Settled');
 
 -- --------------------------------------------------------
 
@@ -662,9 +662,9 @@ ALTER TABLE `tbl_faqs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_feedback`
+-- Indexes for table `tbl_inquiry`
 --
-ALTER TABLE `tbl_feedback`
+ALTER TABLE `tbl_inquiry`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -711,7 +711,7 @@ ALTER TABLE `tbl_academic_year`
 -- AUTO_INCREMENT for table `tbl_account_staff`
 --
 ALTER TABLE `tbl_account_staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -723,13 +723,13 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_account`
 --
 ALTER TABLE `tbl_applicant_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_card`
@@ -786,9 +786,9 @@ ALTER TABLE `tbl_faqs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tbl_feedback`
+-- AUTO_INCREMENT for table `tbl_inquiry`
 --
-ALTER TABLE `tbl_feedback`
+ALTER TABLE `tbl_inquiry`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
