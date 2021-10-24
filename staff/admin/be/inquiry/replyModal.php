@@ -11,7 +11,7 @@
                     <input class="hidden" value="<?php echo $fetch['id'] ?>" name="id">
                     <div class="feedback-reply-details">
                         <p style="font-size: 15px;">Inquiry Ticket Details</p>
-                        <hr class="default-divider ml-auto" style="margin: 10px 0px 10px 0px; background-color: black;">
+                        <hr class="default-divider ml-auto" style=" margin: 10px 0px 10px 0px; background-color: black;">
                         <p><b>From: </b> <?php echo $fetch['first_name'].' '.$fetch['middle_name']
                         .' '.$fetch['last_name'].' ('.$fetch['entry'].')'?></p>
                         <p><b>Subject: </b> <?php echo $fetch['inquiry_subject']?> </p>

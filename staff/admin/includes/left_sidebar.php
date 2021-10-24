@@ -1,3 +1,6 @@
+<?php
+    include 'be/backup/backupModal.php';
+?>
 <section>
        <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
@@ -83,7 +86,7 @@
                         </a>
                     </li>
                     <li class="<?= ($activePage == 'backup') ? 'active': ''; ?>">
-                        <a href="feedback.php">
+                        <a href="" data-toggle="modal" data-target="#backupModal">
                             <i class="material-icons">download</i>
                             <span>Backup Database</span>
                         </a>
@@ -108,3 +111,6 @@
         ?>
 
     </section>
+
+    <script>
+</script>
