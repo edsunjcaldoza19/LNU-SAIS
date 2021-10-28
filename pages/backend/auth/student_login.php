@@ -77,7 +77,7 @@ if(isset($_POST['btnLogin'])){
     				$data = [
 
     					'token' => $token,
-    					'login_status' => "Logged-in",
+    					'login_status' => 1,
     					'id' => $user['id']
 
     				];

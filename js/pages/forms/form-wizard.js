@@ -1,33 +1,6 @@
 $(function () {
-    //Horizontal form basic
-    $('#wizard_horizontal').steps({
-        headerTag: 'h2',
-        bodyTag: 'section',
-        transitionEffect: 'slideLeft',
-        onInit: function (event, currentIndex) {
-            setButtonWavesEffect(event);
-        },
-        onStepChanged: function (event, currentIndex, priorIndex) {
-            setButtonWavesEffect(event);
-        }
-    });
-
-    //Vertical form basic
-    $('#wizard_vertical').steps({
-        headerTag: 'h2',
-        bodyTag: 'section',
-        transitionEffect: 'slideLeft',
-        stepsOrientation: 'vertical',
-        onInit: function (event, currentIndex) {
-            setButtonWavesEffect(event);
-        },
-        onStepChanged: function (event, currentIndex, priorIndex) {
-            setButtonWavesEffect(event);
-        }
-    });
-
     //Advanced form with validation
-    var form = $('#wizard_with_validation').show();
+    var form = $('#myForm').show();
     form.steps({
         headerTag: 'h3',
         bodyTag: 'fieldset',
@@ -62,7 +35,7 @@ $(function () {
             return form.valid();
         },
         onFinished: function (event, currentIndex) {
-            swal("Good job!", "Submitted!", "success");
+            $("#nextModal").modal('show');
         }
     });
 
@@ -82,6 +55,14 @@ $(function () {
             }
         }
     });
+
+    $("select").change(function(e){
+        $("select option").removeAttr('disabled');
+        $("select").each(function(i,s){
+            $("select").not(s).find('option[value="'+$(s).val()+'"]').attr('disabled', 'disabled');
+        });
+    }); 
+
 });
 
 function setButtonWavesEffect(event) {

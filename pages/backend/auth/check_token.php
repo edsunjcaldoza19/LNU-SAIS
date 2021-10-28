@@ -15,6 +15,7 @@ if(isset($_SESSION['token'])){
 
 	if($fetch = $sql->fetch()){
 
+		$id = $fetch['id'];
 		$email = $fetch['email'];
 		$form1 = $fetch['form1_progress'];
 

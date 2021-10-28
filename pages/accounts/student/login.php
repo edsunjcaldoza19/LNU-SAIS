@@ -12,7 +12,7 @@
 
 	}else{
 
-		unset($_SESSION['token']);
+		session_destroy();
 
 	}
 

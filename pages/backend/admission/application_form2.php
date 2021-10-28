@@ -61,16 +61,34 @@
         $SHSSchoolAddress = $_POST['tbSHSSchoolAddress'];
         $SHSYearGraduated = $_POST['tbSHSYearGraduated'];
         $SHSHonorsReceived = $_POST['tbSHSHonorsReceived'];
-        # College 1 [--TRANSFEREES--]
-        $collegeSchoolName1 = $_POST['tbCollegeSchoolName1'];
-        $collegeSchoolAddress1 = $_POST['tbCollegeSchoolAddress1'];
-        $collegeYearGraduated1 = $_POST['tbCollegeYearGraduated1'];
-        $collegeHonorsReceived1 = $_POST['tbCollegeHonorsReceived1'];
-        # College 2 [--TRANSFEREES--]
-        $collegeSchoolName2 = $_POST['tbCollegeSchoolName2'];
-        $collegeSchoolAddress2 = $_POST['tbCollegeSchoolAddress2'];
-        $collegeYearGraduated2 = $_POST['tbCollegeYearGraduated2'];
-        $collegeHonorsReceived2 = $_POST['tbCollegeHonorsReceived2'];
+
+        # Entry 
+
+        $entry = $_POST['entry'];
+
+        if($entry == 'Transferee'){
+            # College 1 [--TRANSFEREES--]
+            $collegeSchoolName1 = $_POST['tbCollegeSchoolName1'];
+            $collegeSchoolAddress1 = $_POST['tbCollegeSchoolAddress1'];
+            $collegeYearGraduated1 = $_POST['tbCollegeYearGraduated1'];
+            $collegeHonorsReceived1 = $_POST['tbCollegeHonorsReceived1'];
+            # College 2 [--TRANSFEREES--]
+            $collegeSchoolName2 = $_POST['tbCollegeSchoolName2'];
+            $collegeSchoolAddress2 = $_POST['tbCollegeSchoolAddress2'];
+            $collegeYearGraduated2 = $_POST['tbCollegeYearGraduated2'];
+            $collegeHonorsReceived2 = $_POST['tbCollegeHonorsReceived2'];
+        }else{
+            # College 1 [--TRANSFEREES--]
+            $collegeSchoolName1 = "N/A";
+            $collegeSchoolAddress1 = "N/A";
+            $collegeYearGraduated1 = "N/A";
+            $collegeHonorsReceived1 = "N/A";
+            # College 2 [--TRANSFEREES--]
+            $collegeSchoolName2 = "N/A";
+            $collegeSchoolAddress2 = "N/A";
+            $collegeYearGraduated2 = "N/A";
+            $collegeHonorsReceived2 = "N/A";
+        }
 
         ## Character Reference 1
         $referenceName1 = $_POST['tbReferenceName1'];
@@ -82,15 +100,34 @@
         $referenceContact2 = $_POST['tbReferenceContact2'];
         ## Previous Applications
         $previousApplication = $_POST['rbPreviousApplication'];
-        $previousApplicationYear = $_POST['tbPreviousApplicationYear'];
+
+        if($previousApplication == 'Yes'){
+            $previousApplicationYear = $_POST['tbPreviousApplicationYear'];
+        }else{
+            $previousApplicationYear = 'N/A';
+        }
+
         ## Hobbies
         $hobbies = $_POST['tbHobbies'];
+
         ## Club Member
         $clubMember = $_POST['rbClubMember'];
-        $clubName = $_POST['tbClubName'];
+
+        if($clubMember == 'Yes'){
+            $clubName = $_POST['tbClubName'];
+        }else{
+            $clubName = 'N/A';
+        }
+
         ## Physical Condition
         $physicalCondition = $_POST['rbPhysicalCondition'];
-        $physicalConditionSpecify = $_POST['tbPhysicalConditionSpecify'];
+
+        if($physicalCondition == 'Yes'){
+            $physicalConditionSpecify = $_POST['tbPhysicalConditionSpecify'];
+        }else{
+            $physicalConditionSpecify = 'N/A';
+        }
+
         ## Personal Statement
         $statement = $_POST['tbStatement'];
 

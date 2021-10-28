@@ -51,7 +51,6 @@
                                     <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
                                     <li role="presentation"><a href="#add_administrator_settings" aria-controls="settings" role="tab" data-toggle="tab">Add Administrator Account</a></li>
                                 </ul>
-
                                 <div class="tab-content">
                                     <!--- ## START PROFILE --->
                                     <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">

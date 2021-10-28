@@ -14,6 +14,11 @@
 		$sql1->execute();
 		$fetch1 = $sql1->fetch();
 
+		//checks entry type 
+		$sql2 = $conn->prepare("SELECT * from `tbl_applicant` WHERE `applicant_account_id` = $id");
+		$sql2->execute();
+		$fetch2 = $sql2->fetch();
+
 		if($fetch = $sql->fetch()){
 
 			$form1_status = $fetch['form1_progress'];
@@ -174,7 +179,6 @@
 			</div>
 			<div class="col-md-10">
 				<div class="student-page-container">
-				<form method="POST" action="../../backend/admission/application_form2.php" enctype="multipart/form-data">
 					<div class="student-account-container">
 						<p id="datetime" class="default-datetime">0:00</p>
 						<div class="student-account-details">
@@ -182,340 +186,334 @@
 							<a class="student-account-details-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
 						</div>
 					</div>
-					<div class="student-page-default" style="height: 275px; margin-bottom: 20px;">
-						<p class="student-page-default-header">EDUCATIONAL BACKGROUND</p>
+					<div class="student-page-default" style="height: 550px; margin-bottom: 10px;">
+						<p class="student-page-default-header">APPLICATION FORM 2</p>
 						<p style="font-size: 12px;"><i>Note: Put NONE or N/A if not applicable.</i></p>
-						<div class="row">
-							<div class="col-md-6">
+						<form id="myForm" method="POST" action="../../backend/admission/application_form2.php" enctype="multipart/form-data">
+							<hr class="default-divider ml-auto" style="margin: 10px 0px 20px 0px;">
+							<h3>Educational Background</h3>
+                            <fieldset>
+                            	<div class="row">
+									<div class="col-md-6">
+										<input type="hidden" name="id" value="<?php echo $fetch['id'] ?>">
+										<input type="hidden" name="entry" value="<?php echo $fetch2['entry'] ?>">
+										<!-- Kindergarten -->
+										<p class="student-page-label">Kindergarten</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbKinderSchoolName" id="tbKinderSchoolName" class="form-control"/>
+				                            	<label class="form-label">School Name </label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbKinderSchoolAddress" id="tbKinderSchoolAddress" class="form-control"/>
+				                            	<label class="form-label">School Address </label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbKinderYearGraduated" id="tbKinderYearGraduated" class="form-control"/>
+				                            	<label class="form-label">Year Graduated </label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbKinderHonorsReceived" id="tbKinderHonorsReceived" class="form-control"/>
+				                            	<label class="form-label">Honors Received (if any)</label>
+				                       		</div>
+				                    	</div>
+				                    	<!-- Elementary -->
+				                    	<p class="student-page-label">Elementary</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbElementarySchoolName" id="tbElementarySchoolName" class="form-control" required/>
+				                            	<label class="form-label">School Name *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbElementarySchoolAddress" id="tbElementarySchoolAddress" class="form-control" required/>
+				                            	<label class="form-label">School Address *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbElementaryYearGraduated" id="tbElementaryYearGraduated" class="form-control" required/>
+				                            	<label class="form-label">Year Graduated *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbElementaryHonorsReceived" id="tbElementaryHonorsReceived" class="form-control"/>
+				                            	<label class="form-label">Honors Received (if any)</label>
+				                       		</div>
+				                    	</div>
+				                    	<!-- Junior Highschool -->
+				                    	<p class="student-page-label">Junior High School</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbJHSSchoolName" id="tbJHSSchoolName" class="form-control" required/>
+				                            	<label class="form-label">School Name *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbJHSSchoolAddress" id="tbJHSSchoolAddress" class="form-control" required/>
+				                            	<label class="form-label">School Address *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbJHSYearGraduated" id="tbJHSYearGraduated" class="form-control" required/>
+				                            	<label class="form-label">Year Graduated *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbJHSHonorsReceived" id="tbJHSHonorsReceived" class="form-control"/>
+				                            	<label class="form-label">Honors Received (if any)</label>
+				                       		</div>
+				                    	</div>
+									</div>
+									<div class="col-md-6">
+										<!-- Senior Highschool -->
+				                    	<p class="student-page-label">Senior High School</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbSHSSchoolName" id="tbSHSSchoolName" class="form-control" required/>
+				                            	<label class="form-label">School Name *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbSHSSchoolAddress" id="tbSHSSchoolAddress" class="form-control" required/>
+				                            	<label class="form-label">School Address *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbSHSYearGraduated" id="tbSHSYearGraduated" class="form-control" required/>
+				                            	<label class="form-label">Year Graduated *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbSHSHonorsReceived" id="tbSHSHonorsReceived" class="form-control"/>
+				                            	<label class="form-label">Honors Received (if any)</label>
+				                       		</div>
+				                    	</div>
+				                    	<!-- College -->
+				                    	<div id="college" <?php if($fetch2['entry'] == 'Transferee')
+				                    	{echo 'style="display: block"';}else{echo 'style="display: none"';}?>>
+				                    		<p class="student-page-label">College 1 (for Transferees only)</p>
+											<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeSchoolName1" id="tbCollegeSchoolName1" class="form-control" />
+					                            	<label class="form-label">School Name</label>
+					                       		</div>
+					                    	</div>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeSchoolAddress1" id="tbCollegeSchoolAddress1" class="form-control" />
+					                            	<label class="form-label">School Address</label>
+					                       		</div>
+					                    	</div>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeYearGraduated1" id="tbCollegeYearGraduated1" class="form-control" />
+					                            	<label class="form-label">Year Graduated</label>
+					                       		</div>
+					                    	</div>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeHonorsReceived1" id="tbCollegeHonorsReceived1" class="form-control"/>
+					                            	<label class="form-label">Honors Received</label>
+					                       		</div>
+					                    	</div>
+					                    	<p class="student-page-label">College 2 (for Transferees only)</p>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeSchoolName2" id="tbCollegeSchoolName2" class="form-control" />
+					                            	<label class="form-label">School Name</label>
+					                       		</div>
+					                    	</div>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeSchoolAddress2" id="tbCollegeSchoolAddress2" class="form-control" />
+					                            	<label class="form-label">School Address</label>
+					                       		</div>
+					                    	</div>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeYearGraduated2" id="tbCollegeYearGraduated2" class="form-control" />
+					                            	<label class="form-label">Year Graduated</label>
+					                       		</div>
+					                    	</div>
+					                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                        	<div class="form-line">
+					                            	<input type="text" name="tbCollegeHonorsReceived2" id="tbCollegeHonorsReceived2" class="form-control"/>
+					                            	<label class="form-label">Honors Received</label>
+					                       		</div>
+					                    	</div>
+				                    	</div>
 
-								<!-- Kindergarten -->
+				                    	<!-- Upload File -->
+				                    	<div style="height: auto; width: 100%; padding: 10px; border-radius: 5px; background-color: #F2F2F2;">
+				                    		<p class="student-page-label">Please upload a scanned copy of your Grade 12 Report Card/TOR (for transferees)</p>
+				                    		<p style="font-size: 12px"><i>Note: See to it that your name is visible in the photo/s of the report card or TOR.</i></p>
+											<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        		<input class="student-page-upload" name="cardImages[]" type="file" multiple required>
+				                    		</div>
+				                    	</div>
+									</div>
+								</div>
+							</fieldset>
+							<h3>Other Relevant Information</h3>
+							<fieldset>
+								<div class="row">
+									<div class="col-md-6">
+										<p class="student-page-label">Character References</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbReferenceName1" id="tbReferenceName1" class="form-control" required/>
+					                           	<label class="form-label">Name (Reference 1) *</label>
+					                       	</div>
+					                    </div>
+					                    <div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbReferenceAddress1" id="tbReferenceAddress1" class="form-control" required/>
+					                           	<label class="form-label">Address (Reference 1) *</label>
+					                       	</div>
+					                    </div>
+					                    <div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbReferenceContact1" id="tbReferenceContact1" class="form-control" required/>
+					                           	<label class="form-label">Contact Number (Reference 1) *</label>
+					                       	</div>
+					                    </div>
+					                    <div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbReferenceName2" id="tbReferenceName2" class="form-control" required/>
+					                           	<label class="form-label">Name (Reference 2) *</label>
+					                       	</div>
+					                    </div>
+					                    <div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbReferenceAddress2" id="tbReferenceAddress2" class="form-control" required/>
+					                           	<label class="form-label">Address (Reference 2) *</label>
+					                       	</div>
+					                    </div>
+					                    <div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbReferenceContact2" id="tbReferenceContact2" class="form-control" required/>
+					                           	<label class="form-label">Contact Number (Reference 2) *</label>
+					                       	</div>
+					                    </div>
+					                    <p class="student-page-label">Do you have previous application at Leyte Normal University? *</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<input type="radio" name="rbPreviousApplication" id="rbPreviousApplicationYes" value="Yes" required/>
+		                                	<label for="rbPreviousApplicationYes">Yes</label>
+		                                	<br>
+		                                	<input type="radio" name="rbPreviousApplication" id="rbPreviousApplicationNo" value="No" />
+		                                	<label for="rbPreviousApplicationNo">No</label>
+					                    </div>
+					                    <div class="form-group form-float" id="academicYearField" style="margin-bottom: 15px; display: none;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbPreviousApplicationYear" id="tbPreviousApplicationYear" class="form-control" />
+					                           	<label class="form-label">If yes, kindly indicate the Academic Year</label>
+					                       	</div>
+					                    </div>
+					                    <p class="student-page-label">What are your hobbies, talents, and interests *</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbHobbies" id="tbHobbies" class="form-control" required/>
+					                           	<label class="form-label">e.g. Singing, Dancing, Writing</label>
+					                       	</div>
+					                    </div>
+					                    <p class="student-page-label">Are you a member of any club or organization in your high school? *</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<input type="radio" name="rbClubMember" id="rbClubMemberYes" value="Yes" required/>
+		                                	<label for="rbClubMemberYes">Yes</label>
+		                                	<br>
+		                                	<input type="radio" name="rbClubMember" id="rbClubMemberNo" value="No" />
+		                                	<label for="rbClubMemberNo">No</label>
+					                    </div>
+					                    <div class="form-group form-float" id="clubField" style="margin-bottom: 25px; display: none;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbClubName" id="tbClubName" class="form-control" />
+					                           	<label class="form-label">If yes, kindly indicate the name/s of the organization or club</label>
+					                       	</div>
+					                    </div>
+									</div>
+									<div class="col-md-6">
+										<p class="student-page-label">Do you have any PHYSICAL DISABILITY and/or CONDITION that requires additional support,
+					                	special attention or that should be taken into consideration in planning your academic activities</p>
+										<div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<input type="radio" name="rbPhysicalCondition" id="rbPhysicalConditionYes" value="Yes"/>
+		                                	<label for="rbPhysicalConditionYes">Yes</label>
+		                                	<br>
+		                                	<input type="radio" name="rbPhysicalCondition" id="rbPhysicalConditionNo" value="No" />
+		                                	<label for="rbPhysicalConditionNo">No</label>
+					                    </div>
+					                    <div class="form-group form-float" id="disabilityField" style="margin-bottom: 15px; display: none;">
+					                       	<div class="form-line">
+					                           	<input type="text" name="tbPhysicalConditionSpecify" id="tbPhysicalConditionSpecify" class="form-control" />
+					                           	<label class="form-label">If yes, please specify</label>
+					                       	</div>
+					                    </div>
 
-								<p class="student-page-label">Kindergarten</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbKinderSchoolName" id="tbKinderSchoolName" class="form-control"/>
-		                            	<label class="form-label">School Name </label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbKinderSchoolAddress" id="tbKinderSchoolAddress" class="form-control"/>
-		                            	<label class="form-label">School Address </label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbKinderYearGraduated" id="tbKinderYearGraduated" class="form-control"/>
-		                            	<label class="form-label">Year Graduated </label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbKinderHonorsReceived" id="tbKinderHonorsReceived" class="form-control"/>
-		                            	<label class="form-label">Honors Received (if any)</label>
-		                       		</div>
-		                    	</div>
+					                    <!-- Upload File -->
 
-		                    	<!-- Elementary -->
+				                    	<div style="height: auto; width: 100%; padding: 10px; border-radius: 5px; background-color: #F2F2F2; display: none;" id="disabilityFile">
+				                    		<p class="student-page-label">If necessary, please attach medical certificate and/or psycho-educational
+				                    		assessment report</p>
+											<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        		<input class="student-page-upload" id="medicalImage" name="medicalImages[]" type="file" multiple>
+				                    		</div>
+				                    	</div>
+				                    	<br>
+				                    	<p class="student-page-label">Personal Statement *</p>
+				                    	<p style="font-size: 12px"><i>Explain your purpose in seeking admission to the University and the goals which
+				                    	you want to achieve.</i></p>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+					                       	<div class="form-line">
+		                                        <textarea rows="7" name="tbStatement" id="tbStatement" class="form-control no-resize" placeholder="Type your answer..." required></textarea>
+		                                    </div>
+					                    </div>
 
-		                    	<p class="student-page-label">Elementary</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbElementarySchoolName" id="tbElementarySchoolName" class="form-control" required/>
-		                            	<label class="form-label">School Name *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbElementarySchoolAddress" id="tbElementarySchoolAddress" class="form-control" required/>
-		                            	<label class="form-label">School Address *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbElementaryYearGraduated" id="tbElementaryYearGraduated" class="form-control" required/>
-		                            	<label class="form-label">Year Graduated *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbElementaryHonorsReceived" id="tbElementaryHonorsReceived" class="form-control"/>
-		                            	<label class="form-label">Honors Received (if any)</label>
-		                       		</div>
-		                    	</div>
+					                    <div class="alert alert-primary">
+					                    	<p style="text-align: justify; font-size: 13px;">I understand that my application for admission is subject for approval
+					                    	of the Admission Committee of the University. I certify that the information given is true and correct. Falsifying
+					                    	any of the information is sufficient ground for any legal action and rejection relative to my application. In addition, I understand that LNU has no obligation to provide me with reasons in case this application will be denied.</p>
+					                    </div>
+									</div>
+								</div>
+							</fieldset>
 
-		                    	<!-- Junior Highschool -->
 
-		                    	<p class="student-page-label">Junior High School</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbJHSSchoolName" id="tbJHSSchoolName" class="form-control" required/>
-		                            	<label class="form-label">School Name *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbJHSSchoolAddress" id="tbJHSSchoolAddress" class="form-control" required/>
-		                            	<label class="form-label">School Address *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbJHSYearGraduated" id="tbJHSYearGraduated" class="form-control" required/>
-		                            	<label class="form-label">Year Graduated *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbJHSHonorsReceived" id="tbJHSHonorsReceived" class="form-control"/>
-		                            	<label class="form-label">Honors Received (if any)</label>
-		                       		</div>
-		                    	</div>
-
-		                    	<!-- Senior Highschool -->
-
-		                    	<p class="student-page-label">Senior High School</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbSHSSchoolName" id="tbSHSSchoolName" class="form-control" required/>
-		                            	<label class="form-label">School Name *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbSHSSchoolAddress" id="tbSHSSchoolAddress" class="form-control" required/>
-		                            	<label class="form-label">School Address *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbSHSYearGraduated" id="tbSHSYearGraduated" class="form-control" required/>
-		                            	<label class="form-label">Year Graduated *</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbSHSHonorsReceived" id="tbSHSHonorsReceived" class="form-control"/>
-		                            	<label class="form-label">Honors Received (if any)</label>
-		                       		</div>
-		                    	</div>
-
-							</div>
-							<div class="col-md-6">
-
-		                    	<!-- College -->
-
-		                    	<p class="student-page-label">College (for Transferees only)</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeSchoolName1" id="tbCollegeSchoolName1" class="form-control" />
-		                            	<label class="form-label">School Name (1)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeSchoolAddress1" id="tbCollegeSchoolAddress1" class="form-control" />
-		                            	<label class="form-label">School Address (1)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeYearGraduated1" id="tbCollegeYearGraduated1" class="form-control" />
-		                            	<label class="form-label">Year Graduated (1)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeHonorsReceived1" id="tbCollegeHonorsReceived1" class="form-control"/>
-		                            	<label class="form-label">Honors Received (1)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeSchoolName2" id="tbCollegeSchoolName2" class="form-control" />
-		                            	<label class="form-label">School Name (2)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeSchoolAddress2" id="tbCollegeSchoolAddress2" class="form-control" />
-		                            	<label class="form-label">School Address (2)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeYearGraduated2" id="tbCollegeYearGraduated2" class="form-control" />
-		                            	<label class="form-label">Year Graduated (2)</label>
-		                       		</div>
-		                    	</div>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        	<div class="form-line">
-		                            	<input type="text" name="tbCollegeHonorsReceived2" id="tbCollegeHonorsReceived2" class="form-control"/>
-		                            	<label class="form-label">Honors Received (2)</label>
-		                       		</div>
-		                    	</div>
-
-		                    	<!-- Upload File -->
-
-		                    	<div style="height: auto; width: 100%; padding: 10px; border-radius: 5px; background-color: #F2F2F2;">
-		                    		<p class="student-page-label">Please upload a scanned copy of your Grade 12 Report Card/TOR (for transferees)</p>
-		                    		<p style="font-size: 12px"><i>Note: See to it that your name is visible in the photo/s of the report card or TOR.</i></p>
-									<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        		<input class="student-page-upload" name="cardImages[]" type="file" multiple required>
-		                    		</div>
-		                    	</div>
-
-							</div>
-						</div>
+							<div class="modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						    	<div class="modal-dialog" role="document">
+						      		<div class="modal-content">
+						       			<div class="modal-header">
+						       			  <p class="modal-header-text">Submit Application Form?</p>
+						       			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						       			    <span aria-hidden="true">×</span>
+						       			  </button>
+						       			</div>
+						       			<div class="modal-body">
+						       				<p style="text-align: justify; font-size: 14px;">By submitting, all the information that you entered on this page will be saved to the database.</p>
+						       				<p style="text-align: justify; font-size: 14px;"><b>Please review everything first before proceeding.</b></p>
+						      			</div>
+						      			<div class="modal-footer" style="padding: 10px;">
+						       			  <button type="submit" name="btnSubmit" class="default-button" 
+						       			  style="padding: 5px 10px 5px 10px; position: relative;">Confirm</button>
+						       			</div>
+						    		</div>
+						  		</div>
+	  						</div>
+						</form>
 					</div>
-					<div class="student-page-default" style="height: 275px;">
-						<p class="student-page-default-header">OTHER RELEVANT INFORMATION</p>
-						<p style="font-size: 12px;"><i>Note: Put NONE or N/A if not applicable.</i></p>
-						<div class="row">
-							<div class="col-md-6">
-								<p class="student-page-label">Character References</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbReferenceName1" id="tbReferenceName1" class="form-control" required/>
-			                           	<label class="form-label">Name (Reference 1) *</label>
-			                       	</div>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbReferenceAddress1" id="tbReferenceAddress1" class="form-control" required/>
-			                           	<label class="form-label">Address (Reference 1) *</label>
-			                       	</div>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbReferenceContact1" id="tbReferenceContact1" class="form-control" required/>
-			                           	<label class="form-label">Contact Number (Reference 1) *</label>
-			                       	</div>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbReferenceName2" id="tbReferenceName2" class="form-control" required/>
-			                           	<label class="form-label">Name (Reference 2) *</label>
-			                       	</div>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbReferenceAddress2" id="tbReferenceAddress2" class="form-control" required/>
-			                           	<label class="form-label">Address (Reference 2) *</label>
-			                       	</div>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbReferenceContact2" id="tbReferenceContact2" class="form-control" required/>
-			                           	<label class="form-label">Contact Number (Reference 2) *</label>
-			                       	</div>
-			                    </div>
-			                    <p class="student-page-label">Do you have previous application at Leyte Normal University? *</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<input type="radio" name="rbPreviousApplication" id="rbPreviousApplicationYes" value="Yes" required/>
-                                	<label for="rbPreviousApplicationYes">Yes</label>
-                                	<br>
-                                	<input type="radio" name="rbPreviousApplication" id="rbPreviousApplicationNo" value="No" />
-                                	<label for="rbPreviousApplicationNo">No</label>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbPreviousApplicationYear" id="tbPreviousApplicationYear" class="form-control" />
-			                           	<label class="form-label">If yes, kindly indicate the Academic Year</label>
-			                       	</div>
-			                    </div>
-			                    <p class="student-page-label">What are your hobbies, talents, and interests *</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbHobbies" id="tbHobbies" class="form-control" required/>
-			                           	<label class="form-label">e.g. Singing, Dancing, Writing</label>
-			                       	</div>
-			                    </div>
-			                    <p class="student-page-label">Are you a member of any club or organization in your high school? *</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<input type="radio" name="rbClubMember" id="rbClubMemberYes" value="Yes" required/>
-                                	<label for="rbClubMemberYes">Yes</label>
-                                	<br>
-                                	<input type="radio" name="rbClubMember" id="rbClubMemberNo" value="No" />
-                                	<label for="rbClubMemberNo">No</label>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbClubName" id="tbClubName" class="form-control" />
-			                           	<label class="form-label">If yes, kindly indicate the name/s of the organization or club</label>
-			                       	</div>
-			                    </div>
-							</div>
-							<div class="col-md-6">
-								<p class="student-page-label">Do you have any PHYSICAL DISABILITY and/or CONDITION that requires additional support,
-			                	special attention or that should be taken into consideration in planning your academic activities</p>
-								<div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<input type="radio" name="rbPhysicalCondition" id="rbPhysicalConditionYes" value="Yes"/>
-                                	<label for="rbPhysicalConditionYes">Yes</label>
-                                	<br>
-                                	<input type="radio" name="rbPhysicalCondition" id="rbPhysicalConditionNo" value="No" />
-                                	<label for="rbPhysicalConditionNo">No</label>
-			                    </div>
-			                    <div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-			                           	<input type="text" name="tbPhysicalConditionSpecify" id="tbPhysicalConditionSpecify" class="form-control" />
-			                           	<label class="form-label">If yes, please specify</label>
-			                       	</div>
-			                    </div>
-
-			                    <!-- Upload File -->
-
-		                    	<div style="height: auto; width: 100%; padding: 10px; border-radius: 5px; background-color: #F2F2F2;">
-		                    		<p class="student-page-label">If necessary, please attach medical certificate and/or psycho-educational
-		                    		assessment report</p>
-									<div class="form-group form-float" style="margin-bottom: 15px;">
-		                        		<input class="student-page-upload" name="medicalImages[]" type="file" multiple>
-		                    		</div>
-		                    	</div>
-		                    	<br>
-		                    	<p class="student-page-label">Personal Statement *</p>
-		                    	<p style="font-size: 12px"><i>Explain your purpose in seeking admission to the University and the goals which
-		                    	you want to achieve.</i></p>
-		                    	<div class="form-group form-float" style="margin-bottom: 15px;">
-			                       	<div class="form-line">
-                                        <textarea rows="7" name="tbStatement" id="tbStatement" class="form-control no-resize" placeholder="Type your answer..." required></textarea>
-                                    </div>
-			                    </div>
-
-			                    <div class="alert alert-primary">
-			                    	<p style="text-align: justify; font-size: 13px;">I understand that my application for admission is subject for approval
-			                    	of the Admission Committee of the University. I certify that the information given is true and correct. Falsifying
-			                    	any of the information is sufficient ground for any legal action and rejection relative to my application. In addition, I understand that LNU has no obligation to provide me with reasons in case this application will be denied.</p>
-			                    </div>
-							</div>
-						</div>
-						<div class="row">
-                            <div class="col-md-12" align="center">
-                                <a class="default-button page-start-button" href="#" data-toggle="modal" data-target="#submitModal" style="padding: 5px 20px 5px 20px;">Submit Application Form</a>
-                            </div>
-						</div>
-					</div>
-					<input type="hidden" name="id" value="<?php echo $fetch['id'] ?>">
-					<div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				    	<div class="modal-dialog" role="document">
-				      		<div class="modal-content">
-				       			<div class="modal-header">
-				       			  <p class="modal-header-text">Submit Application Form?</p>
-				       			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-				       			    <span aria-hidden="true">×</span>
-				       			  </button>
-				       			</div>
-				       			<div class="modal-body">
-				       				<p style="text-align: justify; font-size: 14px;">By submitting, all the information that you entered on this page will be saved to the database.</p>
-				       				<p style="text-align: justify; font-size: 14px;"><b>Please review everything first before proceeding.</b></p>
-				      			</div>
-				      			<div class="modal-footer" style="padding: 10px;">
-				       			  <button type="submit" name="btnSubmit" class="default-button" style="padding: 5px 10px 5px 10px; position: relative;">Confirm</button>
-				       			</div>
-				    		</div>
-				  		</div>
-	  				</div>
-				</form>
 				</div>
 			</div>
 		</div>
@@ -553,9 +551,14 @@
 	<script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="../../assets/libs/node-waves/waves.js"></script>
     <script src="../../assets/js/template/admin.js"></script>
+    <script src="../../../plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="../../../js/pages/forms/form-wizard.js"></script>
+    <script src="../../../plugins/jquery-steps/jquery.steps.js"></script>
     <script src="../../assets/js/template/demo.js"></script>
 
 	<!-- Additional JS codes -->
+
+	<script src="../../../js/formcache.js"></script>
 
 	<script>
 
@@ -563,6 +566,69 @@
 
 		$(document).ready(function () {
         	showDateTime();
+        	$('#myForm').formcache({
+        		local: false,
+        		session: true,
+        		maxAge: 300000
+        	});
+
+        	var previousApplication = $("input[name='rbPreviousApplication']:checked").val();
+	        var clubMember = $("input[name='rbClubMember']:checked").val();
+	        var physicalDisability = $("input[name='rbPhysicalCondition']:checked").val();
+	        if(previousApplication == 'Yes'){
+	        	$("#academicYearField").css('display', 'block');
+	        	$("#tbPreviousApplicationYear").prop('required', true);
+	        }else{
+	        	$("#academicYearField").css('display', 'none');
+	        	$("#tbPreviousApplicationYear").prop('required', false);
+	        }
+	        if(clubMember == 'Yes'){
+	        	$("#clubField").css('display', 'block');
+	        	$("#tbClubName").prop('required', true);
+	        }else{
+	        	$("#clubField").css('display', 'none');
+	        	$("#tbClubName").prop('required', false);
+	        }
+	        if(physicalDisability == 'Yes'){
+	        	$("#disabilityField").css('display', 'block');
+	        	$("#disabilityFile").css('display', 'block');
+	        	$("#tbPhysicalConditionSpecify").prop('required', true);
+	        }else{
+	        	$("#disabilityField").css('display', 'none');
+	        	$("#disabilityFile").css('display', 'none');
+	        	$("#tbPhysicalConditionSpecify").prop('required', false);
+	        }
+
+        	$("input[type='radio']").click(function(){
+	        	var previousApplication = $("input[name='rbPreviousApplication']:checked").val();
+	        	var clubMember = $("input[name='rbClubMember']:checked").val();
+	        	var physicalDisability = $("input[name='rbPhysicalCondition']:checked").val();
+	        	if(previousApplication == 'Yes'){
+	        		$("#academicYearField").css('display', 'block');
+	        		$("#tbPreviousApplicationYear").prop('required', true);
+	        	}else{
+	        		$("#academicYearField").css('display', 'none');
+	        		$("#tbPreviousApplicationYear").prop('required', false);
+	        	}
+	        	if(clubMember == 'Yes'){
+	        		$("#clubField").css('display', 'block');
+	        		$("#tbClubName").prop('required', true);
+	        	}else{
+	        		$("#clubField").css('display', 'none');
+	        		$("#tbClubName").prop('required', false);
+	        	}
+	        	if(physicalDisability == 'Yes'){
+	        		$("#disabilityField").css('display', 'block');
+	        		$("#disabilityFile").css('display', 'block');
+	        		$("#tbPhysicalConditionSpecify").prop('required', true);
+	        	}else{
+	        		$("#disabilityField").css('display', 'none');
+	        		$("#disabilityFile").css('display', 'none');
+	        		$("#tbPhysicalConditionSpecify").prop('required', false);
+	        	}
+	        });
+
+        	$.AdminBSB.input.activate();
     	});
 
 		$('#sidebar-toggle').click(function () {

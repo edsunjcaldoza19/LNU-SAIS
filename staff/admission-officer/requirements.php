@@ -17,28 +17,16 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="block-header">
-                        <h3>
-                            REQUIREMENTS
-                        </h3>
+                    <p class="page-header">Configure Admission Requirements</p>
+                    <p class="page-subheader">Set the requirements for the admission</p>
                     </div>
                     <div class="card">
                         <div class="header">
+                            <p class="table-subheader"></p>
                             <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addModal">
-                                    <i class="material-icons">add</i>
-                                <span>ADD REQUIREMENTS</span>
+                                <i class="material-icons">add</i>
+                                <span>Add Requirement</span>
                             </button>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -46,9 +34,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 20%;">Requirement No.</th>
-                                            <th>Description</th>
-                                            <th style="width: 10%;">Update</th>
-                                            <th style="width: 10%;">Delete</th>
+                                            <th>Requirement Description</th>
+                                            <th style="width: 10%;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,11 +50,9 @@
                                         <tr>
                                             <td><?php echo $fetch['requirements_num']; ?></td>
                                             <td><?php echo $fetch['requirements_desc']; ?></td>
-                                            <td style="text-align: center;">
-                                                <button class="btn bg-teal btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
-                                            </td>
-                                            <td style="text-align: center;">
-                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
+                                            <td style="text-align: center; width: 250px;">
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
+                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
                                             <?php
                                             include 'be/requirement/deleteModal.php';

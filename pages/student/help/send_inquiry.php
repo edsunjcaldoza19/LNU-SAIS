@@ -221,7 +221,7 @@
 
 	<div class="modal fade" id="addMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog" role="document">
-    		<form method="POST" action="../../backend/feedback/add_feedback.php">
+    		<form method="POST" action="../../backend/inquiry/add_inquiry.php">
       		<div class="modal-content">
        			<div class="modal-header">
        			  <p class="modal-header-text">Create New Inquiry Ticket</p>

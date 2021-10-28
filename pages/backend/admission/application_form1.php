@@ -32,24 +32,48 @@ if(isset($_POST['btnNext'])){
         $mailing_address = $_POST['tbMailingAddress'];
         $religion = $_POST['tbReligion'];
         $mobile_number = $_POST['tbMobileNumber'];
-        $father_name = $_POST['tbFatherName'];
-        $father_citizenship = $_POST['tbFatherCitizenship'];
-        $father_contact = $_POST['tbFatherContact'];
-        $father_email = $_POST['tbFatherEmail'];
-        $father_occupation = $_POST['tbFatherOccupation'];
-        $father_employer = $_POST['tbFatherEmployer'];
-        $mother_name = $_POST['tbMotherName'];
-        $mother_citizenship = $_POST['tbMotherCitizenship'];
-        $mother_contact = $_POST['tbMotherContact'];
-        $mother_email = $_POST['tbMotherEmail'];
-        $mother_occupation = $_POST['tbMotherOccupation'];
-        $mother_employer = $_POST['tbMotherEmployer'];
-        $guardian_name = $_POST['tbGuardianName'];
-        $guardian_citizenship = $_POST['tbGuardianCitizenship'];
-        $guardian_contact = $_POST['tbGuardianContact'];
-        $guardian_email = $_POST['tbGuardianEmail'];
-        $guardian_occupation = $_POST['tbGuardianOccupation'];
-        $guardian_employer = $_POST['tbGuardianEmployer'];
+
+        $withParents = $_POST['rbWithParents'];
+        if($withParents == 'Yes'){
+            $father_name = $_POST['tbFatherName'];
+            $father_citizenship = $_POST['tbFatherCitizenship'];
+            $father_contact = $_POST['tbFatherContact'];
+            $father_email = $_POST['tbFatherEmail'];
+            $father_occupation = $_POST['tbFatherOccupation'];
+            $father_employer = $_POST['tbFatherEmployer'];
+            $mother_name = $_POST['tbMotherName'];
+            $mother_citizenship = $_POST['tbMotherCitizenship'];
+            $mother_contact = $_POST['tbMotherContact'];
+            $mother_email = $_POST['tbMotherEmail'];
+            $mother_occupation = $_POST['tbMotherOccupation'];
+            $mother_employer = $_POST['tbMotherEmployer'];
+            $guardian_name = 'N/A';
+            $guardian_citizenship = 'N/A';
+            $guardian_contact = 'N/A';
+            $guardian_email = 'N/A';
+            $guardian_occupation = 'N/A';
+            $guardian_employer = 'N/A';
+        }else{
+            $father_name = 'N/A';
+            $father_citizenship = 'N/A';
+            $father_contact = 'N/A';
+            $father_email = 'N/A';
+            $father_occupation = 'N/A';
+            $father_employer = 'N/A';
+            $mother_name = 'N/A';
+            $mother_citizenship = 'N/A';
+            $mother_contact = 'N/A';
+            $mother_email = 'N/A';
+            $mother_occupation = 'N/A';
+            $mother_employer = 'N/A';
+            $guardian_name = $_POST['tbGuardianName'];
+            $guardian_citizenship = $_POST['tbGuardianCitizenship'];
+            $guardian_contact = $_POST['tbGuardianContact'];
+            $guardian_email = $_POST['tbGuardianEmail'];
+            $guardian_occupation = $_POST['tbGuardianOccupation'];
+            $guardian_employer = $_POST['tbGuardianEmployer'];
+        }
+
         $status = "Pending";
         $timestamp = "N/A";
 

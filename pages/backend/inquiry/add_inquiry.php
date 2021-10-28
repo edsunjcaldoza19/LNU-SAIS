@@ -12,6 +12,7 @@
 <?php
 
 	require '../config/db_mysqli.php';
+    date_default_timezone_set('Asia/Taipei');
 
 	try{
 
@@ -59,7 +60,7 @@
 
                 }).then(function(){
 
-                    window.location.replace("../../student/help/send_feedback.php");
+                    window.location.replace("../../student/help/send_inquiry.php");
 
                 });
 
