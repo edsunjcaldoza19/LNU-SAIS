@@ -5,7 +5,9 @@
  
 	if(isset($_SESSION['token'])){
 
-		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
+		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account
+        LEFT JOIN tbl_applicant ON tbl_applicant_account.id = tbl_applicant.applicant_account_id 
+        WHERE `session_token` = '$token'");
 		$sql->execute();
 
 		//checks if examination module is activated//
@@ -16,6 +18,9 @@
 		if($fetch = $sql->fetch()){
 
 			$interview_status = $fetch['interview_progress'];
+
+			//Determine if re-admission
+			$entry_type = $fetch['entry'];
 
 		}
 
@@ -103,7 +108,7 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1 && $entry_type !== 'Re-admission'){
 								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
@@ -141,7 +146,7 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1 && $entry_type !== 'Re-admission'){
 								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination

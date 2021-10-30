@@ -2,23 +2,23 @@
 <div class="modal fade" id="update<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form action = "be/procedure/update.php" method="POST" enctype="multipart/form-data">
+                        <form action = "be/faqs/update.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Update Procedure</h4>
+                            <h4 class="modal-title" id="defaultModalLabel">Update FAQ Entry</h4>
                             <hr class="default-divider ml-auto">
                         </div>
                         <div class="modal-body">
                             <input type="hidden" value="<?php echo $fetch['id']; ?>" name="id">
                             <div class="form-group form-float">     
                                 <div class="form-line">
-                                    <input type="number" value="<?php echo $fetch['procedure_step_num']; ?>" class="form-control" name="step" placeholder="Step No." required autofocus>
-                                    <label class="form-label">Procedure Number</label>
+                                    <textarea class="form-control" name="question" style="resize: none; height: 100px;"><?php echo $fetch['question']; ?></textarea>
+                                    <label class="form-label">Update Question</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?php echo $fetch['procedure_desc']; ?>" class="form-control" name="description" placeholder="Description" required autofocus>
-                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" name="answer" style="resize: none; height: 100px;"><?php echo $fetch['answer']; ?></textarea>
+                                    <label class="form-label">Update Answer</label>
                                 </div>
                             </div>
                         </div>

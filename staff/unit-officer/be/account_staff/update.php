@@ -6,27 +6,24 @@
 		try{
             $id = $_POST['id'];
             $username = $_POST['username'];
-            $password = $_POST['password'];
             $title = $_POST['title'];
             $firstName = $_POST['firstName'];
             $middleName = $_POST['middleName'];
             $lastName = $_POST['lastName'];
             $email = $_POST['email'];
-            $address = $_POST['address'];
+            $contact = $_POST['contact'];
 			$courseID = $_POST['courseID'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE `tbl_account_staff` SET `staff_username`='$username',
-            `staff_password`='$password',`staff_title`='$title',`staff_first_name`='$firstName',
+			$sql = "UPDATE `tbl_account_staff` SET `staff_username`='$username',`staff_title`='$title',`staff_first_name`='$firstName',
             `staff_middle_name`='$middleName',`staff_last_name`='$lastName',
-            `staff_address`='$address',`staff_email`='$email',`staff_unit`='$courseID' WHERE `id` = '$id'";
+            `staff_contact`='$contact',`staff_email`='$email',`staff_unit`='$courseID' WHERE `id` = '$id'";
 			$conn->exec($sql);
 
 			//pathinfo
 			$image=$_FILES['image']['name'];
 			$extension = pathinfo($image, PATHINFO_EXTENSION);
-			$random=rand(0,100000);
-			$rename = 'IMG_STAFF'.date('Ymd').$random;
+			$rename = 'STAFF_PROFILE_'.strtolower($firstName.'_'.$lastName);
 			$newname = $rename.'.'.$extension;
 			$target="../../../../images/staff-img/".$newname;
 			//old Image
@@ -63,7 +60,7 @@
 					icon: "success",
 					title: "Account Successfully Updated",
                     text: "LNU - Student Admission and Information System",
-                    timer: 3000
+                    timer: 2000
 
 				}).then(function(){
 					window.location.replace("../../account_interviewer.php");

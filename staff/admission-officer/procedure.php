@@ -17,7 +17,7 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="page-header">Configure Admission Procedure</p>
+                        <p class="page-header">Configure Admission Procedures</p>
                         <p class="page-subheader">Manage and configure admission procedures.</p>
                     </div>
                     <div class="card">
@@ -33,9 +33,9 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%;">Procedure No.</th>
+                                            <th>Procedure No.</th>
                                             <th>Procedure Description</th>
-                                            <th style="width: 10%;">Action</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

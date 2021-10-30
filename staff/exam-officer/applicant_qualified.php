@@ -24,19 +24,18 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="page-header">Pending Applicants</p>
-                        <p class="page-subheader">Input scores of applicants who took the entrance examination</p>
+                        <p class="page-header">Qualified Applicants</p>
+                        <p class="page-subheader">Inspect applicants who qualified the entrance examination</p>
                     </div>
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Pending Applicants List - Entrance Examination (A.Y. <?php echo $fetch1['ay_year']?>)</p>
+                            <p class="table-subheader">Qualified Applicants List - Entrance Examination (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Input Score</th>
                                             <th>Applicant Name</th>
                                             <th>Preferred Program</th>
                                             <th>Entry Type</th>
@@ -51,17 +50,11 @@
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Pending' AND `school_year_id` = $id");
+                                            WHERE `form_status`='Approved' AND `exam_status`='Qualified' AND `school_year_id` = $id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td>
-                                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
-                                                    <i class="material-icons">add</i>
-                                                    <span>Add Score</span>
-                                            </button>
-                                            </td>
                                             <td>
                                                 <?php
                                                     echo $fetch['last_name'];
@@ -76,7 +69,7 @@
                                                     echo $fetch['course_acronym'];
                                             ?></td>
                                             <td><?php echo $fetch['entry']; ?></td>
-                                            <td align="center">
+                                            <td>
                                                 <?php
                                                     if($fetch['form_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
@@ -87,7 +80,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td align="center">
+                                            <td>
                                                 <?php
                                                     if($fetch['exam_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
@@ -113,7 +106,6 @@
             <!-- #END# Exportable Table -->
         </div>
     </section>
-    <!-- Logout Modal -->
     <?php
         include 'includes/logout_modal.php';
         include 'includes/scripts.php';

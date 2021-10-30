@@ -7,7 +7,9 @@
 
 	if(isset($_SESSION['token'])){
 
-		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
+		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account
+        LEFT JOIN tbl_applicant ON tbl_applicant_account.id = tbl_applicant.applicant_account_id 
+        WHERE `session_token` = '$token'");
 		$sql->execute();
 
 		if($fetch = $sql->fetch()){
@@ -15,6 +17,9 @@
 			$form1_status = $fetch['form1_progress'];
 			$form2_status = $fetch['form2_progress'];
 			$exam_status = $fetch['examination_progress'];
+
+			//Determine if re-admission
+			$entry_type = $fetch['entry'];
 
 			$sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
 			$sql1->execute();
@@ -48,7 +53,7 @@
 
 						}
 
-					}else{
+					}else if($exam_enabled == 0){
 
 						echo '
 
@@ -70,7 +75,7 @@
 
 		}
 
-		if($exam_status == 'Done'){
+		if($exam_status == 'Done' || $entry_type == 'Re-admission'){
 
 			echo '
 

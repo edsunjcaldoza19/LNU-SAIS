@@ -22,7 +22,7 @@
                                 <a href="applicant.php">Applicants Masterlist</a>
                             </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Pending Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -38,8 +38,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Approved Applications</a>
+                            <li class="<?= ($activePage == 'applicant_qualified') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Qualified Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -48,15 +48,15 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_qualified.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="<?= ($activePage == 'applicant_rejected') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Rejected Applications</a>
+                            <li class="<?= ($activePage == 'applicant_unqualified') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Unqualified Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -65,7 +65,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_unqualified.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -74,6 +74,7 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="header">MANAGE ENTRANCE EXAMINATION</li>
                     <li class="<?= ($activePage == 'exam_manage') ? 'active': ''; ?>">
                                 <a href="exam_manage.php">
                                 <i class="material-icons">assignment</i>
@@ -87,11 +88,19 @@
                             </a>
                         </li>
                     <li class="header">OTHER OPTIONS</li>
-                     <li>
+                    <li>
                         <li class="<?= ($activePage == 'account_settings') ? 'active': ''; ?>">
                             <a href="account_settings.php">
                                 <i class="material-icons">person</i>
                                 <span>Account Settings</span>
+                            </a>
+                        </li>
+                    </li>
+                    <li>
+                        <li class="<?= ($activePage == 'exam_toggle') ? 'active': ''; ?>">
+                            <a href="exam_toggle.php">
+                                <i class="material-icons">settings</i>
+                                <span>Enable/Disable Examination</span>
                             </a>
                         </li>
                     </li>
@@ -101,7 +110,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="version">
-                    LNU SAIS| Version 1.0.0
+                    LNU SAIS | Version 1.0.0
                 </div>
                 <div class="copyright">
                     &copy; 2021 <a href="javascript:void(0);">Leyte Normal University</a>

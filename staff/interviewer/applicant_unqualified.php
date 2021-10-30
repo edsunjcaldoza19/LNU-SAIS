@@ -9,7 +9,7 @@
     <section>
         <?php
             include 'includes/left_sidebar.php';
-
+            
             //Fetch academic year//
 
             $id = $_GET['sy_id'];
@@ -24,24 +24,25 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="page-header">Pending Applicants</p>
-                        <p class="page-subheader">Input scores of applicants who took the entrance examination</p>
+                        <p class="page-header">Unqualified Applicants</p>
+                        <p class="page-subheader">Inspect applicants who unqualified the interview</p>
                     </div>
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Pending Applicants List - Entrance Examination (A.Y. <?php echo $fetch1['ay_year']?>)</p>
+                            <p class="table-subheader">Unqualified Applicants List - Interview (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Input Score</th>
                                             <th>Applicant Name</th>
                                             <th>Preferred Program</th>
                                             <th>Entry Type</th>
                                             <th>Application Form Status</th>
                                             <th>Entrance Exam Status</th>
+                                            <th>Interview Status</th>
+                                            <th>Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,17 +52,12 @@
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Pending' AND `school_year_id` = $id");
+                                            WHERE `form_status`='Approved' AND `exam_status`='Qualified'
+                                            AND `interview_status` = 'Qualified' AND `school_year_id` = $id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td>
-                                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
-                                                    <i class="material-icons">add</i>
-                                                    <span>Add Score</span>
-                                            </button>
-                                            </td>
                                             <td>
                                                 <?php
                                                     echo $fetch['last_name'];
@@ -91,15 +87,27 @@
                                                 <?php
                                                     if($fetch['exam_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['exam_status'] == "Qualified"){
+                                                    }else if($fetch['exam_status'] == "Approved"){
+                                                        echo '<p class="label-green">Approved</p>';
+                                                    }else if($fetch['exam_status'] == "Rejected"){
+                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td align="center">
+                                                <?php
+                                                    if($fetch['interview_status'] == "Pending"){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['interview_status'] == "Qualified"){
                                                         echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['exam_status'] == "Unqualified"){
+                                                    }else if($fetch['inteview_status'] == "Unqualified"){
                                                         echo '<p class="label-red">Unqualified</p>';
                                                     }
                                                 ?>
                                             </td>
+                                            <td><?php echo $fetch['remarks']?></td>
                                             <?php
-                                            include 'be/applicant_exam/updateScoreModal.php';
+                                            include 'be/applicant_interview/updateInterviewScoreModal.php';
                                             }
                                         ?>
                                         </tr>
@@ -113,7 +121,6 @@
             <!-- #END# Exportable Table -->
         </div>
     </section>
-    <!-- Logout Modal -->
     <?php
         include 'includes/logout_modal.php';
         include 'includes/scripts.php';

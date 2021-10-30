@@ -1,8 +1,8 @@
                     <!--- ## START PARENT INFORMATION --->
                     <div role="tabpanel" class="tab-pane fade in" id="documents">
                         <div class="form-horizontal">
-                            <div class="body">
-                            <h3>REPORT CARD AND MEDICAL CERTIFICATE</h3>
+                            <div class="body" style="padding: 10px 0px;">
+                            <p class="table-subheader">Submitted Documents (click to enlarge)</p>
                                 <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
                                 <?php
                                     $sqlCard = $conn->prepare("SELECT * FROM `tbl_applicant_card` WHERE `card_applicant_id` = $applicant_account_id");

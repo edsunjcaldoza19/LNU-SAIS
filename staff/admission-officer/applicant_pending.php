@@ -10,45 +10,42 @@
         <?php
             include 'includes/left_sidebar.php';
             include 'includes/right_sidebar.php';
+
+            //Fetch academic year//
+
+            $id = $_GET['sy_id'];
+
+            $sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `id` = $id");
+            $sql1->execute();
+            $fetch1 = $sql1->fetch();
+            
         ?>
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php include 'includes/breadcrumbs_applicant.php';?>
+                    <div class="block-header">
+                        <p class="page-header">Pending Admission Applications</p>
+                        <p class="page-subheader">Perform preliminary approval of admission applications</p>
+                    </div>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                APPLICANTS
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Pending Applications List (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Review</th>
-                                            <th>Name</th>
-                                            <th>Course</th>
+                                            <th>Applicant Name</th>
+                                            <th>Preferred Program</th>
                                             <th>Entry Type</th>
-                                            <th>Documents Status</th>
+                                            <th>Application Form Status</th>
+                                            <th>Review</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <!-- populate table with db data -->
                                         <?php
                                             $sy_id = $_GET['sy_id'];
@@ -62,12 +59,6 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <a href="applicant_review.php?id=<?php echo $fetch['id'];?>&sy_id=<?php echo $sy_id; ?>" type="button" class="btn btn-primary waves-effect">
-                                                    <i class="material-icons">launch</i>
-                                                    <span>REVIEW</span>
-                                                </a>
-                                            </td>
-                                            <td>
                                                 <?php
                                                     echo $fetch['last_name'];
                                                     echo ', ';
@@ -75,29 +66,29 @@
                                                     echo ' ';
                                                     echo $fetch['first_name'];
                                                 ?></td>
-                                            <td><?php
+                                            <td>
+                                                <?php
                                                     echo $fetch['course_name'];
                                                     echo ' - ';
                                                     echo $fetch['course_acronym'];
-                                            ?></td>
+                                                ?>  
+                                            </td>
                                             <td><?php echo $fetch['entry']; ?></td>
-                                            <td><?php
-                                                if ($fetch['form_status'] == "Approved") {
-                                                    ?>
-                                                    <span class="label bg-green"><?php echo $fetch['form_status'];?></span>
+                                            <td align="center">
                                                 <?php
-                                            }
-                                            elseif ($fetch['form_status'] == "Pending"){
+                                                    if($fetch['form_status'] == "Pending"){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['form_status'] == "Approved"){
+                                                        echo '<p class="label-green">Approved</p>';
+                                                    }else if($fetch['form_status'] == "Rejected"){
+                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }
                                                 ?>
-                                                <span class="label bg-teal"><?php echo $fetch['form_status'];?></span>
-                                                <?php
-                                            }
-                                            elseif ($fetch['form_status'] == "Rejected"){
-                                                ?>
-                                                <span class="label bg-red"><?php echo $fetch['form_status'];?></span>
-                                                <?php
-                                            }
-                                            ?>
+                                            </td>
+                                            <td align="center">
+                                                <a href="applicant_review.php?id=<?php echo $fetch['id'];?>&sy_id=<?php echo $sy_id; ?>" type="button" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">launch</i>
+                                                </a>
                                             </td>
                                             <?php
                                             }

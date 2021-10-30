@@ -30,6 +30,7 @@
                                         <option value="1">Enable</option>
                                         <option value="0">Disable</option>
                                     </select>   
+                                    <label class="form-label">Enable Entrance Examination</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">
@@ -47,6 +48,7 @@
                                         <option value="1">Active (Deactivates currently active year*)</option>
                                         <option value="0">Inactive</option>
                                     </select>   
+                                    <label class="form-label">Academic Year Status</label>
                                 </div>
                             </div>
                         </div>

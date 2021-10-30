@@ -27,12 +27,12 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Admission Officer Account Successfully Deleted",
+					title: "Staff Account Successfully Deleted",
                     text: "LNU - Student Admission and Information System",
-                    timer: 3000
+                    timer: 2000
 
 				}).then(function(){
-					window.location.replace("../../account_admission_officer.php");
+					window.location.replace("../../account_all.php");
 
 				});
 

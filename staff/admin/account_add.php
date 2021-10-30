@@ -69,7 +69,7 @@
                                     </div>
                                 </div> 
                                 <p style="font-size: 20px;">Personal Information</p>
-                                <small>Additional information about this account.</small>
+                                <small>Additional information about this account</small>
                                 <div class="row" style="margin-top: 15px;">
                                     <div class="col-md-6">
                                         <div class="form-group form-float">

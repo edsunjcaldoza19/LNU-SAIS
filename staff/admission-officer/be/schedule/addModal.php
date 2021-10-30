@@ -1,33 +1,32 @@
+<!-- ADD MODAL -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action = "be/schedule/add.php" method="POST" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Schedule Information</h4>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action = "be/schedule/add.php" method="POST" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="defaultModalLabel">Add Schedule</h4>
+                    <hr class="default-divider ml-auto">
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="datepicker form-control" name="date" required autofocus>
+                            <label class="form-label">Pick Schedule Date</label>
                         </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="datepicker form-control" name="date" placeholder="Schedule Date" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="description" placeholder="Description" required autofocus>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="description" required autofocus>
+                            <label class="form-label">Schedule Description</label>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </form>
                     </div>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <hr class="default-divider ml-auto">
+                    <button type="submit" class="btn btn-link waves-effect" name="update" id="update">SAVE CHANGES</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
+         </div>
+    </div>
+</div>

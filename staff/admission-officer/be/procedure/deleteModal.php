@@ -2,7 +2,7 @@
 <div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action = "be/academic_year/delete.php" method="POST" enctype="multipart/form-data">
+            <form action = "be/procedure/delete.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Remove Admission Procedure</h4>
                     <hr class="default-divider ml-auto">

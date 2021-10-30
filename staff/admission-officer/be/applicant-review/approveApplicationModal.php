@@ -1,34 +1,30 @@
-<!-- --APPROVE APPLICATION-- -->
-    <div class="modal fade" id="approve<?php echo $fetch['id']?>" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+<!-- APPROVE MODAL -->
+<div class="modal fade" id="approve<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <?php
                 $syID = $_GET['sy_id'];
             ?>
             <form action = "be/applicant-review/approveApplication.php?syID=<?php echo $syID ?>" method="POST">
                 <div class="modal-header">
-                <h5 class="modal-title logout-modal-title">Approve Application</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body logout-modal-body">
-                <p class="card-dashboard-header">Are you sure you want to approve this Application for
-                    <?php echo $fetch['last_name'];
-                    echo ", ";
-                    echo $fetch['first_name'];
-                    echo " ";
-                    echo $fetch['middle_name'];
-                ?>?</p>
-                <input type="hidden" name="applicantID" id="applicantID" value="<?php echo $fetch['id'] ?>">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success" style="color: #FFFFFF" type="submit" name="approve" id="approve" onclick="showSuccess();">YES, Approve Application</button>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            </div>
+                    <h4 class="modal-title" id="defaultModalLabel">Approve Application</h4>
+                    <hr class="default-divider ml-auto">
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="applicantID" id="applicantID" value="<?php echo $fetch['id'] ?>">
+                    <p class="card-dashboard-header">Are you sure you want to initially approve
+                    <b>
+                    <?php 
+                        echo $fetch['first_name'].' '.$fetch['middle_name'].' '.$fetch['last_name'];
+                    ?></b>'s 
+                application ?</p>
+                </div>
+                <div class="modal-footer">
+                    <hr class="default-divider ml-auto">
+                    <button type="submit" class="btn btn-link btn-success waves-effect" name="approve" id="approve" onclick="showSuccess();" style="color: #EEEEEE;">Yes, Approve Application</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCEL</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-

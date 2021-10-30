@@ -33,6 +33,12 @@
                             <span>Schedules</span>
                         </a>
                     </li>
+                    <li class="<?= ($activePage == 'faqs') ? 'active': ''; ?>">
+                        <a href="faqs.php">
+                            <i class="material-icons">question</i>
+                            <span>Frequently Asked Questions</span>
+                        </a>
+                    </li>
                     <li class="header">MANAGE STUDENT APPLICATIONS</li>
                     <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -78,7 +84,7 @@
                                 </ul>
                             </li>
                             <li class="<?= ($activePage == 'applicant_rejected') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Rejected Applications</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Disapproved Applications</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -127,19 +133,7 @@
                      <li>
                         <a href="settings.php">
                             <i class="material-icons">settings</i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="changelog.php">
-                            <i class="material-icons">feedback</i>
-                            <span>Feedbacks</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="changelog.php">
-                            <i class="material-icons">update</i>
-                            <span>Changelogs</span>
+                            <span>Account Settings</span>
                         </a>
                     </li>
                 </ul>

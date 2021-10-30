@@ -12,76 +12,67 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h1>ADD ACCOUNT</h1>
+                <p class="page-header">Add Unit Interviewer Account</p>
+                <p class="page-subheader">Create new account for designated unit interviewers</p>
             </div>
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <p style="font-size: 24px; font-weight: 600;">ACCOUNT DETAILS</p>
-                            <p>Please fill in the required fields to create an account. </p>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Account Credentials</p>
+                            <small>Basic account credentials for the staff account</small>
                         </div>
                         <div class="body">
                             <form action="be/account_staff/add.php" method="POST" enctype="multipart/form-data">
-                                <p style="font-size: 20px;">Account Information</p>
-                                <div class="form-group">
-                                    <small>Provide username and password for your account information. This will be used to login to the system.</small>
-                                </div>
-                                <fieldset>
-                                    <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
-                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" name="username" id="username" required>
-                                            <label class="form-label">Username*</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="hidden" name="unitID" value="<?php echo $unitId?>">
+                                        <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
+                                            <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
+                                        </div>
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="username" id="username" required>
+                                                <label class="form-label">Username*</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <p id="unitLabel">Program*</p>
-                                                <select name="courseID" class="form-control" required>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-float" id="unit">
+                                            <div class="form-line">
+                                                <select name="courseID" id="ciurseID" class="form-control" required>
+                                                    <option disabled selected>Program*</option>
                                                     <?php
                                                         require 'be/database/db_pdo.php';
-                                                        $program_id = $_SESSION['staff_unit'];
-                                                        $sqlCourse = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $program_id");
+                                                        $sqlCourse = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $unitId");
                                                         $sqlCourse->execute();
                                                         while($fetchCourse = $sqlCourse->fetch()){
                                                     ?>
                                                         <option name="courseID" value="<?php echo $fetchCourse['id']?>">
-                                                        <?php echo $fetchCourse['course_name'] ?></option>
+                                                            <?php echo $fetchCourse['course_name'] ?>        
+                                                        </option>
                                                     <?php
                                                         }
-                                                ?>
+                                                    ?>
                                                 </select>
-                                        </div>  
+                                            </div>
+                                        </div>
                                     </div>
-                                </fieldset>
+                                </div>
                                 <p style="font-size: 20px;">Personal Information</p>
+                                <small>Additional information about this account</small>
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <p id="unitLabel">Honorific</p>
-                                            <select name="title" class="form-control">
+                                            <select name="title" class="form-control" required>
+                                                <option disabled selected>Honorific*</option>
                                                 <option value="Mr.">Mr.</option>
-                                                <option value="Mr.">Mrs.</option>
+                                                <option value="Mrs.">Mrs.</option>
                                                 <option value="Prof.">Prof.</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Engr.">Engr.</option>
                                             </select>
-                                        </div>  
+                                        </div>   
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -118,31 +109,10 @@
                                     </div>
                                 </fieldset>
                                 <div class="form-group">
-                                    <label>
-                                        Please upload the picture of the employee.
-                                    </label>
-                                    <!-- Basic file uploader -->
-                                    <input type="file" name="image" class="form-control"
-                                            onchange="previewImage(event)">
-                                </div>
-                                <div class="form-group">
-                                    Image uploaded will be previewed here.
-                                    Please select an image with same width and
-                                    height ratio.
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <img id="preview" width="350px" height="350px" style="border: 2px solid;"/>
-                                    </div>
-                                </div>
-                                <h3>Terms & Conditions - Finish</h3>
-                                <fieldset>
-                                    <input id="acceptTerms-2" name="acceptTerms" type="checkbox" required>
-                                    <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
-                                </fieldset>
-                                <div class="form-group">
-                                    <button type="submit" class="btn bg-green btn-lg" name="submit">Submit</button>
-                                    <a href="account_admission_officer.php" class="btn bg-blue btn-lg">Cancel</a>
+                                    <button type="submit" class="btn bg-green waves-effect" name="submit" id="submit">
+                                        <i class="material-icons">add</i>
+                                        <span>Add Account</span>
+                                    </button>
                                 </div>
                             </form>
                         </div>

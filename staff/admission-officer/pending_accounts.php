@@ -16,16 +16,17 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php include 'includes/breadcrumbs_applicant.php';?>
+                    <div class="block-header">
+                        <p class="page-header">Pending Re-admission Accounts</p>
+                        <p class="page-subheader">Verify re-admission applicant accounts</p>
+                    </div>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                Pending Applicant Accounts
-                            </h2>
+                            <p class="table-subheader">Pending Accounts</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-basic-example dataTable">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th>Name</th>

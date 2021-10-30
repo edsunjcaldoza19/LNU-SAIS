@@ -16,10 +16,9 @@
                     <div class="card">
                         <div class="header">
                             <p class="table-subheader">Update Staff Account</p>
-                            <small>Modify account details</small>
+                            <small>Update settings for this account</small>
                         </div>
                         <div class="body">
-
                         <?php
                             $updateID = $_GET['id'];
                             require 'be/database/db_pdo.php';
@@ -45,15 +44,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                    <label>
-                                        Account Profile Picture:
-                                    </label>
-                                    <!-- Load IMAGE filename -->
-                                    <input type="hidden" name="oldImage" value="<?php echo $fetchaccount['staff_profile_img']; ?>">
-                                    <!-- Basic file uploader -->
-                                    <input type="file" name="image" class="form-control"
-                                            onchange="previewImage(event)">
-                                </div>
+                                            <label>
+                                                Account Profile Picture:
+                                            </label>
+                                            <!-- Load IMAGE filename -->
+                                            <input type="hidden" name="oldImage" value="<?php echo $fetchaccount['staff_profile_img']; ?>">
+                                            <!-- Basic file uploader -->
+                                            <input type="file" name="image" class="form-control"
+                                                    onchange="previewImage(event)">
+                                        </div>
                                     </div>
                                 </div>
                                 <p class="table-subheader">Account Information</p>

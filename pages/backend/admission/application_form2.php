@@ -131,7 +131,7 @@
         ## Personal Statement
         $statement = $_POST['tbStatement'];
 
-        $timestamp = date("F j, Y, h:i:s a");
+        $timestamp = date("F j, Y, h:i:s A");
 
         $sql = "UPDATE `tbl_applicant` SET `kinder_name`='$kinderSchoolName',
         `kinder_address`= '$kinderSchoolAddress',`kinder_year_graduated`='$kinderYearGraduated',

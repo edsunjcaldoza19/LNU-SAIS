@@ -1,21 +1,17 @@
 <?php
-
     include '../includes/head.php';
     require '../database/db_pdo.php';
-	if(isset($_POST['delete'])){
+
+	if(ISSET($_POST['update'])){
 		try{
             $id = $_POST['id'];
-			$oldImage = $_POST['image'];
+            $question = $_POST['question'];
+            $answer = $_POST['answer'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "DELETE FROM tbl_account_staff WHERE `id` = '$id'";
+			$sql = "UPDATE `tbl_faqs` SET `question`='$question',
+            `answer`='$answer' WHERE `id` = '$id'";
 			$conn->exec($sql);
-			if (unlink("../../../../images/staff-img/".$oldImage)) {
-				$msg= "Deleted";
-			}
-			else {
-				$msg ="Not Deleted";
-			}
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
@@ -27,12 +23,11 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Interviewer Account Successfully Deleted",
+					title: "FAQ Entry Successfully Updated",
                     text: "LNU - Student Admission and Information System",
-                    timer: 2000
-
+					timer: 2000
 				}).then(function(){
-					window.location.replace("../../account_interviewer.php");
+					window.location.replace("../../faqs.php");
 
 				});
 
@@ -42,5 +37,4 @@
 	';
 	}
 ?>
-
 

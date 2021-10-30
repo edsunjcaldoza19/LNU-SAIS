@@ -2,14 +2,14 @@
 <div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action = "be/requirement/delete.php" method="POST" enctype="multipart/form-data">
+            <form action = "be/faqs/delete.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Remove Admission Requirement</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">Remove FAQ Entry?</h4>
                     <hr class="default-divider ml-auto">
                 </div>
                 <div class="modal-body">
                 <input class="hidden" value="<?php echo $fetch['id'] ?>" name="id">
-                <p style="font-size: 15px;">Are you sure you want to remove this requirement?</p>
+                <p style="font-size: 15px;">Are you sure you want to remove this FAQ entry?</p>
                 </div>
                 <div class="modal-footer">
                     <hr class="default-divider ml-auto">

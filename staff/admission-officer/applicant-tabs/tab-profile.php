@@ -2,10 +2,11 @@
 
                                     <div role="tabpanel" class="tab-pane fade in active" id="profile">
                                         <div class="form-horizontal">
-                                        	<h2>APPLICATION TYPE</h2>
+                                            <br>
+                                        	<p class="table-subheader">Application Details</p>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                	<label for="Entry Status">Entry</label>
+                                                	<label for="Entry Status">Entry Type</label>
                                                     <div class="form-line">
                                                         <input type="text" class="form-control" id="name" name="name" placeholder="Entry" value="<?php
                                                         echo $fetch['entry'];?>" disabled="true">
@@ -35,7 +36,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
-                                                <label>Prefer</label>
+                                                <label>Refer Program</label>
                                                 <select name="unitID" class="form-control">
                                                     <option name="unitID" value="<?php echo $fetchCourse['id']?>">
                                                     <?php echo $fetch['course_name'] ?></option>
@@ -44,7 +45,7 @@
                                                 </select>
                                                 </div>
                                             </div>
-                                            <h2>PROFILE</h2>
+                                            <p class="table-subheader">Applicant Profile</p>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                 	<label>Name</label>

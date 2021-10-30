@@ -38,18 +38,19 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12">
-
+                    <!-- ## APPLICANT PROFILE PICTURE ## -->
+                    <?php include 'applicant-tabs/tab-applicant.php';?>
                 </div>
-                <div class="col-xs-12 col-sm-9">
+                <div class="col-xs-12 col-sm-9" style="padding: 0px;">
                     <div class="card">
                         <div class="body">
                             <div>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active"><a href="#profile" aria-controls="settings" role="tab" data-toggle="tab">Applicant Profile</a></li>
-                                    <li role="presentation"><a href="#parent" aria-controls="settings" role="tab" data-toggle="tab">Parent Information</a></li>
+                                    <li role="presentation"><a href="#parent" aria-controls="settings" role="tab" data-toggle="tab">Family Background</a></li>
                                     <li role="presentation"><a href="#education" aria-controls="settings" role="tab" data-toggle="tab">Educational Background</a></li>
-                                     <li role="presentation"><a href="#references" aria-controls="settings" role="tab" data-toggle="tab">References And Other Info</a></li>
-                                     <li role="presentation"><a href="#documents" aria-controls="settings" role="tab" data-toggle="tab">Documents</a></li>
+                                     <li role="presentation"><a href="#references" aria-controls="settings" role="tab" data-toggle="tab">Other Relevant Info</a></li>
+                                     <li role="presentation"><a href="#documents" aria-controls="settings" role="tab" data-toggle="tab">Submitted Documents</a></li>
                                 </ul>
 
 
@@ -68,8 +69,6 @@
                         </div><!-- ## BODY CLOSING TAG ['TAB GROUP'] ## -->
                     </div>
                 </div>
-                <!-- ## APPLICANT PROFILE PICTURE ## -->
-                <?php include 'applicant-tabs/tab-applicant.php';?>
             </div>
         </div>
         <?php include 'be/applicant-review/approveApplicationModal.php';?>

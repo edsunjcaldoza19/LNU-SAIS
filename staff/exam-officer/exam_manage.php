@@ -16,42 +16,28 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="block-header-text">MANAGE EXAMINATION MODULES</p>
-                            <button type="button" class="btn bg-green waves-effect" href="#" data-toggle="modal" data-target="#addExaminationModal">
-                                <i class="material-icons">add</i>
-                                <span style="font-family: 'Segoe UI', sans-serif; font-weight: 600;">ADD EXAM</span>
-                            </button>
+                        <p class="page-header">Manage Entrance Examination Modules</p>
+                        <p class="page-subheader">Configure modules for entrance examination</p>
                     </div>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                Examination Modules
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Examination Module</p>
+                            <button type="button" class="btn bg-green waves-effect" href="#" data-toggle="modal" data-target="#addExaminationModal">
+                                <i class="material-icons">add</i>
+                                <span style="font-family: 'Segoe UI', sans-serif; font-weight: 600;">New Examination Module</span>
+                            </button>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Exam Title</th>
+                                            <th>Module Name</th>
                                             <th>Time Limit (Mins)</th>
-                                            <th>Display Limit</th>
+                                            <th>Items</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
-                                            <th>Manage</th>
-                                            <th>Delete</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,9 +56,7 @@
                                             <td><?php echo $fetch['exam_start_date']; ?></td>
                                             <td><?php echo $fetch['exam_end_date']; ?></td>
                                             <td style="text-align: center;">
-                                                <a href="exam_configure.php?id=<?php echo $fetch['id']; ?>" class="btn bg-teal btn-circle waves-effect waves-circle waves-float"><i class="material-icons">settings</i></a>
-                                            </td>
-                                            <td style="text-align: center;">
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#edit<?php echo $fetch['id']?>" id="btnUpdate"><i class="material-icons">settings</i></button>
                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
                                             <?php

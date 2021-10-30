@@ -8299,6 +8299,15 @@ html.ie11 .bs-searchbox .form-control {
   color: #565656;
 }
 
+.label-blue{
+  width: 100px;
+  text-align: center;
+  padding: 5px;
+  background-color: #c1e3ed;
+  color: #4F77AA;
+  border-radius: 5px;
+}
+
 .label-red{
   width: 100px;
   text-align: center;

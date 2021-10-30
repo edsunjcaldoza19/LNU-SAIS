@@ -20,6 +20,9 @@
 			$form1_status = $fetch['form1_progress'];
 			$id = $fetch['applicant_account_id'];
 
+			//Determine if re-admission
+			$entry_type = $fetch['entry'];
+
 		}
 
 		if($form1_status == 'Done'){
@@ -106,7 +109,7 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1 || $entry_type !== 'Re-admission'){
 								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
@@ -143,7 +146,7 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1){
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1 || $entry_type !== 'Re-admission'){
 								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination

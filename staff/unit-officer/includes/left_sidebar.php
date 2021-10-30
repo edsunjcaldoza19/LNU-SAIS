@@ -33,12 +33,15 @@
                             <i class="material-icons">supervisor_account</i>
                             <span>Applicants</span>
                         </a>
-                         <ul class="ml-menu">
+                        <ul class="ml-menu">
                             <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
                                 <a href="applicant.php">Applicants Masterlist</a>
                             </li>
+                            <li class="<?= ($activePage == 'waitlist') ? 'active': ''; ?>">
+                                <a href="waitlist.php">Waitlisted Applicants</a>
+                            </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Pending Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -55,7 +58,7 @@
                                 </ul>
                             </li>
                             <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Approved Applications</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Approved Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -72,7 +75,7 @@
                                 </ul>
                             </li>
                             <li class="<?= ($activePage == 'applicant_rejected') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Rejected Applications</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Disapproved Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -91,22 +94,10 @@
                         </ul>
                     </li>
                     <li class="header">OTHER OPTIONS</li>
-                     <li>
+                    <li>
                         <a href="settings.php">
                             <i class="material-icons">settings</i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="changelog.php">
-                            <i class="material-icons">feedback</i>
-                            <span>Feedbacks</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="changelog.php">
-                            <i class="material-icons">update</i>
-                            <span>Changelogs</span>
+                            <span>Account Settings</span>
                         </a>
                     </li>
                 </ul>
@@ -115,7 +106,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="version">
-                    LNU SAIS| Version 1.0.0
+                    LNU SAIS | Version 1.0.0
                 </div>
                 <div class="copyright">
                     &copy; 2021 <a href="javascript:void(0);">Leyte Normal University</a>

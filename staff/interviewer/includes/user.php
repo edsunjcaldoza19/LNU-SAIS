@@ -9,7 +9,7 @@
                     $image = (!empty($fetch['staff_profile_img'])) ? '../../images/staff-img/'.$fetch['staff_profile_img'] : '../../images/staff-img/default.png';
                 ?>
                 <div class="image">
-                    <img src="<?php echo $image; ?>" style="border: 2px solid #0084FF;" width="50" height="50" alt="User" />
+                    <img src="<?php echo $image; ?>" width="50" height="50" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="email" style="font-size: 14px;">Hi, <?php echo $_SESSION['staff_email']; ?></div>

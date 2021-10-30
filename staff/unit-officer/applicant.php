@@ -10,38 +10,34 @@
         <?php
             include 'includes/left_sidebar.php';
             include 'includes/right_sidebar.php';
+
+            //Fetch academic year//
+
+            $sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
+            $sql1->execute();
+            $fetch1 = $sql1->fetch();
         ?>
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php include 'includes/breadcrumbs_applicant.php';?>
+                    <div class="block-header">
+                        <p class="page-header">Applicant Masterlist</p>
+                        <p class="page-subheader">View applicants' Information</p>
+                    </div>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                APPLICANTS
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Applicant Masterlist (A.Y. <?php echo $fetch1['ay_year']?>)
+                            </p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Course</th>
+                                            <th>Applicant Name</th>
+                                            <th>Preferred Program</th>
                                             <th>Department</th>
                                             <th>Entry</th>
                                         </tr>

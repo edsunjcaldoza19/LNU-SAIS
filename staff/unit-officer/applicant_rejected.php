@@ -10,39 +10,28 @@
         <?php
             include 'includes/left_sidebar.php';
             include 'includes/right_sidebar.php';
+
+            //Fetch academic year//
+
+            $id = $_GET['sy_id'];
+
+            $sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `id` = $id");
+            $sql1->execute();
+            $fetch1 = $sql1->fetch();
         ?>
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <?php include 'includes/breadcrumbs_applicant.php';?>
+                    <div class="block-header">
+                        <p class="page-header">Disapproved Applicants</p>
+                        <p class="page-subheader">Inspect disapproved applicants</p>
+                    </div>
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                <?php
-                                $sy_id = $_GET['sy_id'];
-                                require 'be/database/db_pdo.php';
-                                $sqlAY = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `id` = $sy_id");
-                                $sqlAY->execute();
-                                $fetchAY = $sqlAY->fetch();
-                                ?>
-                                APPLICANTS FOR A.Y. <?php echo $fetchAY['ay_year']; ?>
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <p class="table-subheader">Disapproved Applicants List (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                         </div>
-
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
@@ -70,7 +59,7 @@
                                             LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id=tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Approved'
                                             AND `interview_status`='Approved' AND `admission_status`='Rejected'
-                                            AND `school_year_id` = $sy_id");
+                                            AND `school_year_id` = $id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>

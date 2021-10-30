@@ -15,13 +15,6 @@
 
 	if(ISSET($_POST['submit'])){
 		try{
-			//pathinfo
-			$image=$_FILES['image']['name'];
-			$extension = pathinfo($image, PATHINFO_EXTENSION);
-			$random=rand(0,100000);
-			$rename = 'IMG_STAFF'.date('Ymd').$random;
-			$newname = $rename.'.'.$extension;
-			$target="../../../../images/staff-img/".$newname;
 
             $username = $_POST['username'];
             $title = $_POST['title'];
@@ -32,6 +25,9 @@
             $contact = $_POST['contact'];
 			$role = 4;
 			$courseID = $_POST['courseID'];
+			$unitID = $_POST['unitID'];
+
+			$image = generateAvatar(strtoupper($firstName[0].''.$lastName[0]), strtolower($firstName.'_'.$lastName));
 
 			$password = $username;
 			$password = password_hash($password, PASSWORD_DEFAULT);
@@ -41,38 +37,61 @@
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO `tbl_account_staff`(`staff_username`, `staff_password`,
             `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_contact`,
-            `staff_email`, `staff_role`, `staff_program`, `login_status`, `staff_profile_img`)
+            `staff_email`, `staff_role`, `staff_unit`, `staff_program`, `login_status`, `staff_profile_img`)
             VALUES ('$username','$password','$title','$firstName','$middleName',
-            '$lastName','$contact','$email', '$role', '$courseID', '$loginStatus', '$newname')";
-			$conn->exec($sql);
-			//Move to path
-			if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
-				$msg="Image uploaded successfully";
+            '$lastName','$contact','$email', '$role',  '$unitID', '$courseID', '$loginStatus', '$image')";
+
+			if($conn->exec($sql)){
+				echo '
+					<script>
+
+						$(document).ready(function(){
+
+							Swal.fire({
+								icon: "success",
+								title: "Account Successfully Added",
+			                    text: "LNU - Student Admission and Information System",
+			                    timer: 2000
+
+							}).then(function(){
+								window.location.replace("../../account_add.php");
+
+							});
+
+						});
+
+					</script>
+				';
 			}
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
 		$conn = null;
-		echo '
-		<script>
+	}
 
-			$(document).ready(function(){
+	function generateAvatar($character, $name){
 
-				Swal.fire({
-					icon: "success",
-					title: "Account Successfully Added",
-                    text: "LNU - Student Admission and Information System",
-                    timer: 3000
+		$rename = 'STAFF_PROFILE_'.$name;
+		$newname = $rename.'.png';
+		$path = "../../../../images/staff-img/".$newname;
 
-				}).then(function(){
-					window.location.replace("../../account_add.php");
+		$image = imagecreate(200, 200);
+		$red = rand(0, 255);
+		$green = rand(0, 255);
+		$blue = rand(0, 255);
 
-				});
+		imagecolorallocate($image, $red, $green, $blue);
 
-			});
+		$textcolor = imagecolorallocate($image, 255, 255, 255);
 
-		</script>
-	';
+		imagettftext($image, 80, 0, 35, 140, $textcolor, 'c:/windows/fonts/segoeui.ttf', $character);
+
+		imagepng($image, $path);
+		imagedestroy($image);
+
+		return $newname;
+
 	}
 ?>
 

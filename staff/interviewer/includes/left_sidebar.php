@@ -20,10 +20,10 @@
                         </a>
                          <ul class="ml-menu">
                             <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
-                                <a href="applicant.php">Applicants Masterlist</a>
+                                <a href="applicant.php">Applicants for Interview</a>
                             </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>
+                                <a href="javascript:void(0);" class="menu-toggle">Pending Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -39,8 +39,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Approved Applications</a>
+                            <li class="<?= ($activePage == 'applicant_qualified') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Qualified Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -49,15 +49,15 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_approved.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_qualified.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="<?= ($activePage == 'applicant_rejected') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Rejected Applications</a>
+                            <li class="<?= ($activePage == 'applicant_unqualified') ? 'active': ''; ?>">
+                                <a href="javascript:void(0);" class="menu-toggle">Unqualified Applicants</a>
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
@@ -66,7 +66,7 @@
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
                                         ?>
-                                        <a href="applicant_rejected.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
+                                        <a href="applicant_unqualified.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
                                         <?php
                                             }
                                         ?>
@@ -79,19 +79,7 @@
                      <li>
                         <a href="settings.php">
                             <i class="material-icons">settings</i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="changelog.php">
-                            <i class="material-icons">feedback</i>
-                            <span>Feedbacks</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="changelog.php">
-                            <i class="material-icons">update</i>
-                            <span>Changelogs</span>
+                            <span>Account Settings</span>
                         </a>
                     </li>
                 </ul>
@@ -100,7 +88,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="version">
-                    LNU SAIS| Version 1.0.0
+                    LNU SAIS | Version 1.0.0
                 </div>
                 <div class="copyright">
                     &copy; 2021 <a href="javascript:void(0);">Leyte Normal University</a>

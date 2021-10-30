@@ -28,7 +28,6 @@ if(isset($_SESSION['token'])){
 
 }else{
 
-
 	loggedOut();
 
 }
