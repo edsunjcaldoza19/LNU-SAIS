@@ -89,15 +89,15 @@ if(isset($_POST['btnRegister'])){
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = "tls";
         $mail->Port = "587";
-        $mail->Username = "1800638@lnu.edu.ph";
-        $mail->Password = "cyrbulsouiebisei";
+        $mail->Username = "mailersais@gmail.com";
+        $mail->Password = "lnusais2021";
         $mail->setFrom("lnu.admissionsoffice@lnu.edu.ph");
 
         //Initialize email body
 
         $mail->isHTML(true);
         $mail->From = "lnu.admissionsoffice@lnu.edu.ph";
-        $mail->FromName = "<no-reply@lnu-sais>";
+        $mail->FromName = "<no-reply@mailersais>";
         $mail->addAddress($email);
         $mail->addEmbeddedImage('../../assets/images/logo.png', 'lnu_logo');
         

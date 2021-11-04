@@ -40,7 +40,7 @@
                                         <!-- populate table with db data -->
                                         <?php
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_course.id FROM tbl_course
+                                            $sql = $conn->prepare("SELECT *, tbl_course.course_id FROM tbl_course
                                             LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
                                             LEFT JOIN tbl_department ON tbl_department.id=tbl_unit.unit_dept_id");
                                             $sql->execute();
@@ -53,8 +53,8 @@
                                             <td><?php echo $fetch['unit_name']?></td>
                                             <td><?php echo $fetch['dept_name']?></td>
                                             <td style="text-align: center; width: 100px;">
-                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
-                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['course_id']?>"><i class="material-icons">edit</i></button>
+                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['course_id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
                                             </td>
                                         </tr>
                                         <?php

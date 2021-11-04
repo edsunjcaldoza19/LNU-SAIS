@@ -15,15 +15,8 @@
             WHERE `exam_applicant_id`=$id";
 			$conn->exec($sql);
 
-			//score conditions for entrance examination
-			if($exam_score >= 75){
-				$exam_remark = "Qualified"
-			}else{
-				$exam_remark = "Unqualified"
-			}
-
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql1 = "UPDATE `tbl_applicant` SET `exam_status`= '$exam_remark', `es_timestamp` = '$timestamp'
+			$sql1 = "UPDATE `tbl_applicant` SET `exam_status`= 'Scored', `es_timestamp` = '$timestamp'
             WHERE `applicant_account_id`=$id";
 			$conn->exec($sql1);
 		}catch(PDOException $e){

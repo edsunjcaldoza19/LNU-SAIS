@@ -35,7 +35,7 @@
                     </li>
                     <li class="<?= ($activePage == 'faqs') ? 'active': ''; ?>">
                         <a href="faqs.php">
-                            <i class="material-icons">question</i>
+                            <i class="material-icons">question_answer</i>
                             <span>Frequently Asked Questions</span>
                         </a>
                     </li>
@@ -43,7 +43,7 @@
                     <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
-                            <span>Applicants</span>
+                            <span>Applicant Evaluation</span>
                         </a>
                          <ul class="ml-menu">
                             <li class="<?= ($activePage == 'pending_accounts') ? 'active': ''; ?>">
@@ -103,30 +103,24 @@
                         </ul>
                     </li>
                     <li class="<?= ($activePage == 'applicant_monitoring') ? 'active': ''; ?>">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">supervisor_account</i>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <a href="applicant_monitoring.php?id=<?php echo $fetch['id'];?>">
+                            <i class="material-icons">person_outline</i>
                             <span>Applicant Monitoring</span>
                         </a>
-                         <ul class="ml-menu">
-                            <li>
-                            <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
-                                        $sql->execute();
-                                        while($fetch = $sql->fetch()){
-                                        ?>
-                                        <a href="applicant_monitoring.php?id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
-                                        <?php
-                                            }
-                                        ?>
-                            </li>
-
-                        </ul>
+                        <?php
+                            }
+                        ?>
                     </li>
                     <li class="<?= ($activePage == 'qualified') ? 'active': ''; ?>">
                         <a href="qualified.php">
                             <i class="material-icons">check_circle</i>
-                            <span>Qualified for Admission</span>
+                            <span>Admission Qualifiers</span>
                         </a>
                     </li>
                     <li class="header">OTHER OPTIONS</li>

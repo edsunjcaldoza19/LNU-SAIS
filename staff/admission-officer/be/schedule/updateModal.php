@@ -10,8 +10,8 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" value="<?php echo $fetch['id']; ?>">
                     <div class="form-group form-float">
-                        <div class="form-line">
-                            <input type="text" value="<?php echo $fetch['schedule_date']; ?>" class="datepicker form-control" name="date" required autofocus>
+                        <div class="form-line focused">
+                            <input type="date" value="<?php echo $fetch['schedule_date']; ?>" class="datepicker form-control" name="date" required autofocus>
                             <label class="form-label">Schedule Date</label>
                         </div>
                     </div>

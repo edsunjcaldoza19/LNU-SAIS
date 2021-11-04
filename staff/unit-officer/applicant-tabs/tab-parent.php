@@ -1,7 +1,8 @@
 <!--- ## START PARENT INFORMATION --->
                                     <div role="tabpanel" class="tab-pane fade in" id="parent">
                                         <div class="form-horizontal">
-                                            <h3>FATHER'S INFORMATION</h3>
+                                            <br>
+                                            <p class="table-subheader">Father's Information</p>
                                              <div class="form-group">
                                                 <div class="col-sm-6">
                                                 	<label>Name</label>
@@ -41,7 +42,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h3>MOTHER'S INFORMATION</h3>
+                                            <p class="table-subheader">Mother's Information</p>
                                              <div class="form-group">
                                                 <div class="col-sm-6">
                                                 	<label>Name</label>
@@ -81,7 +82,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h3>GUARDIAN'S INFORMATION</h3>
+                                            <p class="table-subheader">Guardian's Information</p>
                                              <div class="form-group">
                                                 <div class="col-sm-6">
                                                 	<label>Name</label>

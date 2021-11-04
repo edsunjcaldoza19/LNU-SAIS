@@ -83,7 +83,7 @@
                                                     $sqlCourse->execute();
                                                         while($fetchCourse = $sqlCourse->fetch()){
                                                 ?>
-                                                    <option name="courseID" value="<?php echo $fetchCourse['id']?>">
+                                                    <option name="courseID" value="<?php echo $fetchCourse['course_id']?>">
                                                     <?php echo $fetchCourse['course_name'] ?></option>
                                                 <?php
                                                     }

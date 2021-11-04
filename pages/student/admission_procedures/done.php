@@ -11,13 +11,68 @@
     	$sql->execute();
     	$application = $sql->fetch();
 
-    	if($application['interview_progress'] == 'Done'){
+    	if($application == ''){
+
+    		$application['first_name'] = '--';
+    		$application['middle_name'] = '--';
+    		$application['last_name'] = '--';
+    		$application['entry'] = 'N/A';
+    		$application['form_status'] = 'Pending';
+    		$application['fs_timestamp'] = 'N/A';
+			$application['exam_status'] = 'Pending';
+    		$application['es_timestamp'] = 'N/A';
+			$application['interview_status'] = 'Pending';
+    		$application['is_timestamp'] = 'N/A';
+			$application['admission_status'] = 'Pending';
+    		$application['as_timestamp'] = 'N/A';
+
+    	}else{
+
+    		if($application['form_status'] == ''){
+    			$application['form_status'] = 'Pending';
+    			$application['fs_timestamp'] = 'N/A';
+    		}
+    		if($application['exam_status'] == ''){
+    			$application['exam_status'] = 'Pending';
+    			$application['es_timestamp'] = 'N/A';
+    		}
+    		if($application['interview_status'] == ''){
+    			$application['interview_status'] = 'Pending';
+    			$application['is_timestamp'] = 'N/A';
+    		}
+    		if($application['admission_status'] == ''){
+    			$application['admission_status'] = 'Pending';
+    			$application['as_timestamp'] = 'N/A';
+    		}
+
+    	}
+
+    	if($application['form_status'] == 'Pending'){
+
+    		$application['as_timestamp'] = 'N/A';
+
+    	}
+
+		if($application['exam_status'] == 'Pending'){
+
+    		$application['es_timestamp'] = 'N/A';
+
+    	}
+
+		if($application['interview_status'] == 'Pending'){
+
+    		$application['is_timestamp'] = 'N/A';
+
+    	}
+
+    	if($application['interview_progress'] == 'Not Started'){
 
     		echo '
 
 			<script>
 
-				window.location.replace("../admission_procedures/done.php");
+				alert("[MESSAGE]: Finish the previous step first!");
+				window.location.replace("interview.php");
 
 			</script>
 
@@ -29,12 +84,23 @@
 		echo 'Error: '.$e->getMessage();
 	}
 
+	try{
+
+		$id = $fetch['id'];
+
+		$sql = $conn->prepare("SELECT * FROM tbl_inquiry WHERE `inquiry_applicant_id` = '$id'");
+    	$sql->execute();
+
+	}catch(exception $e){
+		echo 'Error: '.$e->getMessage();
+	}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LNU SAIS | My Status</title>
+	<title>LNU SAIS | Admission Done</title>
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,9 +108,6 @@
 		<!-- Imports third-party CSS libraries -->
 
 		<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../../assets/libs/datatables/dataTables.bootstrap4.min.css">
-		<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap-select/dist/css/bootstrap-select.css">
-    	<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
 		<link rel="stylesheet" type="text/css" href="../../assets/libs/font-awesome/css/all.css">
 
 		<!-- Imports default styling -->
@@ -55,85 +118,122 @@
   		<link rel="icon" href="../../assets/images/lnu.ico" type="image/x-icon"/>
 
 </head>
-<body id="body">
+<body>
 
-	<nav class="navbar navbar-expand-sm student-navbar-secondary" style="z-index: 3">
-		<div class="student-navbar-logo-container secondary">
-			<a class="navbar-brand" href="#">
-				<img src="../../assets/images/navbar_logo_mobile.png" class="secondary-logo">
-			</a>
-		</div>
-		<div class="student-navbar-hamburger-container">
-			<a href="#" id="sidebar-toggle">
-				<img src="../../assets/images/navbar_burger_icon.png" class="burger-icon">
-			</a>
-		</div>
-	</nav>
-
-	<div class="container-fluid">
-
+	<div class="container-fluid login">
 		<div class="row">
-			<div class="col-md-2" style="padding: 0px;">
-				<aside id="sidebar" class="sidebar">
-					<div class="student-sidebar-container">
-						<div class="student-sidebar-logo-container">
-							<img src="../../assets/images/sidebar-logo.png" class="sidebar-logo">
-						</div>
-						<div class="sidebar-navigation">
-							<div class="sidebar-item">
-								<i class="fa fa-arrow-circle-left sidebar-navigation-icon" style="color: #C2C2C2;"></i> <a href="../admission_procedures/start.php"
-								class="sidebar-link" style="color: #C2C2C2;">Return</a>
+			<div class="col-md-4"></div>
+			<div class="col-md-4 login">
+				<div class="container-fluid" style="width: 100%; padding: 35px;">
+					<img src="../../assets/images/navbar_logo_main_alt.png" style="width: 50%; position: absolute; left: 50%; margin-left: -25%;">
+				</div>
+				<div class="default-container">
+					<div class="tab-content">
+						<div class="tab-pane active" style="transition: 0.5s;" role="tabpanel" id="main">
+							<div class="default-header" style="height: 60px;">
+								<img src="../../assets/images/done_icon.png" style="width: 15%; position: absolute;	left: 50%; margin-left: -7.5%;">
 							</div>
-							<hr class="default-divider ml-auto" style="margin: 10px;">
-							<p class="sidebar-header">NAVIGATE</p>
-							<div class="sidebar-item">
-								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="my_status.php" class="sidebar-link">My Status</a>
+							<div class="login-form-header">
+								<p class="login-form-header-text" style="text-align: center; line-height: normal;">Thank you for taking the university admission!</p>
+								<p class="login-form-header-subtext" style="text-align: center; font-size: 14px;">Your application is currently being assessed by the concerned offices. Please wait for further updates on your email address.</p>
 							</div>
-							<hr class="default-divider ml-auto" style="margin: 10px;">
-							<div class="sidebar-item">
-								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="javascript:void(0)" class="sidebar-link active">Send Inquiry</a>
-							</div>
-						</div>
-					</div>
-				</aside>
-				<aside id="sidebar-hidden" class="sidebar-hidden">
-					<div class="student-sidebar-container-hidden">
-						<div class="sidebar-navigation">
-							<div class="sidebar-item">
-								<i class="fa fa-arrow-circle-left sidebar-navigation-icon" style="color: #C2C2C2;"></i> <a href="../admission_procedures/start.php"
-								class="sidebar-link" style="color: #C2C2C2;">Return</a>
-							</div>
-							<hr class="default-divider ml-auto" style="margin: 10px;">
-							<p class="sidebar-header">NAVIGATE</p>
-							<div class="sidebar-item">
-								<i class="far fa-user-circle sidebar-navigation-icon"></i> <a href="my_status.php" class="sidebar-link">My Status</a>
-							</div>
-							<hr class="default-divider ml-auto" style="margin: 10px;">
-							<div class="sidebar-item">
-								<i class="far fa-comments sidebar-navigation-icon"></i> <a href="javascript:void(0)" class="sidebar-link active">Send Inquiry</a>
+							<hr class="default-divider ml-auto" style="margin: 0px;">
+							<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px;">
+								<div class="sidebar-item ml-auto mr-auto">
+									<i class="far fa-user-circle sidebar-navigation-icon"></i><a href="#test" class="sidebar-link" role="tab" data-toggle="tab" aria-controls="test" aria-selected="true">Check Admission Status</a>
+								</div>
+								<hr class="default-divider ml-auto" style="margin: 0px;">
+								<div class="sidebar-item ml-auto mr-auto">
+									<i class="far fa-comments sidebar-navigation-icon"></i><a href="#try" class="sidebar-link" role="tab" data-toggle="tab">Send Inquiry</a>
+								</div>
+								<hr class="default-divider ml-auto" style="margin: 0px;">
+								<div class="sidebar-item ml-auto mr-auto">
+									<a class="default-form-link-text" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+								</div>
 							</div>
 						</div>
-					</div>
-				</aside>
-			</div>
-			<div class="col-md-10">
-				<div class="student-page-container">
-					<div class="student-account-container">
-						<p id="datetime" class="default-datetime">0:00</p>
-						<div class="student-account-details">
-							<p class="student-account-details-item name"><b>Hi, <?php echo $email ?></b></p>
-							<a class="student-account-details-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="test">
+							<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px; margin-bottom: 5px;">
+								ADMISSION STATUS MONITORING
+							</p>
+							<hr class="default-divider ml-auto" style="margin: 5px;">
+							<p class="default-interface-subheader">
+								Application Form Status
+							</p>
+							<p class="default-interface-text">
+								<?php
+									if($application['form_status'] == 'Approved'){
+										echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+									}else if($application['form_status'] == 'Pending'){
+										echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
+									}else{
+										echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
+									}
+								?>
+								<?php echo $application['form_status'] ?> (<?php echo $application['fs_timestamp'] ?>)
+							</p>
+							<p style="margin-left: 22px; <?php if($application['form_status'] == 'Disapproved'){echo 'display:block';}else{echo 'display:none';} ?>">
+								<i>Remarks: <?php echo $application['remarks'];?></i>
+							</p>
+							<hr class="default-divider ml-auto" style="margin: 10px;">
+							<div style="<?php if($application['entry'] !== 'Re-admission'){echo 'display:block';}else{echo 'display:none';}?>">
+								<p class="default-interface-subheader">
+									Entrance Examination Status
+								</p>
+								<p class="default-interface-text">
+									<?php
+										if($application['exam_status'] == 'Qualified'){
+											echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+										}else if($application['exam_status'] == 'Pending'){
+											echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
+										}else{
+											echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
+										}
+									?>
+									<?php echo $application['exam_status'] ?> (<?php echo $application['es_timestamp'] ?>)
+									</p>
+							<hr class="default-divider ml-auto" style="margin: 10px;">
+							</div>
+							<p class="default-interface-subheader">
+								Interview Status
+							</p>
+							<p class="default-interface-text">
+								<?php
+									if($application['interview_status'] == 'Qualified'){
+										echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+									}else if($application['interview_status'] == 'Pending'){
+										echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
+									}else{
+										echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
+									}
+								?>
+								<?php echo $application['interview_status'] ?> (<?php echo $application['is_timestamp'] ?>)
+							</p>
+							<hr class="default-divider ml-auto" style="margin: 10px;">
+							<p class="default-interface-subheader">
+								Admission Status
+							</p>
+							<p class="default-interface-text">
+								<?php
+									if($application['admission_status'] == 'Qualified'){
+										echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+									}else if($application['admission_status'] == 'Pending'){
+										echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
+									}else{
+										echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
+									}
+								?>
+								<?php echo $application['admission_status'] ?> (<?php echo $application['as_timestamp'] ?>)
+									</p>
+							<hr class="default-divider ml-auto" style="margin: 0px;">
+							<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px">
+								<div class="sidebar-item ml-auto mr-auto">
+									<i class="fa fa-arrow-left sidebar-navigation-icon"></i><a href="#main" class="sidebar-link" role="tab" data-toggle="tab">Return</a>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="student-page-default" id="student-page-default">
-						<p class="exam-placeholder-header" style="font-size: 30px; margin: 0px;">
-							Send Inquiry
-						</p>
-						<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px; margin-bottom: 5px;">
-							Send inquiries, issues encountered and other related concerns.
-						</p>
-						<hr class="default-divider ml-auto" style="margin: 10px;">
-						<button class="default-button feedback-button" data-toggle="modal" data-target="#addMessageModal">New Inquiry Ticket</button>
+						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="try">
+							<button class="default-button feedback-button" data-toggle="modal" data-target="#addMessageModal">New Inquiry Ticket</button>
 						<hr class="default-divider ml-auto" style="margin: 10px;">
 						<div class="feedback-table-container" id="feedback-table-container" style="overflow-y: auto;">
 							<table class="table table-striped feedback-table" id="dataTable">
@@ -141,7 +241,6 @@
                                     <tr>
                                     	<th>Inquiry Subject</th>
                                     	<th>Status</th>
-                                    	<th>Sent On</th>
                                     	<th>Action</th>
                                     </tr>
                                 </thead>
@@ -160,7 +259,6 @@
                                                 }
                                             ?>
                                     	</td>
-                                    	<td><?php echo $feedback['inquiry_sent_timestamp']?></td>
                                     	<td>
                                     		<a data-toggle="modal" data-target="#openMessageModal<?php echo $feedback['id']?>"><i class="fa fa-eye" style="color: #7AA0CB; margin: 2px;"></i></a>
 											<div class="modal fade" id="openMessageModal<?php echo $feedback['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -188,7 +286,6 @@
 										       								<hr class="default-divider ml-auto" style="margin: 10px;">
 										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["inquiry_reply_timestamp"].'</p>
 										       							';
-
 										       						}else{
 										       							echo 'No replies yet';
 										       						}
@@ -221,18 +318,26 @@
                                     	</td>
                                     </tr>
                                     <?php
-
                                         }
-
                                     ?>
                                 </tbody>
                             </table>
 						</div>
+						<hr class="default-divider ml-auto" style="margin: 0px;">
+						<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px">
+							<div class="sidebar-item ml-auto mr-auto">
+								<i class="fa fa-arrow-left sidebar-navigation-icon"></i><a href="#main" class="sidebar-link" role="tab" data-toggle="tab">Return</a>
+							</div>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-4"></div>
 		</div>
 	</div>
+
+	<!-- Inquiry Modal -->
 
 	<div class="modal fade" id="addMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog" role="document">
@@ -246,15 +351,17 @@
        			</div>
        			<div class="modal-body" style="overflow-y: auto; height: auto;">
        				<p class="student-page-label">Inquiry Category *</p>
-					<div class="form-group form-float">
-					    <select class="form-control show-tick" name="cbFeedbackCategory" id="cbFeedbackCategory" required>
-                            <option value="" disabled selected>Choose Feedback Category</option>
-                            <option value="General Inquiry">General Inquiry</option>
-                            <option value="Follow-up">Follow-up*</option>
-                            <option value="Others">Others (specify your concern on the subject line)</option>
-                        </select>
-                        <p id="followUpNote" style="margin-top: 10px; font-size: 12px; display: none;"><i>*Note: For follow-up tickets, kindly type "RE: (your original ticket subject)" as your feedback subject.</i></p>
-		            </div>
+       				<div class="form-group form-float">
+						<div class="form-line">
+							<select class="form-control" style="margin-top: 10px;" name="cbFeedbackCategory" id="cbFeedbackCategory" required>
+							    <option value="" disabled selected>Choose Feedback Category</option>
+                            	<option value="General Inquiry">General Inquiry</option>
+                            	<option value="Follow-up">Follow-up*</option>
+                            	<option value="Others">Others (specify your concern on the subject line)</option>
+				            </select>
+						</div>
+						<p id="followUpNote" style="margin-top: 10px; font-size: 12px; display: none;"><i>*Note: For follow-up tickets, kindly type "RE: (your original ticket subject)" as your feedback subject.</i></p>
+				    </div>
                     <div class="form-group form-float">
                     	<p class="student-page-label">Inquiry Subject *</p>
                         <div class="form-line" style="margin-bottom: 20px;">
@@ -280,6 +387,8 @@
   		</div>
   	</div>
 
+	<!-- Logout Modal -->
+
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     	<div class="modal-dialog" role="document">
       		<div class="modal-content">
@@ -299,93 +408,29 @@
   		</div>
   	</div>
 
-	<footer class="footer-subfooter" style="bottom: 0;">
-		<p class="subfooter-text">
-			All Rights Reserved - Leyte Normal University | Maintained by MIS Office
-		</p>
-	</footer>
-
 	<script src="../../assets/libs/jquery/jquery.min.js"></script>
 	<script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../assets/libs/datatables/jquery.dataTables.min.js"></script>
-	<script src="../../assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
-	<script src="../../assets/libs/bootstrap-select/dist/js/bootstrap-select.js"></script>
-	<script src="../../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
     <script src="../../assets/libs/node-waves/waves.js"></script>
+
+    <!-- Custom Js -->
     <script src="../../assets/js/template/admin.js"></script>
+
+    <!-- Demo Js -->
     <script src="../../assets/js/template/demo.js"></script>
 
-	<!-- Additional JS codes -->
-
-	<script>
-
-		var toggleClicks = 0;
-
-		$(document).ready(function () {
-        	showDateTime();
-        	$('table').DataTable({
-                "pageLength": 5,
-                "bLengthChange": false,
-                "scrollY": '38vh'
-            });
+    <script>
+    	$('.sidebar-item a').on('click', function(e){
+    		e.preventDefault();
+    		$(this).tab('show');
+    		var theThis = $(this);
+    		$('.sidebar-item a').removeClass('active');
+    		theThis.addClass('active');
     	});
 
-		$('#sidebar-toggle').click(function () {
-
-			toggleClicks++;
-
-			if(toggleClicks %2 == 0){
-				closeSidebar();
-			}else{
-				openSidebar();
-			}
-
-    	});
-
-		$(function(){
-			$('#feedback-table-container').slimScroll({
-				height: '350px'
-			});
-			$('#student-page-default').slimScroll({
-				height: '550px'
-			});
-		});
-
-
-		function openSidebar(){
-
-			document.getElementById("sidebar-hidden").style.width = "300px";
-			document.getElementById("body").style.overflowY = "hidden";
-
-		}
-
-		function closeSidebar(){
-
-			document.getElementById("sidebar-hidden").style.width = "0px";
-			document.getElementById("body").style.overflowY = "auto";
-
-		}
-
-		function showDateTime(){
-
-  			var dt = new Date();
-
-  			document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-2)) + "/" + (("0"+dt.getDate()).slice(-2)) + "/" + (dt.getFullYear()) + " | " + (("0" + dt.getHours()).slice(-2)) + ":" + (("0" + dt.getMinutes()).slice(-2)) + ":" + (("0" + dt.getSeconds()).slice(-2));
-
-  			setTimeout("showDateTime()", 1000);
-
-  		}
-
-  		var previewImage = function(event){
-            var output = document.getElementById("preview");
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function(){
-                URL.revokeObjectURL(output.src)
-            }
-        }
-
-        $("#cbFeedbackCategory").change(function(){
+    	$("#cbFeedbackCategory").change(function(){
             if($(this).val() == "Others"){
                 $("#followUpNote").hide();
             }
@@ -396,9 +441,7 @@
                 $("#followUpNote").show();
             }
         });
-
-
-	</script>
+    </script>
 
 </body>
 </html>

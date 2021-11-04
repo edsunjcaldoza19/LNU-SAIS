@@ -25,8 +25,8 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="page-header">Disapproved Admission Applications</p>
-                        <p class="page-subheader">Inspect disapproved applications</p>
+                        <p class="page-header">Disapproved Student Applications</p>
+                        <p class="page-subheader">Check disapproved student applications</p>
                     </div>
                     <div class="card">
                         <div class="header">
@@ -38,8 +38,9 @@
                                     <thead>
                                         <tr>
                                             <th>Applicant Name</th>
-                                            <th>Preferred Program</th>
                                             <th>Entry Type</th>
+                                            <th>First Choice</th>
+                                            <th>Second Choice</th>
                                             <th>Application Form Status</th>
                                             <th>Remarks</th>
                                         </tr>
@@ -52,33 +53,34 @@
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            WHERE `form_status`='Rejected' AND `school_year_id` = $sy_id");
+                                            WHERE `form_status`='Disapproved' AND `school_year_id` = $sy_id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo $fetch['last_name'];
-                                                    echo ', ';
-                                                    echo $fetch['middle_name'];
-                                                    echo ' ';
-                                                    echo $fetch['first_name'];
-                                                ?></td>
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
+                                                    echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
+                                                ?>
+                                            </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';
+                                                ?>  
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch2['course_name'].' ('.$fetch2['course_acronym'].')';
+                                                ?>    
+                                            </td>
                                             <td align="center">
                                                 <?php
                                                     if($fetch['form_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
                                                     }else if($fetch['form_status'] == "Approved"){
                                                         echo '<p class="label-green">Approved</p>';
-                                                    }else if($fetch['form_status'] == "Rejected"){
+                                                    }else if($fetch['form_status'] == "Disapproved"){
                                                         echo '<p class="label-red">Disapproved</p>';
                                                     }
                                                 ?>

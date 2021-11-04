@@ -148,7 +148,7 @@
 													<p class="course-header"><?php echo $fetchDept['dept_name']?></p>
 													<hr class="default-divider ml-0" style="margin: 5px;">
 													<?php
-														$sqlCourse = $conn->prepare("SELECT *, tbl_course.id FROM tbl_course
+														$sqlCourse = $conn->prepare("SELECT *, tbl_course.course_id FROM tbl_course
 														LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id WHERE `unit_dept_id` = $dept_id");
 														$sqlCourse->execute();
 														while($fetchCourse = $sqlCourse->fetch()){

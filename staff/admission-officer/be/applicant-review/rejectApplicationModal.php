@@ -17,7 +17,7 @@
                             ?>  
                         </b>
                         's application ?</p>
-                        <p><i>If yes, please specify the reason for disapproving this application:</i></p>
+                        <p><i>If yes, please specify the reason for the disapproval of this application:</i></p>
                         <div class="form-line">
                             <textarea name="reasonReject" cols="30" rows="5" class="form-control no-resize" placeholder="Reason for rejection" required></textarea>
                         </div>

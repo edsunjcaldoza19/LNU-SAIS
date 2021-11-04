@@ -50,7 +50,7 @@
                                         <div class="form-group form-float" id="unit">
                                             <div class="form-line">
                                                 <select name="unitID" id="unitID" class="form-control" required>
-                                                    <option disabled selected>Program (for Unit Heads only)*</option>
+                                                    <option disabled selected>Academic Unit (for Unit Heads only)*</option>
                                                     <?php
                                                         require 'be/database/db_pdo.php';
                                                         $sqlCourse = $conn->prepare("SELECT * FROM `tbl_unit`");

@@ -24,8 +24,8 @@
     </div>
     <div>
         <div class="body">
-            <button type="submit" data-toggle="modal" data-target="#approve<?php echo $fetch['id']?>" class="btn btn-block btn-lg btn-success waves-effect"><i class="material-icons">check</i>APPROVE</button>
-            <button type="submit" data-toggle="modal" data-target="#reject<?php echo $fetch['id']?>"class="btn btn-block btn-lg bg-red waves-effect"><i class="material-icons">close</i>DISAPPROVE</button>
+            <button type="submit" data-toggle="modal" data-target="#approve<?php echo $fetch['id']?>" class="btn btn-block btn-lg bg-green waves-effect" ><i class="material-icons" style="font-size: 15px;">check</i> APPROVE</button>
+            <button type="submit" data-toggle="modal" data-target="#reject<?php echo $fetch['id']?>"class="btn btn-block btn-lg bg-red waves-effect"><i class="material-icons" style="font-size: 15px;">close</i> DISAPPROVE</button>
         </div>
     </div>
 </div>

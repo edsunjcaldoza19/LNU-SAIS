@@ -5,14 +5,14 @@
             <?php
                 $syID = $_GET['sy_id'];
             ?>
-            <form action = "be/applicant-review/approveApplication.php?syID=<?php echo $syID ?>" method="POST">
+            <form action = "be/waitlist/approveApplication.php?syID=<?php echo $syID ?>" method="POST">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Approve Application</h4>
                     <hr class="default-divider ml-auto">
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="applicantID" id="applicantID" value="<?php echo $fetch['id'] ?>">
-                    <input type="hidden" name="courseID" id="courseID" value="<?php echo $fetchCourse['course_id'] ?>"
+                    <input type="hidden" name="courseID" id="courseID" value="<?php echo $fetch['course_id'] ?>"
                     >
                     <input type="hidden" name="firstChoice" id="firstChoice" value="<?php echo $fetch['program_first_choice'] ?>"
                     >
@@ -23,7 +23,7 @@
                     <?php 
                         echo $fetch['first_name'].' '.$fetch['middle_name'].' '.$fetch['last_name'];
                     ?></b>'s 
-                application for the program <b><?php echo $fetchCourse['course_name']?></b>?</p>
+                application for the program <b><?php echo $fetch['course_name']?></b>?</p>
                 </div>
                 <div class="modal-footer">
                     <hr class="default-divider ml-auto">

@@ -13,9 +13,32 @@
 
             //Fetch academic year//
 
-            $sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
+            $id = $_GET['course_id'];
+            $sy_id = $_GET['sy_id'];
+
+            $sql1 = $conn->prepare("SELECT * from `tbl_course` WHERE `course_id` = $id");
             $sql1->execute();
             $fetch1 = $sql1->fetch();
+
+            $sql2 = $conn->prepare("SELECT * from `tbl_unit` WHERE `id` = ".$unitId."");
+            $sql2->execute();
+            $fetch2 = $sql2->fetch();
+
+            $sql3 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `id` = '$sy_id'");
+            $sql3->execute();
+            $fetch3 = $sql3->fetch();
+
+            $course = $fetch1['course_id'];
+
+            require 'be/database/db_pdo.php';
+            $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
+            LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
+            LEFT JOIN tbl_course ON (tbl_course.course_id=tbl_applicant.program_first_choice OR tbl_course.course_id=tbl_applicant.program_second_choice)
+            WHERE `school_year_id` = $sy_id AND `unit_id` = $unitId
+            AND ((`approved_first_choice` = 3 AND `program_first_choice` = $course) OR (`approved_second_choice` = 3 AND `program_second_choice` = $course))
+            ");
+            $sql->execute();
+            $count = $sql->rowCount();
         ?>
     </section>
     <section class="content">
@@ -24,12 +47,12 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
                         <p class="page-header">Waitlist</p>
-                        <p class="page-subheader">View waitlisted applicants' Information</p>
+                        <p class="page-subheader">Check and manage waitlisted applicants</p>
                     </div>
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Waitlisted Applicants (A.Y. <?php echo $fetch1['ay_year']?>)
-                            </p>
+                            <p class="table-subheader">Waitlisted Applicants List (<?php echo $fetch1['course_name']?>)</p>
+                            <small>A.Y. <?php echo $fetch3['ay_year'];?> <b>(Quota: <?php echo $count;?>/<?php echo $fetch1['waitlist_quota'];?>)</b></small>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -37,44 +60,53 @@
                                     <thead>
                                         <tr>
                                             <th>Applicant Name</th>
-                                            <th>Preferred Program</th>
-                                            <th>Department</th>
-                                            <th>Entry</th>
+                                            <th>Entry Type</th>
+                                            <th>Program Preference</th>
+                                            <th>Unit Approval Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
-                                            require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
-                                            LEFT JOIN tbl_department ON tbl_department.id=tbl_unit.unit_dept_id");
-                                            $sql->execute();
 
                                             while($fetch = $sql->fetch()){
+
                                         ?>
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo $fetch['last_name'];
-                                                    echo ', ';
-                                                    echo $fetch['middle_name'];
-                                                    echo ' ';
-                                                    echo $fetch['first_name'];
-                                                ?></td>
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
-                                            <td><?php
-                                                    echo $fetch['dept_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['dept_acronym'];
-                                            ?></td>
+                                                    echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
+                                                ?>   
+                                            </td>
                                             <td><?php echo $fetch['entry']; ?></td>
-                                            <?php
+                                            <td>
+                                                <?php
+                                                    if($fetch['course_id'] == $fetch['program_first_choice']){
+                                                        echo 'First Choice';
+                                                    }else if($fetch['course_id'] == $fetch['program_second_choice']){
+                                                        echo 'Second Choice';
+                                                    }
+                                                ?>    
+                                            </td>
+                                            <td align="center">
+                                                <?php
+                                                    if(($fetch['approved_first_choice'] == 0 && $fetch['program_first_choice'] == $course) || ($fetch['approved_second_choice'] == 0 && $fetch['program_second_choice'] == $course)){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if(($fetch['approved_first_choice'] == 1 && $fetch['program_first_choice'] == $course) || ($fetch['approved_second_choice'] == 1 && $fetch['program_second_choice'] == $course)){
+                                                        echo '<p class="label-green">Approved</p>';
+                                                    }else if(($fetch['approved_first_choice'] == 2 && $fetch['program_first_choice'] == $course) || ($fetch['approved_second_choice'] == 2 && $fetch['program_second_choice'] == $course)){
+                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }else if(($fetch['approved_first_choice'] == 3 && $fetch['program_first_choice'] == $course) || ($fetch['approved_second_choice'] == 3 && $fetch['program_second_choice'] == $course)){
+                                                        echo '<p class="label-orange">Waitlisted</p>';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#approve<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
+                                            </td>
+                                        <?php
+                                            include 'be/waitlist/approveApplicationModal.php';
                                             }
                                         ?>
                                         </tr>
@@ -86,66 +118,13 @@
                 </div>
             </div>
             <!-- #END# Exportable Table -->
-             <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action = "../../be/course/add.php" method="POST" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Course Information</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="name" placeholder="Course Name" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="acronym" placeholder="Acronym" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                <select class="form-control" style="margin-top: 10px;" name="deptId" id="deptId">
-                                    <option selected="true" disabled="true">Department</option>
-                                    <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_department`");
-                                        $sql->execute();
-
-                                        while($fetch = $sql->fetch()){
-                                    ?>
-                                    <option name="deptId" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['dept_name'] ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
-    <?php include 'includes/logout_modal.php';?>
-    <?php include 'includes/scripts.php';?>
+    <!-- Logout Modal -->
+    <?php
+        include 'includes/logout_modal.php';
+        include 'includes/scripts.php';
+    ?>
 </body>
 
 </html>

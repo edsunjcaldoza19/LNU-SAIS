@@ -17,6 +17,7 @@ if(isset($_SESSION['token'])){
 
 		$username = $fetch['staff_username'];
 		$courseID = $fetch['staff_program'];
+		$unitId = $fetch['staff_unit'];
 	
 	}else{
 

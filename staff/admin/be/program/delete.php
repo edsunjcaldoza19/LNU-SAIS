@@ -6,7 +6,7 @@
 		try{
 			$id = $_POST['id'];
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "DELETE FROM tbl_course WHERE `id` = '$id'";
+			$sql = "DELETE FROM tbl_course WHERE `course_id` = '$id'";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();

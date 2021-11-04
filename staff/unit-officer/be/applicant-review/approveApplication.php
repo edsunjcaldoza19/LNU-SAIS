@@ -6,11 +6,21 @@
 	if(ISSET($_POST['approve'])){
 		try{
 			$id = $_POST['applicantID'];
+			$courseId = $_POST['courseID'];
+			$firstChoice = $_POST['firstChoice'];
+			$secondChoice = $_POST['secondChoice'];
 			$timestamp = date('F j, Y, g:i:s A');
 
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE `tbl_applicant` SET `admission_status` = 'Approved', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
-			$conn->exec($sql);
+			if($courseId == $firstChoice){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "UPDATE `tbl_applicant` SET `approved_first_choice` = 1, `admission_status` = 'Approved', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
+				$conn->exec($sql);
+			}else if($courseId == $secondChoice){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "UPDATE `tbl_applicant` SET `approved_second_choice` = 1, `admission_status` = 'Approved', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
+				$conn->exec($sql);
+			}
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

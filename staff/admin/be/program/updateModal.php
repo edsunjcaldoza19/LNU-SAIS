@@ -1,5 +1,5 @@
  <!-- UPDATE MODAL (DEPARTMENT) -->
- <div class="modal fade" id="update<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
+ <div class="modal fade" id="update<?php echo $fetch['course_id']?>" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form action = "be/program/update.php" method="POST" enctype="multipart/form-data">
@@ -8,7 +8,7 @@
                             <hr class="default-divider ml-auto">
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" name="id" value="<?php echo $fetch['id']?>">
+                            <input type="hidden" name="id" value="<?php echo $fetch['course_id']?>">
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <input type="text" class="form-control" name="name" value="<?php echo $fetch['course_name']?>"required autofocus>

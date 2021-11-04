@@ -25,7 +25,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
                         <p class="page-header">Qualified Applicants</p>
-                        <p class="page-subheader">Inspect applicants who qualified the entrance examination</p>
+                        <p class="page-subheader">Check applicants who qualified the entrance examination</p>
                     </div>
                     <div class="card">
                         <div class="header">
@@ -36,11 +36,14 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
+                                            <th>Examination Score</th>
                                             <th>Applicant Name</th>
-                                            <th>Preferred Program</th>
                                             <th>Entry Type</th>
+                                            <th>First Choice</th>
+                                            <th>Second Choice</th>
                                             <th>Application Form Status</th>
                                             <th>Entrance Exam Status</th>
+                                            <th>Update Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,41 +52,64 @@
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
+                                            LEFT JOIN tbl_exam_result ON tbl_exam_result.exam_applicant_id=tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Qualified' AND `school_year_id` = $id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
+
+                                                //fetch first and second choice
+
+                                                $firstChoice = $fetch['program_first_choice'];
+                                                $secondChoice = $fetch['program_second_choice'];
+
+                                                $sql1 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$firstChoice'");
+                                                $sql1->execute();
+
+                                                $sql2 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$secondChoice'");
+                                                $sql2->execute();
+
+                                                while($fetch1 = $sql1->fetch()){
+                                                    while($fetch2 = $sql2->fetch()){
                                         ?>
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo $fetch['last_name'];
-                                                    echo ', ';
-                                                    echo $fetch['middle_name'];
-                                                    echo ' ';
-                                                    echo $fetch['first_name'];
-                                                ?></td>
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
+                                                    echo $fetch['exam_score'];
+                                                ?>       
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
+                                                ?>       
+                                            </td>
                                             <td><?php echo $fetch['entry']; ?></td>
                                             <td>
+                                                <?php
+                                                    echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';
+                                                ?>  
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch2['course_name'].' ('.$fetch2['course_acronym'].')';
+                                                ?>    
+                                            </td>
+                                            <td align="center">
                                                 <?php
                                                     if($fetch['form_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
                                                     }else if($fetch['form_status'] == "Approved"){
                                                         echo '<p class="label-green">Approved</p>';
-                                                    }else if($fetch['form_status'] == "Rejected"){
+                                                    }else if($fetch['form_status'] == "Disapproved"){
                                                         echo '<p class="label-red">Disapproved</p>';
                                                     }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td align="center">
                                                 <?php
                                                     if($fetch['exam_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['exam_status'] == "Scored"){
+                                                        echo '<p class="label-blue">Scored</p>';
                                                     }else if($fetch['exam_status'] == "Qualified"){
                                                         echo '<p class="label-green">Qualified</p>';
                                                     }else if($fetch['exam_status'] == "Unqualified"){
@@ -91,9 +117,17 @@
                                                     }
                                                 ?>
                                             </td>
+                                            <td>
+                                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
+                                                    <i class="material-icons">add</i>
+                                                    <span>Update Score</span>
+                                                </button>
+                                            </td>
                                             <?php
                                             include 'be/applicant_exam/updateScoreModal.php';
+                                                }
                                             }
+                                        }
                                         ?>
                                         </tr>
                                     </tbody>
@@ -106,6 +140,7 @@
             <!-- #END# Exportable Table -->
         </div>
     </section>
+    <!-- Logout Modal -->
     <?php
         include 'includes/logout_modal.php';
         include 'includes/scripts.php';

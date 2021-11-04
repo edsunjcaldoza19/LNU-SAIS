@@ -26,7 +26,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4 login">
 				<div class="container-fluid" style="width: 100%; padding: 40px;">
-				<img src="../../assets/images/navbar_logo_main.png" style="width: 40%;">
+				<img src="../../assets/images/navbar_logo_main.png" style="width: 50%; position: absolute; left: 50%; margin-left: -25%;">
 				</div>
 				<div class="login-form-container">
 					<form method="POST" action="../../backend/recovery/reset_password.php">

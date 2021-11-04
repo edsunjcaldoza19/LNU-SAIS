@@ -134,6 +134,29 @@ a:active{
 
 }
 
+.default-container{
+
+  height: 475px;
+  margin: 50px 30px 30px 30px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #D9D9D9;
+  overflow-y: auto;
+
+  background-color: #FFFFFF;
+
+}
+
+.default-header{
+
+  margin-top: 10px;
+  margin-bottom: 50px;
+  line-height: 0.5;
+
+  color: #262626;
+
+}
+
 .default-home-container{
 
 	max-height: auto;
@@ -2133,6 +2156,22 @@ fieldset[disabled] .form-control{
 		font-size: 12px;
 
 	}
+
+  .login-form-container{
+    margin: 50px 0px 30px 0px;
+  }
+
+  .default-container{
+    margin: 50px 0px 30px 0px;
+  }
+
+  .default-header{
+
+    margin-bottom: 30px;
+
+  }
+
+
 }
 
 @media only screen and (min-width: 813px){

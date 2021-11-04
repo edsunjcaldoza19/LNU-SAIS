@@ -9,8 +9,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group form-float">
-                        <div class="form-line">
-                            <input type="text" class="datepicker form-control" name="date" required autofocus>
+                        <div class="form-line focused">
+                            <input type="date" class="datepicker form-control" name="date" required autofocus>
                             <label class="form-label">Pick Schedule Date</label>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="modal-footer">
                     <hr class="default-divider ml-auto">
-                    <button type="submit" class="btn btn-link waves-effect" name="update" id="update">SAVE CHANGES</button>
+                    <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
                     <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                 </div>
             </form>

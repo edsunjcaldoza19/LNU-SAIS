@@ -735,6 +735,10 @@
 .material-icons.md-48 {
   font-size: 48px; }
 
+.material-icons{
+  font-size: 12px;
+}
+
 /* Helpers ===================================== */
 .m-l--125 {
   margin-left: -125px; }
@@ -7483,7 +7487,7 @@ fieldset[disabled] .form-control {
         font-size: 11px;
         color: #aaa; }
         .dropdown-menu ul.menu .menu-info p .material-icons {
-          font-size: 13px;
+          font-size: 15px;
           color: #aaa;
           position: relative;
           top: 2px; }
@@ -7510,7 +7514,7 @@ fieldset[disabled] .form-control {
       float: left;
       margin-right: 7px;
       margin-top: 2px;
-      font-size: 20px; }
+      font-size: 18px; }
 
 .dropdown-animated {
   -webkit-animation-duration: .3s !important;
@@ -7649,6 +7653,7 @@ fieldset[disabled] .form-control {
         padding: 8px 16px; }
       .sidebar .menu .list i.material-icons {
         margin-top: 4px; 
+        font-size: 20px;
       }
       .sidebar .menu .list .menu-toggle:after, .sidebar .menu .list .menu-toggle:before {
         position: absolute;
@@ -7919,7 +7924,7 @@ fieldset[disabled] .form-control {
   background-color: #D8A93B;
   padding: 42px 0; }
 .profile-body{
-  height: 335px;
+  height: auto;
 }
 
 .profile-card .profile-body .image-area {
@@ -8323,6 +8328,15 @@ html.ie11 .bs-searchbox .form-control {
   padding: 5px;
   background-color: #d2e7d6;
   color: #2f4c39;
+  border-radius: 5px;
+}
+
+.label-orange{
+  width: 100px;
+  text-align: center;
+  padding: 5px;
+  background-color: #ffbd90;
+  color: #e45c00;
   border-radius: 5px;
 }
 

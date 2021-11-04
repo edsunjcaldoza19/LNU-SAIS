@@ -1,7 +1,8 @@
                                     <!--- ## START PARENT INFORMATION --->
                                     <div role="tabpanel" class="tab-pane fade in" id="education">
                                         <div class="form-horizontal">
-                                            <h3>KINDER</h3>
+                                            <br>
+                                            <p class="table-subheader">Kindergarten</p>
                                              <div class="form-group">
                                                 <div class="col-sm-6">
                                                 	<label>School Name</label>
@@ -34,8 +35,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                              <h3>ELEMENTARY</h3>
-                                             <div class="form-group">
+                                            <p class="table-subheader">Elementary</p>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>School Name</label>
                                                     <div class="form-line">
@@ -67,8 +68,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                             <h3>JUNIOR HIGH SCHOOL</h3>
-                                             <div class="form-group">
+                                            <p class="table-subheader">Junior High School</p>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>School Name</label>
                                                     <div class="form-line">
@@ -100,8 +101,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h3>SENIOR HIGH SCHOOL</h3>
-                                             <div class="form-group">
+                                            <p class="table-subheader">Senior High School</p>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>School Name</label>
                                                     <div class="form-line">
@@ -133,69 +134,72 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h3>COLLEGE 1</h3>
-                                             <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>School Name</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_name"
-                                                        value="<?php echo $fetch['college_name'];?>" disabled="true">
+                                            <!-- College -->
+                                            <div style="<?php if($fetch['entry'] == 'Transferee'){echo 'display: block';} else{echo 'display: none';}?>">
+                                                <p class="table-subheader">College (First)</p>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>School Name</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_name"
+                                                            value="<?php echo $fetch['college_name'];?>" disabled="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>School Address</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_address"
+                                                            value="<?php echo $fetch['college_address'];?>" disabled="true">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <label>School Address</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_address"
-                                                        value="<?php echo $fetch['college_address'];?>" disabled="true">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Year Graduated</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_year_graduated"
+                                                            value="<?php echo $fetch['college_year_graduated'];?>" disabled="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Honors Received</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_honors"
+                                                            value="<?php echo $fetch['college_honors'];?>" disabled="true">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Year Graduated</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_year_graduated"
-                                                        value="<?php echo $fetch['college_year_graduated'];?>" disabled="true">
+                                                <p class="table-subheader">College (Second)</p>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>School Name</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_name2"
+                                                            value="<?php echo $fetch['college_name2'];?>" disabled="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>School Address</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_address2"
+                                                            value="<?php echo $fetch['college_address2'];?>" disabled="true">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <label>Honors Received</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_honors"
-                                                        value="<?php echo $fetch['college_honors'];?>" disabled="true">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Year Graduated</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_year_graduated2"
+                                                            value="<?php echo $fetch['college_year_graduated2'];?>" disabled="true">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <h3>COLLEGE 2</h3>
-                                             <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>School Name</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_name2"
-                                                        value="<?php echo $fetch['college_name2'];?>" disabled="true">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>School Address</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_address2"
-                                                        value="<?php echo $fetch['college_address2'];?>" disabled="true">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Year Graduated</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_year_graduated2"
-                                                        value="<?php echo $fetch['college_year_graduated2'];?>" disabled="true">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Honors Received</label>
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" name="college_honors2"
-                                                        value="<?php echo $fetch['college_honors2'];?>" disabled="true">
+                                                    <div class="col-sm-6">
+                                                        <label>Honors Received</label>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="college_honors2"
+                                                            value="<?php echo $fetch['college_honors2'];?>" disabled="true">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

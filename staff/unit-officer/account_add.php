@@ -40,7 +40,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group form-float" id="unit">
                                             <div class="form-line">
-                                                <select name="courseID" id="ciurseID" class="form-control" required>
+                                                <select name="courseID" id="courseID" class="form-control" required>
                                                     <option disabled selected>Program*</option>
                                                     <?php
                                                         require 'be/database/db_pdo.php';
@@ -48,7 +48,7 @@
                                                         $sqlCourse->execute();
                                                         while($fetchCourse = $sqlCourse->fetch()){
                                                     ?>
-                                                        <option name="courseID" value="<?php echo $fetchCourse['id']?>">
+                                                        <option name="courseID" value="<?php echo $fetchCourse['course_id']?>">
                                                             <?php echo $fetchCourse['course_name'] ?>        
                                                         </option>
                                                     <?php

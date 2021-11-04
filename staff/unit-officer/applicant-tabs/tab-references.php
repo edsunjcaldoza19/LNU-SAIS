@@ -1,7 +1,8 @@
                                     <!--- ## START REFERENCES INFORMATION --->
                                     <div role="tabpanel" class="tab-pane fade in" id="references">
                                         <div class="form-horizontal">
-                                            <h3>REFERENCES</h3>
+                                            <br>
+                                            <p class="table-subheader">Character References</p>
                                              <div class="form-group">
                                                 <div class="col-sm-4">
                                                 	<label>Name</label>
@@ -51,8 +52,8 @@
                                             <!-- ## END REFERENCES INFORMATION -->
 
                                             <!-- ## START RELEVANT INFORMATION -->
-                                             <h3>OTHER RELEVANT INFORMATION</h3>
-                                             <div class="form-group">
+                                            <p class="table-subheader">Other Relevant Information</p>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Previous Application</label>
                                                     <div class="form-line">

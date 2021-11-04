@@ -5,7 +5,10 @@
 	if(ISSET($_POST['update'])){
 		try{
             $id = $_POST['id'];
-            $date = $_POST['date'];
+            $dateString = $_POST['date'];
+            $formatDate = new DateTime($dateString);
+            $date = $formatDate->format('l, F d, Y');
+
             $description = $_POST['description'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

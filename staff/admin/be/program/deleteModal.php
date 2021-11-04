@@ -1,5 +1,5 @@
 <!-- DELETE MODAL -->
-<div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
+<div class="modal fade" id="delete<?php echo $fetch['course_id']?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action = "be/program/delete.php" method="POST" enctype="multipart/form-data">
@@ -8,7 +8,7 @@
                     <hr class="default-divider ml-auto">
                 </div>
                 <div class="modal-body">
-                <input class="hidden" value="<?php echo $fetch['id'] ?>" name="id">
+                <input class="hidden" value="<?php echo $fetch['course_id'] ?>" name="id">
                 <p style="font-size: 15px;">Are you sure you want to remove this program offering?</p>
                 </div>
                 <div class="modal-footer">

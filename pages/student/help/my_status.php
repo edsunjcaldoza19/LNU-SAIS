@@ -3,11 +3,11 @@
 	$email = '';
 	require '../../backend/auth/check_token.php';
 
-	$id = $fetch['id'];
-
 	try{
 
-		$sql = $conn->prepare("SELECT * FROM tbl_applicant WHERE `applicant_account_id` = '$id'");
+		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account
+        LEFT JOIN tbl_applicant ON tbl_applicant_account.id = tbl_applicant.applicant_account_id 
+        WHERE `session_token` = '$token'");
     	$sql->execute();
     	$application = $sql->fetch();
 
@@ -62,6 +62,20 @@
 		if($application['interview_status'] == 'Pending'){
 
     		$application['is_timestamp'] = 'N/A';
+
+    	}
+
+    	if($application['interview_progress'] == 'Done'){
+
+    		echo '
+
+			<script>
+
+				window.location.replace("../admission_procedures/done.php");
+
+			</script>
+
+			';
 
     	}
 
@@ -264,8 +278,8 @@
 										?>
 										<?php echo $application['form_status'] ?> (<?php echo $application['fs_timestamp'] ?>)
 									</p>
-									<p style="margin-left: 22px;">
-										<i>Remarks: <?php if($application['form_status'] == 'Disapproved'){echo $application['remarks'];}?></i>
+									<p style="margin-left: 22px; <?php if($application['form_status'] == 'Disapproved'){echo 'display:block';}else{echo 'display:none';} ?>">
+										<i>Remarks: <?php echo $application['remarks'];?></i>
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<div style="<?php if($application['entry'] !== 'Re-admission'){echo 'display:block';}else{echo 'display:none';}?>">
@@ -275,6 +289,8 @@
 										<p class="default-interface-text">
 											<?php
 												if($application['exam_status'] == 'Qualified'){
+													echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+												}else if($application['exam_status'] == 'Scored'){
 													echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
 												}else if($application['exam_status'] == 'Pending'){
 													echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';

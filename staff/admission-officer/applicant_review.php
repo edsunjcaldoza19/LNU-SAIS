@@ -21,12 +21,12 @@
                 $applicant_id = $_GET['id'];
                 require 'be/database/db_pdo.php';
                 $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
-                LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.program_first_choice
+                LEFT JOIN tbl_course ON tbl_course.course_id=tbl_applicant.program_first_choice
                 WHERE tbl_applicant.id = '$applicant_id'");
                 $sql->execute();
 
                 $sql2 = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
-                LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.program_second_choice
+                LEFT JOIN tbl_course ON tbl_course.course_id=tbl_applicant.program_second_choice
                 WHERE tbl_applicant.id = '$applicant_id'");
                 $sql2->execute();
 
@@ -60,7 +60,7 @@
                                     	include 'applicant-tabs/tab-profile.php';
                                     	include 'applicant-tabs/tab-parent.php';
                                     	include 'applicant-tabs/tab-education.php';
-                                    	include 'applicant-tabs/tab-references.php';
+                                    	include 'applicant-tabs/tab-referen ces.php';
                                         include 'applicant-tabs/tab-document.php';
                                     ?>
                                 </div>

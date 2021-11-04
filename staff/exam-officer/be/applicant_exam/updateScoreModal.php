@@ -8,25 +8,25 @@
             ?>
             <form action = "be/applicant_exam/updateScore.php?sy_id=<?php echo $syID;?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Add Exam Score</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">Input Entrance Examination Score</h4>
+                    <hr class="default-divider ml-auto">
                 </div>
                 <div class="modal-body">
                     <input type="hidden" value="<?php echo $fetch['applicant_account_id']; ?>" name="id">
                     <div class="form-group">
-                    <p>Set Exam Score for
-                        <?php echo $fetch ['first_name']; echo ' ';
-                            echo $fetch ['middle_name']; echo ' ';
-                            echo $fetch ['first_name']; ?></p>
-                            </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">mode_edit</i>
-                        </span>
+                        <p style="font-weight: 600;">Set Examination Score for: </p>
+                        <p>
+                            <?php echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name']?>
+                        </p>
+                    </div>
+                    <div class="form-group form-float">
                         <div class="form-line">
-                            <input type="number" class="form-control" name="exam_score" placeholder="Set Exam Score" required autofocus>
+                            <input type="number" class="form-control" name="exam_score" required autofocus>
+                            <label class="form-label">Enter Entrance Examination Score</label>
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <hr class="default-divider ml-auto">
                         <button type="submit" class="btn btn-link waves-effect" name="updateScore" id="updateScore" >SAVE CHANGES</button>
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                     </div>

@@ -216,7 +216,7 @@
 
 							                                    while($fetch = $sql->fetch()){
 							                                ?>
-						                                    <option name="cbFirstChoice" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['course_name'] ?></option>
+						                                    <option name="cbFirstChoice" value="<?php echo $fetch['course_id'] ?>"><?php echo $fetch['course_name'] ?></option>
 							                                <?php
 							                                    }
 							                                ?>
@@ -236,7 +236,7 @@
 
 							                                    while($fetch = $sql->fetch()){
 							                                ?>
-						                                    <option name="cbSecondChoice" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['course_name'] ?></option>
+						                                    <option name="cbSecondChoice" value="<?php echo $fetch['course_id'] ?>"><?php echo $fetch['course_name'] ?></option>
 							                                <?php
 							                                    }
 							                                ?>

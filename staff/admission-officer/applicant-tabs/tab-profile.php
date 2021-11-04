@@ -35,15 +35,6 @@
                                                         value="<?php echo $fetch2['course_name'];?>" disabled="true">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12">
-                                                <label>Refer Program</label>
-                                                <select name="unitID" class="form-control">
-                                                    <option name="unitID" value="<?php echo $fetchCourse['id']?>">
-                                                    <?php echo $fetch['course_name'] ?></option>
-                                                    <option name="unitID" value="<?php echo $fetchCourse['id']?>">
-                                                    <?php echo $fetch2['course_name'] ?></option>
-                                                </select>
-                                                </div>
                                             </div>
                                             <p class="table-subheader">Applicant Profile</p>
                                             <div class="form-group">

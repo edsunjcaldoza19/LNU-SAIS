@@ -37,6 +37,7 @@
 			</script>
 
 			';
+			
 		}else if ($form1_status == 'Not Started'){
 
 			echo '

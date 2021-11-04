@@ -11,7 +11,7 @@ include '../includes/head.php';
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE `tbl_course` SET `course_name`='$name',
-            `course_acronym`='$acronym', `unit_id`='$unitID' WHERE `id` = '$id'";
+            `course_acronym`='$acronym', `unit_id`='$unitID' WHERE `course_id` = '$id'";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();
