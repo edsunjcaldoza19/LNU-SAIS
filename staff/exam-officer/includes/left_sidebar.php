@@ -12,10 +12,11 @@
                             <span>Home</span>
                         </a>
                     </li>
+                    <li class="header">MANAGE ENTRANCE EXAMINATION</li>
                     <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
-                            <span>Applicants</span>
+                            <span>Encode Applicant Scores</span>
                         </a>
                          <ul class="ml-menu">
                             <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
@@ -74,7 +75,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="header">MANAGE ENTRANCE EXAMINATION</li>
                     <li class="<?= ($activePage == 'exam_manage') ? 'active': ''; ?>">
                                 <a href="exam_manage.php">
                                 <i class="material-icons">assignment</i>

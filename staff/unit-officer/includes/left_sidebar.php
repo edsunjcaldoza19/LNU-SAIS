@@ -88,7 +88,7 @@
                     </li>
                     <li class="<?= ($activePage == 'waitlist') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">accounts</i>
+                            <i class="material-icons">low_priority</i>
                             <span>Waitlisted Applicants</span>
                         </a>
                         <ul class="ml-menu" style="max-height: 200px; overflow-x: auto;"> 

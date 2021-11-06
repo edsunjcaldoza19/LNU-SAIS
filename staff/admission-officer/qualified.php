@@ -79,11 +79,13 @@
                                             <td>
                                                 <?php
                                                     if($fetch['approved_first_choice'] == 1){
-                                                        echo '<p class="label-blue">Approved</p>';
+                                                        echo '<p class="label-green">Approved</p>';
                                                     }else if($fetch['approved_first_choice'] == 2){
-                                                        echo '<p class="label-blue">Disapproved</p>';
+                                                        echo '<p class="label-red">Disapproved</p>';
                                                     }else if($fetch['approved_first_choice'] == 3){
                                                         echo '<p class="label-orange">Waitlisted</p>';
+                                                    }else if($fetch['approved_first_choice'] == 0){
+                                                        echo '<p class="label-blue">Pending</p>';
                                                     }
                                                 ?>  
                                             </td>
@@ -95,11 +97,13 @@
                                             <td>
                                                 <?php
                                                     if($fetch['approved_second_choice'] == 1){
-                                                        echo '<p class="label-blue">Approved</p>';
+                                                        echo '<p class="label-green">Approved</p>';
                                                     }else if($fetch['approved_second_choice'] == 2){
-                                                        echo '<p class="label-blue">Disapproved</p>';
+                                                        echo '<p class="label-red">Disapproved</p>';
                                                     }else if($fetch['approved_second_choice'] == 3){
                                                         echo '<p class="label-orange">Waitlisted</p>';
+                                                    }else if($fetch['approved_second_choice'] == 0){
+                                                        echo '<p class="label-blue">Pending</p>';
                                                     }
                                                 ?>  
                                             </td>
@@ -113,7 +117,7 @@
                                                 ?>  
                                             </td>
                                             <td style="text-align: center;">
-                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#notify<?php echo $fetch['id']?>"><i class="material-icons">notify</i></button>
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#notify<?php echo $fetch['id']?>"><i class="material-icons">send</i></button>
                                             </td>
                                             
                                         <?php

@@ -175,8 +175,8 @@
 							<div class="col-md-6" style="text-align: left;">
 								<p class="page-start-text">Greetings, future Normalista!</p>
 								<p class="page-start-subtext">You are currently using Leyte Normal University's online admission platform. Before proceeding, please take note of the following instructions below:</p>
-								<li class="page-start-subtext-text">You may check your student application's status using the <strong>Updates Tab</strong> on the sidebar.</li>
-								<li class="page-start-subtext-text">For feedbacks, suggestions or problems encountered, you may use the <strong>Feedbacks Tab</strong> on the sidebar.</li>
+								<li class="page-start-subtext-text">You may check your student application's status using the <strong>My Status Tab</strong> on the sidebar.</li>
+								<li class="page-start-subtext-text">For feedbacks, suggestions or problems encountered, you may use the <strong>Send Inquiry Tab</strong> on the sidebar.</li>
 								<li class="page-start-subtext-text">To track your progress, kindly refer to the <strong>Progress Checklist Tab.</strong>
 
 								<div class="page-start-button-container">
