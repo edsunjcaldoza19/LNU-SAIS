@@ -45,8 +45,8 @@
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Qualified'
-                                            AND `interview_status`='Qualified' AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 0) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 OR `approved_second_choice` = 1) OR (`approved_first_choice` = 1 OR `approved_second_choice` = 3) OR (`approved_first_choice` = 3 OR `approved_second_choice` = 1))");
+                                            WHERE `form_status`='Approved' AND `exam_status`='Scored'
+                                            AND `interview_status`='Qualified' AND `admission_status`='Evaluated' AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 0) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 OR `approved_second_choice` = 1) OR (`approved_first_choice` = 1 OR `approved_second_choice` = 3) OR (`approved_first_choice` = 3 OR `approved_second_choice` = 1))");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
 

@@ -7,6 +7,7 @@
 		date_default_timezone_set('Asia/Taipei');
 		try{
             $id = $_POST['id'];
+            $courseId = $_POST['courseId'];
             $interview_score = $_POST['interview_score'];
 			$timestamp = date('F j, Y, g:i:s A');
 
@@ -15,10 +16,27 @@
             WHERE `interview_applicant_id`=$id";
 			$conn->exec($sql);
 
+			//fetch passing rating
+
+			$sql1 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id`=$courseId");
+			$sql1->execute();
+			$fetch = $sql1->fetch();
+
+			if($interview_score >= $fetch['interview_passing_score']){
+				$status = "Qualified";
+			}else{
+				$status = "Unqualified";
+			}
+
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql1 = "UPDATE `tbl_applicant` SET `interview_status`='Approved', `is_timestamp` = '$timestamp'
+			$sql2 = "UPDATE `tbl_applicant` SET `interview_status`='$status', `is_timestamp` = '$timestamp'
             WHERE `applicant_account_id`=$id";
-			$conn->exec($sql1);
+			$conn->exec($sql2);
+
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql3 = "UPDATE `tbl_applicant_account` SET `interview_progress`='Done', `ip_timestamp` = '$timestamp'
+            WHERE `id`=$id";
+			$conn->exec($sql3);
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

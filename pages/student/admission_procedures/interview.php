@@ -7,6 +7,7 @@
 
 		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account
         LEFT JOIN tbl_applicant ON tbl_applicant_account.id = tbl_applicant.applicant_account_id 
+        LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id = tbl_applicant.applicant_account_id 
         WHERE `session_token` = '$token'");
 		$sql->execute();
 
@@ -250,52 +251,25 @@
 									Interview Schedule:
 								</p>
 								<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									Schedule Pending
+									<?php echo $fetch['interview_date']; ?> - <?php echo $fetch['interview_time']; ?>
 								</p>
 								<hr class="default-divider ml-auto" style="margin: 5px;">
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
 									Platform:
 								</p>
 								<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									TBA
+									<?php echo $fetch['interview_platform']; ?>
 								</p>
 								<hr class="default-divider ml-auto" style="margin: 5px;">
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
 									Meeting Link:
 								</p>
 								<p class="exam-placeholder-text" href="#" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									TBA
+									<a href="<?php echo $fetch['interview_link']; ?>"><?php echo $fetch['interview_link']; ?></a>
 								</p>
-								<a class="exam-placeholder-text" href="#" style="font-size: 15px; margin: 5px 0px 5px 0px; display: none;">
-									TBA
-								</a>
-								<div class="page-start-button-container" style="margin-top: 30px;">
-									<button class="default-button primary-button" type="button" name="btnDone" id="btnDone" data-toggle="modal" data-target="#doneModal">
-										Interview Done
-									</button>
-								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal fade" id="doneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				    	<div class="modal-dialog" role="document">
-				      		<div class="modal-content">
-				       			<div class="modal-header">
-				       			  <p class="modal-header-text">Done with the Interview?</p>
-				       			  <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-				       			    <span aria-hidden="true">×</span>
-				       			  </button>
-				       			</div>
-				       			<div class="modal-body">
-				       				<p style="text-align: justify; font-size: 14px;">By confirming, you agree that you're done with the interview. This will end the admission procedure.</p>
-				       				<p style="text-align: justify; font-size: 14px;"><b>Do not confirm if you're not done with the interview yet.</b></p>
-				      			</div>
-				      			<div class="modal-footer" style="padding: 10px;">
-				       			  <button type="submit" class="default-button" style="padding: 5px 10px 5px 10px; position: relative;">Confirm</button>
-				       			</div>
-				    		</div>
-				  		</div>
-	  				</div>
 				</form>
 				</div>
 			</div>

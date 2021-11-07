@@ -1,23 +1,22 @@
-<!-- --DELETE MODAL (DEPARTMENT)-- -->
+<!-- --DELETE MODAL-- -->
 <div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <form action = "be/entrance_examination/delete.php" method="POST">
-                                                    <div class="modal-header">
-                                                      <h5 class="modal-title logout-modal-title">Delete Exam</h5>
-                                                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                      </button>
-                                                    </div>
-                                                    <div class="modal-body logout-modal-body">
-                                                        <p class="card-dashboard-header">Are you sure you want to remove this Exam from the database?</p>
-                                                        <input type="hidden" name="id" id="id" value="<?php echo $fetch['id'] ?>">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-danger" style="color: #FFFFFF" type="submit" name="delete" id="delete" onclick="showSuccess();">Confirm Delete</button>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action = "be/entrance_examination/delete.php" method="POST">
+                <div class="modal-header">
+                    <h4 class="modal-title logout-modal-title">Delete Examination Module</h5>
+                    <hr class="default-divider ml-auto">
+                </div>
+                <div class="modal-body logout-modal-body">
+                    <p class="card-dashboard-header">Are you sure you want to remove this Exam from the database?</p>
+                    <input type="hidden" name="id" id="id" value="<?php echo $fetch['id'] ?>">
+                </div>
+                <div class="modal-footer">
+                    <hr class="default-divider ml-auto">
+                    <button type="submit" class="btn btn-link waves-effect" name="delete" id="delete">CONFIRM</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

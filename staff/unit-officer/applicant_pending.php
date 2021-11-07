@@ -66,7 +66,7 @@
                                             LEFT JOIN tbl_course ON (tbl_course.course_id=tbl_applicant.program_first_choice OR tbl_course.course_id=tbl_applicant.program_second_choice)
                                             LEFT JOIN tbl_exam_result ON tbl_exam_result.exam_applicant_id=tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id=tbl_applicant.applicant_account_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Qualified'
+                                            WHERE `form_status`='Approved' AND `exam_status`='Scored'
                                             AND `interview_status`='Qualified'
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
                                             AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 1 AND `program_first_choice` = $courses) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 1 AND `program_second_choice` = $courses) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 0 ))
@@ -97,7 +97,6 @@
                                             <td><?php echo $fetch['exam_score']; ?></td>
                                             <td><?php echo $fetch['interview_rating']; ?></td>
                                             <td align="center">
-                                                <td align="center">
                                                 <?php
                                                     if(($fetch['approved_first_choice'] == 0 && $fetch['program_first_choice'] == $courses) || ($fetch['approved_second_choice'] == 0 && $fetch['program_second_choice'] == $courses)){
                                                         echo '<p class="label-blue">Pending</p>';
@@ -109,7 +108,6 @@
                                                         echo '<p class="label-orange">Waitlisted</p>';
                                                     }
                                                 ?>
-                                            </td>
                                             </td>
                                             <td>
                                                 <a href="applicant_review.php?id=<?php echo $fetch['id'];?>&sy_id=<?php echo $id?>&course=<?php echo $course?>" type="button" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">

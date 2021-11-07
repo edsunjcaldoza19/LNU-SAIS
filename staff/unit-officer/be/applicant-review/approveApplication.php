@@ -13,11 +13,11 @@
 
 			if($courseId == $firstChoice){
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$sql = "UPDATE `tbl_applicant` SET `approved_first_choice` = 1, `admission_status` = 'Approved', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
+				$sql = "UPDATE `tbl_applicant` SET `approved_first_choice` = 1, `admission_status` = 'Evaluated', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
 				$conn->exec($sql);
 			}else if($courseId == $secondChoice){
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$sql = "UPDATE `tbl_applicant` SET `approved_second_choice` = 1, `admission_status` = 'Approved', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
+				$sql = "UPDATE `tbl_applicant` SET `approved_second_choice` = 1, `admission_status` = 'Evaluated', `as_timestamp` = '$timestamp' WHERE `id` = '$id'";
 				$conn->exec($sql);
 			}
 

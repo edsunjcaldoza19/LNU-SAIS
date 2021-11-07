@@ -63,8 +63,9 @@
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_applicant.course_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Approved'
+                                            LEFT JOIN tbl_course ON (tbl_course.course_id=tbl_applicant.program_first_choice OR tbl_course.course_id=tbl_applicant.program_second_choice)
+                                            LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id = tbl_applicant.applicant_account_id
+                                            WHERE `form_status`='Approved' AND `exam_status`='Scored'
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
                                             AND ((`interview_status` = 'Unqualified' AND `program_first_choice` = $courses) OR (`interview_status` = 'Unqualified' AND `program_second_choice` = $courses))
                                             ");
@@ -74,18 +75,13 @@
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo $fetch['exam_score'];
+                                                    echo $fetch['interview_rating'];
                                                 ?>       
                                             </td>
                                             <td>
                                                 <?php
                                                     echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
-                                                ?>       
-                                            <td><?php
-                                                    echo $fetch['course_name'];
-                                                    echo ' - ';
-                                                    echo $fetch['course_acronym'];
-                                            ?></td>
+                                                ?>     
                                             <td><?php echo $fetch['entry']; ?></td>
                                             <td>
                                                 <?php
@@ -129,7 +125,7 @@
                                                         echo '<p class="label-blue">Pending</p>';
                                                     }else if($fetch['interview_status'] == "Qualified"){
                                                         echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['inteview_status'] == "Unqualified"){
+                                                    }else if($fetch['interview_status'] == "Unqualified"){
                                                         echo '<p class="label-red">Unqualified</p>';
                                                     }
                                                 ?>

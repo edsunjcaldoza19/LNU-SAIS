@@ -16,7 +16,7 @@ if(isset($_POST['btnNext'])){
 		$newname = $rename.'.'.$extension;
 		$target="../../../images/applicant-img/applicant-profile/".$newname;
 
-        $applicant_account_id = $_POST['applicantId'];
+        $applicant_account_id = $_POST['id'];
 
         $academic_year = $_POST['academicYear'];
         $semester = $_POST['cbSemester'];
@@ -79,7 +79,7 @@ if(isset($_POST['btnNext'])){
 
         $query="UPDATE `tbl_applicant` SET `school_year_id`='$academic_year',`applicant_picture`='$newname', 
         `semester`='$semester',`program_first_choice`='$first_choice',`program_second_choice`='$second_choice', 
-        `course_id`='$first_choice',`height_feet`='$height_feet',`height_inches`='$height_inch',`weight`='$weight', 
+        `height_feet`='$height_feet',`height_inches`='$height_inch',`weight`='$weight', 
         `civil_status`='$civil_status',`place_birth`='$place_birth',`citizenship`='$citizenship',`address`='$address', 
         `mailing_address`='$mailing_address',`religion`='$religion',`mobile_number`='$mobile_number',`father_name`='$father_name', 
         `father_citizenship`='$father_citizenship',`father_contact`='$father_contact',`father_email`='$father_email', 
@@ -89,11 +89,11 @@ if(isset($_POST['btnNext'])){
         `guardian_citizenship`='$guardian_citizenship',`guardian_contact`='$guardian_contact',`guardian_email`='$guardian_email',
         `guardian_occupation`='$guardian_occupation',`guardian_employer_address`='$guardian_employer',`form_status`='$status', 
         `fs_timestamp`='$timestamp',`exam_status`='$status',`es_timestamp`='$timestamp',`interview_status`='$status', 
-        `is_timestamp`='$timestamp',`admission_status`='$status',`as_timestamp`='$timestamp'
+        `is_timestamp`='$timestamp',`admission_status`='$status',`as_timestamp`='$timestamp', `remarks`='$timestamp'
         WHERE `applicant_account_id` = '$applicant_account_id'";
 
-        $query2="INSERT INTO `tbl_interview`(`interview_applicant_id`)
-        VALUES ('$applicant_account_id')";
+        $query2="INSERT INTO `tbl_interview`(`interview_applicant_id`, `interview_platform`, `interview_date`, `interview_time`, `interview_link`, `interview_rating`)
+        VALUES ('$applicant_account_id', 'N/A', 'N/A', 'N/A', 'N/A', 0)";
         $query3="INSERT INTO `tbl_exam_result`(`exam_applicant_id`)
         VALUES ('$applicant_account_id')";
 

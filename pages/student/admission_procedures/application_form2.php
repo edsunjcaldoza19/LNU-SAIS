@@ -126,7 +126,7 @@
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="fas fa-arrow-circle-right sidebar-progress-icon active"></i> Application Form (2/2)
 								</div>
-								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1 || $entry_type !== 'Re-admission'){
+								<div class="sidebar-item" <?php if($fetch1['enable_exam'] == 1 || $fetch2['entry'] !== 'Re-admission'){
 								echo 'style="display:block"';}else{echo 'style="display:none"';}?>>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<i class="far fa-times-circle sidebar-progress-icon"></i> Entrance Examination
@@ -508,7 +508,7 @@
 						      			</div>
 						      			<div class="modal-footer" style="padding: 10px;">
 						       			  <button type="submit" name="btnSubmit" class="default-button" 
-						       			  style="padding: 5px 10px 5px 10px; position: relative;">Confirm</button>
+						       			  style="padding: 5px 10px 5px 10px; position: relative;" onclick="clearCache();">Confirm</button>
 						       			</div>
 						    		</div>
 						  		</div>
@@ -695,6 +695,12 @@
 				alert("[WARNING]: You've been logged-out due to inactivity. Please login again");
 				window.location = "../../backend/auth/student_logout.php" ;
 			}
+		}
+
+		//clear cache
+
+		function clearCache(){
+			$('#myForm').removeCaches();
 		}
 
 

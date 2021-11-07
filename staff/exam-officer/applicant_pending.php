@@ -71,10 +71,7 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
-                                                    <i class="material-icons">add</i>
-                                                    <span>Add Score</span>
-                                            </button>
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
                                             </td>
                                             <td>
                                                 <?php

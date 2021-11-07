@@ -78,6 +78,19 @@ if(isset($_POST['btnRegister'])){
     VALUES ('$applicant_account_id', '$entry', '$first_name', '$middle_name', '$last_name', '$birthday', '$age', '$gender')";
     $query2_run = mysqli_query($connection, $query2);
 
+    //checks if entrance exam is enabled
+
+    //$sql3 = "SELECT FROM `tbl_academic_year` WHERE `ay_status` = 1";
+    //$conn->exec($sql3);
+    //$fetch = $sql3->fetch();
+
+    //if($fetch['enable_exam'] = 1){
+
+    //    $query3 = "INSERT INTO tbl_exam_result(`applicant`) VALUES ()";
+    //    $conn->exec($sql2);
+
+    //} 
+
     if($query_run && $query2_run){
         sleep(1);
 

@@ -119,9 +119,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="quotas.php">
+                        <a href="program_configurations.php?sy_id=<?php echo $fetch1['id']?>">
                             <i class="material-icons">list</i>
-                            <span>Program Quotas</span>
+                            <span>Program Configurations</span>
                         </a>
                     </li>
                 </ul>

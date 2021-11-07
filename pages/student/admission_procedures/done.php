@@ -182,7 +182,7 @@
 								</p>
 								<p class="default-interface-text">
 									<?php
-										if($application['exam_status'] == 'Qualified'){
+										if($application['exam_status'] == 'Scored'){
 											echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
 										}else if($application['exam_status'] == 'Pending'){
 											echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
@@ -215,7 +215,7 @@
 							</p>
 							<p class="default-interface-text">
 								<?php
-									if($application['admission_status'] == 'Qualified'){
+									if($application['admission_status'] == 'Evaluated'){
 										echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
 									}else if($application['admission_status'] == 'Pending'){
 										echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';

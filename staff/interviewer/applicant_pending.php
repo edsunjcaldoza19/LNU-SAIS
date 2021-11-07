@@ -47,13 +47,13 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Input Rating</th>
                                             <th>Applicant Name</th>
                                             <th>Entry Type</th>
                                             <th>Preferred Program</th>
-                                            <th>Application Form Status</th>
-                                            <th>Entrance Exam Status</th>
+                                            <th>Interview Date</th>
+                                            <th>Interview Time</th>
                                             <th>Interview Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,6 +63,7 @@
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_course ON (tbl_course.course_id=tbl_applicant.program_first_choice OR tbl_course.course_id=tbl_applicant.program_second_choice)
+                                            LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id = tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Scored'
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
                                             AND ((`interview_status` = 'Pending' AND `program_first_choice` = $courses) OR (`interview_status` = 'Pending' AND `program_second_choice` = $courses))
@@ -72,12 +73,6 @@
 
                                         ?>
                                         <tr>
-                                            <td>
-                                            <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
-                                                    <i class="material-icons">add</i>
-                                                    <span>Add Rating</span>
-                                            </button>
-                                            </td>
                                             <td>
                                                 <?php
                                                     echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
@@ -96,42 +91,26 @@
                                                     }
                                                 ?>   
                                             </td>
-                                            <td align="center">
-                                                <?php
-                                                    if($fetch['form_status'] == "Pending"){
-                                                        echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['form_status'] == "Approved"){
-                                                        echo '<p class="label-green">Approved</p>';
-                                                    }else if($fetch['form_status'] == "Disapproved"){
-                                                        echo '<p class="label-red">Disapproved</p>';
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td align="center">
-                                                <?php
-                                                    if($fetch['exam_status'] == "Pending"){
-                                                        echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['exam_status'] == "Scored"){
-                                                        echo '<p class="label-blue">Scored</p>';
-                                                    }else if($fetch['exam_status'] == "Qualified"){
-                                                        echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['exam_status'] == "Unqualified"){
-                                                        echo '<p class="label-red">Qualified</p>';
-                                                    }
-                                                ?>
-                                            </td>
+                                            <td><?php echo $fetch['interview_date']?></td>
+                                            <td><?php echo $fetch['interview_time']?></td>
                                             <td align="center">
                                                 <?php
                                                     if($fetch['interview_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
                                                     }else if($fetch['interview_status'] == "Qualified"){
                                                         echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['inteview_status'] == "Unqualified"){
+                                                    }else if($fetch['interview_status'] == "Unqualified"){
                                                         echo '<p class="label-red">Unqualified</p>';
                                                     }
                                                 ?>
                                             </td>
+                                            
+                                            <td align="center" style="width: 100px;">
+                                                <button class="btn bg-orange btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#setSchedule<?php echo $fetch['id']; ?>"><i class="material-icons">calendar</i></button>
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>"><i class="material-icons">edit</i></button>
+                                            </td>
                                         <?php
+                                            include 'be/applicant_interview/setScheduleModal.php';
                                             include 'be/applicant_interview/updateInterviewScoreModal.php';
                                             }
                                         ?>
@@ -151,6 +130,17 @@
         include 'includes/logout_modal.php';
         include 'includes/scripts.php';
     ?>
+
+    <script>
+        $("#platform").change(function(){
+            if($(this).val() == "Face-to-Face"){
+                $("#callLink").hide();
+            }
+            else if($(this).val() == "Video Call"){
+                $("#callLink").show();
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -18,7 +18,6 @@
 		if($fetch = $sql->fetch()){
 
 			$form1_status = $fetch['form1_progress'];
-			$id = $fetch['applicant_account_id'];
 
 			//Determine if re-admission
 			$entry_type = $fetch['entry'];
@@ -192,7 +191,6 @@
 									<div class="col-md-8">
 										<div class="row">
 											<div class="col-md-6">
-												<input type="hidden" name="applicantId" id="applicantId" value="<?php echo $id?>">
 												<input type="hidden" name="academicYear" id="academicYear" value="<?php echo $fetch1['id'] ?>">
 				                    			<p class="student-page-label">Semester *</p>
 												<div class="form-group form-float">
@@ -211,12 +209,12 @@
 							                        	<select class="form-control" style="margin-top: 10px;" name="cbFirstChoice" id="cbFirstChoice" required>
 							                        		<option value="" selected disabled>Select First Choice</option>
 							                                <?php
-							                                	$sql = $conn->prepare("SELECT * FROM `tbl_course`");
-							                                    $sql->execute();
+							                                	$sql2 = $conn->prepare("SELECT * FROM `tbl_course`");
+							                                    $sql2->execute();
 
-							                                    while($fetch = $sql->fetch()){
+							                                    while($fetch2 = $sql2->fetch()){
 							                                ?>
-						                                    <option name="cbFirstChoice" value="<?php echo $fetch['course_id'] ?>"><?php echo $fetch['course_name'] ?></option>
+						                                    <option name="cbFirstChoice" value="<?php echo $fetch2['course_id'] ?>"><?php echo $fetch2['course_name'] ?></option>
 							                                <?php
 							                                    }
 							                                ?>
@@ -231,12 +229,12 @@
 							                        	<select class="form-control" style="margin-top: 10px;" name="cbSecondChoice" id="cbSecondChoice" required>
 							                        	   	<option value="" selected disabled>Select Second Choice</option>
 							                                <?php
-							                                	$sql = $conn->prepare("SELECT * FROM `tbl_course`");
-							                                    $sql->execute();
+							                                	$sql3 = $conn->prepare("SELECT * FROM `tbl_course`");
+							                                    $sql3->execute();
 
-							                                    while($fetch = $sql->fetch()){
+							                                    while($fetch3 = $sql3->fetch()){
 							                                ?>
-						                                    <option name="cbSecondChoice" value="<?php echo $fetch['course_id'] ?>"><?php echo $fetch['course_name'] ?></option>
+						                                    <option name="cbSecondChoice" value="<?php echo $fetch3['course_id'] ?>"><?php echo $fetch3['course_name'] ?></option>
 							                                <?php
 							                                    }
 							                                ?>

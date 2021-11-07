@@ -1,35 +1,36 @@
+<?php include 'includes/session.php'; ?>
+<!DOCTYPE html>
+<html>
+
 <?php
-    include 'includes/session.php';
     include 'includes/header.php';
-    ?>
-    <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
-    <!-- JQuery DataTable Css -->
-    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-    <?php
     include 'includes/topbar.php';
-    include 'includes/left_sidebar.php';
 ?>
+    <section>
+        <?php
+            include 'includes/left_sidebar.php';
+        ?>
+    </section>
     <section class="content">
         <div class="container-fluid">
-            <div class="block-header">
-            <p class="page-header">Toggle Entrance Examination</p>
-            <p class="page-subheader">Enable/disable entrance examination for this school year</p>
-            </div>
-            <div class="row clearfix jsdemo-notification-button">
+            <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="block-header">
+                        <p class="page-header">Enable/Disable Examination</p>
+                        <p class="page-subheader">Enable or disable online examination for this academic year</p>
+                    </div>
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Entrance Examination Information</p>
+                            <p class="table-subheader">Toggle Entrance Examination</p>
                         </div>
                         <div class="body">
-                            <div class="table">
+                            <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th>Active Academic Year</th>
-                                            <th>Entrance Examination Status</th>
-                                            <th style="width: 5%;">Action</th>
+                                            <th>Examination Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,23 +42,21 @@
 
                                             while($fetch = $sql->fetch()){
                                         ?>
-                                        <tr>
-                                            <td><?php echo $fetch['ay_year']?></td>
-                                            <td style="width: 200px;" align="center">
-                                                <?php 
+                                            <td><?php echo $fetch['ay_year'];?></td>
+                                            <td align="center">
+                                                <?php
                                                     if($fetch['enable_exam'] == 0){
                                                         echo '<p class="label-red">Disabled</p>';
-                                                    }else{
+                                                    }else if($fetch['enable_exam'] == 1){
                                                         echo '<p class="label-green">Enabled</p>';
                                                     }
-                                                ?>    
+                                                ?>
                                             </td>
-                                            <td style="text-align: center; width: 200px;">
-                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
+                                            <td align="center">
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#toggle<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
                                             </td>
-                                        </tr>
-                                        <?php
-                                            //include 'be/academic_year/updateModal.php';
+                                        <?php 
+                                            include 'be/entrance_examination/toggleModal.php';
                                             }
                                         ?>
                                     </tbody>
@@ -67,30 +66,22 @@
                     </div>
                 </div>
             </div>
+            <!-- #END# Exportable Table -->
+             <?php include 'be/entrance_examination/addExaminationModal.php'; ?>
         </div>
     </section>
- <?php
+    <?php
         include 'includes/logout_modal.php';
         include 'includes/scripts.php';
     ?>
-    <!-- ADDITIONAL JAVASCRIPT FOR THIS PAGE (ACADEMIC YEAR) -->
-    <!-- Autosize Plugin Js -->
-    <script src="../../plugins/autosize/autosize.js"></script>
-    <!-- Moment Plugin Js -->
-    <script src="../../plugins/momentjs/moment.js"></script>
-    <!-- Bootstrap Material Datetime Picker Plugin Js -->
-    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <!-- Custom Js -->
-    <script src="../../js/admin.js"></script>
-    <script src="../../js/pages/tables/jquery-datatable.js"></script>
-    <script src="../../js/pages/forms/basic-form-elements.js"></script>
-    <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
 </body>
+
+
+<!-- Autosize Plugin Js -->
+<script src="../../plugins/autosize/autosize.js"></script>
+
+<!-- Custom Js -->
+<script src="../../js/pages/forms/basic-form-elements.js"></script>
+
 
 </html>

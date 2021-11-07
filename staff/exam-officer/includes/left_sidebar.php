@@ -2,6 +2,7 @@
         <aside id="leftsidebar" class="sidebar">
            <?php
                 include 'includes/user.php';
+                require 'be/database/db_pdo.php';
            ?>
             <!-- Menu -->
             <div class="menu">
@@ -13,7 +14,14 @@
                         </a>
                     </li>
                     <li class="header">MANAGE ENTRANCE EXAMINATION</li>
-                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
+
+                    <?php
+                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
+                        $sql->execute();
+                        $fetchAy = $sql->fetch();
+                    
+                    ?>
+                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?> <?php if($fetchAy["enable_exam"] == 1){echo 'li-disabled';}else{echo '';}?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
                             <span>Encode Applicant Scores</span>
@@ -27,7 +35,6 @@
                                 <ul class="ml-menu">
                                     <li>
                                         <?php
-                                        require 'be/database/db_pdo.php';
                                         $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
                                         $sql->execute();
                                         while($fetch = $sql->fetch()){
@@ -75,13 +82,13 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="<?= ($activePage == 'exam_manage') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'exam_manage') ? 'active': ''; ?> <?php if($fetchAy["enable_exam"] == 0){echo 'li-disabled';}else{echo '';}?>">
                                 <a href="exam_manage.php">
                                 <i class="material-icons">assignment</i>
                                 <span>Examination Module</span>
                                 </a>
                             </li>
-                    <li class="<?= ($activePage == 'exam_results') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'exam_results') ? 'active': ''; ?> <?php if($fetchAy["enable_exam"] == 0){echo 'li-disabled';}else{echo '';}?>">
                             <a href="exam_results.php">
                                 <i class="material-icons">list</i>
                                 <span>Examination Results</span>

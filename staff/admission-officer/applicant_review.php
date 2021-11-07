@@ -60,7 +60,7 @@
                                     	include 'applicant-tabs/tab-profile.php';
                                     	include 'applicant-tabs/tab-parent.php';
                                     	include 'applicant-tabs/tab-education.php';
-                                    	include 'applicant-tabs/tab-referen ces.php';
+                                    	include 'applicant-tabs/tab-references.php';
                                         include 'applicant-tabs/tab-document.php';
                                     ?>
                                 </div>
