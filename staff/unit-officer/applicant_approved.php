@@ -52,6 +52,11 @@
                         <div class="header">
                             <p class="table-subheader">Approved Applicants List (<?php echo $fetch1['course_name']?>)</p>
                             <small>A.Y. <?php echo $fetch3['ay_year'];?> <b>(Quota: <?php echo $count;?>/<?php echo $fetch1['course_quota'];?>)</b></small>
+                            <hr class="default-divider ml-auto">
+                            <a class="btn bg-blue waves-effect" href="be/print_pdf.php?sy_id=<?php echo $sy_id ?>&unit_id=<?php echo $unitId ?>&course_id=<?php echo $id ?>">
+                                <i class="material-icons">file_download</i>
+                                <span>Generate List</span>
+                            </a>
                         </div>
                         <div class="body">
                             <div class="table-responsive">

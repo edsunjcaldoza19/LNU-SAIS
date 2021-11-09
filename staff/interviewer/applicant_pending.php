@@ -106,7 +106,7 @@
                                             </td>
                                             
                                             <td align="center" style="width: 100px;">
-                                                <button class="btn bg-orange btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#setSchedule<?php echo $fetch['id']; ?>"><i class="material-icons">calendar</i></button>
+                                                <button class="btn bg-orange btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#setSchedule<?php echo $fetch['id']; ?>"><i class="material-icons">alarm_add</i></button>
                                                 <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>"><i class="material-icons">edit</i></button>
                                             </td>
                                         <?php

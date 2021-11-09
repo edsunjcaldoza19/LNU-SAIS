@@ -1,11 +1,11 @@
-<!-- APPROVE MODAL -->
+<!-- APPROVE MODAL -->c
 <div class="modal fade" id="approve<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php
                 $syID = $_GET['sy_id'];
             ?>
-            <form action = "be/applicant-review/approveApplication.php?syID=<?php echo $syID ?>" method="POST">
+            <form action = "be/applicant-review/approveApplication.php?syID=<?php echo $syID?>&appId=<?php echo $fetch['id']?>&courseId=<?php echo $fetchCourse['course_id']?>" method="POST">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Approve Application</h4>
                     <hr class="default-divider ml-auto">

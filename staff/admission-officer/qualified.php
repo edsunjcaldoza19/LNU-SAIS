@@ -10,6 +10,12 @@
         <?php
             include 'includes/left_sidebar.php';
             include 'includes/right_sidebar.php';
+
+            $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
+            $sql1->execute();
+            $fetch1 = $sql1->fetch();
+
+            $sy_id = $fetch1['id'];
         ?>
     </section>
     <section class="content">
@@ -23,6 +29,11 @@
                     <div class="card">
                         <div class="header">
                             <p class="table-subheader">Admission Qualifiers Masterlist</p>
+                            <hr class="default-divider ml-auto">
+                            <a class="btn bg-blue waves-effect" href="be/print_pdf.php?sy_id=<?php echo $sy_id ?>">
+                                <i class="material-icons">file_download</i>
+                                <span>Generate List</span>
+                            </a>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -46,7 +57,7 @@
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Scored'
-                                            AND `interview_status`='Qualified' AND `admission_status`='Evaluated' AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 0) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 OR `approved_second_choice` = 1) OR (`approved_first_choice` = 1 OR `approved_second_choice` = 3) OR (`approved_first_choice` = 3 OR `approved_second_choice` = 1))");
+                                            AND `interview_status`='Qualified' AND `admission_status`='Evaluated' AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 0) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 3) OR (`approved_first_choice` = 3 AND `approved_second_choice` = 1))");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
 

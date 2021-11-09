@@ -42,7 +42,7 @@
                                         <?php
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_account_staff.id FROM `tbl_account_staff`
-                                            LEFT JOIN tbl_course ON tbl_course.id=tbl_account_staff.staff_program
+                                            LEFT JOIN tbl_course ON tbl_course.course_id=tbl_account_staff.staff_program
                                             LEFT JOIN tbl_unit ON tbl_unit.id=tbl_course.unit_id
                                             WHERE `staff_role` = '4'");
                                             $sql->execute();

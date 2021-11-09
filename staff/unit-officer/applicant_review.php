@@ -55,8 +55,8 @@
                                     <li role="presentation" class="active"><a href="#profile" aria-controls="settings" role="tab" data-toggle="tab">Applicant Profile</a></li>
                                     <li role="presentation"><a href="#parent" aria-controls="settings" role="tab" data-toggle="tab">Family Background</a></li>
                                     <li role="presentation"><a href="#education" aria-controls="settings" role="tab" data-toggle="tab">Educational Background</a></li>
-                                     <li role="presentation"><a href="#references" aria-controls="settings" role="tab" data-toggle="tab">Other Relevant Info</a></li>
-                                     <li role="presentation"><a href="#documents" aria-controls="settings" role="tab" data-toggle="tab">Submitted Documents</a></li>
+                                    <li role="presentation"><a href="#references" aria-controls="settings" role="tab" data-toggle="tab">Other Relevant Info</a></li>
+                                    <li role="presentation"><a href="#documents" aria-controls="settings" role="tab" data-toggle="tab">Submitted Documents</a></li>
                                 </ul>
 
                                 <input type="hidden" name="applicantID" value="<?php echo $fetch['id'];?>">

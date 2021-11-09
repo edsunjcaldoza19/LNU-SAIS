@@ -12,16 +12,19 @@
                             <span>Home</span>
                         </a>
                     </li>
+                    <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
+                        <a href="applicant.php">
+                            <i class="material-icons">perm_identity</i>
+                            <span>Applicants for Interview</span>
+                        </a>
+                    </li>
                     <li class="header">MANAGE STUDENT APPLICATIONS</li>
-                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
                             <span>Applicants</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
-                                <a href="applicant.php">Applicants for Interview</a>
-                            </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
                                 <a href="javascript:void(0);" class="menu-toggle">Pending Applicants</a>
                                 <ul class="ml-menu">
