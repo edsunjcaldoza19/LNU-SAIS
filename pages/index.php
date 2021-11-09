@@ -1,6 +1,10 @@
 <?php
 	require 'backend/config/db_pdo.php';
 	require 'backend/config/db_mysqli.php';
+
+	$sqlSchoolYear = $conn->prepare("SELECT * FROM tbl_academic_year WHERE `ay_status` = 1");
+    $sqlSchoolYear->execute();
+    $fetchSchoolYear = $sqlSchoolYear->fetch()
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +68,10 @@
 	        			</ol>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="home-container">
+						<div class="alert alert-success" role="alert" style="padding: 5px 5px 5px 10px; <?php if($fetchSchoolYear['result_available'] == 0){echo 'display: none';}else{echo 'display: block';}?>"><i class="far fa-check-circle"></i> Admission Results for A.Y. <?php echo $fetchSchoolYear['ay_year']?> is now available! <a href="admission_results.php" class="alert-success" style="font-weight: 600;">View Results</a></div>
 						<div class="home-image-container">
 							<img src="assets/images/home_page_image.jpg" class="home-image">
 						</div>
@@ -74,15 +80,8 @@
 								<div class="col-md-9">
 									<p class="register-text">Be a true and blue #Normalista. Your journey starts here.</p>
 									<p class="register-subtext">Take part in Leyte Normal University's Online Admission for the
-										<?php
-											$sqlSchoolYear = $conn->prepare("SELECT * FROM tbl_academic_year ORDER BY id DESC LIMIT 1");
-                                        	$sqlSchoolYear->execute();
-											while($fetchSchoolYear = $sqlSchoolYear->fetch()){
-											?>
-												<strong>S.Y <?php echo $fetchSchoolYear['ay_year']?></strong>.
-										<?php
-											}
-										?>
+								
+										<strong>S.Y <?php echo $fetchSchoolYear['ay_year']?></strong>.
 									</p>
 								</div>
 								<div class="col-md-3" align="center">
@@ -217,12 +216,11 @@
 										?>
 											<div class="col-md-6">
 												<p class="course-text"><?php echo $fetchSched['schedule_date']?></p>
-												<hr class="default-divider ml-0" style="margin: 5px;">
 											</div>
 											<div class="col-md-6">
 												<p class="course-text"><?php echo $fetchSched['schedule_desc']?></p>
-												<hr class="default-divider ml-0" style="margin: 5px;">
 											</div>
+											<hr class="default-divider ml-0" style="margin: 5px;">
 										<?php
 											}
 										}else{

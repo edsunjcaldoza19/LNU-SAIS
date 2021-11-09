@@ -36,7 +36,8 @@
                             $query->execute();
                             $fetchYear = $query->fetch();
                         ?>
-                        <p class="dashboard-main-text" style="font-size: 32px;"><?php echo $fetchYear['ay_year']?></p>
+                        <p class="dashboard-main-text" style="font-size: 32px;"><?php if($fetchYear['ay_year'] == ''){echo 'TBA';}else{
+                            echo $fetchYear['ay_year'];}?></p>
                     </div>
                     <div class="dashboard-card-wide dashboard-five" align="right">
                         <p class="dashboard-main-subtext">Colleges</p>

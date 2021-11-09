@@ -61,18 +61,15 @@
 							<h4 style="color: #262626;">Admission Results</h4>
 							<p>For
 								<?php
-									$sqlSchoolYear = $conn->prepare("SELECT * FROM tbl_academic_year ORDER BY id DESC LIMIT 1");
+									$sqlSchoolYear = $conn->prepare("SELECT * FROM tbl_academic_year WHERE `ay_status` = 1");
                                     $sqlSchoolYear->execute();
-									while($fetchSchoolYear = $sqlSchoolYear->fetch()){
+                                    $fetchSchoolYear = $sqlSchoolYear->fetch()
 								?>
-									<strong>S.Y <?php echo $fetchSchoolYear['ay_year']?></strong>.
-								<?php
-									}
-								?>
+								<strong>A.Y <?php echo $fetchSchoolYear['ay_year']?></strong>.
 							</p>
 							<hr class="default-divider ml-auto">
 						</div>
-						<div class="results-placeholder" align="center">
+						<div class="results-placeholder" align="center" style="<?php if($fetchSchoolYear['result_available'] == 0){echo 'display: block';}else{echo 'display: none';}?>">
 							<div class="results-placeholder-holder-image">
 								<img src="assets/images/results_placeholder_unavailable1.png" class="placeholder-image">
 							</div>
@@ -86,12 +83,26 @@
 								</div>
 							</div>
 						</div>
+						<div class="results-placeholder" align="center" style="<?php if($fetchSchoolYear['result_available'] == 0){echo 'display: none';}else{echo 'display: block';}?>">
+							<div class="results-placeholder-holder-image">
+								<img src="assets/images/results_placeholder_available.png" class="placeholder-image">
+							</div>
+							<div class="results-placeholder-text">
+								<div class="row">
+									<div class="col-md-2"></div>
+									<div class="col-md-8">
+										<p>Results are already available! Click the button below to view results</p>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+							</div>
+						</div>
 						<hr class="default-divider ml-auto" style="margin-bottom: 5px;">
 						<div class="results-download">
 							<div class="row">
 								<div class="col-md-4"></div>
 								<div class="col-md-4">
-									<a class="default-button primary-button" href="#" align="center">Download Results</a>
+									<a class="default-button <?php if($fetchSchoolYear['result_available'] == 0){echo 'disabled-button';}else{echo 'primary-button';} ?>" href="backend/admission/admission_qualifiers.php?sy_id=<?php echo $fetchSchoolYear['id']; ?>" align="center">Download Results</a>
 								</div>
 								<div class="col-md-4"></div>
 							</div>

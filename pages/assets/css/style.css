@@ -121,6 +121,8 @@ a:active{
 	background-color: #D1B77D;
 
 	transition: 0.5s;
+  pointer-events: none;
+  cursor: default;
 
 }
 
