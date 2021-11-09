@@ -8371,5 +8371,123 @@ html.ie11 .bs-searchbox .form-control {
   resize: none;
 }
 
+.li-disabled{
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Dashboard Items */
+
+.dashboard-card-wide{
+
+  height: 100px;
+  width: auto;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
+  background-color: white;
+  font-family: "Segoe UI", sans-serif;
+
+}
+
+.dashboard-card-small{
+
+  height: 150px;
+  width: auto;
+  padding: 10px 15px 10px 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
+  background-color: white;
+  font-family: "Segoe UI", sans-serif;
+
+}
 
 
+.dashboard-card{
+
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+
+}
+
+.dashboard-name{
+
+  background-image: url("../images/dashboard-yellow.jpg");
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.1);
+
+}
+
+.dashboard-date{
+
+  background-image: url("../images/dashboard-blue.jpeg");
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
+
+}
+
+.dashboard-one{
+
+  background: linear-gradient(50deg, rgba(193,101,221,1)0%, 
+    rgba(92,39,254,1)100%);  
+  color: #F1F1F1;
+
+}
+
+.dashboard-two{
+
+  background: linear-gradient(50deg, rgba(85,129,241,1)0%, 
+    rgba(17,83,252,1)100%);  
+  color: #F1F1F1;
+
+}
+
+.dashboard-three{
+
+  background: linear-gradient(50deg, rgba(250,205,104,1)0%, 
+    rgba(252,118,179,1)100%);  
+  color: #F1F1F1;
+
+}
+
+.dashboard-four{
+
+  background: linear-gradient(50deg, rgba(29,229,226,1)0%, 
+    rgba(181,136,247,1)100%);  
+  color: #F1F1F1;
+
+}
+
+.dashboard-five{
+
+  background: linear-gradient(50deg, rgba(249,119,148,1)0%, 
+    rgba(181,136,247,1)100%);  
+  color: #F1F1F1;
+
+}
+
+.dashboard-main-text{
+  margin: 0px;
+  font-size: 26px;
+  font-weight: 600;
+  color: #F1F1F1;
+}
+
+.dashboard-main-subtext{
+  margin: 0px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #F1F1F1;
+}
+
+.text-overflow{
+  width: 450px;      
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
