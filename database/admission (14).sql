@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2021 at 12:04 PM
+-- Generation Time: Nov 10, 2021 at 02:13 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -31,6 +31,7 @@ CREATE TABLE `tbl_academic_year` (
   `id` int(11) NOT NULL,
   `ay_year` varchar(50) NOT NULL,
   `enable_exam` int(5) NOT NULL,
+  `result_available` int(5) NOT NULL,
   `ay_status` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -38,10 +39,8 @@ CREATE TABLE `tbl_academic_year` (
 -- Dumping data for table `tbl_academic_year`
 --
 
-INSERT INTO `tbl_academic_year` (`id`, `ay_year`, `enable_exam`, `ay_status`) VALUES
-(1, '2019-2020', 0, 0),
-(3, '2020-2021', 0, 0),
-(7, '2021 - 2022', 0, 1);
+INSERT INTO `tbl_academic_year` (`id`, `ay_year`, `enable_exam`, `result_available`, `ay_status`) VALUES
+(1, '2021-2022', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -72,11 +71,9 @@ CREATE TABLE `tbl_account_staff` (
 --
 
 INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_contact`, `staff_email`, `staff_profile_img`, `staff_role`, `staff_unit`, `staff_program`, `login_status`, `session_token`) VALUES
-(1, 'admission', '$2y$10$iMtf9kyfcHaXxcJ8R5JV4OeqtfZp5aoqnbgrO70mdxfHy7nnr9VjO', 'Mr.', 'Admission', '', 'Office', '09123456789', 'testadmission@test.com', 'STAFF_PROFILE_admission_office.png', 1, 0, 0, 0, ''),
-(2, 'exam', '$2y$10$vMjQD.WExiXW2.yoOYDcl.DN9YTels9jAbHmH3f7NYo9JjQQmIjzO', 'Mr.', 'Exam', '', 'Officer', '09123456789', 'testexam@test.com', 'STAFF_PROFILE_exam_officer.png', 2, 0, 0, 0, ''),
-(7, 'unithead', '$2y$10$jt6kAzF1L2ezzSVpbTIfrOFM.no6cK/3oe4/MO.q0M7n7Y8ajdbXi', 'Dr.', 'Rommel', 'Ligutan', 'Verecio', '09911234567', 'rommelverecio@lnu.edu.ph', 'STAFF_PROFILE_rommel_verecio.png', 3, 2, 0, 0, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFmZl91c2VybmFtZSI6InVuaXRoZWFkIiwibmJmIjoxNjM2MzQwMzQ5LCJleHAiOjE2MzYzNDA2NDl9.RYn2YYyUndS262YYAjayVnrz_x3m8fZIOiu0aMXwoD8'),
-(8, 'interviewer', '$2y$10$.6Go.zxyEAl5/2W2IrL.S.bkNQ6Di9XR1OpSFkiOwDEf/uf8PS1wW', 'Mr.', 'Raphy', 'Angco', 'Dalan', '09911234567', 'raphydalan@lnu.edu.ph', 'STAFF_PROFILE_raphy_dalan.png', 4, 2, 18, 0, ''),
-(12, 'unithead2', '$2y$10$yG7A2DtpQf2Uc5LM48iYjOhBh2dkr1tQqoYcArv4MPokaGtlryHKm', 'Dr.', 'John', '', 'Doe', '09911234567', 'johndoe@lnu.edu.ph', 'STAFF_PROFILE_john_doe.png', 3, 9, 0, 0, '');
+(1, 'admission', '$2y$10$RcjyI0I9kh0xXWrucqZopetrVv9IOzY3YI4ZdYCKKGZn9VarATXDi', 'Mr.', 'Wendell', '', 'Yu', '09123456789', 'wendellyu@lnu.edu.ph', 'STAFF_PROFILE_wendell_yu.png', 1, 0, 0, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFmZl91c2VybmFtZSI6ImFkbWlzc2lvbiIsIm5iZiI6MTYzNjU1MDAxMywiZXhwIjoxNjM2NTUwMzEzfQ.Npu1cyzLLfE2DYDOpOpiF-jZ9UjHLZBHNA0eATvzcdA'),
+(2, 'exam', '$2y$10$EDJU7QF1bLSOmhkRjpLxqOqlpQ4Hy9pCPo1ndbWquOgF3GpKUSjCe', 'Prof.', 'Lisa', '', 'Bacierra', '09123456789', 'lisabacierra@lnu.edu.ph', 'STAFF_PROFILE_lisa_bacierra.png', 2, 0, 0, 0, ''),
+(3, 'itunit', '$2y$10$jhOJAw5heK2GJ5s1LPF/aO94AqQ4IRzF1WWgqLcjTx4M0Ua3vPfvi', 'Dr.', 'Rommel', 'Ligutan', 'Verecio', '09123456789', 'rommelverecio@lnu.edu.ph', 'STAFF_PROFILE_rommel_verecio.png', 3, 1, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -102,8 +99,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`id`, `username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `login_status`, `session_token`) VALUES
-(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 0, ''),
-(7, 'test', '$2y$10$7X1Q13xHdHu/dZsYJAWqAOdFfEPawJ26tHKpl4dcU3qdabjA4GORa', 'test admin', '1800638@lnu.edu.ph', '', '49a424fed6e61d5274c5bd48bd3c0cfb', 1, 0, '');
+(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -169,6 +165,7 @@ CREATE TABLE `tbl_applicant` (
   `jhs_honors` varchar(1000) NOT NULL,
   `shs_name` varchar(100) NOT NULL,
   `shs_address` varchar(100) NOT NULL,
+  `shs_strand` varchar(200) NOT NULL,
   `shs_year_graduated` varchar(100) NOT NULL,
   `shs_honors` varchar(1000) NOT NULL,
   `college_name` varchar(100) NOT NULL,
@@ -213,9 +210,8 @@ CREATE TABLE `tbl_applicant` (
 -- Dumping data for table `tbl_applicant`
 --
 
-INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `report_card`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `medical_certificate_image`, `personal_statement`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`, `interview_status`, `is_timestamp`, `approved_first_choice`, `approved_second_choice`, `admission_status`, `as_timestamp`, `application_date`, `remarks`) VALUES
-(4, 4, 'IMG_APPLICANT2021102681651.png', 7, 'Freshmen', 'Second Semester', '19', '18', 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 5, 6, 120, 'Single', 'Pasig City', 'Filipino', 'Brgy. Uyawan, Carigara, Leyte', 'N/A', 'Roman Catholic', '09501532031', 'Rodolfo T. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'Flor V. Combinido', 'Filipino', '09271524506', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Rural Improvement Club Children Center', 'Taguig City', '2006', 'N/A', 'Ricardo P. Cruz Sr. Elementary School', 'Taguig City', '2012', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2016', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2018', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '', 'John Roger Rapis', 'Eastern Samar', '09123456789', 'Edsun Caldoza', 'Leyte', '09123456789', 'No', 'N/A', 'N/A', 'No', 'N/A', 'No', 'N/A', '', 'Blah blah blah', 'Approved', 'November 2, 2021, 10:42:14 PM', 'Scored', 'November 2, 2021, 11:24:15 PM', 'Qualified', 'November 7, 2021, 12:07:22 AM', 0, 3, 'Evaluated', 'November 7, 2021, 6:22:47 PM', '2021-10-21 04:24:29', ''),
-(12, 12, 'IMG_APPLICANT2021110751039.jpg', 7, 'Freshmen', 'First Semester', '18', '15', 0, 'John Roger', 'Lacutab', 'Rapis', '2021-11-02', 22, 'Male', 5, 4, 121, 'Single', 'Pasig City', 'Filipino', 'Brgy. Uyawan, Carigara, Leyte', 'N/A', 'Roman Catholic', '09501532031', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Rosie D. Combinido', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Rural Improvement Club Children Center', 'Taguig City', '2006', 'Top 4', 'Ricardo P. Cruz Sr. Elementary School', 'Taguig City', '2012', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2016', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2018', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '', 'John Roger Rapis', 'Eastern Samar', '09123456789', 'Nel Patrick Chiqullo', 'Palo, Leyte', 'N/A', 'No', 'N/A', 'N/A', 'No', 'N/A', 'No', 'N/A', '', 'This is a test.', 'Approved', 'November 7, 2021, 10:29:21 AM', 'Scored', 'November 7, 2021, 10:31:52 AM', 'Qualified', 'November 7, 2021, 10:59:29 AM', 1, 0, 'Evaluated', 'November 7, 2021, 11:05:00 AM', '2021-11-07 00:47:29', 'N/A');
+INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_strand`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `report_card`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `medical_certificate_image`, `personal_statement`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`, `interview_status`, `is_timestamp`, `approved_first_choice`, `approved_second_choice`, `admission_status`, `as_timestamp`, `application_date`, `remarks`) VALUES
+(1, 1, 'IMG_APPLICANT2021111056995.jpg', 1, 'Freshmen', 'First Semester', '1', '17', 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 5, 6, 121, 'Married', 'Pasig City', 'Filipino', 'Brgy. Uyawan, Carigara, Leyte', 'N/A', 'Roman Catholic', '09501532031', 'Rodolfo T. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'Flor V. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Rural Improvement Club Children Center', 'Taguig City', '2006', 'N/A', 'Ricardo P. Cruz Sr. Elementary School', 'Taguig City', '2012', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2016', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', 'Sports and Arts', '2018', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '', 'John Roger Rapis', 'Eastern Samar', '09123456789', 'Nel Patrick Chiqullo', 'Palo, Leyte', '09123456789', 'No', 'N/A', 'Singing', 'No', 'N/A', 'No', 'N/A', '', 'This is a sample personal statement.', 'Pending', 'N/A', 'Pending', 'N/A', 'Pending', 'N/A', 0, 0, 'Pending', 'N/A', '2021-11-10 05:18:59', 'N/A');
 
 -- --------------------------------------------------------
 
@@ -250,8 +246,7 @@ CREATE TABLE `tbl_applicant_account` (
 --
 
 INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `readmission_verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `notified`, `student_number`, `login_status`, `session_token`) VALUES
-(4, 'ricocombinido9@gmail.com', '$2y$10$QVMLSoO1GCyueI.acVPrVO54Zci1zmWb4anaIMAU/Gbj0OTg6iMZO', 'ed76643da8e486c93466a0399b836347', 1, 1, 'What was the house number and street name you live', '1998', 'Done', 'Done', 'October 27, 2021, 08:48:32 am', 'Not Started', 'N/A', 'Done', 'November 7, 2021, 12:07:22 AM', 0, 'N/A', 0, ''),
-(12, '1800638@lnu.edu.ph', '$2y$10$OqaDXlbCOGuR0EWeRSbvMuGZhxZJYuGsRoBSU6pBm.plvtsPYYreu', '99db1606c532f1e22115e3920705a77c', 1, 1, 'How old is your oldest sibling?', '21', 'Done', 'Done', 'November 7, 2021, 10:26:15 AM', 'Not Started', 'N/A', 'Done', 'November 7, 2021, 10:59:29 AM', 1, '1800638', 0, '');
+(1, 'ricocombinido9@gmail.com', '$2y$10$L0n2nemMxgdARKbS5xCvr.TkBrS.RjdWa2dTsmkRYW8bd436mqX/e', '7e83343bfdede4f50e5692da09c65f46', 1, 1, 'How old is your oldest sibling?', '21', 'Done', 'Done', 'November 10, 2021, 08:28:36 PM', 'Not Started', 'N/A', 'Not Started', 'N/A', 0, 'N/A', 0, '');
 
 -- --------------------------------------------------------
 
@@ -270,13 +265,8 @@ CREATE TABLE `tbl_applicant_card` (
 --
 
 INSERT INTO `tbl_applicant_card` (`id`, `card_applicant_id`, `card_image`) VALUES
-(21, 46, 'IMG_CARD163428992740858_user.png'),
-(22, 46, 'IMG_CARD163428992749076_online-streaming.png'),
-(23, 46, 'IMG_CARD163428992885189_desk-clock.png'),
-(24, 4, 'IMG_CARD163529571233366_2nd Sem - Sched.png'),
-(25, 8, 'IMG_CARD163532053268808_2nd Sem - Sched.png'),
-(26, 12, 'IMG_CARD163625197563022_1609078938964.jpg'),
-(27, 12, 'IMG_CARD163625197560591_id.jpg');
+(1, 1, 'IMG_CARD163654731634453_Screenshot_2021-10-20-09-57-55-124_com.android.chrome.jpg'),
+(2, 1, 'IMG_CARD163654731668218_Screenshot_2021-10-20-09-53-02-349_com.android.chrome.jpg');
 
 -- --------------------------------------------------------
 
@@ -295,10 +285,7 @@ CREATE TABLE `tbl_applicant_medical` (
 --
 
 INSERT INTO `tbl_applicant_medical` (`id`, `medical_applicant_id`, `medical_image`) VALUES
-(15, 46, 'IMG_MED163428992874842_'),
-(16, 4, 'IMG_MED163529571299555_'),
-(17, 8, 'IMG_MED163532053361107_'),
-(18, 12, 'IMG_MED163625197549947_');
+(1, 1, 'IMG_MED163654731689116_');
 
 -- --------------------------------------------------------
 
@@ -321,13 +308,28 @@ CREATE TABLE `tbl_course` (
 --
 
 INSERT INTO `tbl_course` (`course_id`, `course_name`, `course_acronym`, `unit_id`, `course_quota`, `waitlist_quota`, `interview_passing_score`) VALUES
-(7, 'Bachelor of Secondary Education - Major in Math', 'BSED - MATH', 6, 150, 0, 0),
-(14, 'Bachelor of Science in Secondary Education - Major in Filipino', 'BSED - FILIPINO', 4, 0, 0, 0),
-(15, 'Bachelor of Science in Elementary Education', 'BSED', 6, 0, 0, 0),
-(18, 'Bachelor of Science in Information Technology', 'BSIT', 2, 2, 1, 80),
-(19, 'Bachelor of Science in Tourism Management', 'BSTM', 9, 300, 0, 0),
-(20, 'Bachelor of Arts in English Language', 'BAEL', 6, 0, 0, 0),
-(21, 'Bachelor of Elementary Education', 'BEED', 7, 0, 0, 0);
+(1, 'Bachelor of Science in Information Technology', 'BSIT', 1, 0, 0, 0),
+(2, 'Bachelor of Elementary Education', 'BEED', 7, 0, 0, 0),
+(3, 'Bachelor of Early Childhood Education', 'BECED', 7, 0, 0, 0),
+(4, 'Bachelor of Special Needs Education', 'BSNED', 7, 0, 0, 0),
+(5, 'Bachelor of Technology and Livelihood Education', 'BTLED', 4, 0, 0, 0),
+(6, 'Bachelor of Physical Education', 'BPED', 3, 0, 0, 0),
+(7, 'Bachelor of Secondary Education - Major in English', 'BSED - ENGLISH', 11, 0, 0, 0),
+(8, 'Bachelor of Secondary Education - Major in Filipino', 'BSED - FILIPINO', 2, 0, 0, 0),
+(9, 'Bachelor of Secondary Education - Major in Math', 'BSED - MATH', 5, 0, 0, 0),
+(10, 'Bachelor of Secondary Education - Major in Science', 'BSED - SCIENCE', 8, 0, 0, 0),
+(11, 'Bachelor of Secondary Education - Major in Social Studies', 'BSED - SOCIAL STUDIES', 6, 0, 0, 0),
+(12, 'Bachelor of Secondary Education - Major in Values Education', 'BSED - VALUES', 7, 0, 0, 0),
+(13, 'Bachelor of Arts in Communication', 'BACOMM', 11, 0, 0, 0),
+(14, 'Bachelor of Library and Information Science', 'BLIS', 12, 0, 0, 0),
+(15, 'Bachelor of Science in Information Technology', 'BSIT', 1, 0, 0, 0),
+(16, 'Bachelor of Arts in English Language', 'BAEL', 11, 0, 0, 0),
+(17, 'Bachelor of Arts in Political Science', 'BAPos', 6, 0, 0, 0),
+(18, 'Bachelor of Science in Biology', 'BSBio', 8, 0, 0, 0),
+(19, 'Bachelor of Science in Social Work', 'BSSW', 13, 0, 0, 0),
+(20, 'Bachelor of Science in Tourism Management', 'BSTM', 9, 0, 0, 0),
+(21, 'Bachelor of Science in Hospitality Management', 'BSHM', 10, 0, 0, 0),
+(22, 'Bachelor of Science in Entrepreneurship', 'BSEntrep', 10, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -346,9 +348,9 @@ CREATE TABLE `tbl_department` (
 --
 
 INSERT INTO `tbl_department` (`id`, `dept_name`, `dept_acronym`) VALUES
-(14, 'College of Education', 'COE'),
-(17, 'College of Management and Entrepreneurship', 'CME'),
-(37, 'College of Arts and Sciences', 'CAS');
+(1, 'College of Arts and Sciences', 'CAS'),
+(2, 'College of Education', 'COE'),
+(3, 'College of Management and Entrepreneurship', 'CME');
 
 -- --------------------------------------------------------
 
@@ -374,18 +376,6 @@ CREATE TABLE `tbl_exam` (
 
 INSERT INTO `tbl_exam` (`id`, `exam_title`, `exam_time_limit`, `exam_quest_limit`, `exam_description`, `exam_created`, `exam_start_date`, `exam_end_date`, `exam_status`) VALUES
 (9, 'OLSAT Entrance Examination', '50', 100, 'This is the standard examination for LNU Admissions.', '2021-09-24 13:31:22', '2021-10-24 00:00', '2021-10-30 00:29', 'Deactivated');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_exam_admin`
---
-
-CREATE TABLE `tbl_exam_admin` (
-  `id` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -421,7 +411,7 @@ CREATE TABLE `tbl_exam_result` (
 --
 
 INSERT INTO `tbl_exam_result` (`id`, `exam_applicant_id`, `exam_score`) VALUES
-(46, 12, 81);
+(1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -440,9 +430,7 @@ CREATE TABLE `tbl_faqs` (
 --
 
 INSERT INTO `tbl_faqs` (`id`, `question`, `answer`) VALUES
-(1, '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'),
-(2, 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"', 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.'),
-(4, 'Test Question Updated', 'Test Answer');
+(1, 'Will the admissions office allow disapproved applicants to resubmit their application forms again?', 'Yes, but the applicant must resubmit the required/lacking documents within the specified period.');
 
 -- --------------------------------------------------------
 
@@ -453,8 +441,9 @@ INSERT INTO `tbl_faqs` (`id`, `question`, `answer`) VALUES
 CREATE TABLE `tbl_inquiry` (
   `id` int(11) NOT NULL,
   `inquiry_applicant_id` int(11) NOT NULL,
+  `inquiry_reply_role` int(11) NOT NULL,
   `inquiry_category` varchar(30) NOT NULL,
-  `inquiry_subject` varchar(30) NOT NULL,
+  `inquiry_subject` varchar(250) NOT NULL,
   `inquiry_message` longtext NOT NULL,
   `inquiry_sent_timestamp` varchar(30) NOT NULL,
   `inquiry_reply` longtext NOT NULL,
@@ -466,11 +455,9 @@ CREATE TABLE `tbl_inquiry` (
 -- Dumping data for table `tbl_inquiry`
 --
 
-INSERT INTO `tbl_inquiry` (`id`, `inquiry_applicant_id`, `inquiry_category`, `inquiry_subject`, `inquiry_message`, `inquiry_sent_timestamp`, `inquiry_reply`, `inquiry_reply_timestamp`, `inquiry_status`) VALUES
-(1, 7, '', '', '', '', '', '', ''),
-(3, 4, 'General Inquiry', 'This is a test feedback.', 'This is a test feedback message. This is a test feedback message. This is a test feedback message. This is a test feedback message. This is a test feedback message. This is a test. This is a test feedback message. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test.  This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. This is a test. ', 'June 30, 2021, 5:15 am', 'This is settled.', 'October 23, 2021, 10:37 pm', 'Settled'),
-(6, 8, 'General Inquiry', 'I cannot monitor my status.', 'This is a test inquiry.', 'October 27, 2021, 9:49 am', 'Use the monitoring page on your account.', 'October 27, 2021, 3:54 pm', 'Settled'),
-(7, 8, 'General Inquiry', 'This is another inquiry', 'This is another issue', 'October 27, 2021, 3:53 pm', 'Okay, noted.', 'October 27, 2021, 3:55 pm', 'Settled');
+INSERT INTO `tbl_inquiry` (`id`, `inquiry_applicant_id`, `inquiry_reply_role`, `inquiry_category`, `inquiry_subject`, `inquiry_message`, `inquiry_sent_timestamp`, `inquiry_reply`, `inquiry_reply_timestamp`, `inquiry_status`) VALUES
+(1, 1, 0, 'General Inquiry', 'Sample inquiry for the administrator', 'This is a sample inquiry intended for the administrator ', 'November 10, 2021, 2:45 pm', 'This is already settled by the system administrator.', 'November 10, 2021, 3:33 pm', 'Settled'),
+(2, 1, 1, 'General Inquiry', 'Sample inquiry for the admissions office.', 'This is a sample inquiry for the admissions office.', 'November 10, 2021, 3:22 pm', 'This is settled by the admissions office.', 'November 10, 2021, 3:36 pm', 'Settled');
 
 -- --------------------------------------------------------
 
@@ -481,10 +468,12 @@ INSERT INTO `tbl_inquiry` (`id`, `inquiry_applicant_id`, `inquiry_category`, `in
 CREATE TABLE `tbl_interview` (
   `id` int(11) NOT NULL,
   `interview_applicant_id` int(11) NOT NULL,
-  `interview_platform` varchar(20) NOT NULL,
+  `interview_staff_id` int(11) NOT NULL,
+  `interview_preferred_method` varchar(30) NOT NULL,
+  `interview_method` varchar(20) NOT NULL,
   `interview_date` varchar(20) NOT NULL,
   `interview_time` varchar(20) NOT NULL,
-  `interview_link` varchar(100) NOT NULL,
+  `interview_venue_or_link` varchar(100) NOT NULL,
   `interview_rating` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -492,9 +481,8 @@ CREATE TABLE `tbl_interview` (
 -- Dumping data for table `tbl_interview`
 --
 
-INSERT INTO `tbl_interview` (`id`, `interview_applicant_id`, `interview_platform`, `interview_date`, `interview_time`, `interview_link`, `interview_rating`) VALUES
-(49, 4, 'Video Call', '11/19/2021', '2:40 PM', 'Link', 81),
-(74, 12, 'Video Call', '11/16/2021', '8:00 AM', 'meet.google.com/sjk-cas-ddsd', 80);
+INSERT INTO `tbl_interview` (`id`, `interview_applicant_id`, `interview_staff_id`, `interview_preferred_method`, `interview_method`, `interview_date`, `interview_time`, `interview_venue_or_link`, `interview_rating`) VALUES
+(1, 1, 0, 'Video Call', 'TBA', 'TBA', 'TBA', 'TBA', 0);
 
 -- --------------------------------------------------------
 
@@ -513,9 +501,9 @@ CREATE TABLE `tbl_procedures` (
 --
 
 INSERT INTO `tbl_procedures` (`id`, `procedure_step_num`, `procedure_desc`) VALUES
-(1, 1, 'The first steps'),
-(2, 2, 'The Second Step'),
-(9, 3, 'Third step');
+(1, 1, 'This is a sample of the first admission procedure for demonstration.'),
+(2, 2, 'This is a sample of the second admission procedure for demonstration.'),
+(3, 3, 'This is a sample of the third admission procedure for demonstration.');
 
 -- --------------------------------------------------------
 
@@ -534,9 +522,9 @@ CREATE TABLE `tbl_requirements` (
 --
 
 INSERT INTO `tbl_requirements` (`id`, `requirements_num`, `requirements_desc`) VALUES
-(1, 1, 'Duly Accomplished Online Admission Form Sample Update'),
-(2, 2, 'A scanned copy OR a photograph of Grade 12 card showing the grades on all subjects during the first semester, LRN and Strand, or Official Transcript of Records from the school last attended for transferees.'),
-(5, 0, 'Sample Schedule');
+(1, 1, 'Duly accomplished Online Admission Application Form'),
+(2, 2, 'A scanned copy or a photograph of Grade 12 card showing the grades on all subjects during the first semester, LRN and Strand, or Official Transcript of Records from the school last attended for Transferees.'),
+(3, 3, 'A recent (within 6 months) decent solo full-body photo of the applicant with a plain white background.');
 
 -- --------------------------------------------------------
 
@@ -555,8 +543,9 @@ CREATE TABLE `tbl_schedules` (
 --
 
 INSERT INTO `tbl_schedules` (`id`, `schedule_date`, `schedule_desc`) VALUES
-(1, 'Wednesday 01 September 2021', 'Opening of the admission period Sample Update'),
-(2, 'Monday, July 29, 2021', 'Closing of the admission period.');
+(1, 'Tuesday, May 03, 2022', 'Submission of Online Admission Applications Through Portal'),
+(2, 'Tuesday, May 24, 2022', 'Conduct of Interview via Phone or Video Call'),
+(3, 'Thursday, June 24, 2021', 'Announcement of Admission Qualifiers');
 
 -- --------------------------------------------------------
 
@@ -576,11 +565,19 @@ CREATE TABLE `tbl_unit` (
 --
 
 INSERT INTO `tbl_unit` (`id`, `unit_name`, `unit_desc`, `unit_dept_id`) VALUES
-(2, 'IT and Computer Education Unit', 'IT and Computer Education Unit Description', 37),
-(4, 'Filipino Unit', 'Filipino', 14),
-(6, 'Mathematics Unit', 'Mathematics Unit Description', 14),
-(7, 'Professional Education Unit', 'This unit is for Gen. Education', 14),
-(9, 'Entrepreneurship Unit', 'This unit is for entrepreneurship', 17);
+(1, 'IT and Computer Education Unit', 'N/A', 1),
+(2, 'Filipino Unit', 'N/A', 2),
+(3, 'MAPEH Unit', 'N/A', 2),
+(4, 'HAE Unit', 'N/A', 2),
+(5, 'Math Unit', 'N/A', 2),
+(6, 'Social Science Unit', 'N/A', 1),
+(7, 'Professional Education Unit', 'N/A', 2),
+(8, 'Science Unit', 'N/A', 2),
+(9, 'Tourism Unit', 'N/A', 3),
+(10, 'Entrepreneurship Unit', 'N/A', 3),
+(11, 'Languages and Literature Unit', 'N/A', 2),
+(12, 'BLIS Unit', 'N/A', 1),
+(13, 'Social Work Unit', 'N/A', 1);
 
 --
 -- Indexes for dumped tables
@@ -647,12 +644,6 @@ ALTER TABLE `tbl_exam`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_exam_admin`
---
-ALTER TABLE `tbl_exam_admin`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_exam_questions`
 --
 ALTER TABLE `tbl_exam_questions`
@@ -714,13 +705,13 @@ ALTER TABLE `tbl_unit`
 -- AUTO_INCREMENT for table `tbl_academic_year`
 --
 ALTER TABLE `tbl_academic_year`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_account_staff`
 --
 ALTER TABLE `tbl_account_staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -732,49 +723,43 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_account`
 --
 ALTER TABLE `tbl_applicant_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_card`
 --
 ALTER TABLE `tbl_applicant_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_applicant_medical`
 --
 ALTER TABLE `tbl_applicant_medical`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_exam`
 --
 ALTER TABLE `tbl_exam`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `tbl_exam_admin`
---
-ALTER TABLE `tbl_exam_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_exam_questions`
@@ -786,49 +771,49 @@ ALTER TABLE `tbl_exam_questions`
 -- AUTO_INCREMENT for table `tbl_exam_result`
 --
 ALTER TABLE `tbl_exam_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_faqs`
 --
 ALTER TABLE `tbl_faqs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_inquiry`
 --
 ALTER TABLE `tbl_inquiry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_interview`
 --
 ALTER TABLE `tbl_interview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_procedures`
 --
 ALTER TABLE `tbl_procedures`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_requirements`
 --
 ALTER TABLE `tbl_requirements`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedules`
 --
 ALTER TABLE `tbl_schedules`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_unit`
 --
 ALTER TABLE `tbl_unit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
