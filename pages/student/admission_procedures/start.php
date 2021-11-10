@@ -3,7 +3,7 @@
 	$email = '';
 	require '../../backend/auth/check_token.php';
  
-	if(isset($_SESSION['token'])){
+	if(isset($_SESSION['student_token'])){
 
 		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account
         LEFT JOIN tbl_applicant ON tbl_applicant_account.id = tbl_applicant.applicant_account_id 

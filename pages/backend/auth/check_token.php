@@ -6,9 +6,9 @@ session_start();
 
 require '../../backend/config/db_pdo.php';
 
-if(isset($_SESSION['token'])){
+if(isset($_SESSION['student_token'])){
 
-	$token = $_SESSION['token'];
+	$token = $_SESSION['student_token'];
 
 	$sql = $conn->prepare("SELECT * from `tbl_applicant_account` where `session_token`='$token'");
 	$sql->execute();

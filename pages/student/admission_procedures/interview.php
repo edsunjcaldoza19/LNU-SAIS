@@ -3,7 +3,7 @@
 	$email = '';
 	require '../../backend/auth/check_token.php';
 
-	if(isset($_SESSION['token'])){
+	if(isset($_SESSION['student_token'])){
 
 		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM tbl_applicant_account
         LEFT JOIN tbl_applicant ON tbl_applicant_account.id = tbl_applicant.applicant_account_id 
@@ -239,6 +239,11 @@
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px;">
 									Please take note of the following details for the conduct of your interview.
 								</p>
+								<?php
+									if($fetch['interview_staff_id'] == '0'){
+										echo '<small><i>*TBA - To be announced (kindly check this page from time-to-time for updates)</i></small>';
+									} 
+								?>
 								<hr class="default-divider ml-auto" style="margin: 5px;">
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
 									Interviewer:
@@ -255,17 +260,31 @@
 								</p>
 								<hr class="default-divider ml-auto" style="margin: 5px;">
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
-									Platform:
+									Method:
 								</p>
 								<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									<?php echo $fetch['interview_platform']; ?>
+									<?php echo $fetch['interview_method']; ?>
 								</p>
 								<hr class="default-divider ml-auto" style="margin: 5px;">
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
-									Meeting Link:
+									<?php 
+										$method = $fetch['interview_method'];
+										if($method == 'Face-to-Face'){
+											echo 'Interview Venue:';
+										}else{
+											echo 'Video Call Link:';
+										}
+									?>
 								</p>
 								<p class="exam-placeholder-text" href="#" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									<a href="<?php echo $fetch['interview_link']; ?>"><?php echo $fetch['interview_link']; ?></a>
+									<?php 
+										$link = $fetch['interview_venue_or_link'];
+										if($link == 'TBA'){
+											echo 'TBA';
+										}else{
+											echo '<a href="'.$link.'">'.$link.'</a>';
+										}
+									?>
 								</p>
 							</div>
 						</div>

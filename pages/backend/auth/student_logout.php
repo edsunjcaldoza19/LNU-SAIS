@@ -4,7 +4,7 @@ require '../config/db_pdo.php';
 
 session_start();
 
-$token = $_SESSION['token'];
+$token = $_SESSION['student_token'];
 $id = '';
 
 $sql = $conn->prepare("SELECT * from `tbl_applicant_account` where `session_token`='$token'");
@@ -30,7 +30,7 @@ $success = $conn->prepare($sql)->execute($data);
 
 if($success){
 
-	unset($_SESSION['token']);
+	unset($_SESSION['student_token']);
 	header("location:../../accounts/student/login.php");
 
 }else{

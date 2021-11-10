@@ -4,7 +4,7 @@
 	require '../../backend/auth/check_token.php';
 
 
-	if(isset($_SESSION['token'])){
+	if(isset($_SESSION['student_token'])){
 
 		$sql = $conn->prepare("SELECT * from `tbl_applicant_account` WHERE `session_token` = '$token'");
 		$sql->execute();
@@ -294,6 +294,26 @@
 				                    	</div>
 				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
 				                        	<div class="form-line">
+								                <select class="form-control" name="cbSHSStrand" id="cbSHSStrand" required>
+			                                     	<option value="" disabled selected>Senior Highschool Strand *</option>
+				                                    <option value="Science, Technology, Engineering and Mathematics (STEM)">Science, Technology, Engineering and Mathematics (STEM)</option>
+				                                    <option value="Accountancy and Business Management (ABM)">Accountancy and Business Management (ABM)</option>
+				                                    <option value="Humanities and Social Sciences (HUMSS)">Humanities and Social Sciences (HUMSS)</option>
+				                                    <option value="General Academics Strand (GAS)">General Academics Strand (GAS)</option>
+				                                    <option value="Information and Communications Technology (Tech-Voc ICT)">Information and Communications Technology (Tech-Voc ICT)</option>
+				                                    <option value=">Home Economics (Tech-Voc HE)">Home Economics (Tech-Voc HE)</option>
+				                                    <option value="Others">Others (please specify)</option>
+			                                    </select>	
+		                                    </div>
+				                    	</div>
+				                    	<div class="form-group form-float" id="tbSHSStrand" style="margin-bottom: 15px; display: none;">
+				                        	<div class="form-line">
+				                            	<input type="text" name="tbSHSStrand" class="form-control"/>
+				                            	<label class="form-label">Specify Senior High School Strand *</label>
+				                       		</div>
+				                    	</div>
+				                    	<div class="form-group form-float" style="margin-bottom: 15px;">
+				                        	<div class="form-line">
 				                            	<input type="text" name="tbSHSYearGraduated" id="tbSHSYearGraduated" class="form-control" required/>
 				                            	<label class="form-label">Year Graduated *</label>
 				                       		</div>
@@ -364,7 +384,7 @@
 				                    		<p class="student-page-label">Please upload a scanned copy of your Grade 12 Report Card/TOR (for transferees)</p>
 				                    		<p style="font-size: 12px"><i>Note: See to it that your name is visible in the photo/s of the report card or TOR.</i></p>
 											<div class="form-group form-float" style="margin-bottom: 15px;">
-				                        		<input class="student-page-upload" name="cardImages[]" type="file" multiple required>
+				                        		<input class="student-page-upload" name="cardImages[]" type="file" accept="image/jpeg, image/jpg, image/png" multiple required>
 				                    		</div>
 				                    	</div>
 									</div>
@@ -547,7 +567,6 @@
 
 	<script src="../../assets/libs/jquery/jquery.min.js"></script>
 	<script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../assets/libs/bootstrap-select/dist/js/bootstrap-select.js"></script>
 	<script src="../../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="../../assets/libs/node-waves/waves.js"></script>

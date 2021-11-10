@@ -3,7 +3,7 @@
 	$email = '';
 	require '../../backend/auth/check_token.php';
 
-	if(isset($_SESSION['token'])){
+	if(isset($_SESSION['student_token'])){
 
 		$sql = $conn->prepare("SELECT *, tbl_applicant_account.id FROM `tbl_applicant_account`
 		LEFT JOIN tbl_applicant ON tbl_applicant.applicant_account_id = tbl_applicant_account.id
@@ -185,7 +185,7 @@
 										<div class="student-page-upload-text">
 											<p style="font-size: 14px; margin-top: 10px;"><strong>Recent Solo Whole-body Picture *</strong> <br>(Plain White Background w/Name Tag):</p>
 											<input class="student-page-upload" name="image" id="image" type="file" onchange="previewImage(event)" style="white-space: nowrap; overflow: hidden;
-											text-overflow: ellipsis; width: 150px;" required>
+											text-overflow: ellipsis; width: 150px;" accept="image/jpeg, image/jpg, image/png" required>
 										</div>
 									</div>
 									<div class="col-md-8">
@@ -240,6 +240,16 @@
 							                                ?>
 				                                		</select>
 							                        </div>
+				                    			</div>
+				                    			<p class="student-page-label">Preferred Method of Interview *</p>
+				                    			<div class="form-group form-float" style="margin-bottom: 15px;">
+						                        	<div class="form-line">
+										                <select class="form-control" name="cbPreferredMethod" id="cbPreferredMethod" required>
+					                                     	<option value="" disabled selected>Select Method Here</option>
+						                                    <option value="Face-to-Face">Face-to-Face</option>
+						                                    <option value="Video Call">Video Call</option>
+					                                    </select>	
+				                                    </div>
 				                    			</div>
 											</div>
 										</div>
@@ -544,7 +554,6 @@
 
 	<script src="../../assets/libs/jquery/jquery.min.js"></script>
 	<script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="../../assets/libs/node-waves/waves.js"></script>
     <script src="../../assets/js/template/admin.js"></script>

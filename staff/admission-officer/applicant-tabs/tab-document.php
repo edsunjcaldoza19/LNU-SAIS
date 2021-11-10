@@ -23,7 +23,7 @@
                                     $sqlMedical->execute();
                                     while($fetchMedical = $sqlMedical->fetch()){
                                 ?>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="<?php if($fetchMedical['medical_image'] == 'N/A'){echo 'display:none';}else{echo 'display: block';} ?>">
                                     <a href="../../images/applicant-img/applicant-medical/<?php echo $fetchMedical['medical_image'];?>" data-sub-html="Medical Certificate">
                                         <img class="img-responsive thumbnail" style="width: 360px; height: 240px;" src="../../images/applicant-img/applicant-medical/<?php echo $fetchMedical['medical_image'];?>">
                                      </a>
@@ -31,7 +31,6 @@
                                 <?php
                                     }
                                 ?>
-
                                 </div>
                             </div>
                         </div>

@@ -36,11 +36,19 @@
         foreach ($_FILES['medicalImages']['name'] as $key => $medicalname){
             $medicalrandom=rand(0,100000);
 		    $medicalrename = 'IMG_MED'.time().$medicalrandom;
-            $medicalFilename = $medicalrename . "_" . $medicalname;
             move_uploaded_file($_FILES['medicalImages']['tmp_name'][$key], '../../../images/applicant-img/applicant-medical/' . $medicalFilename);
-            $sqlMedical = "INSERT INTO `tbl_applicant_medical`(`medical_applicant_id`, `medical_image`) VALUES ('$applicant_account_id','$medicalFilename')";
-            $conn->exec($sqlMedical);
+            
+            if($_FILE['medical_images'] == ''){
+                $medicalFilename = 'N/A';
+
+            }else{
+                $medicalFilename = $medicalrename . "_" . $medicalname;
+                $sqlMedical = "INSERT INTO `tbl_applicant_medical`(`medical_applicant_id`, `medical_image`) VALUES ('$applicant_account_id','$medicalFilename')";
+                $conn->exec($sqlMedical);
+            }
         }
+
+
         ## Kinder
         $kinderSchoolName = $_POST['tbKinderSchoolName'];
         $kinderSchoolAddress = $_POST['tbKinderSchoolAddress'];
@@ -59,6 +67,14 @@
         # SHS
         $SHSSchoolName = $_POST['tbSHSSchoolName'];
         $SHSSchoolAddress = $_POST['tbSHSSchoolAddress'];
+        $SHSStrand = $_POST['cbSHSStrand'];
+
+        if($SHSStrand == 'Others'){
+            $SHSStrand = $_POST['tbSHSStrand'];
+        }else{
+            $SHSStrand = $_POST['cbSHSStrand'];
+        }
+
         $SHSYearGraduated = $_POST['tbSHSYearGraduated'];
         $SHSHonorsReceived = $_POST['tbSHSHonorsReceived'];
 
@@ -140,7 +156,7 @@
         `elem_honors`='$elementaryHonorsReceived',`jhs_name`='$JHSSchoolName',
         `jhs_address`='$JHSSchoolAddress',`jhs_year_graduated`='$JHSYearGraduated',
         `jhs_honors`='$JHSHonorsReceived',`shs_name`='$SHSSchoolName',
-        `shs_address`='$SHSSchoolAddress',`shs_year_graduated`='$SHSYearGraduated',
+        `shs_address`='$SHSSchoolAddress',`shs_strand` = '$SHSStrand', `shs_year_graduated`='$SHSYearGraduated',
         `shs_honors`='$SHSHonorsReceived',`college_name`='$collegeSchoolName1',
         `college_address`='$collegeSchoolAddress1',`college_year_graduated`='$collegeYearGraduated1',
         `college_honors`='$collegeHonorsReceived1',`college_name2`='$collegeSchoolName2',

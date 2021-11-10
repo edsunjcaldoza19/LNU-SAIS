@@ -2,7 +2,7 @@
 	
 	session_start();
 
-	if(isset($_SESSION['token'])){
+	if(isset($_SESSION['student_token'])){
 
 		echo '
 			<script>

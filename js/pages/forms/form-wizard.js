@@ -63,6 +63,18 @@ $(function () {
         });
     }); 
 
+
+    $('#cbSHSStrand').on('change', function(){
+        var value = $(this).val();
+        if(value == 'Others'){
+            $('#tbSHSStrand').show();
+            $("#tbSHSStrand").prop('required', true);
+        }else{
+            $('#tbSHSStrand').hide();
+            $("#tbSHSStrand").prop('false', true);
+        }
+    }); 
+
 });
 
 function setButtonWavesEffect(event) {

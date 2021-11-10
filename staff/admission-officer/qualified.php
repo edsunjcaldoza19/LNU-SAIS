@@ -42,11 +42,11 @@
                                         <tr>
                                             <th>Applicant Name</th>
                                             <th>Entry Type</th>
+                                            <th>Semester</th>
                                             <th>First Choice</th>
                                             <th>Status</th>
                                             <th>Second Choice</th>
                                             <th>Status</th>
-                                            <th>Notified</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -82,6 +82,7 @@
                                                 ?>
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
                                             <td>
                                                 <?php
                                                     echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';
@@ -115,15 +116,6 @@
                                                         echo '<p class="label-orange">Waitlisted</p>';
                                                     }else if($fetch['approved_second_choice'] == 0){
                                                         echo '<p class="label-blue">Pending</p>';
-                                                    }
-                                                ?>  
-                                            </td>
-                                            <td>
-                                                <?php
-                                                    if($fetch['notified'] == 0){
-                                                        echo '<p class="label-red">Pending</p>';
-                                                    }else if($fetch['notified'] == 1){
-                                                        echo '<p class="label-green">Done</p>';
                                                     }
                                                 ?>  
                                             </td>

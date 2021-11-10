@@ -70,7 +70,7 @@ if(isset($_POST['btnLogin'])){
 
 					/* Set Session Information */
 
-					$_SESSION['token'] = $token;
+					$_SESSION['student_token'] = $token;
 
 					/* Update User Token */
 

@@ -26,7 +26,7 @@ if(isset($_POST['send'])){
     $program = $_POST['program'];
     $idNum = $_POST['idNum'];
 
-    $query="UPDATE tbl_applicant_account SET `student_number` = '$idNum', `notified` = 1 WHERE `email` = '$email'";
+    $query="UPDATE tbl_applicant_account SET `student_number` = '$idNum' WHERE `email` = '$email'";
     $query_run = mysqli_query($connection, $query); 
 
     if($query_run){

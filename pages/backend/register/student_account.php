@@ -217,6 +217,30 @@ if(isset($_POST['btnRegister'])){
             </script>
 
             ';
+        }else{
+            echo '
+            <script>
+
+                $(document).ready(function(){
+
+                    Swal.fire({
+
+                        icon: "error",
+                        title: "Cannot send a verification mail, please check your internet connection.",
+                        showConfirmButton: false,
+                        timer: 3000
+
+                    }).then(function(){
+
+                        window.location.replace("../../accounts/student/registration.php");
+
+                    });
+
+                });
+
+            </script>
+
+            ';
         }
     
     }

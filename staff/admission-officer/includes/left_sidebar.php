@@ -124,7 +124,13 @@
                         </a>
                     </li>
                     <li class="header">OTHER OPTIONS</li>
-                     <li>
+                    <li class="<?= ($activePage == 'inquiry') ? 'active': ''; ?>">
+                        <a href="inquiry.php">
+                            <i class="material-icons">feedback</i>
+                            <span>Inquiries</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="settings.php">
                             <i class="material-icons">settings</i>
                             <span>Account Settings</span>

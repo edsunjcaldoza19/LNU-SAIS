@@ -29,12 +29,23 @@
 		echo 'Error: '.$e->getMessage();
 	}
 
+	try{
+
+		$id = $fetch['id'];
+
+		$sql1 = $conn->prepare("SELECT * FROM tbl_inquiry WHERE `inquiry_applicant_id` = '$id'");
+    	$sql1->execute();
+
+	}catch(exception $e){
+		echo 'Error: '.$e->getMessage();
+	}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LNU SAIS | My Status</title>
+	<title>LNU SAIS | Inquiry</title>
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -147,10 +158,10 @@
                                 </thead>
                                 <tbody class="body">
                                 	<?php
-                                        while($feedback = $sql->fetch()){
+                                        while($feedback = $sql1->fetch()){
                                 	?>
                                     <tr>
-                                    	<td><?php echo $feedback['inquiry_subject']?></td>
+                                    	<td style="width: 350px;"><?php echo $feedback['inquiry_subject']?></td>
                                     	<td>
                                     		<?php 
                                                 if($feedback['inquiry_status'] == "Queued"){
@@ -181,14 +192,20 @@
 										       				</div>
 										       				<div class="reply-container" style="padding: 10px; width: 100%;">
 										       					<?php
-										       						if($feedback['inquiry_reply'] !== ''){
+										       						if($feedback['inquiry_reply'] !== '' && $feedback['inquiry_reply_role'] == 0){
 										       							echo '
 										       								<p><b>System Administrator:</b></p>
 										       								<p>' .$feedback["inquiry_reply"].'</p>
 										       								<hr class="default-divider ml-auto" style="margin: 10px;">
 										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["inquiry_reply_timestamp"].'</p>
 										       							';
-
+										       						}else if($feedback['inquiry_reply'] !== '' && $feedback['inquiry_reply_role'] == 1){
+										       							echo '
+										       								<p><b>Admissions Office:</b></p>
+										       								<p>' .$feedback["inquiry_reply"].'</p>
+										       								<hr class="default-divider ml-auto" style="margin: 10px;">
+										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["inquiry_reply_timestamp"].'</p>
+										       							';
 										       						}else{
 										       							echo 'No replies yet';
 										       						}

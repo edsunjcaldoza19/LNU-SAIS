@@ -65,6 +65,7 @@
 							/* Set Session Information */
 
 							$_SESSION['admin_id'] = $user['id'];
+							$_SESSION['role'] = $role;
 		    				$_SESSION['admin_username'] = $user['username'];
 							$_SESSION['admin_name'] = $user['name'];
 							$_SESSION['admin_email'] = $user['email'];
@@ -163,6 +164,7 @@
 							/* Set Session Information */
 
 							$_SESSION['staff_id'] = $user['id'];
+							$_SESSION['role'] = $role;
 							$_SESSION['staff_username'] = $user['staff_username'];
 							$_SESSION['staff_name'] = $fullname;
 							$_SESSION['staff_email'] = $user['staff_email'];
@@ -256,6 +258,7 @@
 							/* Set Session Information */
 
 							$_SESSION['staff_id'] = $user['id'];
+							$_SESSION['role'] = $role;
 							$_SESSION['staff_username'] = $user['staff_username'];
 							$_SESSION['staff_name'] = $fullname;
 							$_SESSION['staff_email'] = $user['staff_email'];
@@ -349,6 +352,7 @@
 							/* Set Session Information */
 
 							$_SESSION['staff_id'] = $user['id'];
+							$_SESSION['role'] = $role;
 							$_SESSION['staff_username'] = $user['staff_username'];
 							$_SESSION['staff_name'] = $fullname;
 							$_SESSION['staff_email'] = $user['staff_email'];
@@ -443,6 +447,7 @@
 							/* Set Session Information */
 
 							$_SESSION['staff_id'] = $user['id'];
+							$_SESSION['role'] = $role;
 							$_SESSION['staff_username'] = $user['staff_username'];
 							$_SESSION['staff_name'] = $fullname;
 							$_SESSION['staff_email'] = $user['staff_email'];

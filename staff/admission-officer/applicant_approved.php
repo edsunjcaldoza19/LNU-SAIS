@@ -39,6 +39,7 @@
                                         <tr>
                                             <th>Applicant Name</th>
                                             <th>Entry Type</th>
+                                            <th>Semester</th>
                                             <th>First Choice</th>
                                             <th>Second Choice</th>
                                             <th>Application Form Status</th>
@@ -76,6 +77,7 @@
                                                 ?>
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
                                             <td>
                                                 <?php
                                                     echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';
