@@ -65,6 +65,7 @@
                                         <tr>
                                             <th>Applicant Name</th>
                                             <th>Entry Type</th>
+                                            <th>Semester</th>
                                             <th>Unit Approval Status</th>
                                         </tr>
                                     </thead>
@@ -82,6 +83,7 @@
                                                 ?>   
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
                                             <td align="center">
                                                 <?php
                                                     if(($fetch['approved_first_choice'] == 0 && $fetch['program_first_choice'] == $course) || ($fetch['approved_second_choice'] == 0 && $fetch['program_second_choice'] == $course)){

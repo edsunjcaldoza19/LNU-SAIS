@@ -3,6 +3,10 @@
            <?php
                 include 'includes/user.php';
                 require 'be/database/db_pdo.php';
+
+                $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
+                $sql1->execute();
+                $fetch1 = $sql1->fetch();
            ?>
             <!-- Menu -->
             <div class="menu">
@@ -13,6 +17,12 @@
                             <span>Home</span>
                         </a>
                     </li>
+                    <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
+                        <a href="applicant.php">
+                            <i class="material-icons">people</i>
+                            <span>Applicants Masterlist</span>
+                        </a>
+                    </li>
                     <li class="header">MANAGE ENTRANCE EXAMINATION</li>
 
                     <?php
@@ -21,64 +31,17 @@
                         $fetchAy = $sql->fetch();
                     
                     ?>
-                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?> <?php if($fetchAy["enable_exam"] == 1){echo 'li-disabled';}else{echo '';}?>">
+                    <li class="<?= ($activePage == 'applicant_scored' || $activePage == 'applicant_unscored') ? 'active': ''; ?> <?php if($fetchAy["enable_exam"] == 1){echo 'li-disabled';}else{echo '';}?>">
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">supervisor_account</i>
+                            <i class="material-icons">mode</i>
                             <span>Encode Applicant Scores</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
-                                <a href="applicant.php">Applicants Masterlist</a>
-                            </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Pending Applicants</a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <?php
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
-                                        $sql->execute();
-                                        while($fetch = $sql->fetch()){
-                                        ?>
-                                        <a href="applicant_pending.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
-                                        <?php
-                                            }
-                                        ?>
-                                    </li>
-                                </ul>
+                                <a href="applicant_unscored.php?sy_id=<?php echo $fetch1['id'];?>">Unscored Applicants</a>
                             </li>
-                            <li class="<?= ($activePage == 'applicant_qualified') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Qualified Applicants</a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
-                                        $sql->execute();
-                                        while($fetch = $sql->fetch()){
-                                        ?>
-                                        <a href="applicant_qualified.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
-                                        <?php
-                                            }
-                                        ?>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="<?= ($activePage == 'applicant_unqualified') ? 'active': ''; ?>">
-                                <a href="javascript:void(0);" class="menu-toggle">Unqualified Applicants</a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
-                                        $sql->execute();
-                                        while($fetch = $sql->fetch()){
-                                        ?>
-                                        <a href="applicant_unqualified.php?sy_id=<?php echo $fetch['id'];?>">A.Y. <?php echo $fetch['ay_year']; ?></a>
-                                        <?php
-                                            }
-                                        ?>
-                                    </li>
-                                </ul>
+                            <li class="<?= ($activePage == 'applicant_scored') ? 'active': ''; ?>">
+                                <a href="applicant_scored.php?sy_id=<?php echo $fetch1['id'];?>">Scored Applicants</a>
                             </li>
                         </ul>
                     </li>

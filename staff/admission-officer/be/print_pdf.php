@@ -43,10 +43,13 @@
 
             $sql3 = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                 LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                LEFT JOIN tbl_course ON (tbl_course.course_id=tbl_applicant.program_first_choice OR tbl_course.course_id=tbl_applicant.program_second_choice)
                 WHERE `school_year_id` = $sy_id
-                AND (`approved_first_choice` = 1 AND `program_first_choice` = `course_id`) OR (`approved_second_choice` = 1 AND `program_second_choice` = `course_id`)
-                ORDER BY `last_name` AND `course_name` ASC
+                AND `form_status`='Approved' AND `exam_status`='Scored'
+                AND `interview_status`='Qualified' AND `admission_status`='Evaluated' 
+                AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 1) 
+                    OR (`approved_first_choice` = 1 AND `approved_second_choice` = 0) 
+                    OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1))
+                ORDER BY `last_name` ASC
                 ");
             $sql3->execute();
 
@@ -64,18 +67,51 @@
             $num = 1;
 
             while($fetch3 = $sql3->fetch()){
-            $middleInitial = $fetch3['middle_name'];
-            $mi = $middleInitial[0];
+
+            if($fetch3['middle_name'] != ''){
+                $middlename = $fetch3['middle_name'];
+                $mi = $middlename[0].'.';
+            }else{
+                $mi = '';
+            }
+
+            $firstChoice = $fetch3['program_first_choice'];
+            $secondChoice = $fetch3['program_second_choice'];
+
+            $sql4 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$firstChoice'");
+            $sql4->execute();
+
+            $sql5 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$secondChoice'");
+            $sql5->execute();
+
+                while($fetch4 = $sql4->fetch()){
+                    while($fetch5 = $sql5->fetch()){
+
+                    if($fetch3['approved_first_choice'] == 1 && $fetch3['approved_second_choice'] == 1){
+                        $course = $fetch4['course_name'];
+                    }else if($fetch3['approved_first_choice'] == 1 && $fetch3['approved_second_choice'] == 3){
+                        $course = $fetch4['course_name'];
+                    }else if($fetch3['approved_first_choice'] == 1 && $fetch3['approved_second_choice'] == 0){
+                        $course = $fetch4['course_name'];
+                    }else if($fetch3['approved_first_choice'] == 0 && $fetch3['approved_second_choice'] == 1){
+                        $course = $fetch5['course_name'];
+                    }else if($fetch3['approved_first_choice'] == 3 && $fetch3['approved_second_choice'] == 1){
+                        $course = $fetch5['course_name'];
+                    }
+        
             $contents .= "
                 <tr>
                     <td>".$num.".</td>
                     <td>".$fetch3['last_name']."</td>
                     <td>".$fetch3['first_name']."</td>
-                    <td>".$mi.".</td>
-                    <td>".$fetch3['course_name']."</td>
+                    <td>".$mi."</td>
+                    <td>".$course."</td>
                 </tr>
             ";
                 $num = $num+1;
+
+                    }
+                }
             }
 
             return $contents;

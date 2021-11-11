@@ -31,6 +31,7 @@
                                         <tr>
                                             <th>College Name</th>
                                             <th>Acronym</th>
+                                            <th>Dean</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -46,6 +47,7 @@
                                         <tr>
                                             <td><?php echo $fetch['dept_name']?></td>
                                             <td><?php echo $fetch['dept_acronym']?></td>
+                                            <td><?php echo $fetch['dept_dean']?></td>
                                             <td style="text-align: center; width: 200px;">
                                                 <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
                                                 <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>

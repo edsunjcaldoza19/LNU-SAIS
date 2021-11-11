@@ -2,6 +2,11 @@
         <aside id="leftsidebar" class="sidebar">
            <?php
                 include 'includes/user.php';
+                require 'be/database/db_pdo.php';
+
+                $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
+                $sql1->execute();
+                $fetch1 = $sql1->fetch();
            ?>
             <!-- Menu -->
             <div class="menu">
@@ -26,34 +31,32 @@
                             <span>Interviewer Accounts</span>
                         </a>
                     </li>
+                    <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
+                        <a href="applicant.php">
+                            <i class="material-icons">perm_identity</i>
+                            <span>Applicants Masterlist</span>
+                        </a>
+                    </li>
                     <li>
                     <li class="header">MANAGE STUDENT APPLICATIONS</li>
-                    <li class="<?= ($activePage == 'applicant' || $activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
+                    <li class="<?= ($activePage == 'applicant_approved' || $activePage == 'applicant_pending' || $activePage == 'applicant_rejected' || $activePage =='applicant_review') ? 'active': ''; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
-                            <span>Applicants</span>
+                            <span>Applicant Evaluation</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'applicant') ? 'active': ''; ?>">
-                                <a href="applicant.php">Applicants Masterlist</a>
-                            </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
-                                <a href="applicant_pending.php?sy_id=<?php echo $fetch['id'];?>">Pending Applicants</a>
+                                <a href="applicant_pending.php?sy_id=<?php echo $fetch1['id'];?>">Pending Applicants</a>
                             </li>
                             <li class="<?= ($activePage == 'applicant_approved') ? 'active': ''; ?>">
                                 <a href="javascript:void(0);" class="menu-toggle">Approved Applicants</a>
                                 <ul class="ml-menu" style="max-height: 120px; overflow-x: auto;">
                                     <li>
                                         <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $unitId");
-                                        $sql->execute();
+                                            $sql = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $unitId");
+                                            $sql->execute();
 
-                                        $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
-                                        $sql1->execute();
-                                        $fetch1 = $sql1->fetch();
-
-                                        while($fetch = $sql->fetch()){
+                                            while($fetch = $sql->fetch()){
                                         ?>
                                         <a href="applicant_approved.php?course_id=<?php echo $fetch['course_id'];?>&sy_id=<?php echo $fetch1['id'];?>"><?php echo $fetch['course_name']; ?></a>
                                         <?php
@@ -67,15 +70,10 @@
                                 <ul class="ml-menu" style="max-height: 120px; overflow-x: auto;">
                                     <li>
                                         <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $unitId");
-                                        $sql->execute();
+                                            $sql = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $unitId");
+                                            $sql->execute();
 
-                                        $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
-                                        $sql1->execute();
-                                        $fetch1 = $sql1->fetch();
-
-                                        while($fetch = $sql->fetch()){
+                                            while($fetch = $sql->fetch()){
                                         ?>
                                         <a href="applicant_rejected.php?course_id=<?php echo $fetch['course_id'];?>&sy_id=<?php echo $fetch1['id'];?>"><?php echo $fetch['course_name']; ?></a>
                                         <?php
@@ -94,14 +92,8 @@
                         <ul class="ml-menu" style="max-height: 200px; overflow-x: auto;"> 
                             <li>
                                 <?php
-                                    require 'be/database/db_pdo.php';
                                     $sql = $conn->prepare("SELECT * FROM `tbl_course` WHERE `unit_id` = $unitId");
                                     $sql->execute();
-
-                                    $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
-                                    $sql1->execute();
-                                    $fetch1 = $sql1->fetch();
-
                                     while($fetch = $sql->fetch()){
                                 ?>
                                     <a href="waitlist.php?course_id=<?php echo $fetch['course_id'];?>&sy_id=<?php echo $fetch1['id'];?>"><?php echo $fetch['course_name']; ?></a>

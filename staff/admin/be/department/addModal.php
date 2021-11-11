@@ -20,6 +20,12 @@
                                     <label class="form-label">Acronym</label>
                                 </div>
                             </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" name="dean" required autofocus>
+                                    <label class="form-label">College Dean</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <hr class="default-divider ml-auto">

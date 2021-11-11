@@ -46,9 +46,6 @@
                             <span>Applicant Evaluation</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'pending_accounts') ? 'active': ''; ?>">
-                                <a href="pending_accounts.php">Pending Applicant Accounts</a>
-                            </li>
                             <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
                                 <a href="javascript:void(0);" class="menu-toggle">Pending Applications</a>
                                 <ul class="ml-menu">
@@ -128,6 +125,12 @@
                         <a href="inquiry.php">
                             <i class="material-icons">feedback</i>
                             <span>Inquiries</span>
+                        </a>
+                    </li>
+                    <li class="<?= ($activePage == 'pending_accounts') ? 'active': ''; ?>">
+                        <a href="pending_accounts.php">
+                            <i class="material-icons">how_to_reg</i>
+                            <span>Verify Re-admission Accounts</span>
                         </a>
                     </li>
                     <li>

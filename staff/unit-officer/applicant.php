@@ -49,8 +49,11 @@
                                         <tr>
                                             <th>Applicant Name</th>
                                             <th>Entry Type</th>
+                                            <th>Semester</th>
                                             <th>Preferred Program</th>
-                                            <th>Contact Number</th>
+                                            <th>Application Form Status</th>
+                                            <th>Entrance Examination Status</th>
+                                            <th>Interview Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,7 +67,6 @@
                                             AND (`program_first_choice` = $courses OR `program_second_choice` = $courses)
                                             ");
                                             $sql->execute();
-
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
@@ -74,6 +76,7 @@
                                                 ?>       
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
                                             <td>
                                                 <?php
                                                     echo $fetch['course_name'].' ('.$fetch['course_acronym'].')';
@@ -86,7 +89,43 @@
                                                     }
                                                 ?>  
                                             </td>
-                                            <td><?php echo $fetch['mobile_number']; ?></td>
+                                            <td align="center">
+                                                <?php
+                                                    if($fetch['form_status'] == "Pending"){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['form_status'] == "Approved"){
+                                                        echo '<p class="label-green">Approved</p>';
+                                                    }else if($fetch['form_status'] == "Rejected"){
+                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td align="center">
+                                                <?php
+                                                    if($fetch['exam_status'] == "Pending"){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['exam_status'] == "Scored"){
+                                                        echo '<p class="label-blue">Scored</p>';
+                                                    }else if($fetch['exam_status'] == "Qualified"){
+                                                        echo '<p class="label-green">Qualified</p>';
+                                                    }else if($fetch['exam_status'] == "Unqualified"){
+                                                        echo '<p class="label-red">Qualified</p>';
+                                                    }
+                                                ?>
+                                            </td>
+                                            <td align="center">
+                                                <?php
+                                                    if($fetch['interview_status'] == "Pending"){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['interview_status'] == "Scheduled"){
+                                                        echo '<p class="label-blue">Scheduled</p>';
+                                                    }else if($fetch['interview_status'] == "Qualified"){
+                                                        echo '<p class="label-green">Qualified</p>';
+                                                    }else if($fetch['interview_status'] == "Unqualified"){
+                                                        echo '<p class="label-red">Unqualified</p>';
+                                                    }
+                                                ?>
+                                            </td>
                                             <?php
                                             }
                                         ?>
@@ -95,63 +134,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Exportable Table -->
-             <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form action = "../../be/course/add.php" method="POST" enctype="multipart/form-data">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Add Course Information</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="name" placeholder="Course Name" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="acronym" placeholder="Acronym" required autofocus>
-                                </div>
-                            </div>
-                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                <select class="form-control" style="margin-top: 10px;" name="deptId" id="deptId">
-                                    <option selected="true" disabled="true">Department</option>
-                                    <?php
-                                        require 'be/database/db_pdo.php';
-                                        $sql = $conn->prepare("SELECT * FROM `tbl_department`");
-                                        $sql->execute();
-
-                                        while($fetch = $sql->fetch()){
-                                    ?>
-                                    <option name="deptId" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['dept_name'] ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-link waves-effect" name="add" id="add">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </form>
                     </div>
                 </div>
             </div>

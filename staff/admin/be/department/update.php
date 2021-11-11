@@ -7,9 +7,10 @@ include '../includes/head.php';
 			$id = $_POST['id'];
 			$name = $_POST['name'];
 			$acronym = $_POST['acronym'];
+			$dean = $_POST['dean'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE `tbl_department`SET `dept_name` = '$name', `dept_acronym` = '$acronym' WHERE `id` = '$id'";
+			$sql = "UPDATE `tbl_department`SET `dept_name` = '$name', `dept_acronym` = '$acronym', `dept_dean` = '$dean' WHERE `id` = '$id'";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();

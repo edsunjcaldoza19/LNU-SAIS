@@ -24,26 +24,26 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="page-header">Unqualified Applicants</p>
-                        <p class="page-subheader">Check applicants who did not qualify the entrance examination</p>
+                        <p class="page-header">Unscored Applicants</p>
+                        <p class="page-subheader">Input scores of applicants who took the entrance examination</p>
                     </div>
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Unqualified Applicants List - Entrance Examination (A.Y. <?php echo $fetch1['ay_year']?>)</p>
+                            <p class="table-subheader">Unscored Applicants List (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Examination Score</th>
+                                            <th>Input Score</th>
                                             <th>Applicant Name</th>
                                             <th>Entry Type</th>
+                                            <th>Semester</th>
                                             <th>First Choice</th>
                                             <th>Second Choice</th>
                                             <th>Application Form Status</th>
                                             <th>Entrance Exam Status</th>
-                                            <th>Update Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,8 +52,7 @@
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                                            LEFT JOIN tbl_exam_result ON tbl_exam_result.exam_applicant_id=tbl_applicant.applicant_account_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Unqualified' AND `school_year_id` = $id");
+                                            WHERE `form_status`='Approved' AND `exam_status`='Pending' AND `school_year_id` = $id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
 
@@ -73,9 +72,7 @@
                                         ?>
                                         <tr>
                                             <td>
-                                                <?php
-                                                    echo $fetch['exam_score'];
-                                                ?>       
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
                                             </td>
                                             <td>
                                                 <?php
@@ -83,6 +80,7 @@
                                                 ?>       
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
                                             <td>
                                                 <?php
                                                     echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';
@@ -116,12 +114,6 @@
                                                         echo '<p class="label-red">Unqualified</p>';
                                                     }
                                                 ?>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>">
-                                                    <i class="material-icons">add</i>
-                                                    <span>Update Score</span>
-                                                </button>
                                             </td>
                                             <?php
                                             include 'be/applicant_exam/updateScoreModal.php';

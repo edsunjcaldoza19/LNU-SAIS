@@ -40,7 +40,7 @@
                     </div>
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Pending Applicants List (A.Y. <?php echo $fetch1['ay_year']?>)</p>
+                            <p class="table-subheader">Pending Applicants List - Unit Chair Evaluation (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                             <small><?php echo $fetch2['unit_name']?></small>
                         </div>
                         <div class="body">
@@ -51,6 +51,7 @@
                                             <th>Applicant Name</th>
                                             <th>Preferred Program</th>
                                             <th>Entry Type</th>
+                                            <th>Semester</th>
                                             <th>Exam Score</th>
                                             <th>Interview Rating</th>
                                             <th>Unit Approval Status</th>
@@ -69,7 +70,7 @@
                                             WHERE `form_status`='Approved' AND `exam_status`='Scored'
                                             AND `interview_status`='Qualified'
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
-                                            AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 1 AND `program_first_choice` = $courses) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 1 AND `program_second_choice` = $courses) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 0 ))
+                                            AND ((`approved_first_choice` = 0 AND `approved_second_choice` = 1 AND `program_first_choice` = $courses) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 0 AND `program_second_choice` = $courses) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 0) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 0 AND `program_second_choice` = $courses))
                                             ");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
@@ -94,8 +95,17 @@
                                                 ?>    
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
-                                            <td><?php echo $fetch['exam_score']; ?></td>
-                                            <td><?php echo $fetch['interview_rating']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
+                                            <td style="width: 40px;"><?php echo $fetch['exam_score']; ?></td>
+                                            <td style="width: 40px;">
+                                                <?php 
+                                                    if($fetch['program_first_choice'] == $courses){
+                                                        echo $fetch['interview_rating_1']; 
+                                                    }else if($fetch['program_second_choice'] == $courses){
+                                                        echo $fetch['interview_rating_2']; 
+                                                    }
+                                                ?>
+                                            </td>
                                             <td align="center">
                                                 <?php
                                                     if(($fetch['approved_first_choice'] == 0 && $fetch['program_first_choice'] == $courses) || ($fetch['approved_second_choice'] == 0 && $fetch['program_second_choice'] == $courses)){

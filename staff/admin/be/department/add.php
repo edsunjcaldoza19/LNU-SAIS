@@ -7,9 +7,10 @@
 		try{
             $name = $_POST['name'];
             $acronym = $_POST['acronym'];
+            $dean = $_POST['dean'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO tbl_department(`dept_name`, `dept_acronym`) VALUES('$name', '$acronym')";
+			$sql = "INSERT INTO tbl_department(`dept_name`, `dept_acronym`, `dept_dean`) VALUES('$name', '$acronym', `$dean`)";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();

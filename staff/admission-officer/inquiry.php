@@ -73,15 +73,6 @@
         include 'includes/scripts.php';
     ?>
 </body>
-<!-- ADDITIONAL JAVASCRIPT FOR THIS PAGE (ACADEMIC YEAR) -->
-    <!-- Autosize Plugin Js -->
-    <script src="../../plugins/autosize/autosize.js"></script>
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <!-- Custom Js -->
-    <script src="../../js/admin.js"></script>
-    <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
 
     <script>
 

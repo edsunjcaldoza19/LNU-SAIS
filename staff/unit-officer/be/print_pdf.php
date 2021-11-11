@@ -25,9 +25,18 @@
     $sql2->execute();
     $fetch2 = $sql2->fetch();
 
-    $middlename = $fetch2['staff_middle_name'];
-    $middle = $middlename[0];
-    $unit_head = $fetch2['staff_title'].' '.$fetch2['staff_first_name'].' '.$middle.'. '.$fetch2['staff_last_name'];
+    if($fetch2['staff_middle_name'] != ''){
+
+        $middlename = $fetch2['staff_middle_name'];
+        $middle = $middlename[0].'.';
+
+    }else{
+
+        $middle = '';
+
+    }
+
+    $unit_head = $fetch2['staff_title'].' '.$fetch2['staff_first_name'].' '.$middle.' '.$fetch2['staff_last_name'];
 
     $sql3 = $conn->prepare("SELECT * FROM tbl_academic_year WHERE `id` = $sy_id");
     $sql3->execute();
@@ -180,6 +189,8 @@
     $content .= '</table>';
     $pdf->writeHTML($content);
 
+    //Prepared by - Unit Chair//
+
     $pdf->SetFont('helvetica', false, 12);
     $txt = <<<EOD
     Prepared by:
@@ -194,6 +205,27 @@
     $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
     $pdf->SetFont('helvetica', 'I', 10);
     $txt = 'Unit Chair,'.' '.$fetch1['unit_name'];
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+
+    //Concurred by - Dean//
+
+    $pdf->SetFont('helvetica', 'B', 12);
+    $txt = '';
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+    $pdf->SetFont('helvetica', false, 12);
+    $txt = <<<EOD
+    Concurred by:
+
+    EOD;
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+    $pdf->SetFont('helvetica', 'B', 12);
+    $txt = '';
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+    $pdf->SetFont('helvetica', 'B', 12);
+    $txt = $fetch1['dept_dean'];
+    $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+    $pdf->SetFont('helvetica', 'I', 10);
+    $txt = 'Dean,'.' '.$fetch1['dept_name'];
     $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
 
 
