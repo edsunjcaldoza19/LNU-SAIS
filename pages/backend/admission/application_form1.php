@@ -93,8 +93,9 @@ if(isset($_POST['btnNext'])){
         `is_timestamp`='$timestamp',`admission_status`='$status',`as_timestamp`='$timestamp', `remarks`='$timestamp'
         WHERE `applicant_account_id` = '$applicant_account_id'";
 
-        $query2="INSERT INTO `tbl_interview`(`interview_applicant_id`, `interview_preferred_method`, `interview_method`, `interview_date`, `interview_time`, `interview_venue_or_link`, `interview_rating`)
-        VALUES ('$applicant_account_id', '$preferred_method', 'TBA', 'TBA', 'TBA', 'TBA', 0)";
+        $query2="INSERT INTO `tbl_interview`(`interview_applicant_id`, `interview_preferred_method`, `interview_method_1`, `interview_date_1`, `interview_time_1`, `interview_venue_or_link_1`, `interview_rating_1`, `interview_method_2`, `interview_date_2`, `interview_time_2`, `interview_venue_or_link_2`, `interview_rating_2`)
+        VALUES ('$applicant_account_id', '$preferred_method', 'TBA', 'TBA', 'TBA', 'TBA', 0, 'TBA', 'TBA', 'TBA', 'TBA', 0)";
+
         $query3="INSERT INTO `tbl_exam_result`(`exam_applicant_id`)
         VALUES ('$applicant_account_id')";
 

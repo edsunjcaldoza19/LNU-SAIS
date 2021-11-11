@@ -13,6 +13,8 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" value="<?php echo $fetch['applicant_account_id']; ?>" name="id">
+                    <input type="hidden" value="<?php echo $fetch['program_first_choice']; ?>" name="firstChoice">
+                    <input type="hidden" value="<?php echo $fetch['program_second_choice']; ?>" name="secondChoice">
                     <input type="hidden" value="<?php echo $fetch['course_id']; ?>" name="courseId">
                     <div class="form-group">
                     <p style="font-weight: 600;">Set Interview Rating for: </p>

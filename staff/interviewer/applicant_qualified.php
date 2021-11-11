@@ -75,8 +75,12 @@
                                         <tr>
                                             <td>
                                                 <?php
-                                                    echo $fetch['interview_rating'];
-                                                ?>       
+                                                    if($fetch['course_id'] == $fetch['program_first_choice']){
+                                                        echo $fetch['interview_rating_1'];
+                                                    }else if($fetch['course_id'] == $fetch['program_second_choice']){
+                                                        echo $fetch['interview_rating_2'];
+                                                    }
+                                                ?>         
                                             </td>
                                             <td>
                                                 <?php

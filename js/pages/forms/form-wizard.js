@@ -71,7 +71,7 @@ $(function () {
             $("#tbSHSStrand").prop('required', true);
         }else{
             $('#tbSHSStrand').hide();
-            $("#tbSHSStrand").prop('false', true);
+            $("#tbSHSStrand").prop('required', true);
         }
     }); 
 

@@ -12,26 +12,42 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" value="<?php echo $fetch['applicant_account_id']; ?>" name="id">
+                    <input type="hidden" value="<?php echo $fetch['program_first_choice']; ?>" name="firstChoice">
+                    <input type="hidden" value="<?php echo $fetch['program_second_choice']; ?>" name="secondChoice">
+                    <input type="hidden" value="<?php echo $fetch['course_id']; ?>" name="courseID">
+                    <input type="hidden" value="<?php echo $staff_id; ?>" name="staffID">
                     <div class="form-group">
                     <p style="font-weight: 600;">Set Interview Schedule for: </p>
                         <p>
                             <?php echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name']?>
                         </p>       
                     </div>
+                    <div class="form-group">
+                    <p style="font-weight: 600;">Preferred Method of Interview: </p>
+                        <p>
+                            <?php echo $fetch['interview_preferred_method']?>
+                        </p>       
+                    </div>
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <select class="form-control" name="platform" id="platform">
-                                <option value="" disabled selected="">Select Platform for Interview:</option>
+                            <select class="form-control" name="method" id="method">
+                                <option value="" disabled selected="">Select Method for Interview</option>
                                 <option value="Face-to-Face">Face-to-Face</option>
                                 <option value="Video Call">Video Call</option>
                             </select>
-                            <label class="form-label">Interview Platform</label>
+                            <label class="form-label">Interview Method</label>
                         </div>
                     </div>
                     <div class="form-group form-float" id="callLink" style="display: none;">
                         <div class="form-line">
                             <input type="text" class="form-control" name="link" autofocus>
-                            <label class="form-label">Enter Video Call Link:</label>
+                            <label class="form-label">Enter Video Call Link</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float" id="venue" style="display: none;">
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="venue" autofocus>
+                            <label class="form-label">Enter Venue</label>
                         </div>
                     </div>
                     <div class="row">

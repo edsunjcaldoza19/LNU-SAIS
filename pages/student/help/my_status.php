@@ -305,7 +305,7 @@
 									</p>
 									<p class="default-interface-text">
 										<?php
-											if($application['interview_status'] == 'Qualified'){
+											if($application['interview_status'] == 'Qualified' || $application['interview_status'] == 'Scheduled'){
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
 											}else if($application['interview_status'] == 'Pending'){
 												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';

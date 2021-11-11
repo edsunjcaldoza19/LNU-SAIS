@@ -15,7 +15,7 @@
 
             $id = $_GET['sy_id'];
 
-            $sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `id` = $id");
+            $sql1 = $conn->prepare("SELECT * from `tbl_academic_year` WHERE `ay_status` = 1");
             $sql1->execute();
             $fetch1 = $sql1->fetch();
 

@@ -34,12 +34,12 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="block-header">
-                        <p class="page-header">Pending Applicants</p>
-                        <p class="page-subheader">Input ratings for applicants who took the interview</p>
+                        <p class="page-header">Pending for Schedule</p>
+                        <p class="page-subheader">Manage applicants pending for interview schedule</p>
                     </div>
                     <div class="card">
                         <div class="header"> 
-                            <p class="table-subheader">Pending Applicants List - Interview (A.Y. <?php echo $fetch1['ay_year']?>)</p>
+                            <p class="table-subheader">Unscheduled Applicants List - Interview (A.Y. <?php echo $fetch1['ay_year']?>)</p>
                             <small><?php echo $fetch2['unit_name']?></small>
                         </div>
                         <div class="body">
@@ -52,7 +52,6 @@
                                             <th>Preferred Program</th>
                                             <th>Interview Date</th>
                                             <th>Interview Time</th>
-                                            <th>Interview Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -66,11 +65,10 @@
                                             LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id = tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Scored'
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
-                                            AND ((`interview_status` = 'Pending' AND `program_first_choice` = $courses) OR (`interview_status` = 'Pending' AND `program_second_choice` = $courses))
+                                            AND ((`interview_staff_id_1` = 0 AND `program_first_choice` = $courses) OR (`interview_staff_id_2` = 0 AND `program_second_choice` = $courses))
                                             ");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
-
                                         ?>
                                         <tr>
                                             <td>
@@ -91,23 +89,16 @@
                                                     }
                                                 ?>   
                                             </td>
-                                            <td><?php echo $fetch['interview_date']?></td>
-                                            <td><?php echo $fetch['interview_time']?></td>
-                                            <td align="center">
-                                                <?php
-                                                    if($fetch['interview_status'] == "Pending"){
-                                                        echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['interview_status'] == "Qualified"){
-                                                        echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['interview_status'] == "Unqualified"){
-                                                        echo '<p class="label-red">Unqualified</p>';
-                                                    }
-                                                ?>
+                                            <td>
+                                                <p><b>First Choice: </b><br><?php echo $fetch['interview_date_1']; ?></p>
+                                                <p><b>Second Choice: </b><br><?php echo $fetch['interview_date_2']; ?></p>
                                             </td>
-                                            
+                                            <td>
+                                                <p><b>First Choice: </b><br><?php echo $fetch['interview_time_1']; ?></p>
+                                                <p><b>Second Choice: </b><br><?php echo $fetch['interview_time_2']; ?></p>
+                                            </td>    
                                             <td align="center" style="width: 100px;">
                                                 <button class="btn bg-orange btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#setSchedule<?php echo $fetch['id']; ?>"><i class="material-icons">alarm_add</i></button>
-                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#updateScore<?php echo $fetch['id']; ?>"><i class="material-icons">edit</i></button>
                                             </td>
                                         <?php
                                             include 'be/applicant_interview/setScheduleModal.php';
@@ -132,12 +123,18 @@
     ?>
 
     <script>
-        $("#platform").change(function(){
+        $("#method").change(function(){
             if($(this).val() == "Face-to-Face"){
                 $("#callLink").hide();
+                $("#callLink").prop('required', false);
+                $("#venue").show();
+                $("#venue").prop('required', true);
             }
             else if($(this).val() == "Video Call"){
                 $("#callLink").show();
+                $("#callLink").prop('required', true);
+                $("#venue").hide();
+                $("#venue").prop('required', false);
             }
         });
     </script>

@@ -8,14 +8,22 @@
 		try{
             $id = $_POST['id'];
             $courseId = $_POST['courseId'];
+            $firstChoice = $_POST['firstChoice'];
+            $secondChoice = $_POST['secondChoice'];
             $interview_score = $_POST['interview_score'];
 			$timestamp = date('F j, Y, g:i:s A');
 
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE `tbl_interview` SET `interview_rating`=$interview_score
-            WHERE `interview_applicant_id`=$id";
-			$conn->exec($sql);
-
+			if($courseId == $firstChoice){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "UPDATE `tbl_interview` SET `interview_rating_1`= '$interview_score'
+	            WHERE `interview_applicant_id`='$id'";
+				$conn->exec($sql);
+			}else{
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "UPDATE `tbl_interview` SET `interview_rating_2`= '$interview_score'
+	            WHERE `interview_applicant_id`='$id'";
+				$conn->exec($sql);
+			}
 			//fetch passing rating
 
 			$sql1 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id`=$courseId");
@@ -23,9 +31,9 @@
 			$fetch = $sql1->fetch();
 
 			if($interview_score >= $fetch['interview_passing_score']){
-				$status = "Qualified";
+				$status = 'Qualified';
 			}else{
-				$status = "Unqualified";
+				$status = 'Unqualified';
 			}
 
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -52,7 +60,7 @@
                     text: "LNU - Student Admission and Information System",
 					timer: 1000
 				}).then(function(){
-					window.location.replace("../../applicant_pending.php?sy_id='.$sy_id.'");
+					window.location.replace("../../applicant_scheduled.php?sy_id='.$sy_id.'");
 
 				});
 

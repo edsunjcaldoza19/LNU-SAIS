@@ -37,7 +37,7 @@
                                         <!-- populate table with db data -->
                                         <?php
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT * FROM `tbl_account_staff` WHERE `staff_role` = 1");
+                                            $sql = $conn->prepare("SELECT * FROM `tbl_account_staff` WHERE `staff_role` = 3");
                                             $sql->execute();
 
                                             while($fetch = $sql->fetch()){

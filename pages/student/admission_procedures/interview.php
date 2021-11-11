@@ -93,6 +93,31 @@
 		}
 
 
+		$staff_id_1 = $fetch['interview_staff_id_1'];
+		$staff_id_2 = $fetch['interview_staff_id_2'];
+
+		$sql2 = $conn->prepare("SELECT * from `tbl_account_staff` WHERE `id` = $staff_id_1");
+		$sql2->execute();
+		$fetchStaff1 = $sql2->fetch();
+
+		$sql3 = $conn->prepare("SELECT * from `tbl_account_staff` WHERE `id` = $staff_id_2");
+		$sql3->execute();
+		$fetchStaff2 = $sql3->fetch();
+
+		if($fetch['interview_staff_id_1'] == 0){
+			$interviewerName1 = 'TBA';
+		}else{
+			$interviewerName1 = $fetchStaff1['staff_title'].' '.$fetchStaff1['staff_first_name'].' '.
+			$fetchStaff1['staff_middle_name'].' '.$fetchStaff1['staff_last_name'];
+		}
+
+		if($fetch['interview_staff_id_2'] == 0){
+			$interviewerName2 = 'TBA';
+		}else{
+			$interviewerName2 = $fetchStaff2['staff_title'].' '.$fetchStaff2['staff_first_name'].' '.
+			$fetchStaff2['staff_middle_name'].' '.$fetchStaff2['staff_last_name'];
+		}
+
 	}
 
 ?>
@@ -108,8 +133,6 @@
 		<!-- Imports third-party CSS libraries -->
 
 		<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap-select/dist/css/bootstrap-select.css">
-    	<link rel="stylesheet" type="text/css" href="../../assets/libs/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
 		<link rel="stylesheet" type="text/css" href="../../assets/libs/font-awesome/css/all.css">
 
 		<!-- Imports default styling -->
@@ -226,7 +249,7 @@
 							<a class="student-account-details-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
 						</div>
 					</div>
-					<div class="student-page-default" style="height: 550px; margin-bottom: 20px;">
+					<div class="student-page-default" style="height: 550px; margin-bottom: 20px; overflow-x: hidden;">
 						<p class="student-page-default-header">INTERVIEW/EVALUATION</p>
 						<div class="row">
 							<div class="col-md-6">
@@ -239,54 +262,113 @@
 								<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px;">
 									Please take note of the following details for the conduct of your interview.
 								</p>
-								<?php
-									if($fetch['interview_staff_id'] == '0'){
-										echo '<small><i>*TBA - To be announced (kindly check this page from time-to-time for updates)</i></small>';
-									} 
-								?>
-								<hr class="default-divider ml-auto" style="margin: 5px;">
-								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
-									Interviewer:
-								</p>
-								<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									TBA
-								</p>
-								<hr class="default-divider ml-auto" style="margin: 5px;">
-								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
-									Interview Schedule:
-								</p>
-								<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									<?php echo $fetch['interview_date']; ?> - <?php echo $fetch['interview_time']; ?>
-								</p>
-								<hr class="default-divider ml-auto" style="margin: 5px;">
-								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
-									Method:
-								</p>
-								<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									<?php echo $fetch['interview_method']; ?>
-								</p>
-								<hr class="default-divider ml-auto" style="margin: 5px;">
-								<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
-									<?php 
-										$method = $fetch['interview_method'];
-										if($method == 'Face-to-Face'){
-											echo 'Interview Venue:';
-										}else{
-											echo 'Video Call Link:';
-										}
+								<div class="form-group form-float">
+									<div class="form-line">
+								        <select class="form-control" name="cbToggleSchedule" id="cbToggleSchedule" required>
+			                                <option value="" disabled selected>Toggle Schedules</option>
+			                                <option value="First Choice">First Choice Schedule</option>
+			                                <option value="Second Choice">Second Choice Schedule</option>
+			                            </select>	
+		                            </div>
+				                </div>
+								<div id="firstChoiceSchedule" style="display: none;">
+									<?php
+										if($fetch['interview_staff_id_1'] == '0'){
+											echo '<small><i>*TBA - To be announced (kindly check this page from time-to-time for updates)</i></small>';
+										} 
 									?>
-								</p>
-								<p class="exam-placeholder-text" href="#" style="font-size: 15px; margin: 5px 0px 5px 0px;">
-									<?php 
-										$link = $fetch['interview_venue_or_link'];
-										if($link == 'TBA'){
-											echo 'TBA';
-										}else{
-											echo '<a href="'.$link.'">'.$link.'</a>';
-										}
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										Interviewer:
+									</p>
+									<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php echo $interviewerName1; ?>
+									</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										Interview Schedule:
+									</p>
+									<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php echo $fetch['interview_date_1']; ?> - <?php echo $fetch['interview_time_1']; ?>
+									</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										Method:
+									</p>
+									<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php echo $fetch['interview_method_1']; ?>
+									</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										<?php 
+											$method = $fetch['interview_method_1'];
+											if($method == 'Face-to-Face'){
+												echo 'Interview Venue:';
+											}else{
+												echo 'Video Call Link:';
+											}
+										?>
+									</p>
+									<p class="exam-placeholder-text" href="#" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php 
+											$link = $fetch['interview_venue_or_link_1'];
+											if($link == 'TBA'){
+												echo 'TBA';
+											}else{
+												echo '<a href="'.$link.'">'.$link.'</a>';
+											}
+										?>
+									</p>
+								</div>
+								<div id="secondChoiceSchedule" style="display: none;">
+									<?php
+										if($fetch['interview_staff_id_2'] == '0'){
+											echo '<small><i>*TBA - To be announced (kindly check this page from time-to-time for updates)</i></small>';
+										} 
 									?>
-								</p>
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										Interviewer:
+									</p>
+									<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php echo $interviewerName2; ?>
+									</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										Interview Schedule:
+									</p>
+									<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php echo $fetch['interview_date_2']; ?> - <?php echo $fetch['interview_time_2']; ?>
+									</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										Method:
+									</p>
+									<p class="exam-placeholder-text" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php echo $fetch['interview_method_2']; ?>
+									</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p class="exam-placeholder-subheader" style="font-size: 15px; margin: 5px 0px 5px 0px; color: #0A079D;">
+										<?php 
+											$method = $fetch['interview_method_2'];
+											if($method == 'Face-to-Face'){
+												echo 'Interview Venue:';
+											}else{
+												echo 'Video Call Link:';
+											}
+										?>
+									</p>
+									<p class="exam-placeholder-text" href="#" style="font-size: 15px; margin: 5px 0px 5px 0px;">
+										<?php 
+											$link = $fetch['interview_venue_or_link_2'];
+											if($link == 'TBA'){
+												echo 'TBA';
+											}else{
+												echo '<a href="'.$link.'">'.$link.'</a>';
+											}
+										?>
+									</p>
+								</div>
 							</div>
+
 						</div>
 					</div>
 				</form>
@@ -322,8 +404,6 @@
 
 	<script src="../../assets/libs/jquery/jquery.min.js"></script>
 	<script src="../../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../../assets/libs/bootstrap-select/dist/js/bootstrap-select.js"></script>
-	<script src="../../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="../../assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="../../assets/libs/node-waves/waves.js"></script>
     <script src="../../assets/js/template/admin.js"></script>
@@ -337,6 +417,8 @@
 
 		$(document).ready(function () {
         	showDateTime();
+        	toggleSchedule();
+
     	});
 
 		$('#sidebar-toggle').click(function () {
@@ -374,6 +456,21 @@
 
   			setTimeout("showDateTime()", 1000);
 
+  		}
+
+  		function toggleSchedule(){
+
+  			$('#cbToggleSchedule').on('change', function(){
+		        var value = $(this).val();
+		        if(value == 'First Choice'){
+		            $('#firstChoiceSchedule').show();
+		            $('#secondChoiceSchedule').hide();
+		        }else{
+		            $('#firstChoiceSchedule').hide();
+		            $('#secondChoiceSchedule').show();
+		        }
+    		}); 
+		  
   		}
 
   		var previewImage = function(event){
