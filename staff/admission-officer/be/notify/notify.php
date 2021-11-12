@@ -30,6 +30,12 @@ if(isset($_POST['send'])){
     $query_run = mysqli_query($connection, $query); 
 
     if($query_run){
+
+        header('location: ../../qualified.php');
+            
+    }
+
+    /* if($query_run){
         sleep(1);
 
         //Initialize PHPMailer
@@ -125,6 +131,8 @@ if(isset($_POST['send'])){
         echo '<script> alert("Error adding account");</script>';
         echo mysqli_error($connection);
     }
+
+    */
 }
 
 

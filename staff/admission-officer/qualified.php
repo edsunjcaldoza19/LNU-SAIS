@@ -47,6 +47,7 @@
                                             <th>Status</th>
                                             <th>Second Choice</th>
                                             <th>Status</th>
+                                            <th>Admission Confirmation</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -116,6 +117,17 @@
                                                         echo '<p class="label-orange">Waitlisted</p>';
                                                     }else if($fetch['approved_second_choice'] == 0){
                                                         echo '<p class="label-blue">Pending</p>';
+                                                    }
+                                                ?>  
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($fetch['pursue_enrollment'] == 0){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['pursue_enrollment'] == 1){
+                                                        echo '<p class="label-green">Accepted</p>';
+                                                    }else if($fetch['pursue_enrollment'] == 2){
+                                                        echo '<p class="label-red">Declined</p>';
                                                     }
                                                 ?>  
                                             </td>

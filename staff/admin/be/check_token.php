@@ -16,6 +16,7 @@ if(isset($_SESSION['token'])){
 	if($fetch = $sql->fetch()){
 
 		$username = $fetch['username'];
+		$staff_id = $fetch['id'];
 		$role = $_SESSION['role'];
 	
 	}else{

@@ -23,10 +23,13 @@
             /* UPDATE to the database */
             $applicant_account_id = $_POST['id'];
 
+            $sql = $conn->prepare("SELECT * FROM `tbl_applicant` WHERE `applicant_account_id` = $applicant_account_id");
+            $sql->execute();
+            $fetchApplicant = $sql->fetch();
+
         //Pathinfo for CARD IMAGES + Save Filename to Database
         foreach ($_FILES['cardImages']['name'] as $key => $cardname){
-            $cardrandom=rand(0,100000);
-		    $cardrename = 'IMG_CARD'.time().$cardrandom;
+		    $cardrename = 'IMG_CARD'.time().'_'.$fetchApplicant['last_name'].'_'.$fetchApplicant['first_name'];
             $cardFilename = $cardrename . "_" . $cardname;
             move_uploaded_file($_FILES['cardImages']['tmp_name'][$key], '../../../images/applicant-img/applicant-card/' . $cardFilename);
             $sqlCard = "INSERT INTO `tbl_applicant_card`(`card_applicant_id`, `card_image`) VALUES ('$applicant_account_id','$cardFilename')";
@@ -34,8 +37,7 @@
         }
         //Pathinfo for MEDICAL IMAGES + Save Filename to Database
         foreach ($_FILES['medicalImages']['name'] as $key => $medicalname){
-            $medicalrandom=rand(0,100000);
-		    $medicalrename = 'IMG_MED'.time().$medicalrandom;
+		    $medicalrename = 'IMG_MED'.time().'_'.$fetchApplicant['last_name'].'_'.$fetchApplicant['first_name'];
             move_uploaded_file($_FILES['medicalImages']['tmp_name'][$key], '../../../images/applicant-img/applicant-medical/' . $medicalFilename);
             
             if($_FILE['medical_images'] == ''){

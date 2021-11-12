@@ -13,17 +13,17 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-            <p class="page-header">Configure Academic Year</p>
-            <p class="page-subheader">Set configurations for academic year</p>
+            <p class="page-header">System Logs</p>
+            <p class="page-subheader">Monitor actions logged by the system.</p>
             </div>
             <div class="row clearfix jsdemo-notification-button">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <p class="table-subheader">Academic Year Overview</p>
-                            <button type="button" class="btn bg-green waves-effect"  href="#" data-toggle="modal" data-target="#addModal">
-                                <i class="material-icons">add</i>
-                                <span>Add Academic Year</span>
+                            <p class="table-subheader">System Logs Overview</p>
+                            <button type="button" class="btn bg-red waves-effect" href="#" data-toggle="modal" data-target="#eraseModal">
+                                <i class="material-icons">delete</i>
+                                <span>Clear All Logs</span>
                             </button>
                         </div>
                         <div class="body">
@@ -31,50 +31,45 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Academic Year</th>
-                                            <th>Enable Exam</th>
-                                            <th>Status</th>
-                                            <th style="width: 5%;">Action</th>
+                                            <th>Timestamp</th>
+                                            <th>Log Description</th>
+                                            <th>Account Level</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT * FROM `tbl_academic_year`");
+                                            $sql = $conn->prepare("SELECT *, tbl_logs.id FROM tbl_logs
+                                            LEFT JOIN tbl_account_staff ON tbl_account_staff.id = tbl_logs.log_staff_id
+                                            LEFT JOIN tbl_admin ON tbl_admin.id = tbl_logs.log_staff_id
+                                           
+                                            ");
                                             $sql->execute();
 
                                             while($fetch = $sql->fetch()){
                                         ?>
                                         <tr>
-                                            <td><?php echo $fetch['ay_year']?></td>
-                                            <td style="width: 200px;" align="center">
-                                                <?php 
-                                                    if($fetch['enable_exam'] == 0){
-                                                        echo '<p class="label-red">Disabled</p>';
-                                                    }else{
-                                                        echo '<p class="label-green">Enabled</p>';
-                                                    }
-                                                ?>    
-                                            </td>
-                                            <td style="width: 200px;" align="center">
-                                                <?php 
-                                                    if($fetch['ay_status'] == 0){
-                                                        echo '<p class="label-red">Inactive</p>';
-                                                    }else{
-                                                        echo '<p class="label-green">Active</p>';
-                                                    }
+                                            <td><?php echo $fetch['timestamp']?></td>
+                                            <td><?php echo $fetch['log_description']?> - <i>Action commited by <?php echo $fetch['log_staff_username']?></i></td>
+                                            <td style="font-size: 10px;" align="center">
+                                                <?php
+                                                    if($fetch['staff_role'] == 0){
+                                                        echo '<p class="label-green">Administrator</p>';
+                                                    }else if($fetch['staff_role'] == 1){
+                                                        echo '<p class="label-orange">Admissions Office</p>';
+                                                    }else if($fetch['staff_role'] == 2){
+                                                        echo '<p class="label-orange">Examination Office</p>';
+                                                    }else if($fetch['staff_role'] == 3){
+                                                        echo '<p class="label-orange">Unit Head</p>';
+                                                    }else if($fetch['staff_role'] == 4){
+                                                        echo '<p class="label-orange">Unit Interviewer</p>';
+                                                    } 
+
                                                 ?>
                                             </td>
-                                            <td style="text-align: center; width: 200px;">
-                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"><i class="material-icons">edit</i></button>
-                                                <button class="btn bg-red btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#delete<?php echo $fetch['id']?>" id="btnDelete"><i class="material-icons">delete</i></button>
-                                            </td>
                                         </tr>
-
-                                        <?php
-                                            include 'be/academic_year/deleteModal.php';
-                                            include 'be/academic_year/updateModal.php';
+                                        <?php 
                                             }
                                         ?>
                                     </tbody>
@@ -84,7 +79,7 @@
                     </div>
                 </div>
             </div>
-           <?php include 'be/academic_year/addModal.php';?>
+           <!-- <?php //include 'be/academic_year/eraseModal.php';?> -->
         </div>
     </section>
  <?php

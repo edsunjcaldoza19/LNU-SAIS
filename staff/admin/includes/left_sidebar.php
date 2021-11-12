@@ -85,6 +85,12 @@
                             <span>Inquiries</span>
                         </a>
                     </li>
+                    <li class="<?= ($activePage == 'system_logs') ? 'active': ''; ?>">
+                        <a href="system_logs.php">
+                            <i class="material-icons">dvr</i>
+                            <span>System Logs</span>
+                        </a>
+                    </li>
                     <li class="<?= ($activePage == 'backup') ? 'active': ''; ?>">
                         <a href="" data-toggle="modal" data-target="#backupModal">
                             <i class="material-icons">download</i>

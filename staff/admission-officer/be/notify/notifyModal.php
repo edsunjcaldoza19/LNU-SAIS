@@ -4,13 +4,13 @@
         <div class="modal-content">
             <form action = "be/notify/notify.php" method="POST">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Send Notification Email</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">Assign Student Number</h4>
                     <hr class="default-divider ml-auto">
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="applicantID" id="applicantID" value="<?php echo $fetch['id'] ?>">
                     <input type="hidden" name="email" id="email" value="<?php echo $fetch['email'] ?>">
-                    <p class="card-dashboard-header">Email to: 
+                    <p class="card-dashboard-header">Student Name: 
                     <br>
                         <b>
                             <?php 

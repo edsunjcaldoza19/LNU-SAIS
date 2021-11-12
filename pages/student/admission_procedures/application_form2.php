@@ -381,8 +381,8 @@
 
 				                    	<!-- Upload File -->
 				                    	<div style="height: auto; width: 100%; padding: 10px; border-radius: 5px; background-color: #F2F2F2;">
-				                    		<p class="student-page-label">Please upload a scanned copy of your Grade 12 Report Card/TOR (for transferees)</p>
-				                    		<p style="font-size: 12px"><i>Note: See to it that your name is visible in the photo/s of the report card or TOR.</i></p>
+				                    		<p class="student-page-label">Please upload a scanned copy/clear photo of your <?php if($fetch2['entry'] == 'Freshmen'){echo 'Grade 12 Report Card (back-to-back)';}else if($fetch2['entry'] == 'Transferee'){echo 'Transcript of Records (TOR)';}else if($fetch2['entry'] == 'Re-admission'){echo 'Approved Leave of Absence (LOA)';} ?></p>
+				                    		<p style="font-size: 12px"><i>Note: See to it that your name is visible in the photo/s of the report card/TOR/LOA.</i></p>
 											<div class="form-group form-float" style="margin-bottom: 15px;">
 				                        		<input class="student-page-upload" name="cardImages[]" type="file" accept="image/jpeg, image/jpg, image/png" multiple required>
 				                    		</div>

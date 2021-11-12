@@ -52,7 +52,7 @@
                     <div class="card">
                         <div class="header">
                             <p class="table-subheader">Waitlisted Applicants List (<?php echo $fetch1['course_name']?>)</p>
-                            <small>A.Y. <?php echo $fetch3['ay_year'];?> <b>(Quota: <?php echo $count;?>/<?php echo $fetch1['waitlist_quota'];?>)</b></small>
+                            <small>A.Y. <?php echo $fetch3['ay_year'];?> <b>(Waitlist Slots: <?php echo $count;?>/<?php echo $fetch1['waitlist_quota'];?>)</b></small>
                         </div>
                         <div class="body">
                             <div class="table-responsive">

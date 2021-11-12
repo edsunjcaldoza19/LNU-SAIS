@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2021 at 09:05 AM
+-- Generation Time: Nov 12, 2021 at 05:29 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -93,6 +93,7 @@ CREATE TABLE `tbl_admin` (
   `image` varchar(200) NOT NULL,
   `verification_key` varchar(250) NOT NULL,
   `verified` int(5) NOT NULL,
+  `staff_role` int(11) NOT NULL,
   `login_status` int(5) NOT NULL,
   `session_token` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -101,8 +102,8 @@ CREATE TABLE `tbl_admin` (
 -- Dumping data for table `tbl_admin`
 --
 
-INSERT INTO `tbl_admin` (`id`, `username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `login_status`, `session_token`) VALUES
-(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 0, '');
+INSERT INTO `tbl_admin` (`id`, `username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `staff_role`, `login_status`, `session_token`) VALUES
+(1, 'admin', '$2y$10$riWEInc2KIq.YzmJVW0XJuPAfwQGbBr0VNUgzLpFpo5e1bAyOOL.i', 'Administrator', 'adminsample@example.com', '', '0', 1, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -247,7 +248,7 @@ CREATE TABLE `tbl_applicant_account` (
 --
 
 INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `readmission_verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `pursue_enrollment`, `student_number`, `login_status`, `session_token`) VALUES
-(1, 'ricocombinido9@gmail.com', '$2y$10$L0n2nemMxgdARKbS5xCvr.TkBrS.RjdWa2dTsmkRYW8bd436mqX/e', '7e83343bfdede4f50e5692da09c65f46', 1, 1, 'How old is your oldest sibling?', '21', 'Done', 'Done', 'November 10, 2021, 08:28:36 PM', 'Not Started', 'N/A', 'Done', 'November 11, 2021, 6:24:27 PM', 0, '1800638', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpY29jb21iaW5pZG85QGdtYWlsLmNvbSIsIm5iZiI6MTYzNjY4ODg0NywiZXhwIjoxNjM2Njg5MTQ3fQ.dOqbSh3SlY9IGaIpaxKQ1m_jswAn4biTnr7D7XeLQpQ');
+(1, 'ricocombinido9@gmail.com', '$2y$10$L0n2nemMxgdARKbS5xCvr.TkBrS.RjdWa2dTsmkRYW8bd436mqX/e', '7e83343bfdede4f50e5692da09c65f46', 1, 1, 'How old is your oldest sibling?', '21', 'Done', 'Done', 'November 10, 2021, 08:28:36 PM', 'Not Started', 'N/A', 'Done', 'November 11, 2021, 6:24:27 PM', 1, '1800638', 0, '');
 
 -- --------------------------------------------------------
 
@@ -494,6 +495,29 @@ INSERT INTO `tbl_interview` (`id`, `interview_applicant_id`, `interview_staff_id
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_logs`
+--
+
+CREATE TABLE `tbl_logs` (
+  `id` int(11) NOT NULL,
+  `log_staff_id` int(11) NOT NULL,
+  `log_staff_username` varchar(50) NOT NULL,
+  `log_description` varchar(100) NOT NULL,
+  `timestamp` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_logs`
+--
+
+INSERT INTO `tbl_logs` (`id`, `log_staff_id`, `log_staff_username`, `log_description`, `timestamp`) VALUES
+(1, 1, 'admin', 'Modified active academic year', '11/13/2021, 12:24:34 AM'),
+(2, 1, 'admin', 'Modified active academic year', '11/13/2021, 12:25:07 AM'),
+(3, 1, 'admin', 'Deleted an academic year', '11/12/2021, 5:26:44 PM');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_procedures`
 --
 
@@ -681,6 +705,12 @@ ALTER TABLE `tbl_interview`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_procedures`
 --
 ALTER TABLE `tbl_procedures`
@@ -712,7 +742,7 @@ ALTER TABLE `tbl_unit`
 -- AUTO_INCREMENT for table `tbl_academic_year`
 --
 ALTER TABLE `tbl_academic_year`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_account_staff`
@@ -797,6 +827,12 @@ ALTER TABLE `tbl_inquiry`
 --
 ALTER TABLE `tbl_interview`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_procedures`

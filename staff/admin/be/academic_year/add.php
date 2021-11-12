@@ -1,6 +1,9 @@
 <?php
     include '../includes/head.php';
     require '../database/db_pdo.php';
+
+    date_default_timezone_set('Asia/Taipei');
+
 	if(isset($_POST['add'])){
 		try{
            /* Add a new AY to the database */
@@ -22,6 +25,18 @@
 			$sql1 = "INSERT INTO `tbl_academic_year`(`ay_year`, `enable_exam`, `ay_status`)
             VALUES ('$year', '$enable_exam', '$status')";
 			$conn->exec($sql1);
+
+			//log this action
+
+			$staff_id = $_POST['staff_id'];
+			$staff_username = $_POST['staff_username'];
+			$log_description = 'Added new academic year';
+			$timestamp = date('m/d/Y, g:i:s A');
+
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_description`, `timestamp`)
+            VALUES ('$staff_id', '$staff_username', '$log_description', '$timestamp')";
+			$conn->exec($sql2);
 			
 		}catch(PDOException $e){
 			echo $e->getMessage();

@@ -9,6 +9,8 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" value="<?php echo $fetch['id']; ?>" name="id">
+                            <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                            <input class="hidden" name="staff_username" value="<?php echo $username?>">
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <input type="text" class="form-control" name="year" value="<?php echo $fetch['ay_year']; ?>" required autofocus>

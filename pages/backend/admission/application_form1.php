@@ -7,16 +7,19 @@ if(isset($_POST['btnNext'])){
 
     try{
 
+        $applicant_account_id = $_POST['id'];
+
+        $sql = $conn->prepare("SELECT * FROM `tbl_applicant` WHERE `applicant_account_id` = $applicant_account_id");
+        $sql->execute();
+        $fetchApplicant = $sql->fetch();
+
         /* Add a new Applicant to the database [Application Form 1] */
         //pathinfo
-		$image=$_FILES['image']['name'];
-		$extension = pathinfo($image, PATHINFO_EXTENSION);
-		$random=rand(0,100000);
-		$rename = 'IMG_APPLICANT'.date('Ymd').$random;
-		$newname = $rename.'.'.$extension;
-		$target="../../../images/applicant-img/applicant-profile/".$newname;
-
-        $applicant_account_id = $_POST['id'];
+        $image=$_FILES['image']['name'];
+        $extension = pathinfo($image, PATHINFO_EXTENSION);
+        $rename = 'IMG_APPLICANT_'.date('Ymd').'_'.$fetchApplicant['last_name'].'_'.$fetchApplicant['first_name'];
+        $newname = $rename.'.'.$extension;
+        $target="../../../images/applicant-img/applicant-profile/".$newname;
 
         $academic_year = $_POST['academicYear'];
         $semester = $_POST['cbSemester'];

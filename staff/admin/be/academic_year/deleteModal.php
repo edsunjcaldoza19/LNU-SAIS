@@ -9,6 +9,8 @@
                 </div>
                 <div class="modal-body">
                 <input class="hidden" value="<?php echo $fetch['id'] ?>" name="id">
+                <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                 <p style="font-size: 15px;">Are you sure you want to remove this academic year?</p>
                 </div>
                 <div class="modal-footer">

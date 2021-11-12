@@ -141,13 +141,13 @@
 					<div class="tab-content" id="content" style="overflow-x: auto;">
 						<div class="tab-pane active" style="transition: 0.5s;" role="tabpanel" id="main">
 							<div class="default-header" style="height: 60px;">
-								<img src="../../assets/images/done_icon.png" style="width: 30%; position: absolute;	left: 50%; margin-left: -15%;">
+								<img src="../../assets/images/done_icon.png" style="width: 25%; position: absolute;	left: 50%; margin-left: -12.5%;">
 							</div>
 							<div class="login-form-header">
 								<p class="login-form-header-text" style="text-align: center; line-height: normal;">Thank you for taking the university admission!</p>
 							</div>
-							<p class="login-form-header-subtext" style="text-align: center; font-size: 14px; <?php if($application['student_number'] == 'N/A' && $academicYear['result_available'] == 0){ echo 'display: block'; }else{ echo 'display: none'; } ?>">Your application is currently being assessed by the admission committee. Please wait for further updates by checking your status on this account.</p>
-							<div class="nav alert alert-success" role="tablist" align="justify" style="height: auto; text-align: center; <?php if($application['student_number'] != 'N/A' && $academicYear['result_available'] == 1){echo 'display: block';}else{echo 'display: none';}?>"><i class="far fa-check-circle"></i> The admission committee is already done evaluating your application.<div class="sidebar-item"><a href="#results" class="alert-success sidebar-link" role="tab" data-toggle="tab" aria-controls="test" aria-selected="true" style="font-weight: 600;"> Please check your results here.</a></div></div>
+							<p class="login-form-header-subtext" style="text-align: center; font-size: 14px; <?php if( $academicYear['result_available'] == 0){ echo 'display: block'; }else{ echo 'display: none'; } ?>">Your application is currently being assessed by the admission committee. Please wait for further updates by checking your status on this account.</p>
+							<div class="nav alert alert-success" role="tablist" align="justify" style="height: auto; text-align: center; <?php if($academicYear['result_available'] == 1){echo 'display: block';}else{echo 'display: none';}?>"><i class="far fa-check-circle"></i> The admission committee is already done evaluating your application.<div class="sidebar-item"><a href="#results" class="alert-success sidebar-link" role="tab" data-toggle="tab" aria-controls="test" aria-selected="true" style="font-weight: 600;"> Please check your results here.</a></div></div>
 							<hr class="default-divider ml-auto" style="margin: 0px;">
 							<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px;">
 								<div class="sidebar-item ml-auto mr-auto">
@@ -376,10 +376,17 @@
 										$recommendedProgram = $fetchSecondChoice['course_name'].' ('.$fetchSecondChoice['course_acronym'].')';
 									}else if($firstChoiceStatus == 3 && $secondChoiceStatus == 1){
 										$recommendedProgram = $fetchSecondChoice['course_name'].' ('.$fetchSecondChoice['course_acronym'].')';
+									}else if($firstChoiceStatus == 3 && $secondChoiceStatus == 0){
+										$recommendedProgram = $fetchFirstChoice['course_name'].' ('.$fetchFirstChoice['course_acronym'].')';
+									}else if($firstChoiceStatus == 0 && $secondChoiceStatus == 3){
+										$recommendedProgram = $fetchSecondChoice['course_name'].' ('.$fetchSecondChoice['course_acronym'].')';
+									}
+									else if($firstChoiceStatus == 3 && $secondChoiceStatus == 3){
+										$recommendedProgram1 = $fetchFirstChoice['course_name'].' ('.$fetchFirstChoice['course_acronym'].')';
+										$recommendedProgram2 = $fetchSecondChoice['course_name'].' ('.$fetchSecondChoice['course_acronym'].')';
 									}
 
 							?>
-
 							<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px; margin-bottom: 5px;">
 								CHECK ADMISSION RESULT
 							</p>
@@ -397,19 +404,80 @@
 									<p align="justify">
 										Your official student ID number is <b><?php echo $application['student_number']; ?></b>. Please use this to login to the university's online enrollment portal during the pre-registration period. Stay tuned for further updates with regards to the enrollment process. 
 									</p>
-									<p align="justify">Send us your response using the links below:</p>
-									<hr class="default-divider ml-auto" style="margin: 5px;">
-										<div align="center">
-											<a href="../../admission/confirmAcceptance.php" style="font-weight: 600; color: #0A079D;">CONFIRM</a>
-											<hr class="default-divider ml-auto" style="margin: 5px;">
-											<a href="../../admission/declineAcceptance.php" style="font-weight: 600; color: #0A079D;">DECLINE</a>
-										</div>
-									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<div class="result-confirm" style="<?php if($application['pursue_enrollment'] == 0){echo 'display: block';}else{echo 'display: none';} ?>">
+										<p align="justify">For the meantime, please confirm your acceptance to the university by clicking the CONFIRM button below.</p>
+										<hr class="default-divider ml-auto" style="margin: 5px;">
+											<div align="center">
+												<a href="../../backend/admission/confirm_acceptance.php?id=<?php echo $application['id'];?>" style="font-weight: 600; color: #0A079D;">CONFIRM</a>
+												<hr class="default-divider ml-auto" style="margin: 5px;">
+												<a href="../../backend/admission/decline_acceptance.php?id=<?php echo $application['id'];?>" style="font-weight: 600; color: #0A079D;">DECLINE</a>
+											</div>
+										<hr class="default-divider ml-auto" style="margin: 5px;">
+									</div>
 									<p>Congratulations on your new achievement and welcome to the university, Bagong Normalista!</p>
 									<p style="font-weight: 600;">Sincerely,
 									<br>
 									LNU Admissions Office
 									</p>
+								</div>
+								<hr class="default-divider ml-auto" style="margin: 0px;">
+								<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px">
+									<div class="sidebar-item ml-auto mr-auto">
+										<i class="fa fa-arrow-left sidebar-navigation-icon"></i><a href="#main" class="sidebar-link" role="tab" data-toggle="tab">Return</a>
+									</div>
+								</div>
+							</div>
+							<div class="result-content-unqualified" style="<?php if($firstChoiceStatus == 0 && $secondChoiceStatus == 0){echo 'display: block';}else{echo 'display: none';}?>">
+								<div>
+									<p align="justify" style="width: 100%;">We regret to inform you that you failed to qualify any of the university programs that you seeked admission to during your application for the <?php echo $application['semester']; ?> of A.Y <?php echo $academicYear['ay_year'];?>.
+									</p>
+									<p align="justify">
+										In line with this, you might want to check the following remarks below for further details:
+									</p>
+									<p>We wish you all the best on your future academic journey!</p>
+									<p style="font-weight: 600;">Sincerely,
+									<br>
+									LNU Admissions Office
+									</p>
+								</div>
+								<hr class="default-divider ml-auto" style="margin: 0px;">
+								<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px">
+									<div class="sidebar-item ml-auto mr-auto">
+										<i class="fa fa-arrow-left sidebar-navigation-icon"></i><a href="#main" class="sidebar-link" role="tab" data-toggle="tab">Return</a>
+									</div>
+								</div>
+							</div>
+							<div class="result-content-unqualified" style="<?php if(($firstChoiceStatus == 3 && $secondChoiceStatus == 0) || ($firstChoiceStatus == 0 && $secondChoiceStatus == 3) || ($firstChoiceStatus == 3 && $secondChoiceStatus == 3)){echo 'display: block';}else{echo 'display: none';}?>">
+								<div>
+									<p align="justify" style="width: 100%;">We would like to inform you that your application to any of the university's programs for the <?php echo $application['semester']; ?> of A.Y <?php echo $academicYear['ay_year'];?> is still not finalized.
+									</p>
+									<p align="justify" style="font-weight: 600;">
+										However, you have been added to the waitlist of the following program/s:
+										<br>
+										<br>
+										<?php
+											if($firstChoiceStatus == 3 && $secondChoiceStatus == 0){
+												echo 'First Choice: '.$recommendedProgram;
+											}else if($firstChoiceStatus == 0 && $secondChoiceStatus == 3){
+												echo 'Second Choice: '.$recommendedProgram;
+											}else if($firstChoiceStatus == 3 && $secondChoiceStatus == 3){
+												echo 'First Choice: '.$recommendedProgram1;
+												echo '<br>';
+												echo 'Second Choice: '.$recommendedProgram2;
+											}
+										?>
+									</p>
+									<p align="justify">For the meantime, it is highly advisable for you to login to the system from time-to-time to monitor any updates or developments with regards to the status of your admission to the university. Thank you for your patience!</p>
+									<p style="font-weight: 600;">Sincerely,
+									<br>
+									LNU Admissions Office
+									</p>
+								</div>
+								<hr class="default-divider ml-auto" style="margin: 0px;">
+								<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px">
+									<div class="sidebar-item ml-auto mr-auto">
+										<i class="fa fa-arrow-left sidebar-navigation-icon"></i><a href="#main" class="sidebar-link" role="tab" data-toggle="tab">Return</a>
+									</div>
 								</div>
 							</div>
 							<?php 
