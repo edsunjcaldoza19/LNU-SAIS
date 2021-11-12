@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2021 at 11:26 AM
+-- Generation Time: Nov 12, 2021 at 09:05 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_academic_year` (
 --
 
 INSERT INTO `tbl_academic_year` (`id`, `ay_year`, `enable_exam`, `result_available`, `ay_status`) VALUES
-(1, '2021-2022', 0, 0, 1);
+(1, '2021-2022', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,7 @@ CREATE TABLE `tbl_account_staff` (
 INSERT INTO `tbl_account_staff` (`id`, `staff_username`, `staff_password`, `staff_title`, `staff_first_name`, `staff_middle_name`, `staff_last_name`, `staff_contact`, `staff_email`, `staff_profile_img`, `staff_role`, `staff_unit`, `staff_program`, `login_status`, `session_token`) VALUES
 (1, 'admission', '$2y$10$RcjyI0I9kh0xXWrucqZopetrVv9IOzY3YI4ZdYCKKGZn9VarATXDi', 'Mr.', 'Wendell', '', 'Yu', '09123456789', 'wendellyu@lnu.edu.ph', 'STAFF_PROFILE_wendell_yu.png', 1, 0, 0, 0, ''),
 (2, 'exam', '$2y$10$EDJU7QF1bLSOmhkRjpLxqOqlpQ4Hy9pCPo1ndbWquOgF3GpKUSjCe', 'Prof.', 'Lisa', '', 'Bacierra', '09123456789', 'lisabacierra@lnu.edu.ph', 'STAFF_PROFILE_lisa_bacierra.png', 2, 0, 0, 0, ''),
-(3, 'itunit', '$2y$10$jhOJAw5heK2GJ5s1LPF/aO94AqQ4IRzF1WWgqLcjTx4M0Ua3vPfvi', 'Dr.', 'Rommel', 'Ligutan', 'Verecio', '09123456789', 'rommelverecio@lnu.edu.ph', 'STAFF_PROFILE_rommel_verecio.png', 3, 1, 0, 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGFmZl91c2VybmFtZSI6Iml0dW5pdCIsIm5iZiI6MTYzNjYyNjI5NSwiZXhwIjoxNjM2NjI2NTk1fQ.PK3OF2PFDhDvZV_mUWAdhYfSCjmXwiNeqS9BVatD_JQ'),
+(3, 'itunit', '$2y$10$jhOJAw5heK2GJ5s1LPF/aO94AqQ4IRzF1WWgqLcjTx4M0Ua3vPfvi', 'Dr.', 'Rommel', 'Ligutan', 'Verecio', '09123456789', 'rommelverecio@lnu.edu.ph', 'STAFF_PROFILE_rommel_verecio.png', 3, 1, 0, 0, ''),
 (4, 'interviewer', '$2y$10$rhSZu.gd.aZsSluuUEd1LOpyAHd6wO3iKHa8kV3qbBZNfWdRr529W', 'Prof.', 'Raphy', 'Angco', 'Dalan', '09123456789', 'raphydalan@lnu.edu.ph', 'STAFF_PROFILE_raphy_dalan.png', 4, 1, 1, 0, ''),
 (5, 'socsci', '$2y$10$5LMlyzAucorefH5b.5voNOB707AibFUMOw9rjjGkI8nefXjM6ogw.', 'Prof.', 'Ryan', '', 'Destura', '09123456789', 'ryandestura@lnu.edu.ph', 'STAFF_PROFILE_ryan_destura.png', 3, 6, 0, 0, ''),
 (6, 'interviewer2', '$2y$10$6x9nTguUg29lenWEYEetIuq/D6k49jNT8F9AmUTO5J5jK2/Rutn5.', 'Prof.', 'John', '', 'Doe', '09123456789', 'johndoe@lnu.edu.ph', 'STAFF_PROFILE_john_doe.png', 4, 6, 17, 0, '');
@@ -179,7 +179,6 @@ CREATE TABLE `tbl_applicant` (
   `college_address2` varchar(100) NOT NULL,
   `college_year_graduated2` varchar(100) NOT NULL,
   `college_honors2` varchar(1000) NOT NULL,
-  `report_card` varchar(1000) NOT NULL,
   `reference_name` varchar(100) NOT NULL,
   `reference_address` varchar(100) NOT NULL,
   `reference_contact` varchar(100) NOT NULL,
@@ -193,7 +192,6 @@ CREATE TABLE `tbl_applicant` (
   `club_name` varchar(100) NOT NULL,
   `disability` varchar(100) NOT NULL,
   `disability_name` varchar(100) NOT NULL,
-  `medical_certificate_image` varchar(100) NOT NULL,
   `personal_statement` varchar(1000) NOT NULL,
   `form_status` varchar(50) NOT NULL,
   `fs_timestamp` varchar(50) NOT NULL,
@@ -213,8 +211,8 @@ CREATE TABLE `tbl_applicant` (
 -- Dumping data for table `tbl_applicant`
 --
 
-INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_strand`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `report_card`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `medical_certificate_image`, `personal_statement`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`, `interview_status`, `is_timestamp`, `approved_first_choice`, `approved_second_choice`, `admission_status`, `as_timestamp`, `application_date`, `remarks`) VALUES
-(1, 1, 'IMG_APPLICANT2021111056995.jpg', 1, 'Freshmen', 'First Semester', '1', '17', 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 5, 6, 121, 'Married', 'Pasig City', 'Filipino', 'Brgy. Uyawan, Carigara, Leyte', 'N/A', 'Roman Catholic', '09501532031', 'Rodolfo T. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'Flor V. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Rural Improvement Club Children Center', 'Taguig City', '2006', 'N/A', 'Ricardo P. Cruz Sr. Elementary School', 'Taguig City', '2012', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2016', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', 'Sports and Arts', '2018', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', '', 'John Roger Rapis', 'Eastern Samar', '09123456789', 'Nel Patrick Chiqullo', 'Palo, Leyte', '09123456789', 'No', 'N/A', 'Singing', 'No', 'N/A', 'No', 'N/A', '', 'This is a sample personal statement.', 'Approved', 'November 11, 2021, 1:27:21 PM', 'Scored', 'November 11, 2021, 1:29:02 PM', 'Qualified', 'November 11, 2021, 6:24:27 PM', 0, 0, 'Pending', 'N/A', '2021-11-10 05:18:59', 'N/A');
+INSERT INTO `tbl_applicant` (`id`, `applicant_account_id`, `applicant_picture`, `school_year_id`, `entry`, `semester`, `program_first_choice`, `program_second_choice`, `dept_id`, `first_name`, `middle_name`, `last_name`, `date_birth`, `age`, `gender`, `height_feet`, `height_inches`, `weight`, `civil_status`, `place_birth`, `citizenship`, `address`, `mailing_address`, `religion`, `mobile_number`, `father_name`, `father_citizenship`, `father_contact`, `father_email`, `father_occupation`, `father_employer_address`, `mother_name`, `mother_citizenship`, `mother_contact`, `mother_email`, `mother_occupation`, `mother_employer_address`, `guardian_name`, `guardian_citizenship`, `guardian_contact`, `guardian_email`, `guardian_occupation`, `guardian_employer_address`, `kinder_name`, `kinder_address`, `kinder_year_graduated`, `kinder_honors`, `elem_name`, `elem_address`, `elem_year_graduated`, `elem_honors`, `jhs_name`, `jhs_address`, `jhs_year_graduated`, `jhs_honors`, `shs_name`, `shs_address`, `shs_strand`, `shs_year_graduated`, `shs_honors`, `college_name`, `college_address`, `college_year_graduated`, `college_honors`, `college_name2`, `college_address2`, `college_year_graduated2`, `college_honors2`, `reference_name`, `reference_address`, `reference_contact`, `reference_name2`, `reference_address2`, `reference_contact2`, `previous_application`, `previous_academic_year`, `hobbies`, `club_member`, `club_name`, `disability`, `disability_name`, `personal_statement`, `form_status`, `fs_timestamp`, `exam_status`, `es_timestamp`, `interview_status`, `is_timestamp`, `approved_first_choice`, `approved_second_choice`, `admission_status`, `as_timestamp`, `application_date`, `remarks`) VALUES
+(1, 1, 'IMG_APPLICANT2021111056995.jpg', 1, 'Freshmen', 'First Semester', '1', '17', 0, 'Rico', 'Villegas', 'Combinido', '1999-09-04', 22, 'Male', 5, 6, 121, 'Married', 'Pasig City', 'Filipino', 'Brgy. Uyawan, Carigara, Leyte', 'N/A', 'Roman Catholic', '09501532031', 'Rodolfo T. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'Flor V. Combinido', 'Filipino', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Rural Improvement Club Children Center', 'Taguig City', '2006', 'N/A', 'Ricardo P. Cruz Sr. Elementary School', 'Taguig City', '2012', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', '2016', 'N/A', 'Holy Cross College of Carigara', 'Carigara, Leyte', 'Sports and Arts', '2018', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'John Roger Rapis', 'Eastern Samar', '09123456789', 'Nel Patrick Chiqullo', 'Palo, Leyte', '09123456789', 'No', 'N/A', 'Singing', 'No', 'N/A', 'No', 'N/A', 'This is a sample personal statement.', 'Approved', 'November 11, 2021, 1:27:21 PM', 'Scored', 'November 11, 2021, 1:29:02 PM', 'Qualified', 'November 11, 2021, 6:24:27 PM', 1, 1, 'Evaluated', 'November 11, 2021, 9:06:08 PM', '2021-11-10 05:18:59', 'N/A');
 
 -- --------------------------------------------------------
 
@@ -249,7 +247,7 @@ CREATE TABLE `tbl_applicant_account` (
 --
 
 INSERT INTO `tbl_applicant_account` (`id`, `email`, `password`, `verification_key`, `verified`, `readmission_verified`, `security_question`, `security_answer`, `form1_progress`, `form2_progress`, `fp_timestamp`, `examination_progress`, `ep_timestamp`, `interview_progress`, `ip_timestamp`, `pursue_enrollment`, `student_number`, `login_status`, `session_token`) VALUES
-(1, 'ricocombinido9@gmail.com', '$2y$10$L0n2nemMxgdARKbS5xCvr.TkBrS.RjdWa2dTsmkRYW8bd436mqX/e', '7e83343bfdede4f50e5692da09c65f46', 1, 1, 'How old is your oldest sibling?', '21', 'Done', 'Done', 'November 10, 2021, 08:28:36 PM', 'Not Started', 'N/A', 'Done', 'November 11, 2021, 6:24:27 PM', 0, 'N/A', 0, '');
+(1, 'ricocombinido9@gmail.com', '$2y$10$L0n2nemMxgdARKbS5xCvr.TkBrS.RjdWa2dTsmkRYW8bd436mqX/e', '7e83343bfdede4f50e5692da09c65f46', 1, 1, 'How old is your oldest sibling?', '21', 'Done', 'Done', 'November 10, 2021, 08:28:36 PM', 'Not Started', 'N/A', 'Done', 'November 11, 2021, 6:24:27 PM', 0, '1800638', 1, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJpY29jb21iaW5pZG85QGdtYWlsLmNvbSIsIm5iZiI6MTYzNjY4ODg0NywiZXhwIjoxNjM2Njg5MTQ3fQ.dOqbSh3SlY9IGaIpaxKQ1m_jswAn4biTnr7D7XeLQpQ');
 
 -- --------------------------------------------------------
 
@@ -311,7 +309,7 @@ CREATE TABLE `tbl_course` (
 --
 
 INSERT INTO `tbl_course` (`course_id`, `course_name`, `course_acronym`, `unit_id`, `course_quota`, `waitlist_quota`, `interview_passing_score`) VALUES
-(1, 'Bachelor of Science in Information Technology', 'BSIT', 1, 0, 0, 0),
+(1, 'Bachelor of Science in Information Technology', 'BSIT', 1, 150, 50, 80),
 (2, 'Bachelor of Elementary Education', 'BEED', 7, 0, 0, 0),
 (3, 'Bachelor of Early Childhood Education', 'BECED', 7, 0, 0, 0),
 (4, 'Bachelor of Special Needs Education', 'BSNED', 7, 0, 0, 0),
@@ -326,7 +324,7 @@ INSERT INTO `tbl_course` (`course_id`, `course_name`, `course_acronym`, `unit_id
 (13, 'Bachelor of Arts in Communication', 'BACOMM', 11, 0, 0, 0),
 (14, 'Bachelor of Library and Information Science', 'BLIS', 12, 0, 0, 0),
 (16, 'Bachelor of Arts in English Language', 'BAEL', 11, 0, 0, 0),
-(17, 'Bachelor of Arts in Political Science', 'BAPos', 6, 0, 0, 0),
+(17, 'Bachelor of Arts in Political Science', 'BAPos', 6, 100, 20, 85),
 (18, 'Bachelor of Science in Biology', 'BSBio', 8, 0, 0, 0),
 (19, 'Bachelor of Science in Social Work', 'BSSW', 13, 0, 0, 0),
 (20, 'Bachelor of Science in Tourism Management', 'BSTM', 9, 0, 0, 0),
@@ -342,17 +340,18 @@ INSERT INTO `tbl_course` (`course_id`, `course_name`, `course_acronym`, `unit_id
 CREATE TABLE `tbl_department` (
   `id` int(11) NOT NULL,
   `dept_name` varchar(50) NOT NULL,
-  `dept_acronym` varchar(50) NOT NULL
+  `dept_acronym` varchar(50) NOT NULL,
+  `dept_dean` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_department`
 --
 
-INSERT INTO `tbl_department` (`id`, `dept_name`, `dept_acronym`) VALUES
-(1, 'College of Arts and Sciences', 'CAS'),
-(2, 'College of Education', 'COE'),
-(3, 'College of Management and Entrepreneurship', 'CME');
+INSERT INTO `tbl_department` (`id`, `dept_name`, `dept_acronym`, `dept_dean`) VALUES
+(1, 'College of Arts and Sciences', 'CAS', 'Dr. Gil Nicetas Villarino'),
+(2, 'College of Education', 'COE', 'Dr. Lina G. Fabian'),
+(3, 'College of Management and Entrepreneurship', 'CME', 'Dr. Solomon D. Faller');
 
 -- --------------------------------------------------------
 

@@ -95,6 +95,16 @@
 		echo 'Error: '.$e->getMessage();
 	}
 
+	try{
+
+		$fetchAcademicYear = $conn->prepare("SELECT * FROM tbl_academic_year WHERE `ay_status` = 1");
+    	$fetchAcademicYear->execute();
+    	$academicYear = $fetchAcademicYear->fetch();
+
+	}catch(exception $e){
+		echo 'Error: '.$e->getMessage();
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -128,23 +138,24 @@
 					<img src="../../assets/images/navbar_logo_main_alt.png" style="width: 50%; position: absolute; left: 50%; margin-left: -25%;">
 				</div>
 				<div class="default-container">
-					<div class="tab-content">
+					<div class="tab-content" id="content" style="overflow-x: auto;">
 						<div class="tab-pane active" style="transition: 0.5s;" role="tabpanel" id="main">
 							<div class="default-header" style="height: 60px;">
-								<img src="../../assets/images/done_icon.png" style="width: 15%; position: absolute;	left: 50%; margin-left: -7.5%;">
+								<img src="../../assets/images/done_icon.png" style="width: 30%; position: absolute;	left: 50%; margin-left: -15%;">
 							</div>
 							<div class="login-form-header">
 								<p class="login-form-header-text" style="text-align: center; line-height: normal;">Thank you for taking the university admission!</p>
-								<p class="login-form-header-subtext" style="text-align: center; font-size: 14px;">Your application is currently being assessed by the concerned offices. Please wait for further updates on your email address.</p>
 							</div>
+							<p class="login-form-header-subtext" style="text-align: center; font-size: 14px; <?php if($application['student_number'] == 'N/A' && $academicYear['result_available'] == 0){ echo 'display: block'; }else{ echo 'display: none'; } ?>">Your application is currently being assessed by the admission committee. Please wait for further updates by checking your status on this account.</p>
+							<div class="nav alert alert-success" role="tablist" align="justify" style="height: auto; text-align: center; <?php if($application['student_number'] != 'N/A' && $academicYear['result_available'] == 1){echo 'display: block';}else{echo 'display: none';}?>"><i class="far fa-check-circle"></i> The admission committee is already done evaluating your application.<div class="sidebar-item"><a href="#results" class="alert-success sidebar-link" role="tab" data-toggle="tab" aria-controls="test" aria-selected="true" style="font-weight: 600;"> Please check your results here.</a></div></div>
 							<hr class="default-divider ml-auto" style="margin: 0px;">
 							<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px;">
 								<div class="sidebar-item ml-auto mr-auto">
-									<i class="far fa-user-circle sidebar-navigation-icon"></i><a href="#test" class="sidebar-link" role="tab" data-toggle="tab" aria-controls="test" aria-selected="true">Check Admission Status</a>
+									<i class="far fa-user-circle sidebar-navigation-icon"></i><a href="#status" class="sidebar-link" role="tab" data-toggle="tab" aria-controls="test" aria-selected="true">Check Admission Status</a>
 								</div>
 								<hr class="default-divider ml-auto" style="margin: 0px;">
 								<div class="sidebar-item ml-auto mr-auto">
-									<i class="far fa-comments sidebar-navigation-icon"></i><a href="#try" class="sidebar-link" role="tab" data-toggle="tab">Send Inquiry</a>
+									<i class="far fa-comments sidebar-navigation-icon"></i><a href="#inquiry" class="sidebar-link" role="tab" data-toggle="tab">Send Inquiry</a>
 								</div>
 								<hr class="default-divider ml-auto" style="margin: 0px;">
 								<div class="sidebar-item ml-auto mr-auto">
@@ -152,7 +163,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="test">
+						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="status">
 							<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px; margin-bottom: 5px;">
 								ADMISSION STATUS MONITORING
 							</p>
@@ -224,7 +235,7 @@
 									}
 								?>
 								<?php echo $application['admission_status'] ?> (<?php echo $application['as_timestamp'] ?>)
-									</p>
+							</p>
 							<hr class="default-divider ml-auto" style="margin: 0px;">
 							<div class="nav" role="tablist" style="margin: 0px 0px 0px 0px">
 								<div class="sidebar-item ml-auto mr-auto">
@@ -232,7 +243,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="try">
+						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="inquiry">
 							<button class="default-button feedback-button" data-toggle="modal" data-target="#addMessageModal">New Inquiry Ticket</button>
 						<hr class="default-divider ml-auto" style="margin: 10px;">
 						<div class="feedback-table-container" id="feedback-table-container" style="overflow-y: auto;">
@@ -279,9 +290,16 @@
 										       				</div>
 										       				<div class="reply-container" style="padding: 10px; width: 100%;">
 										       					<?php
-										       						if($feedback['inquiry_reply'] !== ''){
+										       						if($feedback['inquiry_reply'] !== '' && $feedback['inquiry_reply_role'] == 0){
 										       							echo '
 										       								<p><b>System Administrator:</b></p>
+										       								<p>' .$feedback["inquiry_reply"].'</p>
+										       								<hr class="default-divider ml-auto" style="margin: 10px;">
+										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["inquiry_reply_timestamp"].'</p>
+										       							';
+										       						}else if($feedback['inquiry_reply'] !== '' && $feedback['inquiry_reply_role'] == 1){
+										       							echo '
+										       								<p><b>Admissions Office:</b></p>
 										       								<p>' .$feedback["inquiry_reply"].'</p>
 										       								<hr class="default-divider ml-auto" style="margin: 10px;">
 										       								<p style="font-weight: 600; font-size: 12px;">Replied on: '.$feedback["inquiry_reply_timestamp"].'</p>
@@ -329,6 +347,75 @@
 								<i class="fa fa-arrow-left sidebar-navigation-icon"></i><a href="#main" class="sidebar-link" role="tab" data-toggle="tab">Return</a>
 							</div>
 						</div>
+						</div>
+						<div class="tab-pane fade in" style="transition: 0.5s;" role="tabpanel" id="results">
+							<?php
+
+								$firstChoiceStatus = $application['approved_first_choice'];
+								$secondChoiceStatus = $application['approved_second_choice'];
+								$firstChoice = $application['program_first_choice'];
+                                $secondChoice = $application['program_second_choice'];
+
+                                $sql1 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$firstChoice'");
+                                $sql1->execute();
+                                
+
+                                $sql2 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$secondChoice'");
+                                $sql2->execute();
+
+                                while($fetchFirstChoice = $sql1->fetch()){
+                                	while($fetchSecondChoice = $sql2->fetch()){
+
+									if($firstChoiceStatus == 1 && $secondChoiceStatus == 1){
+										$recommendedProgram = $fetchFirstChoice['course_name'].' ('.$fetchFirstChoice['course_acronym'].')';
+									}else if($firstChoiceStatus == 1 && $secondChoiceStatus == 0){
+										$recommendedProgram = $fetchFirstChoice['course_name'].' ('.$fetchFirstChoice['course_acronym'].')';
+									}else if($firstChoiceStatus == 1 && $secondChoiceStatus == 3){
+										$recommendedProgram = $fetchFirstChoice['course_name'].' ('.$fetchFirstChoice['course_acronym'].')';
+									}else if($firstChoiceStatus == 0 && $secondChoiceStatus == 1){
+										$recommendedProgram = $fetchSecondChoice['course_name'].' ('.$fetchSecondChoice['course_acronym'].')';
+									}else if($firstChoiceStatus == 3 && $secondChoiceStatus == 1){
+										$recommendedProgram = $fetchSecondChoice['course_name'].' ('.$fetchSecondChoice['course_acronym'].')';
+									}
+
+							?>
+
+							<p class="exam-placeholder-subheader" style="font-size: 15px; margin-top: 5px; margin-bottom: 5px;">
+								CHECK ADMISSION RESULT
+							</p>
+							<div class="results-header">
+								<p style="font-weight: 600; font-size: 20px; color: #0A079D;">Hello, <?php echo $application['first_name']; ?>.</p>
+							</div>
+							<hr class="default-divider ml-auto" style="margin: 5px;">
+							<div class="result-content-qualified" style="<?php if($firstChoiceStatus == 1 || $secondChoiceStatus == 1){echo 'display: block';}else{echo 'display: none';}?>">
+								<div class="result-subheader">
+									<p style="font-size: 16px; color: green; font-weight: 600;">CONGRATULATIONS!</p>
+								</div>
+								<div>
+									<p align="justify" style="width: 100%;">With great pleasure, we wish to inform you that you qualified for admission to the <b><?php echo $recommendedProgram; ?></b> program of the university for the <?php echo $application['semester']; ?>, A.Y <?php echo $academicYear['ay_year']; ?>.
+									</p>
+									<p align="justify">
+										Your official student ID number is <b><?php echo $application['student_number']; ?></b>. Please use this to login to the university's online enrollment portal during the pre-registration period. Stay tuned for further updates with regards to the enrollment process. 
+									</p>
+									<p align="justify">Send us your response using the links below:</p>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+										<div align="center">
+											<a href="../../admission/confirmAcceptance.php" style="font-weight: 600; color: #0A079D;">CONFIRM</a>
+											<hr class="default-divider ml-auto" style="margin: 5px;">
+											<a href="../../admission/declineAcceptance.php" style="font-weight: 600; color: #0A079D;">DECLINE</a>
+										</div>
+									<hr class="default-divider ml-auto" style="margin: 5px;">
+									<p>Congratulations on your new achievement and welcome to the university, Bagong Normalista!</p>
+									<p style="font-weight: 600;">Sincerely,
+									<br>
+									LNU Admissions Office
+									</p>
+								</div>
+							</div>
+							<?php 
+								}
+							}
+							?>
 						</div>
 					</div>
 				</div>
@@ -430,17 +517,12 @@
     		theThis.addClass('active');
     	});
 
-    	$("#cbFeedbackCategory").change(function(){
-            if($(this).val() == "Others"){
-                $("#followUpNote").hide();
-            }
-            else if($(this).val() == "General Inquiry"){
-                $("#followUpNote").hide();
-            }
-            else if($(this).val() == "Follow-up"){
-                $("#followUpNote").show();
-            }
-        });
+    	$(function(){
+			$('#content').slimScroll({
+				height: 'auto'
+			});
+		});
+
     </script>
 
 </body>

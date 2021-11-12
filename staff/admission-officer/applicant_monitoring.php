@@ -127,10 +127,8 @@
                                                 <?php
                                                     if($fetch['admission_status'] == "Pending"){
                                                         echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['admission_status'] == "Approved"){
-                                                        echo '<p class="label-green">Approved</p>';
-                                                    }else if($fetch['admission_status'] == "Rejected"){
-                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }else if($fetch['admission_status'] == "Evaluated"){
+                                                        echo '<p class="label-green">Evaluated</p>';
                                                     }
                                                 ?>
                                             </td>
