@@ -37,7 +37,7 @@
                             <span>Encode Applicant Scores</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?= ($activePage == 'applicant_pending') ? 'active': ''; ?>">
+                            <li class="<?= ($activePage == 'applicant_unscored') ? 'active': ''; ?>">
                                 <a href="applicant_unscored.php?sy_id=<?php echo $fetch1['id'];?>">Unscored Applicants</a>
                             </li>
                             <li class="<?= ($activePage == 'applicant_scored') ? 'active': ''; ?>">

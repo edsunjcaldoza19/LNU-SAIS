@@ -3,6 +3,8 @@
     require '../database/db_pdo.php';
 	$sy_id = $_GET['sy_id'];
 
+	date_default_timezone_set('Asia/Taipei');
+
 	if(ISSET($_POST['updateScore'])){
 		date_default_timezone_set('Asia/Taipei');
 		try{
@@ -18,7 +20,29 @@
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql1 = "UPDATE `tbl_applicant` SET `exam_status`= 'Scored', `es_timestamp` = '$timestamp'
             WHERE `applicant_account_id`=$id";
-			$conn->exec($sql1);
+
+			if($conn->exec($sql1)){
+
+				//log this action
+
+				$account = $conn->prepare("SELECT * FROM `tbl_applicant` WHERE `applicant_account_id` = '$id'");
+				$account->execute();
+				$fetchAccount = $account->fetch();
+
+				$name = $fetchAccount['first_name'].' '.$fetchAccount['last_name'];
+
+				$staff_id = $_POST['staff_id'];
+				$staff_username = $_POST['staff_username'];
+				$staff_role = 2;
+				$log_description = 'Encoded examination score for '.$name;
+				$timestamp = date('m/d/Y, g:i:s A');
+
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+        		VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+				$conn->exec($sql2);
+
+			}
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
@@ -34,7 +58,7 @@
                     text: "LNU - Student Admission and Information System",
 					timer: 1000
 				}).then(function(){
-					window.location.replace("../../applicant_pending.php?sy_id='.$sy_id.'");
+					window.location.replace("../../applicant_unscored.php?sy_id='.$sy_id.'");
 
 				});
 

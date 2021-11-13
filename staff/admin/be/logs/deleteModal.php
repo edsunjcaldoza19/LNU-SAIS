@@ -1,17 +1,17 @@
 <!-- DELETE MODAL -->
-<div class="modal fade" id="delete<?php echo $fetch['id']?>" tabindex="-1" role="dialog">
+<div class="modal fade" id="delete" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action = "be/procedure/delete.php" method="POST" enctype="multipart/form-data">
+            <form action = "be/logs/delete.php" method="POST" enctype="multipart/form-data">
                 <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
                 <input class="hidden" name="staff_username" value="<?php echo $username?>">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="defaultModalLabel">Remove Admission Procedure</h4>
+                    <h4 class="modal-title" id="defaultModalLabel">Clear All Logs?</h4>
                     <hr class="default-divider ml-auto">
                 </div>
                 <div class="modal-body">
-                <input class="hidden" value="<?php echo $fetch['id'] ?>" name="id">
-                <p style="font-size: 15px;">Are you sure you want to remove this procedure?</p>
+                <input class="hidden" value="<?php echo $fetch['course_id'] ?>" name="id">
+                <p style="font-size: 15px;">Are you sure you want to remove all system logs?</p>
                 </div>
                 <div class="modal-footer">
                     <hr class="default-divider ml-auto">

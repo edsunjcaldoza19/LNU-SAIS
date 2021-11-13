@@ -3,6 +3,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="myForm" action="be/backup/backup.php" method="POST">
+                <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Backup Database</h4>
                     <hr class="default-divider ml-auto">

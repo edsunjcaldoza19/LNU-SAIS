@@ -52,7 +52,7 @@
                                             $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                                             LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                                             LEFT JOIN tbl_exam_result ON tbl_exam_result.exam_applicant_id=tbl_applicant.applicant_account_id
-                                            WHERE `form_status`='Approved' AND `exam_status`='Qualified' AND `school_year_id` = $id");
+                                            WHERE `form_status`='Approved' AND `exam_status`='Scored' AND `school_year_id` = $id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
 
@@ -77,6 +77,7 @@
                                                 ?>       
                                             </td>
                                             <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
                                             <td>
                                                 <?php
                                                     echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';

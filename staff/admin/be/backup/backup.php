@@ -1,6 +1,9 @@
 <?php
 
     include 'be/backup/backupModal.php';
+    require '../database/db_pdo.php';
+
+    date_default_timezone_set('Asia/Taipei');
 
     $mysqlUserName = "root";
     $mysqlPassword = "";
@@ -9,6 +12,19 @@
     $backup_name = "sais-db-backup.sql";
 
     if(isset($_POST['backup'])){
+
+        //log this action
+
+        $staff_id = $_POST['staff_id'];
+        $staff_username = $_POST['staff_username'];
+        $staff_role = 0;
+        $log_description = 'Generated database backup file';
+        $timestamp = date('m/d/Y, g:i:s A');
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+        VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+        $conn->exec($sql2);
 
         Export_Database($mysqlHostName,$mysqlUserName,$mysqlPassword,$DbName, $tables=false, $backup_name=false );
 
@@ -77,6 +93,7 @@
                 }
             } $content .="\n\n\n";
         }
+
         //$backup_name = $backup_name ? $backup_name : $name."___(".date('H-i-s')."_".date('d-m-Y').")__rand".rand(1,11111111).".sql";
         $date = date("Y-m-d");
         $backup_name = $backup_name ? $backup_name : $name.".$date.sql";
@@ -84,6 +101,8 @@
         header("Content-Transfer-Encoding: Binary");
         header("Content-disposition: attachment; filename=\"".$backup_name."\"");
         echo $content; 
+                header("location: ../../home.php");
+
         exit;
     }
 ?>

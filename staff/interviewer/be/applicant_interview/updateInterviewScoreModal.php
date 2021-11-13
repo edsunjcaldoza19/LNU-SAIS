@@ -16,6 +16,8 @@
                     <input type="hidden" value="<?php echo $fetch['program_first_choice']; ?>" name="firstChoice">
                     <input type="hidden" value="<?php echo $fetch['program_second_choice']; ?>" name="secondChoice">
                     <input type="hidden" value="<?php echo $fetch['course_id']; ?>" name="courseId">
+                    <input type="hidden" value="<?php echo $staff_id; ?>" name="staffID">
+                    <input type="hidden" name="staff_username" value="<?php echo $username?>">
                     <div class="form-group">
                     <p style="font-weight: 600;">Set Interview Rating for: </p>
                         <p>

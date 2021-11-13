@@ -115,14 +115,22 @@
                                             </td>
                                             <td align="center">
                                                 <?php
-                                                    if($fetch['interview_status'] == "Pending"){
-                                                        echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['interview_status'] == "Scheduled"){
-                                                        echo '<p class="label-blue">Scheduled</p>';
-                                                    }else if($fetch['interview_status'] == "Qualified"){
-                                                        echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['interview_status'] == "Unqualified"){
-                                                        echo '<p class="label-red">Unqualified</p>';
+                                                    if($fetch['program_first_choice'] == $courses){
+                                                        if($fetch['interview_status_1'] == "Pending"){
+                                                            echo '<p class="label-blue">Pending</p>';
+                                                        }else if($fetch['interview_status_1'] == "Qualified"){
+                                                            echo '<p class="label-green">Qualified</p>';
+                                                        }else if($fetch['interview_status_1'] == "Unqualified"){
+                                                            echo '<p class="label-red">Unqualified</p>';
+                                                        }
+                                                    }else{
+                                                        if($fetch['interview_status_2'] == "Pending"){
+                                                            echo '<p class="label-blue">Pending</p>';
+                                                        }else if($fetch['interview_status_2'] == "Qualified"){
+                                                            echo '<p class="label-green">Qualified</p>';
+                                                        }else if($fetch['inteview_status_2'] == "Unqualified"){
+                                                            echo '<p class="label-red">Unqualified</p>';
+                                                        }
                                                     }
                                                 ?>
                                             </td>

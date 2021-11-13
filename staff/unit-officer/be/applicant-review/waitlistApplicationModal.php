@@ -18,6 +18,8 @@
                     >
                     <input type="hidden" name="secondChoice" id="secondChoice" value="<?php echo $fetch['program_second_choice'] ?>"
                     >
+                    <input type="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                    <input type="hidden" name="staff_username" value="<?php echo $username?>">
                     <p class="card-dashboard-header">Are you sure you want to add
                     <b>
                     <?php 

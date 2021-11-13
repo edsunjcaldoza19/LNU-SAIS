@@ -11,10 +11,13 @@
 
 <?php
 
+require '../database/db_pdo.php';
 require '../database/db_mysqli.php';
 require '../../../../pages/assets/libs/PHPMailer/src/PHPMailer.php';
 require '../../../../pages/assets/libs/PHPMailer/src/SMTP.php'; 
 require '../../../../pages/assets/libs/PHPMailer/src/Exception.php'; 
+
+date_default_timezone_set('Asia/Taipei');
 
 if(isset($_POST['addAccount'])){
 
@@ -37,7 +40,7 @@ if(isset($_POST['addAccount'])){
 
     //Set last name as default password
 
-    $password = password_hash($lastName, PASSWORD_DEFAULT);
+    $password = password_hash($username, PASSWORD_DEFAULT);
 
     //Set default avatar
 
@@ -47,7 +50,6 @@ if(isset($_POST['addAccount'])){
 
     $vkey = md5(time().$email);
     $verified = 0;
-
 
     $query="INSERT INTO tbl_admin(`username`, `password`, `name`, `email`, `image`, `verification_key`, `verified`, `login_status`) VALUES('$username', '$password', '$fullName', '$email', '$image', '$vkey', '$verified', '$loginStatus')";
     $query_run = mysqli_query($connection, $query);
@@ -64,7 +66,7 @@ if(isset($_POST['addAccount'])){
         $mail->SMTPSecure = "tls";
         $mail->Port = "587";
         $mail->Username = "1800638@lnu.edu.ph";
-        $mail->Password = "cyrbulsouiebisei";
+        $mail->Password = "llrcxiwvmbbjmmza";
         $mail->Subject = "Activate LNU-SAIS Administrator Account";
         $mail->setFrom("lnu.admissionsoffice@lnu.edu.ph");
 
@@ -72,7 +74,7 @@ if(isset($_POST['addAccount'])){
 
         $mail->isHTML(true);
         $mail->From = "lnu.admissionsoffice@lnu.edu.ph";
-        $mail->FromName = "<no-reply-lnu.admissionsoffice@lnu.edu.ph>";
+        $mail->FromName = "<no-reply@mailersais>";
         $mail->addAddress($email);
         $mail->addEmbeddedImage('../../../../pages/assets/images/logo.png', 'lnu_logo');
         $mail->Body = "
@@ -92,10 +94,10 @@ if(isset($_POST['addAccount'])){
                     <p style='font-weight: 600;'>Greetings! $email <br>You may now activate your LNU-SAIS Administrator Account</p>
                     <p>Please use the following default user credentials upon activation:</p>
                     <p style='margin-bottom: 5px;'><b>Username: $username</b></p>
-                    <p><b>Password: $lastName</b></p>
+                    <p><b>Password: $username</b></p>
                     <p style='text-align: justify;'>To activate your administrator account, please click the link provided below</p>
                     <p style='text-align: justify;'>Sincerely,</p>
-                    <p style='text-align: justify; font-weight: 600;'>Admissions Office | Leyte Normal University</p>
+                    <p style='text-align: justify; font-weight: 600;'>MIS Office | Leyte Normal University</p>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
                         <a href='http://localhost/lnu-sais/staff/admin/be/account_admin/verify.php?verification_key=$vkey'>Activate My Account</a>
                     <hr class='default-divider ml-auto' style='background-color: #A2A2A2;'>
@@ -137,12 +139,26 @@ if(isset($_POST['addAccount'])){
 
             ';
         }
+
+        //log this action
+
+        $staff_id = $_POST['staff_id'];
+        $staff_username = $_POST['staff_username'];
+        $staff_role = 0;
+        $log_description = 'Added new administrator account';
+        $timestamp = date('m/d/Y, g:i:s A');
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+        VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+        $conn->exec($sql2);
     
-    }
-    else{
+    }else{
         echo '<script> alert("Error adding account");</script>';
         echo mysqli_error($connection);
     }
+
+}
 
     function generateAvatar($character, $name){
 
@@ -167,7 +183,6 @@ if(isset($_POST['addAccount'])){
         return $newname;
 
     }
-}
 
 
 ?>

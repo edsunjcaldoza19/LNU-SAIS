@@ -3,6 +3,8 @@
     include '../includes/head.php';
     require '../database/db_pdo.php';
     error_reporting(0);
+    date_default_timezone_set('Asia/Taipei');
+
 	if(ISSET($_POST['submit'])){
 		try{
 			
@@ -24,8 +26,7 @@
 
 			$image = generateAvatar(strtoupper($firstName[0].''.$lastName[0]), strtolower($firstName.'_'.$lastName));
 
-			$password = $username;
-            $password = password_hash($password, PASSWORD_DEFAULT);
+            $password = password_hash($username, PASSWORD_DEFAULT);
 
             $loginStatus = 0;
 
@@ -57,6 +58,19 @@
 
 					</script>
 				';
+
+				//log this action
+
+				$staff_id = $_POST['staff_id'];
+				$staff_username = $_POST['staff_username'];
+				$staff_role = 0;
+				$log_description = 'Added new staff account with username '.$username;
+				$timestamp = date('m/d/Y, g:i:s A');
+
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+	            VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+				$conn->exec($sql2);
 			}
 			
 		}catch(PDOException $e){

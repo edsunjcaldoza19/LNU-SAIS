@@ -21,10 +21,6 @@
                     <div class="card">
                         <div class="header">
                             <p class="table-subheader">System Logs Overview</p>
-                            <button type="button" class="btn bg-red waves-effect"  href="#" data-toggle="modal" data-target="#delete">
-                                <i class="material-icons">delete</i>
-                                <span>Clear All Logs</span>
-                            </button>
                         </div>
                         <div class="body">
                             <div class="table">
@@ -64,8 +60,7 @@
                                                 ?>
                                             </td>
                                         </tr>
-                                        <?php
-                                            include 'be/logs/deleteModal.php'; 
+                                        <?php 
                                             }
                                         ?>
                                     </tbody>
@@ -91,11 +86,7 @@
     <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <!-- Custom Js -->
-    <script src="../../js/admin.js"></script>
-    <script src="../../js/pages/tables/jquery-datatable.js"></script>
     <script src="../../js/pages/forms/basic-form-elements.js"></script>
-    <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
 </body>
 
 </html>

@@ -25,6 +25,8 @@
                         <div class="body">
                             <form action="be/account_staff/add.php" method="POST" enctype="multipart/form-data">        
                                 <div class="row">
+                                    <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                                    <input class="hidden" name="staff_username" value="<?php echo $username?>">
                                     <div class="col-md-6">
                                         <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
                                         <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
@@ -78,6 +80,7 @@
                                                     <option disabled selected>Honorific*</option>
                                                     <option value="Mr.">Mr.</option>
                                                     <option value="Mrs.">Mrs.</option>
+                                                    <option value="Mrs.">Ms.</option>
                                                     <option value="Prof.">Prof.</option>
                                                     <option value="Dr.">Dr.</option>
                                                     <option value="Engr.">Engr.</option>

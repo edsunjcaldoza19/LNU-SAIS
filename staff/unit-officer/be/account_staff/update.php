@@ -18,7 +18,22 @@
 			$sql = "UPDATE `tbl_account_staff` SET `staff_username`='$username',`staff_title`='$title',`staff_first_name`='$firstName',
             `staff_middle_name`='$middleName',`staff_last_name`='$lastName',
             `staff_contact`='$contact',`staff_email`='$email',`staff_unit`='$courseID' WHERE `id` = '$id'";
-			$conn->exec($sql);
+
+			if($conn->exec($sql)){
+
+				//log this action
+
+				$staff_username = $_POST['staff_username'];
+				$staff_role = 3;
+				$log_description = 'Modified unit interviewer account for username '.$username;
+				$timestamp = date('m/d/Y, g:i:s A');
+
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+        		VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+				$conn->exec($sql2);
+
+			}
 
 			//pathinfo
 			$image=$_FILES['image']['name'];

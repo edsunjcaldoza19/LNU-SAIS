@@ -1,6 +1,8 @@
 <?php
-include '../includes/head.php';
+	include '../includes/head.php';
 	require_once '../database/db_pdo.php';
+
+	date_default_timezone_set('Asia/Taipei');
 
 	if(ISSET($_POST['update'])){
 		try{
@@ -14,7 +16,29 @@ include '../includes/head.php';
 			$sql = "UPDATE `tbl_course` SET `course_quota`='$program_quota',
             `waitlist_quota`='$waitlist_quota', `interview_passing_score`='$interview_passing' 
             WHERE `course_id` = '$id'";
-			$conn->exec($sql);
+
+			if($conn->exec($sql)){
+
+				//log this action
+
+				$course = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$id'");
+				$course->execute();
+				$fetchProgram = $course->fetch();
+
+				$program = $fetchProgram['course_name'];
+
+				$staff_id = $_POST['staff_id'];
+				$staff_username = $_POST['staff_username'];
+				$staff_role = 3;
+				$log_description = 'Modified program configurations for '.$program;
+				$timestamp = date('m/d/Y, g:i:s A');
+
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+	        	VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+				$conn->exec($sql2);
+			}
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

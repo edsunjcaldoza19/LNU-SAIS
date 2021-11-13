@@ -7,6 +7,8 @@
             $syID = $_GET['sy_id'];
             ?>
             <form action = "be/applicant_exam/updateScore.php?sy_id=<?php echo $syID;?>" method="POST" enctype="multipart/form-data">
+                <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Input Entrance Examination Score</h4>
                     <hr class="default-divider ml-auto">

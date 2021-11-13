@@ -67,7 +67,7 @@
                                             LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id = tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Scored'
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
-                                            AND ((`interview_status` = 'Unqualified' AND `program_first_choice` = $courses) OR (`interview_status` = 'Unqualified' AND `program_second_choice` = $courses))
+                                            AND ((`interview_status_1` = 'Unqualified' AND `program_first_choice` = $courses) OR (`interview_status_2` = 'Unqualified' AND `program_second_choice` = $courses))
                                             ");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
@@ -125,12 +125,22 @@
                                             </td>
                                             <td align="center">
                                                 <?php
-                                                    if($fetch['interview_status'] == "Pending"){
-                                                        echo '<p class="label-blue">Pending</p>';
-                                                    }else if($fetch['interview_status'] == "Qualified"){
-                                                        echo '<p class="label-green">Qualified</p>';
-                                                    }else if($fetch['interview_status'] == "Unqualified"){
-                                                        echo '<p class="label-red">Unqualified</p>';
+                                                    if($fetch['program_first_choice'] == $courses){
+                                                        if($fetch['interview_status_1'] == "Pending"){
+                                                            echo '<p class="label-blue">Pending</p>';
+                                                        }else if($fetch['interview_status_1'] == "Qualified"){
+                                                            echo '<p class="label-green">Qualified</p>';
+                                                        }else if($fetch['interview_status_1'] == "Unqualified"){
+                                                            echo '<p class="label-red">Unqualified</p>';
+                                                        }
+                                                    }else{
+                                                        if($fetch['interview_status_2'] == "Pending"){
+                                                            echo '<p class="label-blue">Pending</p>';
+                                                        }else if($fetch['interview_status_2'] == "Qualified"){
+                                                            echo '<p class="label-green">Qualified</p>';
+                                                        }else if($fetch['inteview_status_2'] == "Unqualified"){
+                                                            echo '<p class="label-red">Unqualified</p>';
+                                                        }
                                                     }
                                                 ?>
                                             </td>

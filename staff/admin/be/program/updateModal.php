@@ -3,6 +3,8 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form action = "be/program/update.php" method="POST" enctype="multipart/form-data">
+                        <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                        <input class="hidden" name="staff_username" value="<?php echo $username?>">
                         <div class="modal-header">
                             <h4 class="modal-title" id="defaultModalLabel">Update Program Offering</h4>
                             <hr class="default-divider ml-auto">

@@ -30,6 +30,8 @@
                                 <p class="table-subheader">Profile Picture</p>
                                 <br>
                                 <div class="row">
+                                    <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                                    <input class="hidden" name="staff_username" value="<?php echo $username?>">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <?php

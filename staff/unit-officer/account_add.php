@@ -24,6 +24,8 @@
                         </div>
                         <div class="body">
                             <form action="be/account_staff/add.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                                <input type="hidden" name="staff_username" value="<?php echo $username?>">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <input type="hidden" name="unitID" value="<?php echo $unitId?>">

@@ -6,6 +6,8 @@
                 $syID = $_GET['sy_id'];
             ?>
             <form action = "be/applicant-review/approveApplication.php?syID=<?php echo $syID ?>" method="POST">
+                <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Approve Application</h4>
                     <hr class="default-divider ml-auto">

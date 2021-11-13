@@ -2,6 +2,9 @@
 
     include '../includes/head.php';
     require '../database/db_pdo.php';
+
+    date_default_timezone_set('Asia/Taipei');
+
     error_reporting(0);
 	if(ISSET($_POST['update'])){
 		try{
@@ -23,7 +26,44 @@
             `staff_password`='$password',`staff_role`='$role', `staff_title`='$title',`staff_first_name`='$firstName',
             `staff_middle_name`='$middleName',`staff_last_name`='$lastName',
             `staff_contact`='$contact',`staff_email`='$email',`staff_role`='$role',`staff_unit`='$unitID' WHERE `id` = '$id'";
-			$conn->exec($sql);
+
+			if($conn->exec($sql)){
+
+				echo '
+					<script>
+
+						$(document).ready(function(){
+
+							Swal.fire({
+								icon: "success",
+								title: "Staff Account Successfully Updated",
+			                    text: "LNU - Student Admission and Information System",
+			                    timer: 2000
+
+							}).then(function(){
+								window.location.replace("../../account_all.php");
+
+							});
+
+						});
+
+					</script>
+				';
+
+				//log this action
+
+				$staff_id = $_POST['staff_id'];
+				$staff_username = $_POST['staff_username'];
+				$staff_role = 0;
+				$log_description = 'Modified staff account details for username '.$username;
+				$timestamp = date('m/d/Y, g:i:s A');
+
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+	            VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+				$conn->exec($sql2);
+
+			}
 
 			//pathinfo
 			$image=$_FILES['image']['name'];
@@ -56,26 +96,7 @@
 			echo $e->getMessage();
 		}
 		$conn = null;
-		echo '
-		<script>
-
-			$(document).ready(function(){
-
-				Swal.fire({
-					icon: "success",
-					title: "Staff Account Successfully Updated",
-                    text: "LNU - Student Admission and Information System",
-                    timer: 2000
-
-				}).then(function(){
-					window.location.replace("../../account_all.php");
-
-				});
-
-			});
-
-		</script>
-	';
+	
 	}
 ?>
 

@@ -1,24 +1,23 @@
 <?php
-    include '../includes/head.php';
-    require '../database/db_pdo.php';
+	include '../includes/head.php';
+	require '../database/db_pdo.php';
 
-    date_default_timezone_set('Asia/Taipei');
+	date_default_timezone_set('Asia/Taipei');
 
 	if(isset($_POST['delete'])){
 		try{
-           	/* DELETE course from Database */
-           	$id = $_POST['id'];
+			$id = $_POST['id'];
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql1 = "DELETE FROM tbl_unit WHERE `id` = '$id'";
+			$sql = "TRUNCATE TABLE `tbl_logs`";
 
-			if($conn->exec($sql1)){
+			if($conn->exec($sql)){
 
 				//log this action
 
 				$staff_id = $_POST['staff_id'];
 				$staff_username = $_POST['staff_username'];
 				$staff_role = 0;
-				$log_description = 'Deleted an academic unit';
+				$log_description = 'Cleared logs table';
 				$timestamp = date('m/d/Y, g:i:s A');
 
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -27,6 +26,7 @@
 				$conn->exec($sql2);
 
 			}
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
@@ -38,18 +38,18 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Academic Unit Successfully Deleted",
-                    text: "LNU - Student Admission and Information System",
+					title: "System Logs Successfully Deleted",
+					text: "LNU - Student Admission and Information System",
 					timer: 2000
 				}).then(function(){
-					window.location.replace("../../unit.php");
+
+					window.location.replace("../../system_logs.php");
 
 				});
+
 			});
+
 		</script>
 	';
 	}
 ?>
-
-
-

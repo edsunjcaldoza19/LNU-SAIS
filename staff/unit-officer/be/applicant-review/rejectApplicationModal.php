@@ -13,7 +13,9 @@
                     >
                     <input type="hidden" name="firstChoice" id="firstChoice" value="<?php echo $fetch['program_first_choice'] ?>"
                     >
-                    <input type="hidden" name="secondChoice" id="secondChoice" value="<?php echo $fetch['program_second_choice'] ?>"
+                    <input type="hidden" name="secondChoice" id="secondChoice" value="<?php echo $fetch['program_second_choice'] ?>">
+                    <input type="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                    <input type="hidden" name="staff_username" value="<?php echo $username?>">
                     >
                     <div class="form-group">
                         <p class="card-dashboard-header">Are you sure you want to finalize disapproval of

@@ -3,6 +3,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action = "be/account_staff/delete.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                <input type="hidden" name="staff_username" value="<?php echo $username?>">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Remove Interviewer Account</h4>
                     <hr class="default-divider ml-auto">

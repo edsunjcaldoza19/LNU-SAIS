@@ -39,14 +39,14 @@ if(isset($_POST['btnConfirm'])){
         $mail->SMTPSecure = "tls";
         $mail->Port = "587";
         $mail->Username = "1800638@lnu.edu.ph";
-        $mail->Password = "payjspnnmtcjvvkd";
+        $mail->Password = "llrcxiwvmbbjmmza";
         $mail->setFrom("lnu.admissionsoffice@lnu.edu.ph");
 
         //Initialize email body
 
         $mail->isHTML(true);
         $mail->From = "lnu.admissionsoffice@lnu.edu.ph";
-        $mail->FromName = "<no-reply@lnu-sais>";
+        $mail->FromName = "<no-reply@mailersais>";
         $mail->addAddress($email);
         $mail->addEmbeddedImage('../../../../pages/assets/images/logo.png', 'lnu_logo');
         

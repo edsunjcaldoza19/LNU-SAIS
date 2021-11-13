@@ -10,6 +10,8 @@
                 <div class="modal-body">
                     <input type="hidden" name="ticketID" value="<?php echo $fetch['id']?>">
                     <input type="hidden" name="role" value="<?php echo $role?>">
+                    <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                    <input class="hidden" name="staff_username" value="<?php echo $username?>">
                     <div class="feedback-reply-details">
                         <p style="font-size: 15px;">Inquiry Ticket Details</p>
                         <hr class="default-divider ml-auto" style=" margin: 10px 0px 10px 0px; background-color: black;">

@@ -29,6 +29,8 @@
                             while($fetchaccount = $update->fetch()){
                         ?>
                             <form action="be/account_staff/update.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                                <input type="hidden" name="staff_username" value="<?php echo $username?>">
                                 <p class="table-subheader">Profile Picture</p>
                                 <br>
                                 <div class="row">

@@ -3,6 +3,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action = "be/notify/notify.php" method="POST">
+                <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                 <div class="modal-header">
                     <h4 class="modal-title" id="defaultModalLabel">Assign Student Number</h4>
                     <hr class="default-divider ml-auto">
@@ -52,7 +54,7 @@
                 </div>
                 <div class="modal-footer">
                     <hr class="default-divider ml-auto">
-                    <button type="submit" class="btn btn-link btn-success waves-effect" name="send" id="send" onclick="showSuccess();" style="color: #EEEEEE;">Send Notification Email</button>
+                    <button type="submit" class="btn btn-link btn-success waves-effect" name="send" id="send" onclick="showSuccess();" style="color: #EEEEEE;">Assign Student Number</button>
                     <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCEL</button>
                 </div>
             </form>

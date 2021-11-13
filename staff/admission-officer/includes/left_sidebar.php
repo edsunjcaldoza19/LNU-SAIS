@@ -127,6 +127,12 @@
                             <span>Inquiries</span>
                         </a>
                     </li>
+                    <li class="<?= ($activePage == 'system_logs') ? 'active': ''; ?>">
+                        <a href="system_logs.php">
+                            <i class="material-icons">dvr</i>
+                            <span>System Logs</span>
+                        </a>
+                    </li>
                     <li class="<?= ($activePage == 'pending_accounts') ? 'active': ''; ?>">
                         <a href="pending_accounts.php">
                             <i class="material-icons">how_to_reg</i>

@@ -99,6 +99,7 @@
                                                 <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">The old password is incorrect!</p>
                                             </div>
                                             <div class="form-group">
+                                                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                                                 <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
                                                 <div class="col-sm-9">
                                                     <input type="hidden" name="adminId" id="id" value="<?php echo $id?>">
@@ -152,6 +153,8 @@
                                                 <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar email already exists!</p>
                                             </div>
                                             <div class="form-group">
+                                                <input class="hidden" name="staff_id" value="<?php echo $staff_id?>">
+                                                <input class="hidden" name="staff_username" value="<?php echo $username?>">
                                                 <label for="firstName" class="col-sm-3 control-label">First Name</label>
                                                 <div class="col-sm-9">
                                                     <div class="form-line">
@@ -188,7 +191,7 @@
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" name="addAccount" id="addAccount" class="btn bg-green waves-effect">
                                                         <i class="material-icons">save</i>
-                                                        <span>Save Changes</span>
+                                                        <span>Add Administrator Account</span>
                                                     </button>
                                                 </div>
                                             </div>

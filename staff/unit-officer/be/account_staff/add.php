@@ -13,6 +13,8 @@
 
     require '../database/db_pdo.php';
 
+    date_default_timezone_set('Asia/Taipei');
+
 	if(ISSET($_POST['submit'])){
 		try{
 
@@ -42,6 +44,17 @@
             '$lastName','$contact','$email', '$role',  '$unitID', '$courseID', '$loginStatus', '$image')";
 
 			if($conn->exec($sql)){
+
+				$staff_username = $_POST['staff_username'];
+				$staff_role = 3;
+				$log_description = 'Added unit interviewer account for '.$username;
+				$timestamp = date('m/d/Y, g:i:s A');
+
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql2 = "INSERT INTO `tbl_logs`(`log_staff_id`, `log_staff_username`, `log_staff_role`, `log_description`, `timestamp`)
+        		VALUES ('$staff_id', '$staff_username', '$staff_role', '$log_description', '$timestamp')";
+				$conn->exec($sql2);
+
 				echo '
 					<script>
 

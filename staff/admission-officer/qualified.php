@@ -48,6 +48,7 @@
                                             <th>Second Choice</th>
                                             <th>Status</th>
                                             <th>Admission Confirmation</th>
+                                            <th>ID Number</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -86,7 +87,7 @@
                                             <td><?php echo $fetch['semester']; ?></td>
                                             <td>
                                                 <?php
-                                                    echo $fetch1['course_name'].' ('.$fetch1['course_acronym'].')';
+                                                    echo $fetch1['course_acronym'];
                                                 ?>  
                                             </td>
                                             <td>
@@ -104,7 +105,7 @@
                                             </td>
                                             <td>
                                                 <?php
-                                                    echo $fetch2['course_name'].' ('.$fetch2['course_acronym'].')';
+                                                    echo $fetch2['course_acronym'];
                                                 ?>    
                                             </td>
                                             <td>
@@ -120,7 +121,7 @@
                                                     }
                                                 ?>  
                                             </td>
-                                            <td>
+                                            <td align="center">
                                                 <?php
                                                     if($fetch['pursue_enrollment'] == 0){
                                                         echo '<p class="label-blue">Pending</p>';
@@ -131,8 +132,13 @@
                                                     }
                                                 ?>  
                                             </td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch['student_number'];
+                                                ?>  
+                                            </td>
                                             <td style="text-align: center;">
-                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#notify<?php echo $fetch['id']?>"><i class="material-icons">send</i></button>
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#notify<?php echo $fetch['id']?>" <?php if($fetch['student_number'] != 'N/A'){echo 'disabled';} ?>><i class="material-icons">add_circle_outline</i></button>
                                             </td>
                                             
                                         <?php

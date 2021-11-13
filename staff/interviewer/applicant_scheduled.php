@@ -65,7 +65,7 @@
                                             LEFT JOIN tbl_interview ON tbl_interview.interview_applicant_id = tbl_applicant.applicant_account_id
                                             WHERE `form_status`='Approved' AND `exam_status`='Scored' 
                                             AND `school_year_id` = $id AND `unit_id` = $unitId
-                                            AND ((`interview_rating_1` = 0 AND `program_first_choice` = $courses) OR (`interview_rating_2` = 0 AND `program_second_choice` = $courses))
+                                            AND ((`interview_status_1` = 'Scheduled' AND `program_first_choice` = $courses) OR (`interview_status_2` = 'Scheduled' AND `program_second_choice` = $courses))
                                             ");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
