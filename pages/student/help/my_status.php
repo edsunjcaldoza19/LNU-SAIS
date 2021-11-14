@@ -21,8 +21,10 @@
     		$application['fs_timestamp'] = 'N/A';
 			$application['exam_status'] = 'Pending';
     		$application['es_timestamp'] = 'N/A';
-			$application['interview_status'] = 'Pending';
-    		$application['is_timestamp'] = 'N/A';
+			$application['interview_status_1'] = 'Pending';
+    		$application['is_timestamp_1'] = 'N/A';
+    		$application['interview_status_2'] = 'Pending';
+    		$application['is_timestamp_2'] = 'N/A';
 			$application['admission_status'] = 'Pending';
     		$application['as_timestamp'] = 'N/A';
 
@@ -36,9 +38,13 @@
     			$application['exam_status'] = 'Pending';
     			$application['es_timestamp'] = 'N/A';
     		}
-    		if($application['interview_status'] == ''){
-    			$application['interview_status'] = 'Pending';
-    			$application['is_timestamp'] = 'N/A';
+    		if($application['interview_status_1'] == ''){
+    			$application['interview_status_1'] = 'Pending';
+    			$application['is_timestamp_1'] = 'N/A';
+    		}
+    		if($application['interview_status_2'] == ''){
+    			$application['interview_status_2'] = 'Pending';
+    			$application['is_timestamp_2'] = 'N/A';
     		}
     		if($application['admission_status'] == ''){
     			$application['admission_status'] = 'Pending';
@@ -59,9 +65,15 @@
 
     	}
 
-		if($application['interview_status'] == 'Pending'){
+		if($application['interview_status_1'] == 'Pending'){
 
-    		$application['is_timestamp'] = 'N/A';
+    		$application['is_timestamp_1'] = 'N/A';
+
+    	}
+
+    	if($application['interview_status_2'] == 'Pending'){
+
+    		$application['is_timestamp_2'] = 'N/A';
 
     	}
 
@@ -303,17 +315,31 @@
 									<p class="default-interface-subheader">
 										Interview Status
 									</p>
+									<p style="font-weight: 600; margin-bottom: 5px; font-size: 14px;">First Choice:</p>
 									<p class="default-interface-text">
 										<?php
-											if($application['interview_status'] == 'Qualified' || $application['interview_status'] == 'Scheduled'){
+											if($application['interview_status_1'] == 'Qualified' || $application['interview_status_1'] == 'Scheduled'){
 												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
-											}else if($application['interview_status'] == 'Pending'){
+											}else if($application['interview_status_1'] == 'Pending'){
 												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
 											}else{
 												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
 											}
 										?>
-										<?php echo $application['interview_status'] ?> (<?php echo $application['is_timestamp'] ?>)
+										<?php echo $application['interview_status_1'] ?> (<?php echo $application['is_timestamp_1'] ?>)
+									</p>
+									<p style="font-weight: 600; margin-bottom: 5px; font-size: 14px;">Second Choice:</p>
+									<p class="default-interface-text">
+										<?php
+											if($application['interview_status_2'] == 'Qualified' || $application['interview_status_2'] == 'Scheduled'){
+												echo '<i class="far fa-check-circle sidebar-progress-icon done"></i>';
+											}else if($application['interview_status_2'] == 'Pending'){
+												echo '<i class="far fa-question-circle sidebar-progress-icon"></i>';
+											}else{
+												echo '<i class="far fa-times-circle sidebar-progress-icon"></i>';
+											}
+										?>
+										<?php echo $application['interview_status_2'] ?> (<?php echo $application['is_timestamp_2'] ?>)
 									</p>
 									<hr class="default-divider ml-auto" style="margin: 10px;">
 									<p class="default-interface-subheader">

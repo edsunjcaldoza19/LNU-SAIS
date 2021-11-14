@@ -45,7 +45,8 @@
                 LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
                 WHERE `school_year_id` = $sy_id
                 AND `form_status`='Approved' AND `exam_status`='Scored'
-                AND `interview_status`='Qualified' AND `admission_status`='Evaluated' 
+                AND `interview_status_1`='Qualified' OR `interview_status_2`='Qualified'
+                AND `admission_status`='Evaluated' 
                 AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 1) 
                     OR (`approved_first_choice` = 1 AND `approved_second_choice` = 0) 
                     OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1))
