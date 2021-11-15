@@ -83,19 +83,21 @@
 				                            	<label class="form-label">Last Name *</label>
 				                       		</div>
 		                    			</div>
+		                    			<p class="student-page-label">Birthday *</p>
 		                    			<div class="form-group form-float">
+                                    		<div class="form-line">
+                                       			<input type="date" name="dpBirthday" id="dpBirthday" class="form-control" required/>
+                                    		</div>
+                               	 		</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group form-float">
 	                                    	<div class="form-line">
 	                                        	<input type="number" name="tbAge" id="tbAge" class="form-control" required/>
 	                                        	<label class="form-label">Enter Age *</label>
 	                                    	</div>
 	                                	</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group form-float">
-                                    		<div class="form-line">
-                                       			<input type="date" name="dpBirthday" id="dpBirthday" class="form-control" required/>
-                                    		</div>
-                               	 		</div>
+									
 	                                	<div class="form-group form-float">
 					                        <select class="form-control show-tick" name="cbGender" id="cbGender" required>
                                         		<option value="" disabled selected>Select Gender *</option>
@@ -437,6 +439,18 @@
 			});
 
 		}
+
+		$('#dpBirthday').on('change', function(){
+			var birthDate = new Date($('#dpBirthday').val());
+			var currentDate = new Date();
+			var age = currentDate - birthDate
+			var formatAge = new Date(age);
+			var newAge = Math.abs(formatAge.getUTCFullYear() - 1970);
+			
+			document.getElementById('tbAge').value = newAge;
+
+			$.AdminBSB.input.activate();
+		})
 
 		//toggles show/hide password
 
