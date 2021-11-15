@@ -13,7 +13,7 @@
 
 require '../config/db_pdo.php';
 
-session_set_cookie_params(0);
+ini_set('session.gc_maxlifetime', 3600);
 session_start();
 
 if(isset($_POST['btnLogin'])){
@@ -159,15 +159,7 @@ function invalidCredentials(){
 
 function loggedIn(){
 
-	echo '
-      	<script>
-
-         	alert("[WARNING]: Your account is already logged-in from other device");
-         	window.location.replace("../../accounts/student/login.php");
-
-      	</script>
-
-   	';
+	header('location: ../../student/admission_procedures/start.php');
 
 }
 

@@ -96,7 +96,7 @@
 
 						}else{
 
-							loggedIn();
+							header('location: ../../admin/home.php');
 
 						}
 
@@ -196,7 +196,7 @@
 
 					}else{
 
-						loggedIn();
+						header('location: ../../admission-officer/home.php');
 
 					}
 
@@ -290,7 +290,7 @@
 
 					}else{
 
-						loggedIn();
+						header('location: ../../exam-officer/home.php');
 
 					}
 
@@ -385,7 +385,7 @@
 
 					}else{
 
-						loggedIn();
+						header('location: ../../unit-officer/home.php');
 
 					}
 
@@ -481,7 +481,7 @@
 
 					}else{
 
-						loggedIn();
+						header('location: ../../interviewer/home.php');
 
 					}
 
@@ -553,20 +553,6 @@
         </script>
 
     ';
-
-	}
-
-	function loggedIn(){
-
-		echo '
-	      	<script>
-
-	         	alert("[WARNING]: Your account is already logged-in from other device");
-	         	window.location.replace("../index.php");
-
-	      	</script>
-
-	   	';
 
 	}
 

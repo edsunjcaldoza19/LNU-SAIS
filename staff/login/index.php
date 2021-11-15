@@ -2,6 +2,57 @@
 
     include 'includes/header.php';
     include 'includes/scripts.php';
+    require 'be/database/db_pdo.php';
+
+    session_start();
+
+    if(isset($_SESSION['token'])){
+
+        $token = $_SESSION['token'];
+
+        $sql = $conn->prepare("SELECT * from `tbl_account_staff` where `session_token` = '$token'");
+        $sql->execute();
+        $fetchAccount = $sql->fetch();
+
+        if($fetchAccount['staff_role'] == 1){
+
+            echo '
+                <script>
+                    window.location.replace("../admission-officer/home.php");
+                </script>
+            ';
+
+        }else if($fetchAccount['staff_role'] == 2){
+
+            echo '
+                <script>
+                    window.location.replace("../exam-officer/home.php");
+                </script>
+            ';
+
+        }else if($fetchAccount['staff_role'] == 3){
+
+            echo '
+                <script>
+                    window.location.replace("../unit-officer/home.php");
+                </script>
+            ';
+            
+        }else if($fetchAccount['staff_role'] == 4){
+
+            echo '
+                <script>
+                    window.location.replace("../interviewer/home.php");
+                </script>
+            ';
+            
+        }
+
+    }else{
+
+        session_destroy();
+
+    }
 
 ?>
 
