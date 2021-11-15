@@ -31,6 +31,7 @@ if(isset($_SESSION['student_token'])){
 
 }
 
+
 function invalidToken(){
 
 	echo '
@@ -58,5 +59,6 @@ function loggedOut(){
     ';
 
 }
+
 
 ?>
