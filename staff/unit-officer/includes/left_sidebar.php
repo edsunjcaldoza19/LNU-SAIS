@@ -104,16 +104,16 @@
                         </ul>
                     </li>
                     <li class="header">OTHER OPTIONS</li>
-                    <li>
-                        <a href="settings.php">
-                            <i class="material-icons">settings</i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
+                    <li class="<?= ($activePage == 'program_configurations') ? 'active': ''; ?>">
                         <a href="program_configurations.php?sy_id=<?php echo $fetch1['id']?>">
                             <i class="material-icons">list</i>
                             <span>Program Configurations</span>
+                        </a>
+                    </li>
+                    <li class="<?= ($activePage == 'account_settings') ? 'active': ''; ?>">
+                        <a href="account_settings.php">
+                            <i class="material-icons">settings</i>
+                            <span>Account Settings</span>
                         </a>
                     </li>
                 </ul>

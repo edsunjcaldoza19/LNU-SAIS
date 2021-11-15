@@ -52,7 +52,7 @@
                     </li>
                     <li class="header">OTHER OPTIONS</li>
                      <li>
-                        <a href="settings.php">
+                        <a href="account_settings.php">
                             <i class="material-icons">settings</i>
                             <span>Account Settings</span>
                         </a>

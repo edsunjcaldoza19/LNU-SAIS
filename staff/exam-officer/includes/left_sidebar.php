@@ -59,18 +59,18 @@
                         </li>
                     <li class="header">OTHER OPTIONS</li>
                     <li>
-                        <li class="<?= ($activePage == 'account_settings') ? 'active': ''; ?>">
-                            <a href="account_settings.php">
-                                <i class="material-icons">person</i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                    </li>
-                    <li>
                         <li class="<?= ($activePage == 'exam_toggle') ? 'active': ''; ?>">
                             <a href="exam_toggle.php">
                                 <i class="material-icons">settings</i>
                                 <span>Enable/Disable Examination</span>
+                            </a>
+                        </li>
+                    </li>
+                    <li>
+                        <li class="<?= ($activePage == 'account_settings') ? 'active': ''; ?>">
+                            <a href="account_settings.php">
+                                <i class="material-icons">person</i>
+                                <span>Account Settings</span>
                             </a>
                         </li>
                     </li>

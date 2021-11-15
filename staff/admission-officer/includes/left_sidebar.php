@@ -139,8 +139,8 @@
                             <span>Verify Re-admission Accounts</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="settings.php">
+                    <li class="<?= ($activePage == 'account_settings') ? 'active': ''; ?>">
+                        <a href="account_settings.php">
                             <i class="material-icons">settings</i>
                             <span>Account Settings</span>
                         </a>
