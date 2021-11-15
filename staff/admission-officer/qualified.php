@@ -1,378 +1,169 @@
+<?php include 'includes/session.php'; ?>
+<!DOCTYPE html>
+<html>
+
 <?php
-    include 'includes/session.php';
     include 'includes/header.php';
-    ?>
-    <!-- JQuery DataTable Css -->
-    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-    <?php
     include 'includes/topbar.php';
-    include 'includes/left_sidebar.php';
 ?>
-    <!-- ## BODY CONTENTS ## -->
-    <?php
-        require 'be/database/db_pdo.php';
-        $sql = $conn->prepare("SELECT * FROM `tbl_account_staff` where `id` = '$staff_id'");
-        $sql->execute();
-        while($fetch = $sql->fetch()){
-    ?>
+    <section>
+        <?php
+            include 'includes/left_sidebar.php';
+            include 'includes/right_sidebar.php';
+
+            $sql1 = $conn->prepare("SELECT * FROM `tbl_academic_year` WHERE `ay_status` = 1");
+            $sql1->execute();
+            $fetch1 = $sql1->fetch();
+
+            $sy_id = $fetch1['id'];
+            $sem = $_GET['sem'];
+        ?>
+    </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-                <div class="col-xs-12 col-sm-3">
-                    <div class="card profile-card">
-                        <div class="profile-header">&nbsp;</div>
-                        <div class="profile-body">
-                            <?php
-                                $image = (!empty($fetch['staff_profile_img'])) ? '../../images/staff-img/'.$fetch['staff_profile_img'] : '../../images/staff-img/default.png';
-                                $name = $fetch['staff_first_name'].' '.$fetch['staff_middle_name'].' '.$fetch['staff_last_name'];
-                            ?>
-                            <div class="image-area">
-                                <img src="<?php echo $image ?>" width="128px" height="128px" alt="profile_picture" />
-                            </div>
-                            <div class="content-area">
-                                <h3><?php echo $name?></h3>
-                                <p>LNU SAIS V.1.0.0</p>
-                                <p>Admissions Office</p>
-                            </div>
-                        </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="block-header">
+                        <p class="page-header">Qualified Student Applicants</p>
+                        <p class="page-subheader">Check/export list of qualified applicants</p>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-9">
-                    <div class="card" style="height: 376px; overflow-y: auto;">
+                    <div class="card">
+                        <div class="header">
+                            <p class="table-subheader">Admission Qualifiers Masterlist</p>
+                            <small>A.Y. <?php echo $fetch1['ay_year']?> - <?php echo $sem ?></small>
+                            <hr class="default-divider ml-auto">
+                            <a class="btn bg-blue waves-effect" href="be/print_pdf.php?sy_id=<?php echo $sy_id ?>&sem=<?php echo $sem?>">
+                                <i class="material-icons">file_download</i>?
+                                <span>Generate List</span>
+                            </a>
+                        </div>
                         <div class="body">
-                            <div>
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
-                                    <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <!--- ## START PROFILE --->
-                                    <div class="alert alert-danger" id="alertUsername" name="alertUsername" style="padding: 10px; display: none;">
-                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar username already exists!</p>
-                                    </div>
-                                    <div class="alert alert-danger" id="alertEmail" name="alertEmail" style="padding: 10px; display: none;">
-                                        <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">An account with a similar email already exists!</p>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
-                                        <form action="be/account_settings/update-info.php" method="post" class="form-horizontal">
-                                            <input type="hidden" name="id" value="<?php echo $staff_id?>">
-                                            <input type="hidden" name="staff_username" value="<?php echo $username?>">
-                                            <div class="form-group">
-                                                <label for="NameSurname" class="col-sm-2 control-label">Name</label>
-                                                <div class="row">
-                                                    <div class="col-md-3" style="margin: 5px 5px 15px 5px;">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="<?php echo $fetch['staff_first_name']?>" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" style="margin: 5px 5px 15px 5px;">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" id="middlename" name="middlename" placeholder="Middle Name" value="<?php echo $fetch['staff_middle_name']?>">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3" style="margin: 5px 5px 15px 5px;">
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="<?php echo $fetch['staff_last_name']?>" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">Username</label>
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" id="newUsername" name="username" placeholder="username" value="<?php echo $fetch['staff_username'];?>" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Email" class="col-sm-2 control-label">Email</label>
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="email" class="form-control" id="newEmail" name="email" placeholder="Email" value="<?php echo $fetch['staff_email'];?>" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Email" class="col-sm-2 control-label">Contact</label>
-                                                <div class="col-sm-10">
-                                                    <div class="form-line">
-                                                        <input type="text" class="form-control" id="contact" name="contact" placeholder="Email" value="<?php echo $fetch['staff_contact'];?>" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr class="default-divider ml-auto">
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" id="btnSubmit" class="btn bg-green waves-effect">
-                                                        <i class="material-icons">save</i>
-                                                        <span>Save Changes</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!--- ## END PROFILE --->
-                                    <!--- ## START CHANGE PASSWORD --->
-                                    <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
-                                        <form action="be/account_settings/update-password.php" method="post" class="form-horizontal">
-                                            <div class="alert alert-danger" id="alertMessage" name="alertMessage" style="padding: 10px; display: none;">
-                                                <i class="fa fa-times-circle"></i><p class="" style="display: inline-block; margin-left: 10px;">The old password is incorrect!</p>
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="hidden" name="staff_id" id="staff_id" value="<?php echo $staff_id?>">
-                                                <input type="hidden" name="staff_username" value="<?php echo $username?>">
-                                                <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
-                                                <div class="col-sm-9">
-                                                    <input type="hidden" name="adminId" id="id" value="<?php echo $staff_id?>">
-                                                    <div class="form-line">
-                                                        <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Old Password" required>
-                                                        <span toggle="#oldPassword" class="fa fa-eye form-toggle-password"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="NewPassword" class="col-sm-3 control-label" id="newPasswordLabel">New Password</label>
-                                                <div class="col-sm-9">
-                                                    <div class="form-line" id="newPasswordLine">
-                                                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New Password" required disabled>
-                                                        <span toggle="#newPassword" class="fa fa-eye form-toggle-password"></span>
-                                                    </div>
-                                                    <p class="form-error" id="passwordError1"><i class="fa fa-exclamation-circle"></i> What's your password?</p>
-                                                    <p class="form-error" id="passwordError2"><i class="fa fa-exclamation-circle"></i> Minimum password length is 8</p>
-                                                    <p class="form-error" id="passwordError3"><i class="fa fa-exclamation-circle"></i> Maximum password length is 16</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="newPasswordConfirm" class="col-sm-3 control-label" id="newPasswordConfirmLabel">New Password (Confirm)</label>
-                                                <div class="col-sm-9">
-                                                    <div class="form-line" id="newPasswordConfirmLine" >
-                                                        <input type="password" class="form-control" id="newPasswordConfirm" name="newPasswordConfirm" placeholder="New Password (Confirm)" required disabled>
-                                                        <span toggle="#newPasswordConfirm" class="fa fa-eye form-toggle-password"></span>
-                                                    </div>
-                                                    <p class="form-error" id="confirmPasswordError"><i class="fa fa-exclamation-circle"></i> Passwords does not match</p>
-                                                </div>
-                                            </div>
-                                            <hr class="default-divider ml-auto">
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" id="submitPass" class="btn bg-green waves-effect" disabled>
-                                                        <i class="material-icons">save</i>
-                                                        <span>Save Changes</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- ## END CHANGE PASSWORD -->
-                                   
-                                    <!-- ## END ADD ADMIN -->
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                    <thead>
+                                        <tr>
+                                            <th>Applicant Name</th>
+                                            <th>Entry Type</th>
+                                            <th>Semester</th>
+                                            <th>First Choice</th>
+                                            <th>Status</th>
+                                            <th>Second Choice</th>
+                                            <th>Status</th>
+                                            <th>Admission Confirmation</th>
+                                            <th>ID Number</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- populate table with db data -->
+                                        <?php
+
+                                            $sql = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
+                                            LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
+                                            WHERE `form_status`='Approved' AND `exam_status`='Scored'
+                                            AND `semester` = '$sem'
+                                            AND `interview_status_1`='Qualified' OR `interview_status_2`='Qualified'
+                                            AND `admission_status`='Evaluated' AND ((`approved_first_choice` = 1 AND `approved_second_choice` = 0) OR (`approved_first_choice` = 0 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 1) OR (`approved_first_choice` = 1 AND `approved_second_choice` = 3) OR (`approved_first_choice` = 3 AND `approved_second_choice` = 1))");
+                                            $sql->execute();
+                                            while($fetch = $sql->fetch()){
+
+                                                //fetch first and second choice
+
+                                                $firstChoice = $fetch['program_first_choice'];
+                                                $secondChoice = $fetch['program_second_choice'];
+
+                                                $sql1 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$firstChoice'");
+                                                $sql1->execute();
+
+                                                $sql2 = $conn->prepare("SELECT * FROM `tbl_course` WHERE `course_id` = '$secondChoice'");
+                                                $sql2->execute();
+
+                                                while($fetch1 = $sql1->fetch()){
+                                                    while($fetch2 = $sql2->fetch()){
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                    echo $fetch['last_name'].', '.$fetch['first_name'].' '.$fetch['middle_name'];
+                                                ?>
+                                            </td>
+                                            <td><?php echo $fetch['entry']; ?></td>
+                                            <td><?php echo $fetch['semester']; ?></td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch1['course_acronym'];
+                                                ?>  
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($fetch['approved_first_choice'] == 1){
+                                                        echo '<p class="label-green">Approved</p>';
+                                                    }else if($fetch['approved_first_choice'] == 2){
+                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }else if($fetch['approved_first_choice'] == 3){
+                                                        echo '<p class="label-orange">Waitlisted</p>';
+                                                    }else if($fetch['approved_first_choice'] == 0){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }
+                                                ?>  
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch2['course_acronym'];
+                                                ?>    
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if($fetch['approved_second_choice'] == 1){
+                                                        echo '<p class="label-green">Approved</p>';
+                                                    }else if($fetch['approved_second_choice'] == 2){
+                                                        echo '<p class="label-red">Disapproved</p>';
+                                                    }else if($fetch['approved_second_choice'] == 3){
+                                                        echo '<p class="label-orange">Waitlisted</p>';
+                                                    }else if($fetch['approved_second_choice'] == 0){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }
+                                                ?>  
+                                            </td>
+                                            <td align="center">
+                                                <?php
+                                                    if($fetch['pursue_enrollment'] == 0){
+                                                        echo '<p class="label-blue">Pending</p>';
+                                                    }else if($fetch['pursue_enrollment'] == 1){
+                                                        echo '<p class="label-green">Accepted</p>';
+                                                    }else if($fetch['pursue_enrollment'] == 2){
+                                                        echo '<p class="label-red">Declined</p>';
+                                                    }
+                                                ?>  
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    echo $fetch['student_number'];
+                                                ?>  
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <button class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float" data-toggle="modal" data-target="#notify<?php echo $fetch['id']?>" <?php if($fetch['student_number'] != 'N/A'){echo 'disabled';} ?>><i class="material-icons">add_circle_outline</i></button>
+                                            </td>
+                                            
+                                        <?php
+                                            include 'be/notify/notifyModal.php';
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- #END# Exportable Table -->
         </div>
     </section>
-
-    <?php
-    }
-        include 'includes/logout_modal.php';
-        include 'includes/scripts.php';
-    ?>
+    <?php include 'includes/logout_modal.php';?>
+    <?php include 'includes/scripts.php';?>
 </body>
-<!-- ADDITIONAL JAVASCRIPT FOR THIS PAGE (ACADEMIC YEAR) -->
-    <!-- Autosize Plugin Js -->
-    <script src="../../plugins/autosize/autosize.js"></script>
-    <!-- Moment Plugin Js -->
-    <script src="../../plugins/momentjs/moment.js"></script>
-    <!-- Bootstrap Material Datetime Picker Plugin Js -->
-    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-    <!-- Custom Js -->
-    <script src="../../js/admin.js"></script>
-    <script src="../../js/pages/tables/jquery-datatable.js"></script>
-    <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
-
-    <!-- Validation scripts -->
-
-    <script>
-
-        document.getElementById("oldPassword").addEventListener("keyup", checkOldPassword);
-        document.getElementById("newPassword").addEventListener("keyup", validateNewPasswordField);
-        document.getElementById("newPasswordConfirm").addEventListener("keyup", validateConfirmPasswordField);
-
-        document.getElementById("newUsername").addEventListener("keyup", checkUsername);
-        document.getElementById("newEmail").addEventListener("keyup", checkEmail);
-
-        function checkOldPassword(){
-
-            var id = $('#id').val();
-            var pass = $('#oldPassword').val();
-
-            $.post("be/account_settings/verify_password.php", { "id": id, "pass": pass }, function(response){
-
-                if(response == 0){
-
-                    $('#alertMessage').css('display', 'block');
-                    $('#newPassword').prop('disabled', true);
-                    $('#newPasswordConfirm').prop('disabled', true);
-
-                }else{
-
-                    $('#alertMessage').css('display', 'none');
-                    $('#newPassword').prop('disabled', false);
-                    $('#newPasswordConfirm').prop('disabled', false);
-
-                }
-
-            });
-
-        }
-
-        function validateNewPasswordField(){
-
-            var newPass = $('#newPassword').val();
-
-            if(newPass == ''){
-
-                $('#newPasswordLine').css('border-bottom', '2px solid #ff6961');
-                $('#newPasswordLabel').css('color', '#ff6961');
-                $('#passwordError1').css('display', 'block');
-                
-            }else{
-
-                $('#newPasswordLine').css('border-bottom', '1px solid #1f91f3');
-                $('#newPasswordLabel').css('color', '#555');
-                $('#passwordError1').css('display', 'none');
-
-                if(newPass.length < 8){
-
-                    $('#newPasswordLine').css('border-bottom', '2px solid #ff6961');
-                    $('#newPasswordLabel').css('color', '#ff6961');
-                    $('#passwordError2').css('display', 'block');
-
-                }else{
-
-                    $('#newPasswordLine').css('border-bottom', '1px solid #1f91f3');
-                    $('#newPasswordLabel').css('color', '#55');
-                    $('#passwordError2').css('display', 'none');
-
-                    if(newPass.length > 16){
-
-                        $('#newPasswordLine').css('border-bottom', '2px solid #ff6961');
-                        $('#newPasswordLabel').css('color', '#ff6961');
-                        $('#passwordError3').css('display', 'block');
-
-                    }else{
-
-                        $('#newPasswordLine').css('border-bottom', '1px solid #1f91f3');
-                        $('#newPasswordLabel').css('color', '#555');
-                        $('#passwordError3').css('display', 'none');
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        function validateConfirmPasswordField(){
-
-            var pass = $('#newPassword').val();
-            var cpass = $('#newPasswordConfirm').val();
-
-            if(pass != cpass){
-
-                $('#newPasswordConfirmLine').css('border-bottom', '2px solid #ff6961');
-                $('#newPasswordConfirmLabel').css('color', '#ff6961');
-                $('#confirmPasswordError').css('display', 'block');
-                $('#submitPass').prop('disabled', true);
-                    
-            }else{
-
-                $('#newPasswordConfirmLine').css('border-bottom', '1px solid #1f91f3');
-                $('#newPasswordConfirmLabel').css('color', '#555');
-                $('#confirmPasswordError').css('display', 'none');
-                $('#submitPass').prop('disabled', false);
-
-            }
-
-        }
-
-        //Validate add administrator account
-
-        function checkUsername(){
-
-            var username = $('#newUsername').val();
-
-            $.post("be/account_settings/check_account_staff.php", { "username": username }, function(response){
-
-                if(response == 1){
-
-                    $('#alertUsername').css('display', 'block');
-                    $('#btnSubmit').attr("disabled", true);
-
-                }else{
-
-                    $('#alertUsername').css('display', 'none');
-                    $('#btnSubmit').attr("disabled", false);
-
-                }
-
-            });
-
-        }
-
-        function checkEmail(){
-
-            var email = $('#newEmail').val();
-
-            $.post("be/account_settings/check_account_staff.php", { "email": email }, function(response){
-
-                if(response == 1){
-
-                    $('#alertEmail').css('display', 'block');
-                    $('#btnSubmit').attr("disabled", true);
-
-                }else{
-
-                    $('#alertEmail').css('display', 'none');
-                    $('#btnSubmit').attr("disabled", false);
-
-                }
-
-            });
-
-        }
-
-        //toggles show/hide password
-
-        $('.form-toggle-password').click(function(){
-
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            var input = $($(this).attr("toggle"));
-
-            if(input.attr("type") == "password"){
-                input.attr("type", "text");
-            }else{
-                input.attr("type", "password");
-            }
-
-        })
-
-    </script>
 
 </html>

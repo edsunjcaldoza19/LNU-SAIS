@@ -6,6 +6,7 @@
     require_once('../../../plugins/tcpdf/tcpdf.php');
 
     $sy_id = $_GET['sy_id'];
+    $sem = $_GET['sem'];
 
     $sql3 = $conn->prepare("SELECT * FROM tbl_academic_year WHERE `id` = $sy_id");
     $sql3->execute();
@@ -40,10 +41,11 @@
             require 'database/db_pdo.php';
 
             $sy_id = $_GET['sy_id'];
+            $sem = $_GET['sem'];
 
             $sql3 = $conn->prepare("SELECT *, tbl_applicant.id FROM tbl_applicant
                 LEFT JOIN tbl_applicant_account ON tbl_applicant_account.id = tbl_applicant.applicant_account_id
-                WHERE `school_year_id` = $sy_id
+                WHERE `school_year_id` = $sy_id AND `semester` = '$sem'
                 AND `form_status`='Approved' AND `exam_status`='Scored'
                 AND `interview_status_1`='Qualified' OR `interview_status_2`='Qualified'
                 AND `admission_status`='Evaluated' 
@@ -171,8 +173,13 @@
     $pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
 
     $pdf->SetFont('helvetica', false, 14);
-    $txt = "LIST OF QUALIFIED APPLICANTS".' (A.Y. '.$fetch3['ay_year'].')';
-    $pdf->Write(25, $txt, '', 0, 'C', true, 0, false, false, 0);
+    $txt = "LIST OF QUALIFIED APPLICANTS";
+    $pdf->Write(20, $txt, '', 0, 'C', true, 0, false, false, 0);
+    $pdf->SetFont('helvetica', 'B', 12);
+    $txt = "A.Y. ". $fetch3['ay_year']." - ".$sem;
+    $pdf->Write(10, $txt, '', 0, 'L', true, 0, false, false, 0);
+
+    $pdf->SetFont('helvetica', false, 12);
 
     $content = '';
     $content .= '

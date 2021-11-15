@@ -99,6 +99,23 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="<?= ($activePage == 'qualified') ? 'active': ''; ?>">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">check_circle</i>
+                            <span>Admission Qualifiers</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="qualified.php?sem=First%20Semester">First Semester</a>
+                            </li>
+                            <li>
+                                <a href="qualified.php?sem=Second%20Semester">Second Semester</a>
+                            </li>
+                            <li>
+                                <a href="qualified.php?sem=Summer">Summer</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="<?= ($activePage == 'applicant_monitoring') ? 'active': ''; ?>">
                         <?php
                             require 'be/database/db_pdo.php';
@@ -113,12 +130,6 @@
                         <?php
                             }
                         ?>
-                    </li>
-                    <li class="<?= ($activePage == 'qualified') ? 'active': ''; ?>">
-                        <a href="qualified.php">
-                            <i class="material-icons">check_circle</i>
-                            <span>Admission Qualifiers</span>
-                        </a>
                     </li>
                     <li class="header">OTHER OPTIONS</li>
                     <li class="<?= ($activePage == 'inquiry') ? 'active': ''; ?>">
